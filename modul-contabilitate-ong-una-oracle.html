@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNA.ONG — Contabilitatea Organizației Necomerciale</title>
+<meta name="description" content="Modul standard de evidență contabilă pentru organizații necomerciale (ONG) din Republica Moldova, pe platforma UNA.md ERP cu Oracle Database 26ai. Livrare PaaS sau SaaS.">
+<style>
+  :root {
+    --ink: #1c2733;
+    --ink-soft: #4a5a6a;
+    --accent: #b3261e;
+    --accent-dark: #8c1d17;
+    --paper: #ffffff;
+    --paper-soft: #f5f7f9;
+    --line: #d8dee5;
+    --ok: #1a7a4a;
+    --note-bg: #fff8e6;
+    --note-line: #e6c95c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--ink);
+    background: var(--paper-soft);
+    line-height: 1.6;
+    font-size: 17px;
+  }
+  .sheet {
+    max-width: 980px;
+    margin: 0 auto;
+    background: var(--paper);
+    box-shadow: 0 0 30px rgba(28,39,51,.08);
+  }
+  header.masthead {
+    background: linear-gradient(135deg, #1c2733 0%, #2c3e50 60%, #8c1d17 100%);
+    color: #fff;
+    padding: 48px 56px 40px;
+  }
+  header.masthead .kicker {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    opacity: .75;
+    margin-bottom: 14px;
+  }
+  header.masthead h1 {
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: normal;
+    margin-bottom: 12px;
+  }
+  header.masthead .subtitle {
+    font-size: 18px;
+    opacity: .92;
+    max-width: 720px;
+  }
+  header.masthead .badges { margin-top: 22px; }
+  .badge {
+    display: inline-block;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    padding: 5px 12px;
+    border: 1px solid rgba(255,255,255,.45);
+    border-radius: 3px;
+    margin: 0 8px 8px 0;
+    background: rgba(255,255,255,.08);
+  }
+  main { padding: 40px 56px 56px; }
+  section { margin-bottom: 44px; }
+  h2 {
+    font-size: 24px;
+    font-weight: normal;
+    color: var(--accent-dark);
+    border-bottom: 2px solid var(--accent-dark);
+    padding-bottom: 8px;
+    margin-bottom: 18px;
+  }
+  h3 {
+    font-size: 19px;
+    color: var(--ink);
+    margin: 22px 0 10px;
+  }
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 0 0 14px 26px; }
+  li { margin-bottom: 6px; }
+  strong { color: var(--ink); }
+  .lead { font-size: 18px; color: var(--ink-soft); }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+  }
+  @media (max-width: 760px) {
+    main, header.masthead { padding-left: 24px; padding-right: 24px; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 20px;
+  }
+  .card h4 {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--accent-dark);
+    margin-bottom: 10px;
+  }
+  .card ul { margin-left: 20px; margin-bottom: 0; }
+  .card li { font-size: 15.5px; }
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15.5px;
+    margin: 10px 0 16px;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: #eef1f4;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--ink-soft);
+  }
+  td.num { text-align: right; white-space: nowrap; font-weight: bold; }
+  tr.total td { background: #f9f3ec; font-weight: bold; }
+  .note {
+    background: var(--note-bg);
+    border: 1px solid var(--note-line);
+    border-left: 5px solid var(--note-line);
+    border-radius: 3px;
+    padding: 14px 18px;
+    font-size: 15.5px;
+    margin: 14px 0;
+  }
+  .price-tag {
+    font-size: 26px;
+    color: var(--accent-dark);
+    font-weight: bold;
+  }
+  .price-sub {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+  .plan {
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--accent-dark);
+    border-radius: 4px;
+    padding: 22px 24px;
+    background: var(--paper);
+  }
+  .plan.saas { border-top-color: var(--ok); }
+  .plan h4 {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 6px;
+  }
+  .check li { list-style: none; position: relative; padding-left: 22px; }
+  .check li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: var(--ok);
+    font-size: 14px;
+  }
+  footer {
+    background: var(--ink);
+    color: #cfd8e0;
+    padding: 28px 56px;
+    font-size: 14.5px;
+  }
+  footer .vat {
+    color: #fff;
+    font-weight: bold;
+  }
+  .toc {
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 24px;
+    margin-bottom: 40px;
+    font-size: 15.5px;
+  }
+  .toc h4 {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .toc ol { margin-bottom: 0; }
+  .toc a { color: var(--accent-dark); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header class="masthead">
+  <div class="kicker">Fișă de produs · Configurație aplicativă standard · Ediția 2026</div>
+  <h1>UNA.ONG — Contabilitatea Organizației Necomerciale</h1>
+  <p class="subtitle">Modul standard de evidență contabilă și fiscală pentru organizațiile necomerciale din Republica Moldova, dezvoltat pe platforma <strong>UNA.md ERP</strong> cu baza de date <strong>Oracle Database 26ai</strong>, găzduit în <strong>Oracle Cloud Infrastructure (OCI)</strong>.</p>
+  <div class="badges">
+    <span class="badge">Platformă: UNA.md ERP</span>
+    <span class="badge">SGBD: Oracle Database 26ai</span>
+    <span class="badge">Cloud: Oracle OCI</span>
+    <span class="badge">Livrare: PaaS / SaaS</span>
+    <span class="badge">Limbi: RO / RU / EN</span>
+  </div>
+</header>
+
+<main>
+
+<nav class="toc">
+  <h4>Cuprins</h4>
+  <ol>
+    <li><a href="#destinatie">Destinația configurației</a></li>
+    <li><a href="#functional">Funcționalitatea modulului</a></li>
+    <li><a href="#rapoarte">Rapoarte reglementate pentru Republica Moldova</a></li>
+    <li><a href="#oracle">Avantajele tehnologice Oracle Database 26ai</a></li>
+    <li><a href="#securitate">Securitate cibernetică în Oracle OCI</a></li>
+    <li><a href="#grok">Grok Builder — configurare și dezvoltare (opțional, recomandat)</a></li>
+    <li><a href="#livrare">Variante de livrare și lista de prețuri</a></li>
+    <li><a href="#suport">Suport, mentenanță legislativă și SLA</a></li>
+  </ol>
+</nav>
+
+<!-- ============================================================ -->
+<section id="destinatie">
+  <h2>1. Destinația configurației</h2>
+  <p class="lead">Configurația <strong>„UNA.ONG — Contabilitatea Organizației Necomerciale”</strong> este o soluție aplicativă standard („cutie”), destinată automatizării complete a evidenței contabile, fiscale și de gestiune în organizațiile necomerciale înregistrate în Republica Moldova.</p>
+  <p>Soluția este construită după modelul configurațiilor aplicative standard consacrate pe piață (o singură bază informațională, plan de conturi predefinit, documente tipizate, rapoarte reglementate actualizate), dar rulează integral pe platforma <strong>UNA.md ERP</strong> — o platformă ERP modernă, web-nativă, cu baza de date Oracle.</p>
+  <h3>Cui îi este destinată</h3>
+  <ul>
+    <li><strong>Asociații obștești</strong> (inclusiv filiale ale organizațiilor internaționale umanitare care activează în Moldova — de exemplu, organizații de tip <em>People in Need</em>, care gestionează programe de asistență umanitară și granturi de la donatori multipli);</li>
+    <li><strong>Fundații</strong> și <strong>instituții private</strong> conform Legii nr. 86/2020 cu privire la organizațiile necomerciale;</li>
+    <li>Organizații religioase, uniuni, patronate, sindicate, asociații de economii și împrumut;</li>
+    <li>Asociații de proprietari (condominii), partide și alte structuri necomerciale;</li>
+    <li>Companii de outsourcing contabil care deservesc portofolii de ONG-uri (regim multi-firmă).</li>
+  </ul>
+  <h3>Cadrul normativ acoperit</h3>
+  <ul>
+    <li>Legea contabilității și raportării financiare nr. 287/2017;</li>
+    <li>Standardele Naționale de Contabilitate (SNC), cu posibilitate de raportare paralelă IFRS pentru donatori;</li>
+    <li>Indicațiile metodice privind particularitățile contabilității în organizațiile necomerciale (Ordinul Ministerului Finanțelor);</li>
+    <li>Codul fiscal al RM, inclusiv regimul fiscal special al organizațiilor necomerciale și mecanismul desemnării procentuale („Legea 2%”);</li>
+    <li>Legislația muncii, CNAS, CNAM și raportarea salarială curentă.</li>
+  </ul>
+</section>
+
+<!-- ============================================================ -->
+<section id="functional">
+  <h2>2. Funcționalitatea modulului</h2>
+  <p>Modulul reproduce integral logica de lucru a unei configurații standard de contabilitate pentru sectorul necomercial: de la introducerea documentelor primare până la închiderea perioadei și generarea rapoartelor reglementate — totul într-o singură bază informațională.</p>
+
+  <div class="two-col">
+    <div class="card">
+      <h4>Finanțări cu destinație specială</h4>
+      <ul>
+        <li>Evidența granturilor, donațiilor, cotizațiilor de membru, contribuțiilor fondatorilor și mijloacelor din desemnarea procentuală (2%);</li>
+        <li>Evidență analitică pe <strong>surse de finanțare</strong>, <strong>proiecte</strong>, <strong>contracte de grant</strong> și <strong>linii de buget</strong>;</li>
+        <li>Controlul utilizării conform destinației: blocarea depășirii bugetului pe linie de buget;</li>
+        <li>Repartizarea automată a cheltuielilor indirecte între proiecte după cote configurabile;</li>
+        <li>Evidența cofinanțării și a contribuției proprii (in-kind).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Contabilitate generală</h4>
+      <ul>
+        <li>Plan de conturi predefinit pentru organizații necomerciale, cu analitică multidimensională;</li>
+        <li>Operațiuni manuale și documente tipizate cu contare automată;</li>
+        <li>Evidență multivalutară, diferențe de curs, cursul oficial BNM preluat automat;</li>
+        <li>Închiderea perioadei cu asistent pas-cu-pas;</li>
+        <li>Registre contabile: Cartea mare, balanța de verificare, analiza contului, fișa contului.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Bancă și casă</h4>
+      <ul>
+        <li>Ordine de plată, extras bancar, import/export în sistemele bancare din Moldova (MICB, MAIB, Victoriabank ș.a.);</li>
+        <li>Registru de casă, dispoziții de încasare/plată;</li>
+        <li>Decontări cu titularii de avans, deconturi de avans în lei și valută;</li>
+        <li>Evidența transferurilor de la donatori externi cu documente justificative atașate.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Imobilizări și stocuri</h4>
+      <ul>
+        <li>Mijloace fixe și imobilizări necorporale: intrare, amortizare, transfer, casare;</li>
+        <li>Particularitățile ONG: amortizarea din contul finanțărilor cu destinație specială;</li>
+        <li>Stocuri, ajutoare materiale și <strong>ajutor umanitar</strong> cu evidență cantitativ-valorică pe depozite și proiecte;</li>
+        <li>Distribuirea ajutoarelor către beneficiari, cu liste nominale și acte de predare-primire.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Salarizare și personal</h4>
+      <ul>
+        <li>Calculul salariilor, inclusiv finanțarea posturilor din mai multe proiecte simultan (time-sheets pe proiecte);</li>
+        <li>Impozit pe venit, CNAS, CNAM conform cotelor în vigoare;</li>
+        <li>Contracte de muncă, de prestări servicii și de voluntariat;</li>
+        <li>Fluturași de salariu, plata pe card, evidența concediilor și delegațiilor.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Bugetare și raportare către donatori</h4>
+      <ul>
+        <li>Bugete pe proiect în valuta donatorului, cu versiuni și scenarii;</li>
+        <li>Rapoarte financiare pe formatele donatorilor (UE, USAID, agențiile ONU, fundații private);</li>
+        <li>Analiza plan-fapt pe linii de buget, prognoza execuției;</li>
+        <li>Export în Excel/PDF, machete configurabile pentru fiecare donator.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Servicii electronice de stat integrate</h3>
+  <ul>
+    <li><strong>e-Factura</strong> — emiterea și recepționarea facturilor fiscale electronice;</li>
+    <li><strong>Declarația electronică (SFS)</strong> — depunerea dărilor de seamă direct din program;</li>
+    <li><strong>MSign / semnătura electronică</strong> — semnarea documentelor;</li>
+    <li><strong>MConnect</strong> — schimb de date cu registrele de stat (la solicitare);</li>
+    <li>Import automat al cursului valutar BNM și al clasificatoarelor de stat.</li>
+  </ul>
+</section>
+
+<!-- ============================================================ -->
+<section id="rapoarte">
+  <h2>3. Rapoarte reglementate pentru Republica Moldova</h2>
+  <p>Setul de rapoarte reglementate este menținut permanent în actualitate și include, printre altele:</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Domeniu</th><th>Rapoarte incluse</th></tr>
+    <tr>
+      <td><strong>Situații financiare</strong></td>
+      <td>Situațiile financiare pentru organizațiile necomerciale (bilanț, situația de venituri și cheltuieli, situația fluxurilor de numerar, nota explicativă), situații financiare prescurtate/complete conform SNC.</td>
+    </tr>
+    <tr>
+      <td><strong>Fiscalitate</strong></td>
+      <td>Declarația <strong>ONG17</strong> (impozitul pe venit al organizației necomerciale), declarația TVA (TVA12) pentru organizațiile plătitoare, dări de seamă privind taxele locale, raportul privind desemnarea procentuală.</td>
+    </tr>
+    <tr>
+      <td><strong>Salarii și contribuții</strong></td>
+      <td><strong>IPC21</strong> (impozit pe venit, CNAM, CNAS lunar), informația IALS, note informative anuale, certificate pentru angajați.</td>
+    </tr>
+    <tr>
+      <td><strong>Statistică</strong></td>
+      <td>Rapoartele statistice periodice cerute ONG-urilor de Biroul Național de Statistică.</td>
+    </tr>
+    <tr>
+      <td><strong>Donatori</strong></td>
+      <td>Rapoarte financiare pe proiect în formatele donatorilor, registrul granturilor, execuția bugetară pe surse de finanțare.</td>
+    </tr>
+  </table>
+  </div>
+  <div class="note"><strong>Notă:</strong> formele rapoartelor se actualizează la fiecare modificare legislativă publicată în <strong>Monitorul Oficial al Republicii Moldova</strong> — vezi serviciul de „asigurare legislativă” din secțiunea 8.</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="oracle">
+  <h2>4. Avantajele tehnologice Oracle Database 26ai</h2>
+  <p>Spre deosebire de soluțiile clasice de contabilitate construite pe baze de date de fișiere sau SGBD-uri de nivel mediu, UNA.ONG rulează pe <strong>Oracle Database 26ai</strong> — cea mai recentă generație a bazei de date convergente Oracle, cu inteligența artificială integrată direct în nucleul SGBD.</p>
+  <div class="two-col">
+    <div class="card">
+      <h4>AI încorporat în baza de date</h4>
+      <ul>
+        <li><strong>AI Vector Search</strong> — căutare semantică în documente, contracte de grant și corespondența cu donatorii, direct în SQL;</li>
+        <li><strong>Select AI</strong> — interogări în limbaj natural: contabilul întreabă „cheltuielile proiectului X pe trimestrul 2” și primește raportul;</li>
+        <li>Algoritmi ML in-database pentru detectarea anomaliilor în tranzacții (dublări, contări atipice, depășiri de buget);</li>
+        <li>Suport RAG pentru asistenți AI care răspund pe datele proprii ale organizației, fără a scoate datele din bază.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Fiabilitate și performanță</h4>
+      <ul>
+        <li>Bază de date convergentă: date relaționale, JSON, spațiale și vectoriale într-un singur motor — fără sisteme suplimentare;</li>
+        <li><strong>JSON-Relational Duality</strong> — aceleași date accesibile și ca tabele, și ca documente JSON pentru integrări API;</li>
+        <li><strong>True Cache</strong> și indexare automată — rapoarte mari pe secunde, nu pe minute;</li>
+        <li>Funcționare 24/7, patch-uri fără oprirea sistemului (rolling patching);</li>
+        <li>Scalare de la 1 la sute de utilizatori fără schimbarea arhitecturii.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Integritate și audit</h4>
+      <ul>
+        <li><strong>Blockchain Tables</strong> — registre contabile imuabile: nicio înregistrare istorică nu poate fi modificată sau ștearsă neobservat, un argument puternic la auditurile donatorilor;</li>
+        <li>Flashback — „mașina timpului”: restabilirea stării bazei la orice moment, fără backup-uri manuale;</li>
+        <li>Jurnalizare completă a acțiunilor fiecărui utilizator.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Autonomie operațională</h4>
+      <ul>
+        <li>Varianta Autonomous Database în OCI: administrare, optimizare, backup și patch-uri complet automate;</li>
+        <li>Organizația nu are nevoie de administrator de bază de date propriu;</li>
+        <li>Copii de rezervă automate zilnice, cu păstrare configurabilă (implicit 60 de zile).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="securitate">
+  <h2>5. Securitate cibernetică în Oracle OCI</h2>
+  <p>Pentru organizațiile care lucrează cu date ale beneficiarilor vulnerabili și cu fonduri ale donatorilor internaționali, securitatea este o cerință contractuală, nu o opțiune. Găzduirea în <strong>Oracle Cloud Infrastructure</strong> oferă un nivel de protecție inaccesibil serverelor locale din oficiu:</p>
+  <ul class="check">
+    <li><strong>Criptare totală implicită</strong> — toate datele sunt criptate în repaus (TDE — Transparent Data Encryption) și în tranzit (TLS); criptarea nu poate fi dezactivată;</li>
+    <li><strong>Oracle Data Safe</strong> — evaluarea continuă a securității bazei de date, descoperirea și mascarea datelor cu caracter personal, auditul activității utilizatorilor;</li>
+    <li><strong>Oracle Cloud Guard</strong> — monitorizarea permanentă a întregii infrastructuri cloud, cu detectarea și remedierea automată a configurărilor riscante;</li>
+    <li><strong>Security Zones</strong> — politici de securitate obligatorii, aplicate la nivel de infrastructură, care fac imposibilă publicarea accidentală a datelor;</li>
+    <li><strong>OCI Vault</strong> — gestiunea centralizată a cheilor de criptare și a secretelor (parole, certificate);</li>
+    <li><strong>IAM + MFA</strong> — autentificare multi-factor obligatorie pentru administratori, roluri și drepturi granulare pentru fiecare utilizator;</li>
+    <li><strong>Izolare de rețea</strong> — fiecare client rulează în propriul Virtual Cloud Network, cu acces doar prin canale criptate;</li>
+    <li><strong>Protecție anti-DDoS</strong> și Web Application Firewall la perimetrul OCI;</li>
+    <li><strong>Certificări internaționale</strong> — centrele de date OCI dețin certificări ISO 27001/27017/27018, SOC 1/2/3, PCI DSS; conformitate GDPR și cu Legea RM nr. 133/2011 privind protecția datelor cu caracter personal;</li>
+    <li><strong>Regiuni UE</strong> — datele se găzduiesc în regiuni OCI din Uniunea Europeană (ex. Frankfurt, Amsterdam), cerință frecventă a donatorilor europeni.</li>
+  </ul>
+</section>
+
+<!-- ============================================================ -->
+<section id="grok">
+  <h2>6. Grok Builder — configurare și dezvoltare (opțional, recomandat)</h2>
+  <p>Pentru personalizarea și dezvoltarea ulterioară a configurației se recomandă opțional instrumentul <strong>Grok Builder</strong> — mediul de configurare al platformei UNA.md, asistat de inteligență artificială:</p>
+  <ul>
+    <li>Crearea de câmpuri, registre, documente și rapoarte noi <strong>fără programare</strong> (no-code/low-code);</li>
+    <li>Generarea machetelor de rapoarte pentru donatori noi prin descriere în limbaj natural;</li>
+    <li>Construirea fluxurilor de aprobare (workflow) pentru plăți și deconturi;</li>
+    <li>Toate modificările sunt versionate și separate de configurația standard — actualizările legislative nu suprascriu personalizările;</li>
+    <li>Poate fi utilizat atât de partenerul de implementare, cât și de utilizatorii avansați ai organizației.</li>
+  </ul>
+  <div class="note"><strong>Recomandare:</strong> Grok Builder nu este obligatoriu pentru exploatarea pachetului standard, dar este recomandat organizațiilor cu mai mulți donatori și formate de raportare specifice.</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="livrare">
+  <h2>7. Variante de livrare și lista de prețuri</h2>
+  <p>Soluția se livrează ca <strong>aplicație separată</strong>, în două modele comerciale, după practica listelor de prețuri ale partenerilor-franciză 1C din Republica Moldova, cu intervale reale de prețuri medii de piață. <strong>Toate prețurile sunt indicate fără TVA.</strong></p>
+
+  <div class="two-col">
+    <div class="plan">
+      <h4>Varianta PaaS — instanță dedicată</h4>
+      <p class="price-sub">Baza de date Oracle dedicată organizației, în OCI. Configurația se adaptează la specificul organizației.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Serviciu</th><th>Preț, EUR fără TVA</th></tr>
+        <tr>
+          <td>Pachet de bază — licențierea și configurarea aplicației după complexitatea organizației (număr de proiecte, donatori, utilizatori)</td>
+          <td class="num">500 – 1 500 <span class="price-sub">unic</span></td>
+        </tr>
+        <tr>
+          <td>Instalare unică <strong>+ migrarea datelor din orice sistem-sursă</strong> (1C, Excel, alte programe de contabilitate): solduri inițiale, parteneri, mijloace fixe, salariați, proiecte</td>
+          <td class="num">200 – 400 <span class="price-sub">unic</span></td>
+        </tr>
+        <tr>
+          <td>Grok Builder — instrument de configurare și dezvoltare <em>(opțional, recomandat)</em></td>
+          <td class="num">conform ofertei</td>
+        </tr>
+      </table>
+      </div>
+    </div>
+    <div class="plan saas">
+      <h4>Varianta SaaS — abonament în cloud</h4>
+      <p class="price-sub">Aplicație standard multi-tenant, fără investiție inițială mare. Pornire în câteva zile.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Serviciu</th><th>Preț, EUR fără TVA</th></tr>
+        <tr>
+          <td>Conectare (crearea bazei, utilizatorii, setările inițiale)</td>
+          <td class="num">200 <span class="price-sub">unic</span></td>
+        </tr>
+        <tr>
+          <td>Abonament lunar (găzduire OCI, actualizări, copii de rezervă)</td>
+          <td class="num">50 <span class="price-sub">/ lună</span></td>
+        </tr>
+      </table>
+      </div>
+      <ul class="check">
+        <li>Actualizările configurației standard incluse în abonament;</li>
+        <li>Migrarea datelor și personalizările se tarifează separat, conform listei de prețuri.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">Intervalele de preț corespund practicii pieței serviciilor de implementare a programelor de contabilitate din Republica Moldova (nivelul mediu al partenerilor-franciză): pachetul de bază se stabilește prin chestionar de evaluare a complexității, iar oferta finală se fixează în contract înainte de începerea lucrărilor.</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="suport">
+  <h2>8. Suport, mentenanță legislativă și SLA</h2>
+
+  <h3>8.1. „Asigurare legislativă” — actualizări conform Monitorul Oficial</h3>
+  <p>Serviciu de mentenanță care garantează adaptarea configurației la <strong>orice modificare a legislației</strong> Republicii Moldova (contabilă, fiscală, salarială), pe măsura publicării în <strong>Monitorul Oficial</strong>. Actualizările se livrează <strong>la cerere</strong>, prin sistemul de tichete de suport <strong>OTRS</strong>: clientul deschide un tichet, primește actualizarea și confirmarea instalării.</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Abonament</th><th>Perioada</th><th>Preț, EUR fără TVA</th></tr>
+    <tr><td>Asigurare legislativă — anuală</td><td>12 luni</td><td class="num">400 / an</td></tr>
+    <tr><td>Asigurare legislativă — semestrială</td><td>6 luni</td><td class="num">300 / 6 luni</td></tr>
+  </table>
+  </div>
+
+  <h3>8.2. Suport prin chat — abonament</h3>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Serviciu</th><th>Condiții</th><th>Preț, EUR fără TVA</th></tr>
+    <tr>
+      <td>Abonament consultații în chat</td>
+      <td>Perioadă de 2 săptămâni; număr nelimitat de întrebări; durata lucrului per întrebare — <strong>maximum 15 minute</strong></td>
+      <td class="num">30 / 2 săptămâni</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3>8.3. Lucrări la tarif orar</h3>
+  <p>Solicitările care depășesc 15 minute per întrebare, precum și lucrările de dezvoltare, se execută la tarif orar conform listei de prețuri:</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Serviciu</th><th>Condiții</th><th>Preț, EUR fără TVA</th></tr>
+    <tr>
+      <td>Oră de lucru specialist (consultanță, setări, dezvoltare)</td>
+      <td>Tarif minim în anul 2026; comandă minimă — <strong>pachet de 4 ore</strong></td>
+      <td class="num">de la 40 / oră</td>
+    </tr>
+    <tr class="total">
+      <td>Pachet minim de lucrări</td>
+      <td>4 ore × 40 EUR</td>
+      <td class="num">de la 160</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3>8.4. Canale de suport</h3>
+  <ul>
+    <li><strong>OTRS</strong> — sistem de tichete pentru actualizări legislative, incidente și cereri de dezvoltare, cu istoric complet și termene de reacție;</li>
+    <li><strong>Chat</strong> — consultații operative în cadrul abonamentului;</li>
+    <li>Bază de cunoștințe și instrucțiuni video în limbile română și rusă.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p><span class="vat">Toate prețurile din prezenta fișă de produs sunt indicate în EUR, fără TVA.</span></p>
+  <p>UNA.ONG — Contabilitatea Organizației Necomerciale · Platforma UNA.md ERP · Oracle Database 26ai · Oracle Cloud Infrastructure.<br>
+  Fișă de produs cu caracter informativ, ediția 2026. Oferta finală de preț se stabilește prin contract. Denumirile Oracle, OCI, OTRS și alte mărci aparțin deținătorilor respectivi.</p>
+</footer>
+
+</div>
+</body>
+</html>
