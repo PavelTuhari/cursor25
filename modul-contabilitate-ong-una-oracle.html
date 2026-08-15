@@ -365,6 +365,7 @@
     <span class="badge">Platformă: UNA.md ERP</span>
     <span class="badge">SGBD: Oracle Database 26ai</span>
     <span class="badge">Cloud: Oracle OCI (regiuni UE)</span>
+    <span class="badge">Client: Windows nativ (Embarcadero Delphi / C++)</span>
     <span class="badge">Livrare: PaaS / SaaS</span>
     <span class="badge">Limbi: RO / RU / EN</span>
   </div>
@@ -487,11 +488,11 @@
 <!-- ============================================================ -->
 <section id="arhitectura">
   <h2>3. Arhitectura soluției</h2>
-  <p>Soluția este 100 % web: utilizatorii lucrează din browser (Chrome, Edge, Firefox, Safari), fără instalări locale, de la birou, de acasă sau din teren. Arhitectura pe niveluri:</p>
+  <p>Soluția are arhitectură client–server clasică, de înaltă performanță: utilizatorii lucrează în <strong>aplicația nativă UNA.md pentru Windows</strong> — un client desktop scris în <strong>Embarcadero RAD Studio (Delphi / C++)</strong>, platformă universală de dezvoltare nativă — care se conectează securizat la baza de date Oracle din cloud-ul OCI. Clientul nativ oferă viteza de lucru și ergonomia cu tastatura pe care contabilii le așteaptă de la un program profesional de evidență (introducere rapidă a documentelor, grile mari fără întârzieri de browser). Arhitectura pe niveluri:</p>
   <div class="arch">
     <div class="layer">
       <span class="t">Nivel utilizator</span>
-      <span class="d">Browser web + aplicație mobilă pentru aprobări, deconturi de avans și fotografierea documentelor primare. Interfață în română, rusă și engleză, comutabilă per utilizator.</span>
+      <span class="d"><strong>Aplicația nativă UNA.md pentru Windows</strong> (Embarcadero Delphi / C++): interfață rapidă, orientată pe tastatură, în română, rusă și engleză, comutabilă per utilizator. Instalare simplă pe stațiile de lucru, cu actualizare automată a clientului. Lucrul de la distanță (de acasă sau din teren) — prin conexiune criptată directă la OCI sau prin server terminal (RDP), la alegerea organizației.</span>
     </div>
     <div class="layer">
       <span class="t">Nivel aplicație</span>
@@ -844,8 +845,8 @@
     </li>
     <li>
       <span class="when">Etapa 2 · Instalare (1–2 zile)</span>
-      <span class="what">Provizionarea instanței în OCI, crearea utilizatorilor, setările organizației.</span>
-      <span class="det">Politici de parole și MFA, roluri de acces, conectarea serviciilor de stat (e-Factura, Declarația electronică, MSign), planul de conturi și politicile contabile.</span>
+      <span class="what">Provizionarea instanței în OCI, instalarea clientului nativ, crearea utilizatorilor.</span>
+      <span class="det">Instalarea aplicației native UNA.md pe stațiile de lucru Windows, configurarea conexiunii criptate la OCI, politici de parole și MFA, roluri de acces, conectarea serviciilor de stat (e-Factura, Declarația electronică, MSign), planul de conturi și politicile contabile.</span>
     </li>
     <li>
       <span class="when">Etapa 3 · Migrarea datelor (2–10 zile)</span>
