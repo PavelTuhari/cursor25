@@ -508,7 +508,7 @@
     </div>
     <div class="layer deep">
       <span class="t">Nivel infrastructură</span>
-      <span class="d"><strong>Oracle Cloud Infrastructure</strong>, regiuni din Uniunea Europeană (Frankfurt / Amsterdam): rețea izolată per client, criptare implicită, backup automat, monitorizare 24/7.</span>
+      <span class="d"><strong>Oracle Cloud Infrastructure</strong>, regiuni din Uniunea Europeană (Frankfurt / Amsterdam): rețea izolată per client, criptare implicită, backup automat, monitorizare 24/7. Pentru instanțele PaaS cu <strong>până la 5 utilizatori</strong> se folosește nivelul <strong>Oracle Always Free</strong> (Autonomous Database) — infrastructura de bază de date fără niciun cost lunar.</span>
     </div>
   </div>
   <div class="note ok"><strong>Principiul „nucleu standard + extensii”:</strong> actualizările legislative se aplică nucleului standard fără a atinge personalizările clientului — același model care a făcut fiabile configurațiile tipizate clasice, dar implementat nativ în platformă.</div>
@@ -830,6 +830,8 @@
       </ul>
     </div>
   </div>
+  <h3>Instalare complet automată cu AI — Grok Builder 1.0</h3>
+  <p>Pe lângă rolul de configurator, <strong>Grok Builder 1.0</strong> conduce și <strong>instalarea complet automată</strong> a soluției: AI-ul provizionează baza de date în OCI (inclusiv pe nivelul Oracle Always Free pentru instanțele de până la 5 utilizatori), desfășoară configurația standard, aplică setările organizației din chestionarul de evaluare și pregătește utilizatorii și rolurile — fără intervenție manuală a inginerilor. Scenariul de instalare automată a fost <strong>verificat într-un proiect-pilot pentru compania Siemens</strong>.</p>
   <div class="note"><strong>Recomandare:</strong> Grok Builder nu este necesar pentru exploatarea pachetului standard. Este recomandat organizațiilor cu mai mulți donatori și formate de raportare specifice — tipic filialelor organizațiilor internaționale. Licențierea — conform ofertei individuale.</div>
 </section>
 
@@ -846,7 +848,7 @@
     <li>
       <span class="when">Etapa 2 · Instalare (1–2 zile)</span>
       <span class="what">Provizionarea instanței în OCI, instalarea clientului nativ, crearea utilizatorilor.</span>
-      <span class="det">Instalarea aplicației native UNA.md pe stațiile de lucru Windows, configurarea conexiunii criptate la OCI, politici de parole și MFA, roluri de acces, conectarea serviciilor de stat (e-Factura, Declarația electronică, MSign), planul de conturi și politicile contabile.</span>
+      <span class="det">Întregul proces poate rula <strong>complet automat, condus de AI pe baza Grok Builder 1.0</strong>: provizionarea bazei în OCI (pentru până la 5 utilizatori — pe nivelul Oracle Always Free, fără cost de infrastructură), desfășurarea configurației, instalarea aplicației native UNA.md pe stațiile de lucru Windows, conexiunea criptată, politici de parole și MFA, roluri de acces, conectarea serviciilor de stat (e-Factura, Declarația electronică, MSign), planul de conturi și politicile contabile. Scenariul de instalare automată a fost verificat într-un <strong>proiect-pilot pentru compania Siemens</strong>.</span>
     </li>
     <li>
       <span class="when">Etapa 3 · Migrarea datelor (2–10 zile)</span>
@@ -895,6 +897,8 @@
       </div>
       <ul class="check">
         <li>Instanță dedicată = performanță garantată și politici de securitate proprii;</li>
+        <li><strong>Până la 5 utilizatori:</strong> baza rulează pe <strong>Oracle Autonomous Database Always Free</strong> — costul infrastructurii OCI este <strong>zero</strong>, se achită doar serviciile din lista de prețuri;</li>
+        <li>Instalare <strong>complet automată, asistată de AI</strong>, pe baza Grok Builder 1.0 (vezi secțiunea 9);</li>
         <li>Regim multi-firmă disponibil fără plăți per firmă suplimentare în pachetul de bază;</li>
         <li>Mediu de test inclus.</li>
       </ul>
@@ -1085,7 +1089,8 @@
     <tr><td>Asigurare legislativă (actualizări Monitorul Oficial, prin tichete OTRS)</td><td class="ctr">400 €/an sau 300 €/6 luni <span class="price-sub">(serviciu separat)</span></td><td class="yes">✔ inclusă în abonament</td></tr>
     <tr><td>Suport prin chat (max. 15 min/întrebare)</td><td class="ctr">30 €/2 săptămâni <span class="price-sub">(abonament separat)</span></td><td class="yes">✔ inclus în abonament</td></tr>
     <tr><td>Lucrări peste 15 min/întrebare (setări, dezvoltare)</td><td class="ctr">de la 40 €/oră, pachet min. 4 ore</td><td class="ctr">de la 40 €/oră, pachet min. 4 ore</td></tr>
-    <tr><td>Bază de date</td><td class="ctr">Oracle 26ai dedicată, VCN propriu</td><td class="ctr">Oracle 26ai partajată, date izolate per client</td></tr>
+    <tr><td>Bază de date</td><td class="ctr">Oracle 26ai dedicată, VCN propriu · până la 5 utilizatori — Always Free, cost infrastructură zero</td><td class="ctr">Oracle 26ai partajată, date izolate per client</td></tr>
+    <tr><td>Instalare automată cu AI (Grok Builder 1.0)</td><td class="yes">✔ verificată în proiect-pilot (Siemens)</td><td class="yes">✔ provizionare automată standard</td></tr>
     <tr><td>Personalizări (Grok Builder)</td><td class="yes">✔ complet</td><td class="no">limitat (machete de rapoarte)</td></tr>
     <tr><td>Regim multi-firmă</td><td class="yes">✔</td><td class="no">1 organizație per abonament</td></tr>
     <tr><td>Mediu de test</td><td class="yes">✔ inclus</td><td class="no">—</td></tr>
