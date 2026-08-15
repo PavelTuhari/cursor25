@@ -395,6 +395,7 @@
     <li><a href="#scenarii">Exemple de calcul al costului</a></li>
     <li><a href="#suport">Suport, mentenanță legislativă și SLA</a></li>
     <li><a href="#comparatie">Comparație PaaS / SaaS</a></li>
+    <li><a href="#concurenta">Comparație cu alte soluții (Sirius, 1C, softuri românești)</a></li>
     <li><a href="#faq">Întrebări frecvente</a></li>
   </ol>
 </nav>
@@ -1103,8 +1104,173 @@
 </section>
 
 <!-- ============================================================ -->
+<section id="concurenta">
+  <h2>14. Comparație cu alte soluții de pe piață</h2>
+  <p>Pentru o decizie informată, mai jos este poziționarea UNA.md/ONG față de soluțiile de contabilitate utilizate cel mai des de organizațiile din Republica Moldova — atât cele de pe piața locală (1C, Sirius, Universal Accounting), cât și produsele românești întâlnite la organizațiile cu activitate în ambele țări (SAGA, WinMENTOR, Ciel, Smartbill).</p>
+
+  <h3><span class="idx">14.1.</span> Matricea de comparație</h3>
+  <div class="table-wrap">
+  <table>
+    <tr>
+      <th>Criteriu</th>
+      <th>UNA.md/ONG<br><span style="text-transform:none;font-weight:normal">(Oracle 26ai / OCI)</span></th>
+      <th>1C:Contabilitate 8<br><span style="text-transform:none;font-weight:normal">(Moldova, prin franciză)</span></th>
+      <th>Sirius<br><span style="text-transform:none;font-weight:normal">(Moldova)</span></th>
+      <th>SAGA C<br><span style="text-transform:none;font-weight:normal">(România)</span></th>
+      <th>WinMENTOR / Ciel<br><span style="text-transform:none;font-weight:normal">(România)</span></th>
+      <th>Smartbill<br><span style="text-transform:none;font-weight:normal">(România, cloud)</span></th>
+    </tr>
+    <tr>
+      <td>Legislația și rapoartele reglementate ale <strong>Republicii Moldova</strong> (ONG17, IPC21, TVA12, situații financiare ONC)</td>
+      <td class="yes">✔ complet, în pachetul standard</td>
+      <td class="yes">✔ prin configurațiile localizate</td>
+      <td class="yes">✔ produs local</td>
+      <td class="no">— doar legislația României</td>
+      <td class="no">— doar legislația României</td>
+      <td class="no">— doar legislația României</td>
+    </tr>
+    <tr>
+      <td>Specializare <strong>ONG</strong>: finanțări cu destinație specială, analitică pe proiecte/donatori/linii de buget, rapoarte către donatori</td>
+      <td class="yes">✔ nativ, subsistem dedicat</td>
+      <td class="ctr">parțial — prin adaptarea configurației, contra cost</td>
+      <td class="ctr">parțial — evidență generală, fără raportare donatori</td>
+      <td class="ctr">parțial — modul ONG pentru legislația RO</td>
+      <td class="no">— orientate pe firme comerciale</td>
+      <td class="no">— facturare/contabilitate comercială</td>
+    </tr>
+    <tr>
+      <td>Baza de date</td>
+      <td class="yes">Oracle 26ai (convergentă, AI încorporat)</td>
+      <td class="ctr">proprie (fișiere) sau MS SQL/PostgreSQL</td>
+      <td class="ctr">SGBD de nivel mediu</td>
+      <td class="ctr">bază locală proprie</td>
+      <td class="ctr">bază proprie / SGBD mediu</td>
+      <td class="ctr">cloud propriu al producătorului</td>
+    </tr>
+    <tr>
+      <td>AI încorporat: interogări în limbaj natural, căutare semantică, detecția anomaliilor</td>
+      <td class="yes">✔ Select AI, Vector Search, ML in-database</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+      <td class="ctr">asistență AI limitată la facturare</td>
+    </tr>
+    <tr>
+      <td>Registre imuabile pentru audit (Blockchain Tables), Flashback</td>
+      <td class="yes">✔</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+    </tr>
+    <tr>
+      <td>Găzduire cloud cu certificări ISO 27001 / SOC, regiuni UE, criptare implicită</td>
+      <td class="yes">✔ Oracle OCI (Frankfurt/Amsterdam)</td>
+      <td class="ctr">hosting la parteneri, nivel variabil</td>
+      <td class="ctr">de regulă server local la client</td>
+      <td class="ctr">local sau hosting terț</td>
+      <td class="ctr">local sau hosting terț</td>
+      <td class="ctr">cloud RO, certificare proprie</td>
+    </tr>
+    <tr>
+      <td>Client nativ Windows de înaltă performanță</td>
+      <td class="yes">✔ Embarcadero Delphi / C++</td>
+      <td class="yes">✔</td>
+      <td class="yes">✔</td>
+      <td class="yes">✔</td>
+      <td class="yes">✔</td>
+      <td class="no">— doar web</td>
+    </tr>
+    <tr>
+      <td>Integrare servicii de stat <strong>MD</strong>: e-Factura SFS, Declarația electronică, MSign, curs BNM</td>
+      <td class="yes">✔</td>
+      <td class="yes">✔</td>
+      <td class="yes">✔ / parțial</td>
+      <td class="no">— integrate cu ANAF/SPV (RO)</td>
+      <td class="no">— integrate cu ANAF/SPV (RO)</td>
+      <td class="no">— e-Factura RO, SAF-T RO</td>
+    </tr>
+    <tr>
+      <td>Multivalută + evidență paralelă în valuta donatorului</td>
+      <td class="yes">✔ inclusiv curs InforEuro / curs fix contract</td>
+      <td class="ctr">multivalută da, evidența donatorilor — prin adaptare</td>
+      <td class="ctr">multivalută de bază</td>
+      <td class="ctr">multivalută de bază</td>
+      <td class="ctr">multivalută de bază</td>
+      <td class="ctr">facturare multivalută</td>
+    </tr>
+    <tr>
+      <td>Actualizări legislative pentru Moldova (Monitorul Oficial), canal garantat</td>
+      <td class="yes">✔ asigurare legislativă prin OTRS (PaaS) / incluse (SaaS)</td>
+      <td class="ctr">prin abonament ITS la partenerul franciză</td>
+      <td class="ctr">prin producătorul local</td>
+      <td class="no">— urmărește doar Monitorul Oficial al României</td>
+      <td class="no">— idem</td>
+      <td class="no">— idem</td>
+    </tr>
+    <tr>
+      <td>Instalare complet automată condusă de AI</td>
+      <td class="yes">✔ Grok Builder 1.0, verificată în pilot (Siemens)</td>
+      <td class="no">— instalare manuală de specialist</td>
+      <td class="no">—</td>
+      <td class="ctr">instalare simplă manuală</td>
+      <td class="no">—</td>
+      <td class="yes">✔ înregistrare online (SaaS)</td>
+    </tr>
+    <tr>
+      <td>Personalizare fără programare (no-code) protejată la actualizări</td>
+      <td class="yes">✔ Grok Builder, extensii versionate</td>
+      <td class="ctr">configurator propriu — necesită programator 1C</td>
+      <td class="no">— la producător</td>
+      <td class="no">—</td>
+      <td class="ctr">parametrizare limitată</td>
+      <td class="no">—</td>
+    </tr>
+    <tr>
+      <td>Interfață RO / RU / EN comutabilă per utilizator</td>
+      <td class="yes">✔</td>
+      <td class="ctr">RU/RO, după configurație</td>
+      <td class="ctr">RO/RU</td>
+      <td class="no">doar RO</td>
+      <td class="no">doar RO</td>
+      <td class="ctr">RO/EN</td>
+    </tr>
+    <tr>
+      <td>Model de preț transparent, publicat (fără TVA)</td>
+      <td class="yes">✔ PaaS 500–1 500 € + 200–400 € / SaaS 200 € + 50 €/lună</td>
+      <td class="ctr">licențe + implementare + ITS, ofertă per partener</td>
+      <td class="ctr">ofertă a producătorului</td>
+      <td class="ctr">licență accesibilă, dar inutilizabilă pentru evidența MD</td>
+      <td class="ctr">licențe per modul + mentenanță</td>
+      <td class="ctr">abonamente SaaS publicate (RO)</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3><span class="idx">14.2.</span> Față de soluțiile de pe piața Moldovei (1C, Sirius, Universal Accounting)</h3>
+  <ul>
+    <li><strong>Acoperirea legislativă este comparabilă</strong> — toate produsele locale mature acoperă rapoartele reglementate ale RM. Diferența decisivă este <strong>specializarea ONG din pachetul standard</strong>: în UNA.md/ONG finanțările cu destinație specială, analitica pe patru dimensiuni și machetele de rapoarte pentru donatori există „din cutie”, pe când în soluțiile universale se obțin prin adaptări individuale plătite, care apoi complică fiecare actualizare;</li>
+    <li><strong>Fundația tehnologică</strong>: bazele de date de fișiere sau SGBD-urile de nivel mediu nu oferă registre imuabile, Flashback, criptare totală implicită sau AI încorporat. Pe Oracle 26ai acestea sunt proprietăți ale platformei, nu promisiuni ale aplicației;</li>
+    <li><strong>Modelul de operare</strong>: serverul local din oficiu (tipic pentru instalările Sirius/1C din sectorul asociativ) concentrează toate riscurile — furt, incendiu, lipsă backup, lipsă patch-uri. OCI le elimină ca clasă, cu certificări pe care le puteți anexa direct la dosarul de audit al donatorului;</li>
+    <li><strong>Costul total</strong>: la 1C se cumulează licențele platformei, orele partenerului de implementare și abonamentul de actualizări; UNA.md/ONG publică lista de prețuri integral (secțiunile 10–12), iar până la 5 utilizatori infrastructura PaaS este pe nivelul Always Free — cost zero.</li>
+  </ul>
+
+  <h3><span class="idx">14.3.</span> Față de soluțiile românești (SAGA, WinMENTOR, Ciel, Smartbill)</h3>
+  <ul>
+    <li>Produsele românești sunt construite pentru <strong>legislația României</strong>: planul de conturi RO, declarațiile ANAF, SAF-T (D406), e-Factura RO. Ele <strong>nu acoperă</strong> planul de conturi al RM, declarațiile SFS (ONG17, IPC21, TVA12), CNAS/CNAM sau situațiile financiare pentru ONC din Moldova — folosirea lor pentru o entitate moldovenească ar însemna ținerea manuală, în paralel, a întregii evidențe reglementate;</li>
+    <li>Pentru organizațiile care activează <strong>în ambele țări</strong> (entitate RO + entitate MD), combinația practică este: softul românesc rămâne la entitatea din România, UNA.md/ONG ține evidența entității din Moldova, iar rapoartele consolidate către donator se generează din UNA.md/ONG prin machetele multi-valută (secțiunea 4.9);</li>
+    <li>Avantajul de preț al unor produse românești (ex. SAGA, cu licențiere foarte accesibilă) nu se transferă pe piața Moldovei: economia la licență este anulată de costul ținerii manuale a raportării RM;</li>
+    <li>Soluțiile cloud românești (Smartbill, Oblio, FGO) sunt orientate pe facturare și contabilitate comercială pentru IMM-uri din România — fără evidența finanțărilor cu destinație specială și fără raportare către donatori.</li>
+  </ul>
+
+  <div class="note"><strong>Notă:</strong> comparația are caracter informativ și este întocmită pe baza informațiilor publice disponibile la data ediției (2026); capabilitățile și prețurile produselor terților se pot modifica. Denumirile 1C, Sirius, Universal Accounting, SAGA, WinMENTOR, Ciel, Smartbill și celelalte mărci menționate aparțin deținătorilor respectivi. Înainte de decizie recomandăm verificarea cerințelor proprii printr-o sesiune demo.</div>
+</section>
+
+<!-- ============================================================ -->
 <section id="faq">
-  <h2>14. Întrebări frecvente</h2>
+  <h2>15. Întrebări frecvente</h2>
 
   <details>
     <summary>Putem migra din 1C? Ce se pierde la migrare?</summary>
