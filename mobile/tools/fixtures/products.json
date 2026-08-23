@@ -1,0 +1,912 @@
+[
+  {
+    "id": "p-1001",
+    "sku": "SKU1001",
+    "barcode": "4841001000000",
+    "category_id": "cat-dairy-milk",
+    "name": {
+      "ro": "Lapte 2.5% 1 L",
+      "ru": "Молоко 2,5% 1 л",
+      "en": "Milk 2.5% 1 L"
+    },
+    "description": {
+      "ro": "Lapte 2.5% 1 L — produs disponibil în magazinele UNA Market.",
+      "ru": "Молоко 2,5% 1 л — товар доступен в магазинах UNA Market.",
+      "en": "Milk 2.5% 1 L — available in UNA Market stores."
+    },
+    "brand": "JLC",
+    "image_url": "https://cdn.una.md/retail/products/p-1001.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-1001.png"
+    ],
+    "price": 17.9,
+    "old_price": 21.5,
+    "discount_percent": 17,
+    "unit": "l",
+    "unit_size": 1.0,
+    "unit_price": 17.9,
+    "stock_status": "low_stock",
+    "promo_id": "promo-w34",
+    "promo_ends_at": "2026-08-26T20:59:59Z",
+    "rating": 4.0,
+    "sort_order": 0,
+    "is_active": true,
+    "search_text": "Lapte 2.5% 1 L Молоко 2,5% 1 л Milk 2.5% 1 L JLC",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-1002",
+    "sku": "SKU1002",
+    "barcode": "4841002000000",
+    "category_id": "cat-dairy-milk",
+    "name": {
+      "ro": "Lapte 3.2% 0.9 L",
+      "ru": "Молоко 3,2% 0,9 л",
+      "en": "Milk 3.2% 0.9 L"
+    },
+    "description": {
+      "ro": "Lapte 3.2% 0.9 L — produs disponibil în magazinele UNA Market.",
+      "ru": "Молоко 3,2% 0,9 л — товар доступен в магазинах UNA Market.",
+      "en": "Milk 3.2% 0.9 L — available in UNA Market stores."
+    },
+    "brand": "Incomlac",
+    "image_url": "https://cdn.una.md/retail/products/p-1002.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-1002.png"
+    ],
+    "price": 19.4,
+    "old_price": null,
+    "discount_percent": 0,
+    "unit": "l",
+    "unit_size": 0.9,
+    "unit_price": 21.56,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.1,
+    "sort_order": 10,
+    "is_active": true,
+    "search_text": "Lapte 3.2% 0.9 L Молоко 3,2% 0,9 л Milk 3.2% 0.9 L Incomlac",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-1003",
+    "sku": "SKU1003",
+    "barcode": "4841003000000",
+    "category_id": "cat-dairy-cheese",
+    "name": {
+      "ro": "Brânză de vaci 5% 500 g",
+      "ru": "Творог 5% 500 г",
+      "en": "Cottage cheese 5% 500 g"
+    },
+    "description": {
+      "ro": "Brânză de vaci 5% 500 g — produs disponibil în magazinele UNA Market.",
+      "ru": "Творог 5% 500 г — товар доступен в магазинах UNA Market.",
+      "en": "Cottage cheese 5% 500 g — available in UNA Market stores."
+    },
+    "brand": "JLC",
+    "image_url": "https://cdn.una.md/retail/products/p-1003.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-1003.png"
+    ],
+    "price": 34.5,
+    "old_price": 39.9,
+    "discount_percent": 14,
+    "unit": "kg",
+    "unit_size": 0.5,
+    "unit_price": 69.0,
+    "stock_status": "in_stock",
+    "promo_id": "promo-w34",
+    "promo_ends_at": "2026-08-26T20:59:59Z",
+    "rating": 4.2,
+    "sort_order": 20,
+    "is_active": true,
+    "search_text": "Brânză de vaci 5% 500 g Творог 5% 500 г Cottage cheese 5% 500 g JLC",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-1004",
+    "sku": "SKU1004",
+    "barcode": "4841004000000",
+    "category_id": "cat-dairy-cheese",
+    "name": {
+      "ro": "Cașcaval Rossiyskiy 300 g",
+      "ru": "Сыр Российский 300 г",
+      "en": "Cheese Rossiyskiy 300 g"
+    },
+    "description": {
+      "ro": "Cașcaval Rossiyskiy 300 g — produs disponibil în magazinele UNA Market.",
+      "ru": "Сыр Российский 300 г — товар доступен в магазинах UNA Market.",
+      "en": "Cheese Rossiyskiy 300 g — available in UNA Market stores."
+    },
+    "brand": "Hâncești",
+    "image_url": "https://cdn.una.md/retail/products/p-1004.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-1004.png"
+    ],
+    "price": 62.0,
+    "old_price": null,
+    "discount_percent": 0,
+    "unit": "kg",
+    "unit_size": 0.3,
+    "unit_price": 206.67,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.3,
+    "sort_order": 30,
+    "is_active": true,
+    "search_text": "Cașcaval Rossiyskiy 300 g Сыр Российский 300 г Cheese Rossiyskiy 300 g Hâncești",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-1005",
+    "sku": "SKU1005",
+    "barcode": "4841005000000",
+    "category_id": "cat-dairy",
+    "name": {
+      "ro": "Unt 82% 200 g",
+      "ru": "Масло 82% 200 г",
+      "en": "Butter 82% 200 g"
+    },
+    "description": {
+      "ro": "Unt 82% 200 g — produs disponibil în magazinele UNA Market.",
+      "ru": "Масло 82% 200 г — товар доступен в магазинах UNA Market.",
+      "en": "Butter 82% 200 g — available in UNA Market stores."
+    },
+    "brand": "Alba",
+    "image_url": "https://cdn.una.md/retail/products/p-1005.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-1005.png"
+    ],
+    "price": 44.9,
+    "old_price": 52.0,
+    "discount_percent": 14,
+    "unit": "kg",
+    "unit_size": 0.2,
+    "unit_price": 224.5,
+    "stock_status": "in_stock",
+    "promo_id": "promo-w34",
+    "promo_ends_at": "2026-08-26T20:59:59Z",
+    "rating": 4.4,
+    "sort_order": 40,
+    "is_active": true,
+    "search_text": "Unt 82% 200 g Масло 82% 200 г Butter 82% 200 g Alba",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-1006",
+    "sku": "SKU1006",
+    "barcode": "4841006000000",
+    "category_id": "cat-dairy",
+    "name": {
+      "ro": "Iaurt natural 330 g",
+      "ru": "Йогурт натуральный 330 г",
+      "en": "Natural yoghurt 330 g"
+    },
+    "description": {
+      "ro": "Iaurt natural 330 g — produs disponibil în magazinele UNA Market.",
+      "ru": "Йогурт натуральный 330 г — товар доступен в магазинах UNA Market.",
+      "en": "Natural yoghurt 330 g — available in UNA Market stores."
+    },
+    "brand": "JLC",
+    "image_url": "https://cdn.una.md/retail/products/p-1006.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-1006.png"
+    ],
+    "price": 12.6,
+    "old_price": null,
+    "discount_percent": 0,
+    "unit": "kg",
+    "unit_size": 0.33,
+    "unit_price": 38.18,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.5,
+    "sort_order": 50,
+    "is_active": true,
+    "search_text": "Iaurt natural 330 g Йогурт натуральный 330 г Natural yoghurt 330 g JLC",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-2001",
+    "sku": "SKU2001",
+    "barcode": "4842001000000",
+    "category_id": "cat-bakery",
+    "name": {
+      "ro": "Pâine albă 500 g",
+      "ru": "Хлеб белый 500 г",
+      "en": "White bread 500 g"
+    },
+    "description": {
+      "ro": "Pâine albă 500 g — produs disponibil în magazinele UNA Market.",
+      "ru": "Хлеб белый 500 г — товар доступен в магазинах UNA Market.",
+      "en": "White bread 500 g — available in UNA Market stores."
+    },
+    "brand": "Franzeluța",
+    "image_url": "https://cdn.una.md/retail/products/p-2001.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-2001.png"
+    ],
+    "price": 9.5,
+    "old_price": null,
+    "discount_percent": 0,
+    "unit": "kg",
+    "unit_size": 0.5,
+    "unit_price": 19.0,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.6,
+    "sort_order": 60,
+    "is_active": true,
+    "search_text": "Pâine albă 500 g Хлеб белый 500 г White bread 500 g Franzeluța",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-2002",
+    "sku": "SKU2002",
+    "barcode": "4842002000000",
+    "category_id": "cat-bakery",
+    "name": {
+      "ro": "Pâine de secară 400 g",
+      "ru": "Хлеб ржаной 400 г",
+      "en": "Rye bread 400 g"
+    },
+    "description": {
+      "ro": "Pâine de secară 400 g — produs disponibil în magazinele UNA Market.",
+      "ru": "Хлеб ржаной 400 г — товар доступен в магазинах UNA Market.",
+      "en": "Rye bread 400 g — available in UNA Market stores."
+    },
+    "brand": "Franzeluța",
+    "image_url": "https://cdn.una.md/retail/products/p-2002.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-2002.png"
+    ],
+    "price": 11.2,
+    "old_price": 13.5,
+    "discount_percent": 17,
+    "unit": "kg",
+    "unit_size": 0.4,
+    "unit_price": 28.0,
+    "stock_status": "in_stock",
+    "promo_id": "promo-w34",
+    "promo_ends_at": "2026-08-26T20:59:59Z",
+    "rating": 4.7,
+    "sort_order": 70,
+    "is_active": true,
+    "search_text": "Pâine de secară 400 g Хлеб ржаной 400 г Rye bread 400 g Franzeluța",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-2003",
+    "sku": "SKU2003",
+    "barcode": "4842003000000",
+    "category_id": "cat-bakery",
+    "name": {
+      "ro": "Croasant cu ciocolată 70 g",
+      "ru": "Круассан с шоколадом 70 г",
+      "en": "Chocolate croissant 70 g"
+    },
+    "description": {
+      "ro": "Croasant cu ciocolată 70 g — produs disponibil în magazinele UNA Market.",
+      "ru": "Круассан с шоколадом 70 г — товар доступен в магазинах UNA Market.",
+      "en": "Chocolate croissant 70 g — available in UNA Market stores."
+    },
+    "brand": "Bucuria",
+    "image_url": "https://cdn.una.md/retail/products/p-2003.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-2003.png"
+    ],
+    "price": 8.9,
+    "old_price": null,
+    "discount_percent": 0,
+    "unit": "buc",
+    "unit_size": 1.0,
+    "unit_price": 8.9,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.8,
+    "sort_order": 80,
+    "is_active": true,
+    "search_text": "Croasant cu ciocolată 70 g Круассан с шоколадом 70 г Chocolate croissant 70 g Bucuria",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-3001",
+    "sku": "SKU3001",
+    "barcode": "4843001000000",
+    "category_id": "cat-meat",
+    "name": {
+      "ro": "Piept de pui 1 kg",
+      "ru": "Куриная грудка 1 кг",
+      "en": "Chicken breast 1 kg"
+    },
+    "description": {
+      "ro": "Piept de pui 1 kg — produs disponibil în magazinele UNA Market.",
+      "ru": "Куриная грудка 1 кг — товар доступен в магазинах UNA Market.",
+      "en": "Chicken breast 1 kg — available in UNA Market stores."
+    },
+    "brand": "Ave",
+    "image_url": "https://cdn.una.md/retail/products/p-3001.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-3001.png"
+    ],
+    "price": 89.9,
+    "old_price": 109.0,
+    "discount_percent": 18,
+    "unit": "kg",
+    "unit_size": 1.0,
+    "unit_price": 89.9,
+    "stock_status": "low_stock",
+    "promo_id": "promo-w34",
+    "promo_ends_at": "2026-08-26T20:59:59Z",
+    "rating": 4.9,
+    "sort_order": 90,
+    "is_active": true,
+    "search_text": "Piept de pui 1 kg Куриная грудка 1 кг Chicken breast 1 kg Ave",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-3002",
+    "sku": "SKU3002",
+    "barcode": "4843002000000",
+    "category_id": "cat-meat",
+    "name": {
+      "ro": "Salam de casă 350 g",
+      "ru": "Колбаса домашняя 350 г",
+      "en": "Home salami 350 g"
+    },
+    "description": {
+      "ro": "Salam de casă 350 g — produs disponibil în magazinele UNA Market.",
+      "ru": "Колбаса домашняя 350 г — товар доступен в магазинах UNA Market.",
+      "en": "Home salami 350 g — available in UNA Market stores."
+    },
+    "brand": "Carmez",
+    "image_url": "https://cdn.una.md/retail/products/p-3002.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-3002.png"
+    ],
+    "price": 67.4,
+    "old_price": null,
+    "discount_percent": 0,
+    "unit": "kg",
+    "unit_size": 0.35,
+    "unit_price": 192.57,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.0,
+    "sort_order": 100,
+    "is_active": true,
+    "search_text": "Salam de casă 350 g Колбаса домашняя 350 г Home salami 350 g Carmez",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-3003",
+    "sku": "SKU3003",
+    "barcode": "4843003000000",
+    "category_id": "cat-meat",
+    "name": {
+      "ro": "Ceafă de porc 1 kg",
+      "ru": "Свиная шея 1 кг",
+      "en": "Pork neck 1 kg"
+    },
+    "description": {
+      "ro": "Ceafă de porc 1 kg — produs disponibil în magazinele UNA Market.",
+      "ru": "Свиная шея 1 кг — товар доступен в магазинах UNA Market.",
+      "en": "Pork neck 1 kg — available in UNA Market stores."
+    },
+    "brand": "Basarabia",
+    "image_url": "https://cdn.una.md/retail/products/p-3003.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-3003.png"
+    ],
+    "price": 129.0,
+    "old_price": 149.0,
+    "discount_percent": 13,
+    "unit": "kg",
+    "unit_size": 1.0,
+    "unit_price": 129.0,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.1,
+    "sort_order": 110,
+    "is_active": true,
+    "search_text": "Ceafă de porc 1 kg Свиная шея 1 кг Pork neck 1 kg Basarabia",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-4001",
+    "sku": "SKU4001",
+    "barcode": "4844001000000",
+    "category_id": "cat-produce",
+    "name": {
+      "ro": "Roșii de seră 1 kg",
+      "ru": "Помидоры тепличные 1 кг",
+      "en": "Greenhouse tomatoes 1 kg"
+    },
+    "description": {
+      "ro": "Roșii de seră 1 kg — produs disponibil în magazinele UNA Market.",
+      "ru": "Помидоры тепличные 1 кг — товар доступен в магазинах UNA Market.",
+      "en": "Greenhouse tomatoes 1 kg — available in UNA Market stores."
+    },
+    "brand": null,
+    "image_url": "https://cdn.una.md/retail/products/p-4001.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-4001.png"
+    ],
+    "price": 32.9,
+    "old_price": 44.9,
+    "discount_percent": 27,
+    "unit": "kg",
+    "unit_size": 1.0,
+    "unit_price": 32.9,
+    "stock_status": "in_stock",
+    "promo_id": "promo-w34",
+    "promo_ends_at": "2026-08-26T20:59:59Z",
+    "rating": 4.2,
+    "sort_order": 120,
+    "is_active": true,
+    "search_text": "Roșii de seră 1 kg Помидоры тепличные 1 кг Greenhouse tomatoes 1 kg",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-4002",
+    "sku": "SKU4002",
+    "barcode": "4844002000000",
+    "category_id": "cat-produce",
+    "name": {
+      "ro": "Cartofi 1 kg",
+      "ru": "Картофель 1 кг",
+      "en": "Potatoes 1 kg"
+    },
+    "description": {
+      "ro": "Cartofi 1 kg — produs disponibil în magazinele UNA Market.",
+      "ru": "Картофель 1 кг — товар доступен в магазинах UNA Market.",
+      "en": "Potatoes 1 kg — available in UNA Market stores."
+    },
+    "brand": null,
+    "image_url": "https://cdn.una.md/retail/products/p-4002.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-4002.png"
+    ],
+    "price": 11.5,
+    "old_price": null,
+    "discount_percent": 0,
+    "unit": "kg",
+    "unit_size": 1.0,
+    "unit_price": 11.5,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.3,
+    "sort_order": 130,
+    "is_active": true,
+    "search_text": "Cartofi 1 kg Картофель 1 кг Potatoes 1 kg",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-4003",
+    "sku": "SKU4003",
+    "barcode": "4844003000000",
+    "category_id": "cat-produce",
+    "name": {
+      "ro": "Mere Golden 1 kg",
+      "ru": "Яблоки Голден 1 кг",
+      "en": "Golden apples 1 kg"
+    },
+    "description": {
+      "ro": "Mere Golden 1 kg — produs disponibil în magazinele UNA Market.",
+      "ru": "Яблоки Голден 1 кг — товар доступен в магазинах UNA Market.",
+      "en": "Golden apples 1 kg — available in UNA Market stores."
+    },
+    "brand": null,
+    "image_url": "https://cdn.una.md/retail/products/p-4003.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-4003.png"
+    ],
+    "price": 18.9,
+    "old_price": 24.0,
+    "discount_percent": 21,
+    "unit": "kg",
+    "unit_size": 1.0,
+    "unit_price": 18.9,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.4,
+    "sort_order": 140,
+    "is_active": true,
+    "search_text": "Mere Golden 1 kg Яблоки Голден 1 кг Golden apples 1 kg",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-4004",
+    "sku": "SKU4004",
+    "barcode": "4844004000000",
+    "category_id": "cat-produce",
+    "name": {
+      "ro": "Banane 1 kg",
+      "ru": "Бананы 1 кг",
+      "en": "Bananas 1 kg"
+    },
+    "description": {
+      "ro": "Banane 1 kg — produs disponibil în magazinele UNA Market.",
+      "ru": "Бананы 1 кг — товар доступен в магазинах UNA Market.",
+      "en": "Bananas 1 kg — available in UNA Market stores."
+    },
+    "brand": null,
+    "image_url": "https://cdn.una.md/retail/products/p-4004.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-4004.png"
+    ],
+    "price": 27.5,
+    "old_price": null,
+    "discount_percent": 0,
+    "unit": "kg",
+    "unit_size": 1.0,
+    "unit_price": 27.5,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.5,
+    "sort_order": 150,
+    "is_active": true,
+    "search_text": "Banane 1 kg Бананы 1 кг Bananas 1 kg",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-5001",
+    "sku": "SKU5001",
+    "barcode": "4845001000000",
+    "category_id": "cat-drinks-water",
+    "name": {
+      "ro": "Apă plată 2 L",
+      "ru": "Вода негазированная 2 л",
+      "en": "Still water 2 L"
+    },
+    "description": {
+      "ro": "Apă plată 2 L — produs disponibil în magazinele UNA Market.",
+      "ru": "Вода негазированная 2 л — товар доступен в магазинах UNA Market.",
+      "en": "Still water 2 L — available in UNA Market stores."
+    },
+    "brand": "Gura Căinarului",
+    "image_url": "https://cdn.una.md/retail/products/p-5001.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-5001.png"
+    ],
+    "price": 9.9,
+    "old_price": 12.0,
+    "discount_percent": 17,
+    "unit": "l",
+    "unit_size": 2.0,
+    "unit_price": 4.95,
+    "stock_status": "in_stock",
+    "promo_id": "promo-w34",
+    "promo_ends_at": "2026-08-26T20:59:59Z",
+    "rating": 4.6,
+    "sort_order": 160,
+    "is_active": true,
+    "search_text": "Apă plată 2 L Вода негазированная 2 л Still water 2 L Gura Căinarului",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-5002",
+    "sku": "SKU5002",
+    "barcode": "4845002000000",
+    "category_id": "cat-drinks-juice",
+    "name": {
+      "ro": "Suc de mere 1 L",
+      "ru": "Сок яблочный 1 л",
+      "en": "Apple juice 1 L"
+    },
+    "description": {
+      "ro": "Suc de mere 1 L — produs disponibil în magazinele UNA Market.",
+      "ru": "Сок яблочный 1 л — товар доступен в магазинах UNA Market.",
+      "en": "Apple juice 1 L — available in UNA Market stores."
+    },
+    "brand": "Orhei-Vit",
+    "image_url": "https://cdn.una.md/retail/products/p-5002.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-5002.png"
+    ],
+    "price": 21.9,
+    "old_price": null,
+    "discount_percent": 0,
+    "unit": "l",
+    "unit_size": 1.0,
+    "unit_price": 21.9,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.7,
+    "sort_order": 170,
+    "is_active": true,
+    "search_text": "Suc de mere 1 L Сок яблочный 1 л Apple juice 1 L Orhei-Vit",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-5003",
+    "sku": "SKU5003",
+    "barcode": "4845003000000",
+    "category_id": "cat-drinks",
+    "name": {
+      "ro": "Bere blondă 0.5 L",
+      "ru": "Пиво светлое 0,5 л",
+      "en": "Lager 0.5 L"
+    },
+    "description": {
+      "ro": "Bere blondă 0.5 L — produs disponibil în magazinele UNA Market.",
+      "ru": "Пиво светлое 0,5 л — товар доступен в магазинах UNA Market.",
+      "en": "Lager 0.5 L — available in UNA Market stores."
+    },
+    "brand": "Chișinău",
+    "image_url": "https://cdn.una.md/retail/products/p-5003.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-5003.png"
+    ],
+    "price": 15.4,
+    "old_price": 18.9,
+    "discount_percent": 19,
+    "unit": "l",
+    "unit_size": 0.5,
+    "unit_price": 30.8,
+    "stock_status": "low_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.8,
+    "sort_order": 180,
+    "is_active": true,
+    "search_text": "Bere blondă 0.5 L Пиво светлое 0,5 л Lager 0.5 L Chișinău",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-5004",
+    "sku": "SKU5004",
+    "barcode": "4845004000000",
+    "category_id": "cat-drinks",
+    "name": {
+      "ro": "Cafea măcinată 250 g",
+      "ru": "Кофе молотый 250 г",
+      "en": "Ground coffee 250 g"
+    },
+    "description": {
+      "ro": "Cafea măcinată 250 g — produs disponibil în magazinele UNA Market.",
+      "ru": "Кофе молотый 250 г — товар доступен в магазинах UNA Market.",
+      "en": "Ground coffee 250 g — available in UNA Market stores."
+    },
+    "brand": "Lavazza",
+    "image_url": "https://cdn.una.md/retail/products/p-5004.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-5004.png"
+    ],
+    "price": 89.0,
+    "old_price": 109.0,
+    "discount_percent": 18,
+    "unit": "kg",
+    "unit_size": 0.25,
+    "unit_price": 356.0,
+    "stock_status": "in_stock",
+    "promo_id": "promo-w34",
+    "promo_ends_at": "2026-08-26T20:59:59Z",
+    "rating": 4.9,
+    "sort_order": 190,
+    "is_active": true,
+    "search_text": "Cafea măcinată 250 g Кофе молотый 250 г Ground coffee 250 g Lavazza",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-6001",
+    "sku": "SKU6001",
+    "barcode": "4846001000000",
+    "category_id": "cat-frozen",
+    "name": {
+      "ro": "Pizza congelată 350 g",
+      "ru": "Пицца замороженная 350 г",
+      "en": "Frozen pizza 350 g"
+    },
+    "description": {
+      "ro": "Pizza congelată 350 g — produs disponibil în magazinele UNA Market.",
+      "ru": "Пицца замороженная 350 г — товар доступен в магазинах UNA Market.",
+      "en": "Frozen pizza 350 g — available in UNA Market stores."
+    },
+    "brand": "Bucuria",
+    "image_url": "https://cdn.una.md/retail/products/p-6001.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-6001.png"
+    ],
+    "price": 42.5,
+    "old_price": null,
+    "discount_percent": 0,
+    "unit": "kg",
+    "unit_size": 0.35,
+    "unit_price": 121.43,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.0,
+    "sort_order": 200,
+    "is_active": true,
+    "search_text": "Pizza congelată 350 g Пицца замороженная 350 г Frozen pizza 350 g Bucuria",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-6002",
+    "sku": "SKU6002",
+    "barcode": "4846002000000",
+    "category_id": "cat-frozen",
+    "name": {
+      "ro": "Legume pentru supă 400 g",
+      "ru": "Овощи для супа 400 г",
+      "en": "Soup vegetables 400 g"
+    },
+    "description": {
+      "ro": "Legume pentru supă 400 g — produs disponibil în magazinele UNA Market.",
+      "ru": "Овощи для супа 400 г — товар доступен в магазинах UNA Market.",
+      "en": "Soup vegetables 400 g — available in UNA Market stores."
+    },
+    "brand": "Vitalis",
+    "image_url": "https://cdn.una.md/retail/products/p-6002.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-6002.png"
+    ],
+    "price": 26.9,
+    "old_price": 32.0,
+    "discount_percent": 16,
+    "unit": "kg",
+    "unit_size": 0.4,
+    "unit_price": 67.25,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.1,
+    "sort_order": 210,
+    "is_active": true,
+    "search_text": "Legume pentru supă 400 g Овощи для супа 400 г Soup vegetables 400 g Vitalis",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-7001",
+    "sku": "SKU7001",
+    "barcode": "4847001000000",
+    "category_id": "cat-sweets",
+    "name": {
+      "ro": "Ciocolată cu lapte 90 g",
+      "ru": "Шоколад молочный 90 г",
+      "en": "Milk chocolate 90 g"
+    },
+    "description": {
+      "ro": "Ciocolată cu lapte 90 g — produs disponibil în magazinele UNA Market.",
+      "ru": "Шоколад молочный 90 г — товар доступен в магазинах UNA Market.",
+      "en": "Milk chocolate 90 g — available in UNA Market stores."
+    },
+    "brand": "Bucuria",
+    "image_url": "https://cdn.una.md/retail/products/p-7001.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-7001.png"
+    ],
+    "price": 16.9,
+    "old_price": 19.9,
+    "discount_percent": 15,
+    "unit": "kg",
+    "unit_size": 0.09,
+    "unit_price": 187.78,
+    "stock_status": "in_stock",
+    "promo_id": "promo-w34",
+    "promo_ends_at": "2026-08-26T20:59:59Z",
+    "rating": 4.2,
+    "sort_order": 220,
+    "is_active": true,
+    "search_text": "Ciocolată cu lapte 90 g Шоколад молочный 90 г Milk chocolate 90 g Bucuria",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-7002",
+    "sku": "SKU7002",
+    "barcode": "4847002000000",
+    "category_id": "cat-sweets",
+    "name": {
+      "ro": "Biscuiți cu ovăz 300 g",
+      "ru": "Печенье овсяное 300 г",
+      "en": "Oat biscuits 300 g"
+    },
+    "description": {
+      "ro": "Biscuiți cu ovăz 300 g — produs disponibil în magazinele UNA Market.",
+      "ru": "Печенье овсяное 300 г — товар доступен в магазинах UNA Market.",
+      "en": "Oat biscuits 300 g — available in UNA Market stores."
+    },
+    "brand": "Nefis",
+    "image_url": "https://cdn.una.md/retail/products/p-7002.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-7002.png"
+    ],
+    "price": 24.5,
+    "old_price": null,
+    "discount_percent": 0,
+    "unit": "kg",
+    "unit_size": 0.3,
+    "unit_price": 81.67,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.3,
+    "sort_order": 230,
+    "is_active": true,
+    "search_text": "Biscuiți cu ovăz 300 g Печенье овсяное 300 г Oat biscuits 300 g Nefis",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-8001",
+    "sku": "SKU8001",
+    "barcode": "4848001000000",
+    "category_id": "cat-home",
+    "name": {
+      "ro": "Detergent vase 1 L",
+      "ru": "Средство для посуды 1 л",
+      "en": "Dish soap 1 L"
+    },
+    "description": {
+      "ro": "Detergent vase 1 L — produs disponibil în magazinele UNA Market.",
+      "ru": "Средство для посуды 1 л — товар доступен в магазинах UNA Market.",
+      "en": "Dish soap 1 L — available in UNA Market stores."
+    },
+    "brand": "Fairy",
+    "image_url": "https://cdn.una.md/retail/products/p-8001.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-8001.png"
+    ],
+    "price": 54.9,
+    "old_price": 64.9,
+    "discount_percent": 15,
+    "unit": "l",
+    "unit_size": 1.0,
+    "unit_price": 54.9,
+    "stock_status": "in_stock",
+    "promo_id": "promo-w34",
+    "promo_ends_at": "2026-08-26T20:59:59Z",
+    "rating": 4.4,
+    "sort_order": 240,
+    "is_active": true,
+    "search_text": "Detergent vase 1 L Средство для посуды 1 л Dish soap 1 L Fairy",
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "p-8002",
+    "sku": "SKU8002",
+    "barcode": "4848002000000",
+    "category_id": "cat-home",
+    "name": {
+      "ro": "Hârtie igienică 8 role",
+      "ru": "Туалетная бумага 8 рулонов",
+      "en": "Toilet paper 8 rolls"
+    },
+    "description": {
+      "ro": "Hârtie igienică 8 role — produs disponibil în magazinele UNA Market.",
+      "ru": "Туалетная бумага 8 рулонов — товар доступен в магазинах UNA Market.",
+      "en": "Toilet paper 8 rolls — available in UNA Market stores."
+    },
+    "brand": "Zewa",
+    "image_url": "https://cdn.una.md/retail/products/p-8002.png",
+    "images": [
+      "https://cdn.una.md/retail/products/p-8002.png"
+    ],
+    "price": 78.0,
+    "old_price": null,
+    "discount_percent": 0,
+    "unit": "buc",
+    "unit_size": 8.0,
+    "unit_price": 9.75,
+    "stock_status": "in_stock",
+    "promo_id": null,
+    "promo_ends_at": null,
+    "rating": 4.5,
+    "sort_order": 250,
+    "is_active": true,
+    "search_text": "Hârtie igienică 8 role Туалетная бумага 8 рулонов Toilet paper 8 rolls Zewa",
+    "updated_at": "2026-08-20T08:00:00Z"
+  }
+]

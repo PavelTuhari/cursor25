@@ -1,0 +1,25 @@
+{
+  "id": "catalog",
+  "titleKey": "screen.catalog",
+  "refreshable": true,
+  "blocks": [
+    { "id": "catalog-search", "type": "search_bar", "props": { "placeholderKey": "search.placeholder", "target": "search" } },
+    {
+      "id": "catalog-root",
+      "type": "category_list",
+      "props": {
+        "source": {
+          "entity": "categories",
+          "where": [
+            { "field": "parent_id", "op": "is null" },
+            { "field": "is_active", "op": "=", "value": 1 }
+          ],
+          "orderBy": [{ "field": "sort_order", "dir": "asc" }],
+          "limit": 100
+        },
+        "showProductCount": true,
+        "itemAction": { "type": "navigate", "screen": "category" }
+      }
+    }
+  ]
+}

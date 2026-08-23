@@ -1,0 +1,77 @@
+[
+  {
+    "id": "ban-1",
+    "placement": "home",
+    "title": {
+      "ro": "Săptămâna reducerilor",
+      "ru": "Неделя скидок",
+      "en": "Discount week"
+    },
+    "subtitle": {
+      "ro": "Până la -40% la peste 300 de produse",
+      "ru": "До -40% на более чем 300 товаров",
+      "en": "Up to -40% on 300+ products"
+    },
+    "image_url": "https://cdn.una.md/retail/banners/week34.jpg",
+    "action": {
+      "type": "navigate",
+      "screen": "category",
+      "params": {
+        "preset": "deals"
+      }
+    },
+    "starts_at": "2026-08-18T00:00:00Z",
+    "ends_at": "2026-08-26T20:59:59Z",
+    "sort_order": 10,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "ban-2",
+    "placement": "home",
+    "title": {
+      "ro": "Card de fidelitate",
+      "ru": "Карта лояльности",
+      "en": "Loyalty card"
+    },
+    "subtitle": {
+      "ro": "Acumulează puncte la fiecare cumpărătură",
+      "ru": "Копите баллы за каждую покупку",
+      "en": "Earn points on every purchase"
+    },
+    "image_url": "https://cdn.una.md/retail/banners/loyalty.jpg",
+    "action": {
+      "type": "navigate",
+      "screen": "loyalty"
+    },
+    "starts_at": null,
+    "ends_at": null,
+    "sort_order": 20,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "ban-3",
+    "placement": "home",
+    "title": {
+      "ro": "Legume de sezon",
+      "ru": "Сезонные овощи",
+      "en": "Seasonal vegetables"
+    },
+    "subtitle": {
+      "ro": "Direct de la producătorii locali",
+      "ru": "Прямо от местных производителей",
+      "en": "Straight from local growers"
+    },
+    "image_url": "https://cdn.una.md/retail/banners/local.jpg",
+    "action": {
+      "type": "navigate",
+      "screen": "category",
+      "params": {
+        "categoryId": "cat-produce"
+      }
+    },
+    "starts_at": null,
+    "ends_at": null,
+    "sort_order": 30,
+    "updated_at": "2026-08-20T08:00:00Z"
+  }
+]

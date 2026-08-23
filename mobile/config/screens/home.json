@@ -1,0 +1,119 @@
+{
+  "id": "home",
+  "titleKey": "screen.home",
+  "refreshable": true,
+  "blocks": [
+    {
+      "id": "home-search",
+      "type": "search_bar",
+      "props": { "placeholderKey": "search.placeholder", "target": "search" }
+    },
+    {
+      "id": "home-hero",
+      "type": "hero_carousel",
+      "props": {
+        "aspectRatio": 1.9,
+        "autoplayMs": 6000,
+        "source": {
+          "entity": "banners",
+          "where": [
+            { "field": "placement", "op": "=", "value": "home" },
+            { "field": "starts_at", "op": "<=", "value": "$now", "orNull": true },
+            { "field": "ends_at", "op": ">=", "value": "$now", "orNull": true }
+          ],
+          "orderBy": [{ "field": "sort_order", "dir": "asc" }],
+          "limit": 8
+        }
+      }
+    },
+    {
+      "id": "home-loyalty",
+      "type": "loyalty_card",
+      "visibleIf": { "feature": "loyalty" },
+      "props": { "compact": true, "action": { "type": "navigate", "screen": "loyalty" } }
+    },
+    {
+      "id": "home-categories",
+      "type": "category_grid",
+      "titleKey": "home.categories",
+      "props": {
+        "columns": 4,
+        "rows": 2,
+        "source": {
+          "entity": "categories",
+          "where": [
+            { "field": "parent_id", "op": "is null" },
+            { "field": "is_active", "op": "=", "value": 1 }
+          ],
+          "orderBy": [{ "field": "sort_order", "dir": "asc" }],
+          "limit": 8
+        },
+        "moreAction": { "type": "navigate", "screen": "catalog" }
+      }
+    },
+    {
+      "id": "home-deals",
+      "type": "product_carousel",
+      "titleKey": "home.deals",
+      "props": {
+        "cardWidth": 156,
+        "source": {
+          "entity": "products",
+          "where": [
+            { "field": "discount_percent", "op": ">", "value": 0 },
+            { "field": "is_active", "op": "=", "value": 1 }
+          ],
+          "orderBy": [{ "field": "discount_percent", "dir": "desc" }],
+          "limit": 20
+        },
+        "moreAction": { "type": "navigate", "screen": "category", "params": { "preset": "deals" } }
+      }
+    },
+    {
+      "id": "home-flyers",
+      "type": "promo_flyers",
+      "titleKey": "home.flyers",
+      "visibleIf": { "feature": "promoFlyers" },
+      "props": {
+        "layout": "carousel",
+        "source": {
+          "entity": "promotions",
+          "where": [{ "field": "ends_at", "op": ">=", "value": "$today", "orNull": true }],
+          "orderBy": [{ "field": "sort_order", "dir": "asc" }, { "field": "starts_at", "dir": "desc" }],
+          "limit": 6
+        }
+      }
+    },
+    {
+      "id": "home-new",
+      "type": "product_carousel",
+      "titleKey": "home.new",
+      "props": {
+        "cardWidth": 156,
+        "source": {
+          "entity": "products",
+          "where": [{ "field": "is_active", "op": "=", "value": 1 }],
+          "orderBy": [{ "field": "updated_at", "dir": "desc" }],
+          "limit": 20
+        }
+      }
+    },
+    {
+      "id": "home-store",
+      "type": "store_locator_card",
+      "titleKey": "home.stores",
+      "visibleIf": { "feature": "stores" },
+      "props": { "limit": 3, "action": { "type": "navigate", "screen": "stores" } }
+    },
+    {
+      "id": "home-info",
+      "type": "info_banner",
+      "props": {
+        "titleKey": "home.info_title",
+        "textKey": "home.info_text",
+        "icon": "info",
+        "action": { "type": "url", "url": "https://una.md" }
+      }
+    }
+  ]
+}
