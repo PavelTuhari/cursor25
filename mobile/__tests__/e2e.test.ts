@@ -46,6 +46,76 @@ async function startApp(driver: NodeSqlDriver): Promise<Runtime> {
   return runtime;
 }
 
+describe('account area against the mock API', () => {
+  it('signs in by SMS code and pulls the account data', async () => {
+    const driver = new NodeSqlDriver(':memory:');
+    const runtime = await startApp(driver);
+
+    // Anonymous: the account entities are skipped, the catalogue still syncs.
+    const anonymous = await runtime.sync.sync();
+    expect(anonymous.entities.find((item) => item.entity === 'receipts')?.skipped).toBe('not_authenticated');
+
+    const request = await runtime.auth.requestCode('060 123 456');
+    expect(request.devCode).toBe('1234');
+
+    const session = await runtime.auth.verifyCode('060 123 456', request.devCode ?? '', request.requestId);
+    expect(session.userId).toBe('usr-1001');
+    expect(session.displayName).toBe('Ion Popescu');
+
+    const report = await runtime.sync.sync();
+    expect(report.ok).toBe(true);
+
+    const ctx = { locale: 'ro' };
+    const receipts = await runtime.db
+      .repository('receipts')
+      .query({ entity: 'receipts', orderBy: [{ field: 'purchased_at', dir: 'desc' }] }, ctx);
+    expect(receipts).toHaveLength(6);
+    expect(Array.isArray(receipts[0]!.items)).toBe(true);
+
+    const profile = await runtime.db.repository('profile').query({ entity: 'profile' }, ctx);
+    expect(profile[0]?.phone).toBe('+37360123456');
+
+    const loyalty = await runtime.db.repository('loyalty_account').query({ entity: 'loyalty_account' }, ctx);
+    expect(loyalty).toHaveLength(1);
+
+    await driver.close();
+  }, 30_000);
+
+  it('saves a profile change offline and pushes it, then clears everything on sign-out', async () => {
+    const driver = new NodeSqlDriver(':memory:');
+    const runtime = await startApp(driver);
+    const request = await runtime.auth.requestCode('+37360123456');
+    await runtime.auth.verifyCode('+37360123456', request.devCode ?? '', request.requestId);
+    await runtime.sync.sync();
+
+    await runtime.db.repository('profile').saveLocal({
+      id: 'usr-1001',
+      first_name: 'Ionel',
+      email: 'ionel@example.md',
+      marketing_opt_in: false,
+    });
+    expect(await pendingCount(driver)).toBe(1);
+
+    const report = await runtime.sync.sync({ entities: ['profile'] });
+    expect(report.pushed).toBe(1);
+    expect(await pendingCount(driver)).toBe(0);
+
+    const stored = await runtime.db.repository('profile').query({ entity: 'profile' }, { locale: 'ro' });
+    expect(stored[0]?.first_name).toBe('Ionel');
+
+    await runtime.auth.logout();
+    expect(runtime.auth.isAuthenticated()).toBe(false);
+    for (const entity of ['profile', 'receipts', 'loyalty_account']) {
+      expect(await runtime.db.repository(entity).query({ entity }, { locale: 'ro' })).toEqual([]);
+    }
+    // The catalogue is not account data and survives the sign-out.
+    const products = await runtime.db.repository('products').query({ entity: 'products', limit: 5 }, { locale: 'ro' });
+    expect(products.length).toBeGreaterThan(0);
+
+    await driver.close();
+  }, 30_000);
+});
+
 describe('app against the mock API', () => {
   it('fills the offline database from the API and serves screen queries from it', async () => {
     const driver = new NodeSqlDriver(':memory:');

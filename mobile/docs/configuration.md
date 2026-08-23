@@ -33,14 +33,37 @@ GET /app-config┘                 └─ ошибки → откат к пре�
 | `api` | `baseUrl`, таймаут, размер страницы, политика повторов, режим авторизации, доп. заголовки |
 | `sync` | синхронизация при старте, интервал, порог «устаревших» данных, настройки outbox, лимит страниц |
 | `remoteConfig` | включение удалённой конфигурации, endpoint, TTL кэша, `failOpen` |
-| `features` | фич-флаги: `loyalty`, `shoppingList`, `favorites`, `stores`, `promoFlyers`, `search`, `cart`, `onlineOrders` |
+| `features` | фич-флаги: `loyalty`, `shoppingList`, `favorites`, `stores`, `promoFlyers`, `search`, `account`, `purchaseHistory`, `eReceipts`, `cart`, `onlineOrders` |
 | `loyalty` | формат штрихкода (`ean13` / `code128`), показ баллов и прогресса уровня |
+| `account` | редактируемые поля профиля, галочка рассылки, размер страницы истории покупок, формат штрихкода чека |
 | `catalog` | что показывать на карточке товара, число колонок, размер страницы |
 | `search` | минимум символов, размер истории, задержка ввода |
 
 Валидатор проверяет: `defaultLocale` входит в `locales`, `baseUrl` — абсолютный http(s),
 `sync.minIntervalMinutes ≤ sync.intervalMinutes`, `maxPagesPerEntity > 0`, все фич-флаги
 булевы.
+
+### Вход в личный кабинет (`api.auth`)
+
+```json
+{
+  "mode": "bearer",
+  "flow": "otp",
+  "requestCodeEndpoint": "/auth/request-code",
+  "loginEndpoint": "/auth/login",
+  "refreshEndpoint": "/auth/refresh",
+  "logoutEndpoint": "/auth/logout",
+  "otpLength": 4,
+  "otpResendSeconds": 60,
+  "anonymousAllowed": true,
+  "termsUrl": "https://una.md/terms"
+}
+```
+
+`flow: "otp"` — вход по коду из SMS (экран сам показывает шаг «телефон» → шаг «код» с
+таймером повтора), `flow: "password"` — логин и пароль. Валидатор требует эндпоинты,
+которые нужны выбранному сценарию, и предупреждает, если не задан `refreshEndpoint`
+(без него истёкший токен просто разлогинит пользователя).
 
 ## `theme.config.json`
 
@@ -105,6 +128,10 @@ GET /app-config┘                 └─ ошибки → откат к пре�
 | `store_locator_card` | «ваш магазин» на главной | `limit`, `action` |
 | `shopping_list` | список покупок | `showTotals`, `allowManualItems`, `suggestions` |
 | `profile_header` | шапка профиля | — |
+| `login_prompt` | приглашение войти (для анонимных) | `titleKey`, `textKey` |
+| `logout_button` | выход из аккаунта с подтверждением | — |
+| `purchase_history` | последние чеки на экране профиля | `source`, `moreAction` |
+| `receipt_list` | полная история покупок | `source`, `showStore`, `showPoints` |
 | `menu_list` | меню профиля | `items[]` |
 | `sync_status` | состояние синхронизации | — |
 
@@ -191,6 +218,7 @@ GET /app-config┘                 └─ ошибки → откат к пре�
 | `requiresAuth` | сущность синхронизируется только у авторизованного пользователя |
 | `order` | порядок синхронизации: родительские сущности раньше дочерних |
 | `columns[].type` | `text`, `integer`, `real`, `boolean`, `json`, `localized`, `datetime` |
+| `requiresAuth` | данные аккаунта: не синхронизируются без входа и удаляются при выходе |
 | `searchColumns` | колонки, по которым работает `search` в запросах |
 
 `localized` — это JSON вида `{"ro": "Lapte", "ru": "Молоко"}`; приложение выбирает
@@ -202,6 +230,17 @@ GET /app-config┘                 └─ ошибки → откат к пре�
 изменения при этом не теряются: они лежат в `_outbox`, который никогда не удаляется.
 Сущность, исчезнувшая из конфигурации, удаляется вместе со своей таблицей, курсором и
 очередью.
+
+## Данные аккаунта и выход
+
+Сущности с `requiresAuth: true` (`profile`, `receipts`, `loyalty_account`, `favorites`)
+синхронизируются только у авторизованного пользователя, а при выходе их таблицы,
+курсоры и очереди удаляются с устройства — следующий человек, открывший приложение на
+этом же телефоне, не увидит чужие чеки. `shopping_list_items` отмечен как данные
+устройства и остаётся.
+
+Чтобы сделать какую-то сущность «личной», достаточно проставить ей `requiresAuth: true`
+в конфигурации — код менять не нужно.
 
 ## Переводы
 

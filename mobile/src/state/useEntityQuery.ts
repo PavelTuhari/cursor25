@@ -35,7 +35,7 @@ export function useEntityQuery<T extends EntityRecord = EntityRecord>(
 
     setState((previous) => ({ ...previous, loading: true }));
     db.repository<T>(query.entity)
-      .query(query, { locale, storeId, userId: session.userId, params })
+      .query(query, { locale, storeId, userId: session?.userId ?? null, params })
       .then((data) => {
         if (!cancelled) setState({ data, loading: false, error: null });
       })
@@ -47,7 +47,7 @@ export function useEntityQuery<T extends EntityRecord = EntityRecord>(
       cancelled = true;
     };
     // `key` covers query/params; dataVersion re-runs after writes and syncs.
-  }, [db, key, locale, storeId, session.userId, dataVersion]);
+  }, [db, key, locale, storeId, session?.userId, dataVersion]);
 
   return state;
 }

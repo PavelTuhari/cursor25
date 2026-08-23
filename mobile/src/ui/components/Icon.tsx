@@ -28,6 +28,9 @@ const GLYPHS: Record<string, string> = {
   clock: '◷',
   phone: '☎',
   cloud: '☁',
+  receipt: '▤',
+  logout: '⇥',
+  lock: '⚿',
   warning: '⚠',
 };
 

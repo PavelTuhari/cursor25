@@ -8,6 +8,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Localization from 'expo-localization';
 import Constants from 'expo-constants';
 
+import { ExpoSecureStorage } from './src/auth/expoSecureStorage';
+import { KvStorage } from './src/auth/secureStorage';
 import { bootstrap, type Runtime } from './src/bootstrap';
 import { ExpoSqlDriver } from './src/db/expoDriver';
 import { AppProvider } from './src/state/AppContext';
@@ -39,6 +41,8 @@ export default function App(): React.ReactElement {
         const extra = Constants.expoConfig?.extra as { apiBaseUrl?: string } | undefined;
         const instance = await bootstrap({
           driver,
+          // The token goes to the platform keystore, not to the app database.
+          storage: new ExpoSecureStorage(new KvStorage(driver)),
           deviceLocales: Localization.getLocales().map((locale) => locale.languageTag),
           // Dev and staging builds point the app at their own backend.
           apiBaseUrl: __DEV__ ? extra?.apiBaseUrl : undefined,
@@ -82,6 +86,7 @@ export default function App(): React.ReactElement {
         db={runtime.db}
         api={runtime.api}
         sync={runtime.sync}
+        auth={runtime.auth}
         initialLocale={runtime.locale}
         initialThemeMode={runtime.themeMode}
         initialStoreId={runtime.storeId}

@@ -7,6 +7,7 @@ import {
   normalizeEan13,
 } from '../src/domain/barcode';
 import { isStale, shouldAutoSync } from '../src/domain/dates';
+import { formatPhone, isValidEmail, isValidPhone, maskPhone, normalizePhone } from '../src/domain/phone';
 import { discountPercent, formatPrice, formatUnitPrice, unitPrice } from '../src/domain/price';
 import { generateLocalId, listTotals, nextSortOrder, sortListItems } from '../src/domain/shoppingList';
 import { distanceKm, isOpenAt, sortByDistance } from '../src/domain/stores';
@@ -72,6 +73,36 @@ describe('barcode', () => {
   it('dispatches on the configured format', () => {
     expect(encodeBarcode('4841234500017', 'ean13').format).toBe('ean13');
     expect(encodeBarcode('4841234500017', 'code128').format).toBe('code128');
+  });
+});
+
+describe('phone numbers', () => {
+  it('normalises the formats a Moldovan shopper actually types', () => {
+    expect(normalizePhone('+373 60 123 456')).toBe('+37360123456');
+    expect(normalizePhone('060123456')).toBe('+37360123456');
+    expect(normalizePhone('60123456')).toBe('+37360123456');
+    expect(normalizePhone('37360123456')).toBe('+37360123456');
+    expect(normalizePhone('+40 721 234 567')).toBe('+40721234567');
+  });
+
+  it('rejects what cannot be a phone number', () => {
+    expect(normalizePhone('')).toBeNull();
+    expect(normalizePhone('12345')).toBeNull();
+    expect(normalizePhone('телефон')).toBeNull();
+    expect(isValidPhone('060123456')).toBe(true);
+    expect(isValidPhone('1')).toBe(false);
+  });
+
+  it('formats and masks numbers for display', () => {
+    expect(formatPhone('+37360123456')).toBe('+373 60 123 456');
+    expect(formatPhone('060123456')).toBe('+373 60 123 456');
+    expect(maskPhone('+37360123456')).toBe('+373 60 *** 456');
+  });
+
+  it('validates e-mail addresses', () => {
+    expect(isValidEmail('ion.popescu@example.md')).toBe(true);
+    expect(isValidEmail('ion@example')).toBe(false);
+    expect(isValidEmail(' ')).toBe(false);
   });
 });
 

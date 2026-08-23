@@ -11,8 +11,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useApp, useT, useTheme } from '../../state/AppContext';
 import { useShoppingList } from '../../state/ShoppingListContext';
 import { Icon } from '../components/Icon';
+import { AccountScreen } from '../screens/AccountScreen';
 import { BlocksScreen } from '../screens/BlocksScreen';
 import { CategoryScreen } from '../screens/CategoryScreen';
+import { LoginScreen } from '../screens/LoginScreen';
+import { ReceiptScreen } from '../screens/ReceiptScreen';
 import { FavoritesScreen } from '../screens/FavoritesScreen';
 import { ProductScreen } from '../screens/ProductScreen';
 import { PromoScreen } from '../screens/PromoScreen';
@@ -39,14 +42,14 @@ function useNavigate(): Navigate {
 function TabsNavigator(): React.ReactElement {
   const theme = useTheme();
   const t = useT();
-  const { config, session, locale } = useApp();
+  const { config, isAuthenticated, locale } = useApp();
   const list = useShoppingList();
   const navigate = useNavigate();
 
   const tabs = config.navigation.tabs.filter((tab) =>
     isVisible(tab.visibleIf, {
       features: config.app.features,
-      isAuthenticated: Boolean(session.userId),
+      isAuthenticated,
       locale,
     }),
   );
@@ -113,6 +116,20 @@ function FavoritesRoute(): React.ReactElement {
   return <FavoritesScreen navigate={navigate} />;
 }
 
+function ReceiptsRoute(): React.ReactElement {
+  const navigate = useNavigate();
+  return <BlocksScreen screenId="receipts" navigate={navigate} />;
+}
+
+function ReceiptRoute({ route }: { route: { params: RootStackParamList['receipt'] } }): React.ReactElement {
+  return <ReceiptScreen receiptId={route.params.receiptId} />;
+}
+
+function LoginRoute(): React.ReactElement {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  return <LoginScreen onSignedIn={() => navigation.goBack()} />;
+}
+
 export function RootNavigator(): React.ReactElement {
   const theme = useTheme();
   const t = useT();
@@ -153,6 +170,10 @@ export function RootNavigator(): React.ReactElement {
         <Stack.Screen name="store" component={StoreRoute} options={{ title: t('screen.stores') }} />
         <Stack.Screen name="favorites" component={FavoritesRoute} options={{ title: t('screen.favorites') }} />
         <Stack.Screen name="settings" component={SettingsScreen} options={{ title: t('screen.settings') }} />
+        <Stack.Screen name="login" component={LoginRoute} options={{ title: t('screen.login'), presentation: 'modal' }} />
+        <Stack.Screen name="account" component={AccountScreen} options={{ title: t('screen.account') }} />
+        <Stack.Screen name="receipts" component={ReceiptsRoute} options={{ title: t('screen.receipts') }} />
+        <Stack.Screen name="receipt" component={ReceiptRoute} options={{ title: t('screen.receipts') }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -66,6 +66,36 @@ describe('app config validation', () => {
   });
 });
 
+describe('auth configuration', () => {
+  it('requires the endpoints the configured flow needs', () => {
+    const broken = structuredClone(loadBundle().app);
+    delete broken.api.auth.requestCodeEndpoint;
+    const errors = validateAppConfig(broken).errors.join('\n');
+    expect(errors).toContain('requestCodeEndpoint');
+  });
+
+  it('rejects an unknown sign-in flow', () => {
+    const broken = structuredClone(loadBundle().app);
+    broken.api.auth.flow = 'magic-link' as never;
+    expect(validateAppConfig(broken).errors.join()).toContain('api.auth.flow');
+  });
+
+  it('warns when no refresh endpoint is configured', () => {
+    const config = structuredClone(loadBundle().app);
+    delete config.api.auth.refreshEndpoint;
+    expect(validateAppConfig(config).warnings.join()).toContain('refreshEndpoint');
+  });
+
+  it('checks the account section', () => {
+    const broken = structuredClone(loadBundle().app);
+    broken.account.receiptBarcodeFormat = 'qr' as never;
+    broken.account.receiptsPageSize = 0;
+    const errors = validateAppConfig(broken).errors.join('\n');
+    expect(errors).toContain('receiptBarcodeFormat');
+    expect(errors).toContain('receiptsPageSize');
+  });
+});
+
 describe('theme validation', () => {
   it('requires the same colour keys in both schemes', () => {
     const theme = structuredClone(loadBundle().theme);

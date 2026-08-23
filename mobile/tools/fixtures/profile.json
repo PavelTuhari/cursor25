@@ -1,0 +1,14 @@
+[
+  {
+    "id": "usr-1001",
+    "phone": "+37360123456",
+    "email": "ion.popescu@example.md",
+    "first_name": "Ion",
+    "last_name": "Popescu",
+    "birthday": "1988-04-12",
+    "city": "Chișinău",
+    "marketing_opt_in": true,
+    "registered_at": "2024-03-02T10:15:00Z",
+    "updated_at": "2026-08-19T09:00:00Z"
+  }
+]

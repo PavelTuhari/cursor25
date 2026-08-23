@@ -3,7 +3,10 @@
  * (bundled → cached remote → freshly downloaded remote), then build the API
  * client and the sync engine on top of it.
  */
-import { ApiClient, type FetchLike, type TokenProvider } from './api/client';
+import { ApiClient, type FetchLike } from './api/client';
+import { AuthService } from './auth/authService';
+import { KvStorage, type SecureStorage } from './auth/secureStorage';
+import type { Session } from './auth/types';
 import { bundledConfig } from './config/defaults';
 import { mergeConfigBundle } from './config/merge';
 import type { ConfigBundle, RemoteConfigPayload } from './config/types';
@@ -18,18 +21,18 @@ import type { ThemeMode } from './ui/theme';
 
 const REMOTE_CONFIG_KEY = 'config:remote';
 const REMOTE_CONFIG_FETCHED_AT = 'config:remote:fetchedAt';
-const AUTH_TOKEN_KEY = 'auth:token';
-const AUTH_USER_KEY = 'auth:user';
 
 export interface Runtime {
   config: ConfigBundle;
   db: Database;
   api: ApiClient;
   sync: SyncEngine;
+  auth: AuthService;
   locale: string;
   themeMode: ThemeMode;
   storeId: string | null;
-  session: { userId: string | null; token: string | null; displayName: string | null };
+  /** The session restored from secure storage, if the user was signed in. */
+  session: Session | null;
   /** Downloads the remote config and applies it; returns the new bundle when it changed. */
   refreshRemoteConfig: () => Promise<ConfigBundle | null>;
   warnings: string[];
@@ -39,6 +42,8 @@ export interface BootstrapOptions {
   driver: SqlDriver;
   deviceLocales: string[];
   fetchImpl?: FetchLike;
+  /** Where the session token is kept; defaults to the database-backed store. */
+  storage?: SecureStorage;
   /**
    * Overrides `api.baseUrl` from any configuration source. Dev and staging
    * builds set it (from `expo.extra.apiBaseUrl`) to talk to a local or test
@@ -97,26 +102,27 @@ export async function bootstrap(options: BootstrapOptions): Promise<Runtime> {
     }
   }
 
-  const tokenProvider: TokenProvider = {
-    async getToken() {
-      return getKv(db.driver, AUTH_TOKEN_KEY);
-    },
-  };
+  const api = new ApiClient({ config: config.app.api, fetchImpl: options.fetchImpl });
+  const auth = new AuthService({
+    api,
+    db,
+    storage: options.storage ?? new KvStorage(db.driver),
+    config: config.app.api.auth,
+  });
+  api.setTokenProvider(auth.tokenProvider());
+  const session = await auth.restore();
 
-  const api = new ApiClient({ config: config.app.api, tokenProvider, fetchImpl: options.fetchImpl });
   const sync = new SyncEngine({
     db,
     api,
     config: config.app,
-    isAuthenticated: () => Boolean(tokenProvider),
+    isAuthenticated: () => auth.isAuthenticated(),
   });
 
-  const [storedLocale, storedTheme, storedStore, token, userId] = await Promise.all([
+  const [storedLocale, storedTheme, storedStore] = await Promise.all([
     db.getSetting('locale'),
     db.getSetting('themeMode'),
     db.getSetting('storeId'),
-    getKv(db.driver, AUTH_TOKEN_KEY),
-    getKv(db.driver, AUTH_USER_KEY),
   ]);
 
   const locale =
@@ -129,10 +135,11 @@ export async function bootstrap(options: BootstrapOptions): Promise<Runtime> {
     db,
     api,
     sync,
+    auth,
     locale,
     themeMode: (storedTheme as ThemeMode | null) ?? 'system',
     storeId: storedStore && storedStore.length > 0 ? storedStore : null,
-    session: { userId, token, displayName: null },
+    session,
     warnings,
     refreshRemoteConfig: async () => {
       if (!config.app.remoteConfig.enabled) return null;
@@ -154,6 +161,7 @@ export async function bootstrap(options: BootstrapOptions): Promise<Runtime> {
         runtime.config = bundle;
         api.setConfig(bundle.app.api);
         sync.setConfig(bundle.app);
+        auth.setConfig(bundle.app.api.auth);
         return bundle;
       } catch (error) {
         // `failOpen` keeps the app usable on the last known good configuration.

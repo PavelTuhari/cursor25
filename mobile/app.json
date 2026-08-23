@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#E10915"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "md.una.retail"
@@ -22,7 +24,11 @@
         "backgroundColor": "#E10915"
       }
     },
-    "plugins": ["expo-sqlite", "expo-localization"],
+    "plugins": [
+      "expo-sqlite",
+      "expo-localization",
+      "expo-secure-store"
+    ],
     "extra": {
       "apiBaseUrl": "https://api.una.md/retail/v1",
       "tenantId": "demo"

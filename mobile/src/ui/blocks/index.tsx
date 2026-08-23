@@ -18,6 +18,7 @@ import {
   SearchBarBlock,
 } from './catalog';
 import { InfoBannerBlock, LoyaltyCardBlock, PromoFlyersBlock } from './promo';
+import { LoginPromptBlock, LogoutButtonBlock, PurchaseHistoryBlock, ReceiptListBlock } from './account';
 import {
   MenuListBlock,
   ProfileHeaderBlock,
@@ -43,6 +44,10 @@ export const BLOCK_REGISTRY: Record<string, BlockComponent> = {
   store_locator_card: StoreLocatorCardBlock,
   shopping_list: ShoppingListBlock,
   profile_header: ProfileHeaderBlock,
+  login_prompt: LoginPromptBlock,
+  logout_button: LogoutButtonBlock,
+  purchase_history: PurchaseHistoryBlock,
+  receipt_list: ReceiptListBlock,
   menu_list: MenuListBlock,
   sync_status: SyncStatusBlock,
 };
@@ -50,11 +55,11 @@ export const BLOCK_REGISTRY: Record<string, BlockComponent> = {
 export const BLOCK_TYPES: string[] = [...BLOCK_TYPE_NAMES];
 
 export function BlockRenderer({ block, navigate }: BlockProps): React.ReactElement | null {
-  const { config, session, locale } = useApp();
+  const { config, isAuthenticated, locale } = useApp();
 
   const visible = isVisible(block.visibleIf, {
     features: config.app.features,
-    isAuthenticated: Boolean(session.userId),
+    isAuthenticated,
     locale,
   });
   if (!visible) return null;

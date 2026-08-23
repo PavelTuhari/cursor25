@@ -5,8 +5,17 @@
     "name": "UNA Market",
     "tenantId": "demo",
     "defaultLocale": "ro",
-    "locales": ["ro", "ru", "en"],
-    "currency": { "code": "MDL", "symbol": "lei", "decimals": 2, "position": "suffix" },
+    "locales": [
+      "ro",
+      "ru",
+      "en"
+    ],
+    "currency": {
+      "code": "MDL",
+      "symbol": "lei",
+      "decimals": 2,
+      "position": "suffix"
+    },
     "supportPhone": "+373 22 000 000",
     "supportEmail": "suport@una.md"
   },
@@ -14,21 +23,40 @@
     "baseUrl": "https://api.una.md/retail/v1",
     "timeoutMs": 15000,
     "pageSize": 200,
-    "retry": { "attempts": 3, "backoffMs": 500, "factor": 2, "maxBackoffMs": 8000 },
+    "retry": {
+      "attempts": 3,
+      "backoffMs": 500,
+      "factor": 2,
+      "maxBackoffMs": 8000
+    },
     "auth": {
       "mode": "bearer",
+      "flow": "otp",
+      "requestCodeEndpoint": "/auth/request-code",
       "loginEndpoint": "/auth/login",
       "refreshEndpoint": "/auth/refresh",
-      "anonymousAllowed": true
+      "logoutEndpoint": "/auth/logout",
+      "otpLength": 4,
+      "otpResendSeconds": 60,
+      "anonymousAllowed": true,
+      "termsUrl": "https://una.md/terms"
     },
-    "headers": { "X-App-Platform": "mobile", "X-Tenant": "demo" }
+    "headers": {
+      "X-App-Platform": "mobile",
+      "X-Tenant": "demo"
+    }
   },
   "sync": {
     "syncOnStart": true,
     "intervalMinutes": 30,
     "minIntervalMinutes": 5,
     "staleAfterMinutes": 720,
-    "outbox": { "maxAttempts": 5, "backoffMs": 2000, "factor": 3, "maxBackoffMs": 3600000 },
+    "outbox": {
+      "maxAttempts": 5,
+      "backoffMs": 2000,
+      "factor": 3,
+      "maxBackoffMs": 3600000
+    },
     "maxPagesPerEntity": 200
   },
   "remoteConfig": {
@@ -46,7 +74,10 @@
     "search": true,
     "productReviews": false,
     "cart": false,
-    "onlineOrders": false
+    "onlineOrders": false,
+    "account": true,
+    "purchaseHistory": true,
+    "eReceipts": true
   },
   "loyalty": {
     "barcodeFormat": "ean13",
@@ -64,5 +95,21 @@
     "gridColumns": 2,
     "pageSize": 30
   },
-  "search": { "minChars": 2, "historySize": 10, "debounceMs": 250 }
+  "search": {
+    "minChars": 2,
+    "historySize": 10,
+    "debounceMs": 250
+  },
+  "account": {
+    "editableFields": [
+      "first_name",
+      "last_name",
+      "email",
+      "birthday",
+      "city"
+    ],
+    "showMarketingOptIn": true,
+    "receiptsPageSize": 50,
+    "receiptBarcodeFormat": "code128"
+  }
 }

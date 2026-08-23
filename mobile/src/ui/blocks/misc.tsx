@@ -294,7 +294,7 @@ export function ProfileHeaderBlock(_: BlockProps): React.ReactElement {
           </View>
           <View style={{ flex: 1 }}>
             <Text style={{ color: theme.colors.text, fontSize: theme.typography.sizes.lg }}>
-              {session.displayName ?? t('profile.guest')}
+              {session?.displayName ?? session?.phone ?? t('profile.guest')}
             </Text>
             <Text style={{ color: theme.colors.textMuted, fontSize: theme.typography.sizes.xs }}>
               {config.app.app.name} · {config.app.app.tenantId}
@@ -309,13 +309,13 @@ export function ProfileHeaderBlock(_: BlockProps): React.ReactElement {
 export function MenuListBlock({ block, navigate }: BlockProps): React.ReactElement {
   const theme = useTheme();
   const t = useT();
-  const { config, session, locale } = useApp();
+  const { config, isAuthenticated, locale } = useApp();
   const items = Array.isArray(block.props?.items) ? (block.props?.items as Record<string, unknown>[]) : [];
 
   const visibleItems = items.filter((item) =>
     isVisible(item.visibleIf as never, {
       features: config.app.features,
-      isAuthenticated: Boolean(session.userId),
+      isAuthenticated,
       locale,
     }),
   );

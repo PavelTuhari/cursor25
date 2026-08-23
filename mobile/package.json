@@ -22,6 +22,7 @@
     "expo": "^57.0.15",
     "expo-constants": "^57.0.13",
     "expo-localization": "^57.0.1",
+    "expo-secure-store": "~57.0.1",
     "expo-sqlite": "^57.0.1",
     "expo-status-bar": "^57.0.1",
     "react": "19.2.3",

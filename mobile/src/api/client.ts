@@ -35,6 +35,11 @@ export interface RequestOptions {
   signal?: AbortSignal;
   /** Skips the retry loop (used for user-initiated actions that must fail fast). */
   noRetry?: boolean;
+  /**
+   * Never answer a 401 by refreshing the token. The auth endpoints themselves
+   * set this: refreshing from inside a refresh would wait on itself.
+   */
+  skipTokenRefresh?: boolean;
 }
 
 export type FetchLike = (input: string, init?: RequestInit) => Promise<Response>;
@@ -65,6 +70,11 @@ export class ApiClient {
   /** Applied when a remote configuration changes the endpoint or retry policy. */
   setConfig(config: ApiConfig): void {
     this.options.config = config;
+  }
+
+  /** Set once the auth service exists; both objects need each other at start-up. */
+  setTokenProvider(tokenProvider: TokenProvider): void {
+    this.options.tokenProvider = tokenProvider;
   }
 
   buildUrl(path: string, query?: RequestOptions['query']): string {
@@ -136,7 +146,12 @@ export class ApiClient {
       clearTimeout(timeout);
     }
 
-    if (response.status === 401 && !isRetryAfterRefresh && this.options.tokenProvider?.refresh) {
+    if (
+      response.status === 401 &&
+      !isRetryAfterRefresh &&
+      !options.skipTokenRefresh &&
+      this.options.tokenProvider?.refresh
+    ) {
       const token = await this.options.tokenProvider.refresh();
       if (token) return this.performRequest<T>(path, options, true);
     }

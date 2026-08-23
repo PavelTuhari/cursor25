@@ -104,7 +104,7 @@ export function LoyaltyCardBlock({ block, navigate }: BlockProps): React.ReactEl
         <View style={{ paddingHorizontal: theme.spacing.lg }}>
           <Card>
             <Text style={{ color: theme.colors.textMuted, fontSize: theme.typography.sizes.sm }}>
-              {session.userId ? t('common.empty') : t('loyalty.no_card')}
+              {session ? t('common.empty') : t('loyalty.no_card')}
             </Text>
           </Card>
         </View>

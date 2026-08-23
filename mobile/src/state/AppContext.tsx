@@ -3,21 +3,17 @@
  * the sync engine, plus the small pieces of UI state that depend on them
  * (locale, theme mode, selected store, session).
  */
-import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { ApiClient } from '../api/client';
+import type { AuthService } from '../auth/authService';
+import type { Session } from '../auth/types';
 import type { ConfigBundle } from '../config/types';
 import type { Database } from '../db/database';
 import { createTranslator, type Translator } from '../i18n';
 import type { SyncEngine } from '../sync/syncEngine';
 import type { SyncReport } from '../sync/types';
 import { resolveTheme, type Theme, type ThemeMode } from '../ui/theme';
-
-export interface SessionState {
-  userId: string | null;
-  token: string | null;
-  displayName: string | null;
-}
 
 export interface SyncStatus {
   running: boolean;
@@ -31,14 +27,17 @@ export interface AppContextValue {
   db: Database;
   api: ApiClient;
   sync: SyncEngine;
+  auth: AuthService;
   theme: Theme;
   themeMode: ThemeMode;
   setThemeMode: (mode: ThemeMode) => void;
   locale: string;
   setLocale: (locale: string) => void;
   t: Translator['t'];
-  session: SessionState;
-  setSession: (session: SessionState) => void;
+  session: Session | null;
+  isAuthenticated: boolean;
+  /** Signs the user out and clears the data that belonged to the account. */
+  logout: () => Promise<void>;
   storeId: string | null;
   setStoreId: (storeId: string | null) => void;
   syncStatus: SyncStatus;
@@ -56,21 +55,22 @@ export interface AppProviderProps {
   db: Database;
   api: ApiClient;
   sync: SyncEngine;
+  auth: AuthService;
   initialLocale: string;
   initialThemeMode: ThemeMode;
   initialStoreId: string | null;
-  initialSession: SessionState;
+  initialSession: Session | null;
   systemScheme: 'light' | 'dark';
   onPersist?: (key: string, value: string) => void;
   children: React.ReactNode;
 }
 
 export function AppProvider(props: AppProviderProps): React.ReactElement {
-  const { config, db, api, sync, systemScheme, onPersist } = props;
+  const { config, db, api, sync, auth, systemScheme, onPersist } = props;
   const [locale, setLocaleState] = useState(props.initialLocale);
   const [themeMode, setThemeModeState] = useState<ThemeMode>(props.initialThemeMode);
   const [storeId, setStoreIdState] = useState<string | null>(props.initialStoreId);
-  const [session, setSession] = useState<SessionState>(props.initialSession);
+  const [session, setSession] = useState<Session | null>(props.initialSession);
   const [dataVersion, setDataVersion] = useState(0);
   const [syncStatus, setSyncStatus] = useState<SyncStatus>({
     running: false,
@@ -90,6 +90,14 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
   );
 
   const invalidate = useCallback(() => setDataVersion((version) => version + 1), []);
+
+  useEffect(() => {
+    // Signing in or out changes which entities sync and what the screens show.
+    return auth.subscribe((next) => {
+      setSession(next);
+      setDataVersion((version) => version + 1);
+    });
+  }, [auth]);
 
   const setLocale = useCallback(
     (next: string) => {
@@ -142,6 +150,11 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
     [sync],
   );
 
+  const logout = useCallback(async () => {
+    await auth.logout();
+    setSyncStatus((status) => ({ ...status, error: null }));
+  }, [auth]);
+
   const isFeatureEnabled = useCallback(
     (feature: string | undefined) => (feature ? config.app.features[feature] === true : true),
     [config.app.features],
@@ -152,6 +165,7 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
     db,
     api,
     sync,
+    auth,
     theme,
     themeMode,
     setThemeMode,
@@ -159,7 +173,8 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
     setLocale,
     t: translator.t,
     session,
-    setSession,
+    isAuthenticated: session !== null,
+    logout,
     storeId,
     setStoreId,
     syncStatus,

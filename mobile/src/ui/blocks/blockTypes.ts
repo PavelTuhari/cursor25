@@ -17,6 +17,10 @@ export const BLOCK_TYPE_NAMES = [
   'store_locator_card',
   'shopping_list',
   'profile_header',
+  'login_prompt',
+  'logout_button',
+  'purchase_history',
+  'receipt_list',
   'menu_list',
   'sync_status',
 ] as const;

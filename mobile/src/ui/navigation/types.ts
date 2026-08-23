@@ -9,6 +9,10 @@ export type RootStackParamList = {
   stores: undefined;
   favorites: undefined;
   settings: undefined;
+  login: undefined;
+  account: undefined;
+  receipts: undefined;
+  receipt: { receiptId: string };
 };
 
 export type ScreenName = keyof RootStackParamList;

@@ -159,9 +159,34 @@ describe('pull', () => {
   it('skips entities that need a signed-in user when there is none', async () => {
     const stub = new FetchStub();
     const { db, engine } = await makeEngine(stub, { authenticated: false });
-    const result = await engine.syncEntity(entity('loyalty_account'));
-    expect(result.skipped).toBe('not_authenticated');
+
+    for (const name of ['loyalty_account', 'profile', 'receipts', 'favorites']) {
+      const result = await engine.syncEntity(entity(name));
+      expect({ name, skipped: result.skipped }).toEqual({ name, skipped: 'not_authenticated' });
+    }
     expect(stub.calls).toHaveLength(0);
+    await db.close();
+  });
+
+  it('pulls the account entities once the user is signed in', async () => {
+    const stub = new FetchStub();
+    stub.on('GET /account/receipts', {
+      body: {
+        items: [
+          { id: 'rcp-1', number: '2026000001', total: 51.3, item_count: 3, purchased_at: '2026-08-22T18:42:00Z',
+            items: [{ product_id: 'p-1001', quantity: 2, price: 17.9, total: 35.8 }],
+            updated_at: '2026-08-22T18:42:00Z' },
+        ],
+        has_more: false,
+      },
+    });
+
+    const { db, engine } = await makeEngine(stub, { authenticated: true });
+    const result = await engine.syncEntity(entity('receipts'));
+    expect(result.pulled).toBe(1);
+
+    const rows = await db.repository('receipts').query({ entity: 'receipts' }, { locale: 'ro' });
+    expect(rows[0]?.items).toEqual([{ product_id: 'p-1001', quantity: 2, price: 17.9, total: 35.8 }]);
     await db.close();
   });
 

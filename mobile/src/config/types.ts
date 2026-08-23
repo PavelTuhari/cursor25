@@ -38,9 +38,16 @@ export interface RetryConfig {
 
 export interface ApiAuthConfig {
   mode: 'bearer' | 'none';
+  /** `otp` signs in with a code sent by SMS, `password` with login + password. */
+  flow?: 'otp' | 'password';
+  requestCodeEndpoint?: string;
   loginEndpoint?: string;
   refreshEndpoint?: string;
+  logoutEndpoint?: string;
+  otpLength?: number;
+  otpResendSeconds?: number;
   anonymousAllowed: boolean;
+  termsUrl?: string;
 }
 
 export interface ApiConfig {
@@ -96,6 +103,14 @@ export interface CatalogConfig {
   pageSize: number;
 }
 
+export interface AccountConfig {
+  /** Profile fields the user may edit in the app. */
+  editableFields: string[];
+  showMarketingOptIn: boolean;
+  receiptsPageSize: number;
+  receiptBarcodeFormat: 'ean13' | 'code128';
+}
+
 export interface SearchConfig {
   minChars: number;
   historySize: number;
@@ -112,6 +127,7 @@ export interface AppConfig {
   loyalty: LoyaltyConfig;
   catalog: CatalogConfig;
   search: SearchConfig;
+  account: AccountConfig;
 }
 
 /* ------------------------------------------------------------------ theme */

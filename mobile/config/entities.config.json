@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "entities": [
     {
       "name": "categories",
@@ -428,6 +428,62 @@
       ]
     },
     {
+      "name": "profile",
+      "table": "profile",
+      "endpoint": "/account/profile",
+      "direction": "bidirectional",
+      "syncMode": "full",
+      "pushMode": "rest",
+      "conflict": "last_write_wins",
+      "requiresAuth": true,
+      "primaryKey": "id",
+      "order": 65,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "phone",
+          "type": "text"
+        },
+        {
+          "name": "email",
+          "type": "text"
+        },
+        {
+          "name": "first_name",
+          "type": "text"
+        },
+        {
+          "name": "last_name",
+          "type": "text"
+        },
+        {
+          "name": "birthday",
+          "type": "text"
+        },
+        {
+          "name": "city",
+          "type": "text"
+        },
+        {
+          "name": "marketing_opt_in",
+          "type": "boolean",
+          "default": 0
+        },
+        {
+          "name": "registered_at",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
       "name": "shopping_list_items",
       "table": "shopping_list_items",
       "endpoint": "/list/items",
@@ -511,6 +567,94 @@
           "type": "datetime",
           "index": true
         }
+      ],
+      "requiresAuth": true
+    },
+    {
+      "name": "receipts",
+      "table": "receipts",
+      "endpoint": "/account/receipts",
+      "direction": "pull",
+      "syncMode": "delta",
+      "requiresAuth": true,
+      "primaryKey": "id",
+      "cursorField": "updated_at",
+      "order": 90,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "number",
+          "type": "text"
+        },
+        {
+          "name": "store_id",
+          "type": "text",
+          "index": true
+        },
+        {
+          "name": "purchased_at",
+          "type": "datetime",
+          "index": true
+        },
+        {
+          "name": "total",
+          "type": "real",
+          "default": 0
+        },
+        {
+          "name": "discount_total",
+          "type": "real",
+          "default": 0
+        },
+        {
+          "name": "points_earned",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "points_spent",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "payment_method",
+          "type": "text"
+        },
+        {
+          "name": "fiscal_code",
+          "type": "text"
+        },
+        {
+          "name": "items",
+          "type": "json"
+        },
+        {
+          "name": "item_count",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "index": true
+        }
+      ],
+      "indexes": [
+        {
+          "name": "idx_receipts_date",
+          "columns": [
+            "purchased_at",
+            "total"
+          ]
+        }
+      ],
+      "searchColumns": [
+        "number",
+        "fiscal_code"
       ]
     }
   ]

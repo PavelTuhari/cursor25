@@ -145,11 +145,29 @@ export function validateAppConfig(input: unknown, c = new Collector()): Validati
       c.require(`${path}.api.retry.factor`, isPositiveNumber(cfg.api.retry.factor), 'must be > 0');
     }
     if (c.require(`${path}.api.auth`, isObject(cfg.api.auth), 'missing section')) {
-      c.require(
-        `${path}.api.auth.mode`,
-        cfg.api.auth.mode === 'bearer' || cfg.api.auth.mode === 'none',
-        'must be "bearer" or "none"',
-      );
+      const auth = cfg.api.auth;
+      c.require(`${path}.api.auth.mode`, auth.mode === 'bearer' || auth.mode === 'none', 'must be "bearer" or "none"');
+
+      if (auth.mode === 'bearer') {
+        const flow = auth.flow ?? 'password';
+        c.require(`${path}.api.auth.flow`, flow === 'otp' || flow === 'password', 'must be "otp" or "password"');
+        c.require(`${path}.api.auth.loginEndpoint`, isString(auth.loginEndpoint), 'required to sign a user in');
+        if (flow === 'otp') {
+          c.require(
+            `${path}.api.auth.requestCodeEndpoint`,
+            isString(auth.requestCodeEndpoint),
+            'the otp flow needs an endpoint that sends the code',
+          );
+          c.require(
+            `${path}.api.auth.otpLength`,
+            Number.isInteger(auth.otpLength) && (auth.otpLength ?? 0) >= 3,
+            'must be an integer of at least 3',
+          );
+        }
+        if (!auth.refreshEndpoint) {
+          c.warn(`${path}.api.auth.refreshEndpoint`, 'without it an expired token signs the user out');
+        }
+      }
     }
   }
 
@@ -190,6 +208,24 @@ export function validateAppConfig(input: unknown, c = new Collector()): Validati
     for (const [flag, value] of Object.entries(cfg.features)) {
       c.require(`${path}.features.${flag}`, typeof value === 'boolean', 'must be a boolean');
     }
+  }
+
+  if (isObject(cfg.account)) {
+    c.require(
+      `${path}.account.editableFields`,
+      Array.isArray(cfg.account.editableFields),
+      'must be an array of profile column names',
+    );
+    c.require(
+      `${path}.account.receiptsPageSize`,
+      isPositiveNumber(cfg.account.receiptsPageSize),
+      'must be > 0',
+    );
+    c.require(
+      `${path}.account.receiptBarcodeFormat`,
+      cfg.account.receiptBarcodeFormat === 'ean13' || cfg.account.receiptBarcodeFormat === 'code128',
+      'must be "ean13" or "code128"',
+    );
   }
 
   if (isObject(cfg.loyalty)) {

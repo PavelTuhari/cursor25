@@ -9,11 +9,51 @@ end-to-end тестах (`__tests__/e2e.test.ts`), так что докумен�
 ## Авторизация
 
 - `Authorization: Bearer <token>` — если `api.auth.mode = "bearer"` и токен есть.
-- На `401` клиент один раз вызывает `refresh` и повторяет запрос.
-- Сущности с `requiresAuth: true` (например, `loyalty_account`) не запрашиваются,
-  пока пользователь не авторизован.
+- На `401` клиент один раз вызывает `refresh` и повторяет запрос (сами эндпоинты
+  `/auth/*` из этого правила исключены).
+- Сущности с `requiresAuth: true` (`profile`, `receipts`, `loyalty_account`,
+  `favorites`) не запрашиваются, пока пользователь не авторизован.
 - Дополнительные заголовки берутся из `api.headers` (в поставке — `X-Tenant`,
   `X-App-Platform`).
+
+### Вход по коду из SMS (`flow: "otp"`)
+
+```
+POST /auth/request-code   { "phone": "+37360123456" }
+→ 200 { "request_id": "req-1", "resend_after_seconds": 60,
+        "expires_in_seconds": 300, "dev_code": "1234" }
+→ 422 если номер не подходит
+```
+
+`dev_code` возвращают только dev- и staging-контуры, чтобы QA не ждал SMS; приложение
+показывает его отдельной строкой.
+
+```
+POST /auth/login   { "phone": "+37360123456", "code": "1234", "request_id": "req-1" }
+→ 200 { "access_token": "...", "refresh_token": "...", "expires_in": 3600,
+        "user": { "id": "usr-1001", "phone": "+37360123456", "email": "...",
+                  "first_name": "Ion", "last_name": "Popescu" } }
+→ 422 если код неверный или истёк
+→ 429 если кодов запрошено слишком много
+```
+
+Телефон приложение нормализует до `+373XXXXXXXX` перед отправкой.
+
+### Вход по паролю (`flow: "password"`)
+
+```
+POST /auth/login   { "login": "ion@example.md", "password": "..." }
+```
+
+### Продление и выход
+
+```
+POST /auth/refresh   { "refresh_token": "..." }   → тот же ответ с токенами
+POST /auth/logout                                  → 204
+```
+
+Если `refresh` вернул ошибку, приложение считает сессию завершённой: очищает токен и
+данные аккаунта на устройстве.
 
 ## Загрузка данных (pull)
 
@@ -126,6 +166,29 @@ GET /app-config?tenant={tenantId}&config_version={configVersion}
 Объекты сливаются со встроенной конфигурацией, массивы заменяются. Ответ, не прошедший
 валидацию, игнорируется — приложение остаётся на предыдущей конфигурации.
 
+## Формат чека
+
+Позиции чека приходят в поле `items` как JSON-массив, поэтому история покупок читается
+без дополнительных запросов:
+
+```json
+{
+  "id": "rcp-1001", "number": "2026000001", "store_id": "st-01",
+  "purchased_at": "2026-08-22T18:42:00Z",
+  "total": 51.3, "discount_total": 7.2,
+  "points_earned": 5, "points_spent": 0,
+  "payment_method": "card", "fiscal_code": "MD00010000513",
+  "item_count": 3,
+  "items": [
+    { "product_id": "p-1001", "name": { "ro": "Lapte 2.5% 1 L", "ru": "Молоко 2,5% 1 л" },
+      "quantity": 2, "unit": "l", "price": 17.9, "total": 35.8, "discount": 7.2 }
+  ],
+  "updated_at": "2026-08-22T18:42:00Z"
+}
+```
+
+`product_id` в позициях позволяет одной кнопкой перенести покупку в список покупок.
+
 ## Минимальный набор эндпоинтов
 
 | Сущность | Эндпоинт | Направление | Режим |
@@ -136,6 +199,8 @@ GET /app-config?tenant={tenantId}&config_version={configVersion}
 | `promotions` | `/promo/flyers` | pull | delta |
 | `stores` | `/network/stores` | pull | full |
 | `loyalty_account` | `/loyalty/account` | pull (auth) | full |
+| `profile` | `/account/profile` | bidirectional (auth) | full, REST |
+| `receipts` | `/account/receipts` | pull (auth) | delta |
 | `shopping_list_items` | `/list/items` | bidirectional | delta, REST |
 | `favorites` | `/account/favorites` | bidirectional | delta, batch |
 
