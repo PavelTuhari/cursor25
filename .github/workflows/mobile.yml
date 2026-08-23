@@ -1,0 +1,42 @@
+name: mobile
+
+# The checks a contributor runs locally with `npm run check`, on every push
+# and pull request that touches the app.
+on:
+  push:
+    paths:
+      - 'mobile/**'
+      - '.github/workflows/mobile.yml'
+  pull_request:
+    paths:
+      - 'mobile/**'
+      - '.github/workflows/mobile.yml'
+
+defaults:
+  run:
+    working-directory: mobile
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # The test suite stores data in SQLite through the built-in
+          # `node:sqlite` module, which needs Node 22 or newer.
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Validate JSON configuration
+        run: npm run validate-config
+
+      - name: Tests
+        run: npm test -- --ci
