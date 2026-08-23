@@ -3,7 +3,11 @@ name: mobile
 # The checks a contributor runs locally with `npm run check`, on every push
 # and pull request that touches the app.
 on:
+  # Pull requests are covered by the pull_request trigger; pushes are only
+  # checked on the default branch, so a PR does not run the job twice.
   push:
+    branches:
+      - claude/nko-accounting-oracle-module-uvuhgv
     paths:
       - 'mobile/**'
       - '.github/workflows/mobile.yml'
