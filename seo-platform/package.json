@@ -1,0 +1,14 @@
+{
+  "name": "seo-platform",
+  "private": true,
+  "version": "0.1.0",
+  "description": "AI-driven SEO promotion platform with UNA.md accounting integration",
+  "workspaces": ["packages/*", "apps/*"],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "api:dev": "npm run dev --workspace @seo/api"
+  },
+  "engines": { "node": ">=22" }
+}
