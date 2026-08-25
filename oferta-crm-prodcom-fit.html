@@ -511,7 +511,9 @@
 
   <div class="badges">
     <span class="badge">22 module din caietul de sarcini</span>
-    <span class="badge">Oracle Database 26ai · căutare vectorială</span>
+    <span class="badge">Oracle 26ai · nivel Always Free, infrastructură 0 €</span>
+    <span class="badge">Alternativă PostgreSQL</span>
+    <span class="badge">API deschis pentru dezvoltatori terți</span>
     <span class="badge">Fără licențe per utilizator</span>
     <span class="badge">Găzduire: TopHost Chișinău</span>
     <span class="badge">Legea nr. 195/2024 — în vigoare din 23.08.2026</span>
@@ -674,6 +676,7 @@
       </ul>
     </div>
   </div>
+  <div class="note"><strong>Trei variante de bază de date, la alegere:</strong> livrarea standard se face pe <strong>Oracle Always Free</strong> — infrastructură de bază de date la cost zero, cu funcțiile vectoriale active integral (300 € conectare, 100 €/lună). La depășirea limitelor nivelului gratuit se trece pe <strong>licența Oracle plătită</strong> (200 €/lună licență, abonament CRM 200 €/lună). Ca alternativă complet open-source rămâne <strong>PostgreSQL</strong> (600 € conectare, 150 €/lună). Comparația în secțiunile 4.1 și 4.2.</div>
   <div class="note ok"><strong>Costul total pe doi ani: 2 700 €</strong> — 300 € la start și 100 €/lună, pentru oricâți utilizatori. O implementare amoCRM comparabilă, cu licențe pentru 10 utilizatori, se situează în intervalul 5 100 – 9 500 € pe aceeași perioadă (secțiunea 11).</div>
   <div class="note"><strong>Contextul care schimbă calculul:</strong> din <strong>23 august 2026</strong> este în vigoare Legea nr. 195/2024 privind protecția datelor cu caracter personal. Ea nu interzice niciun produs, dar vă obligă să demonstrați unde ajung datele clienților și ce garanții verificabile aveți — sub sancțiuni de până la <strong>2.000.000 lei sau 2 % din cifra de afaceri</strong>. Iar amoCRM are ca acționar de control, din 2016, compania 1C. Detalii în secțiunile 1.1 și 1.2.</div>
 </section>
@@ -745,6 +748,82 @@
     </div>
   </div>
   <div class="note"><strong>Alegerea găzduirii vă aparține.</strong> Recomandăm TopHost Chișinău: costul este inclus în abonament, datele nu părăsesc jurisdicția Republicii Moldova, iar viteza de lucru pentru utilizatorii din țară este maximă. Varianta cloud rămâne disponibilă la cerere, fără schimbarea funcționalului.</div>
+
+  <h3><span class="idx">4.1.</span> Trei variante de bază de date</h3>
+  <p>Livrarea standard se face pe <strong>Oracle Autonomous Database — nivelul Always Free</strong>. Este o ofertă permanentă a Oracle, nu o perioadă de probă: infrastructura de bază de date nu costă nimic lunar, iar funcțiile vectoriale din secțiunea 6 sunt disponibile integral. Când volumul de date sau numărul de utilizatori depășește limitele nivelului gratuit, se trece pe licența plătită. Pentru companiile care preferă o soluție complet open-source, varianta PostgreSQL rămâne disponibilă.</p>
+  <div class="table-wrap">
+  <table>
+    <tr>
+      <th style="width:210px">Variantă</th>
+      <th class="ctr">Conectare</th>
+      <th class="ctr">Abonament CRM</th>
+      <th class="ctr">Licență BD</th>
+      <th class="ctr">Total lunar</th>
+    </tr>
+    <tr>
+      <td><strong>Oracle Always Free</strong><br><span class="chip">livrare standard</span></td>
+      <td class="num">300 €</td>
+      <td class="num">100 €</td>
+      <td class="num">0 €</td>
+      <td class="num">100 €</td>
+    </tr>
+    <tr>
+      <td><strong>Oracle licență plătită</strong><br><span class="chip">la depășirea limitelor</span></td>
+      <td class="num">300 €</td>
+      <td class="num">200 €</td>
+      <td class="num">200 €</td>
+      <td class="num">400 €</td>
+    </tr>
+    <tr>
+      <td><strong>PostgreSQL</strong><br><span class="chip">alternativă open-source</span></td>
+      <td class="num">600 €</td>
+      <td class="num">150 €</td>
+      <td class="num">0 €</td>
+      <td class="num">150 €</td>
+    </tr>
+  </table>
+  </div>
+  <div class="note ok"><strong>Recomandarea pentru Prodcom Fit: Oracle Always Free.</strong> Acoperă confortabil o echipă de vânzări de dimensiunea descrisă în caietul de sarcini, cu toate funcțiile vectoriale active, la un cost de infrastructură zero. Trecerea pe licența plătită se face doar atunci când o cer volumele reale — nu preventiv, și nu ca o condiție de pornire.</div>
+
+  <h3><span class="idx">4.2.</span> Ce se schimbă în varianta PostgreSQL</h3>
+  <p>Varianta PostgreSQL este integral funcțională pentru cele 22 de puncte din caietul de sarcini. Costul de conectare este mai mare — 600 € în loc de 300 € — pentru că presupune adaptarea platformei, iar o parte din funcțiile bazate pe motorul Oracle se comportă diferit.</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th style="width:260px">Funcție</th><th class="ctr">Oracle 26ai</th><th class="ctr">PostgreSQL</th></tr>
+    <tr><td>Cele 22 de puncte din caietul de sarcini</td><td class="yes">✔ integral</td><td class="yes">✔ integral</td></tr>
+    <tr><td>Căutare semantică în istoric și transcrieri</td><td class="yes">✔ nativ</td><td class="yes">✔ prin extensia vectorială</td></tr>
+    <tr><td>Clienți similari, scor de risc, acțiune recomandată</td><td class="yes">✔ nativ</td><td class="yes">✔ prin extensia vectorială</td></tr>
+    <tr><td>Sales Bot cu răspunsuri din catalogul propriu</td><td class="yes">✔</td><td class="yes">✔</td></tr>
+    <tr><td>Întrebări în limbaj natural asupra datelor <span class="chip">Select AI</span></td><td class="yes">✔ nativ</td><td class="no">indisponibil — funcție specifică Oracle</td></tr>
+    <tr><td>Modele de învățare automată în interiorul bazei</td><td class="yes">✔ nativ</td><td class="no">necesită componente externe</td></tr>
+    <tr><td>Costul lunar al licenței de bază de date</td><td class="ctr">0 € pe Always Free</td><td class="ctr">0 €</td></tr>
+  </table>
+  </div>
+  <div class="note">Perimetrul exact al variantei PostgreSQL se confirmă la etapa de analiză, înainte de semnarea contractului. Dacă o funcție pe care o considerați esențială nu poate fi livrată identic, o spunem atunci — nu după implementare.</div>
+
+  <h3><span class="idx">4.3.</span> API deschis, documentat și disponibil dezvoltatorilor terți</h3>
+  <p>API-ul dezvoltat în cadrul proiectului — cel de la punctul 10 din caietul de sarcini, plus interfețele de schimb cu sistemele contabile — este <strong>documentat și pus la dispoziția beneficiarului</strong>, nu ținut ca instrument de dependență.</p>
+  <div class="two-col">
+    <div class="card">
+      <h4>Ce înseamnă practic</h4>
+      <ul>
+        <li><strong>Dezvoltatorii dumneavoastră de 1C</strong> pot realiza singuri ajustările necesare pe partea de 1C, folosind documentația API pe care o predăm — fără să treacă prin noi și fără să ne achite ore;</li>
+        <li>Orice integrator terț poate construi conexiuni suplimentare către sistemele pe care le folosiți;</li>
+        <li>Departamentul dumneavoastră IT poate scrie propriile rapoarte și automatizări peste API;</li>
+        <li>Documentația API este livrată împreună cu sistemul, la recepție.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Integrare de test cu un ERP deschis</h4>
+      <ul>
+        <li>La etapa de implementare realizăm o <strong>integrare de test cu un sistem ERP open-source</strong>, ca demonstrație funcțională a API-ului;</li>
+        <li>Scopul: să vedeți API-ul lucrând cu un sistem terț, nu doar descris în documentație;</li>
+        <li>Aceeași interfață este folosită apoi pentru schimbul cu 1C sau cu orice alt sistem contabil;</li>
+        <li>Integrarea de test este inclusă în conectare.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note ok"><strong>De ce contează:</strong> un API închis transformă orice modificare viitoare într-o comandă către furnizor, la tarif orar. Aici, partea de 1C rămâne în mâinile dezvoltatorilor cu care lucrați deja — noi răspundem de partea noastră a interfeței, ei de a lor.</div>
 </section>
 
 <!-- ============================================================ -->
@@ -1159,7 +1238,7 @@
     <div class="plan">
       <h4>Conectare</h4>
       <span class="big">300 €</span>
-      <span class="price-sub">o singură dată, la începutul colaborării</span>
+      <span class="price-sub">o singură dată · pe Oracle Always Free</span>
       <ul class="check" style="margin-top:14px">
         <li>Analiza proceselor și specificația de configurare;</li>
         <li>Configurarea tuturor celor 22 de module;</li>
@@ -1167,6 +1246,7 @@
         <li>API pentru site și analitica UTM;</li>
         <li>Migrarea bazei de clienți din sistemul curent;</li>
         <li>Activarea funcțiilor vectoriale din secțiunea 6;</li>
+        <li>Documentația API și integrarea de test cu un ERP deschis;</li>
         <li>Instruirea managerilor și a administrației;</li>
         <li>Ghidurile video, modul manager și modul administrator;</li>
         <li>Punerea în exploatare, în 2 săptămâni.</li>
@@ -1176,7 +1256,7 @@
     <div class="plan saas">
       <h4>Abonament lunar</h4>
       <span class="big">100 €/lună</span>
-      <span class="price-sub">dezvoltare asistată de inteligență artificială, tip <em>Basic</em></span>
+      <span class="price-sub">dezvoltare asistată de IA, tip <em>Basic</em> · pe Oracle Always Free</span>
       <ul class="check" style="margin-top:14px">
         <li>Dezvoltarea și ajustarea curentă a configurației;</li>
         <li>Consultații pentru utilizatori, nelimitat;</li>
@@ -1185,7 +1265,7 @@
         <li>Actualizările sistemului;</li>
         <li>Suport prin chat și telefon, reacție în maximum 4 ore lucrătoare.</li>
       </ul>
-      <div class="doclist"><b>Fix, indiferent de echipă.</b> 5, 10 sau 50 de manageri — același tarif. Majorabil <b>doar prin acord comun</b>.</div>
+      <div class="doclist"><b>Fix, indiferent de echipă.</b> 5, 10 sau 50 de manageri — același tarif. Majorabil <b>doar prin acord comun</b>. Variantele pe licență Oracle plătită și pe PostgreSQL — în secțiunea 4.1.</div>
     </div>
   </div>
 
@@ -1204,6 +1284,24 @@
       <td class="num">100 €/lună</td>
       <td>lunar, fix</td>
       <td>Dezvoltare asistată de IA, ajustări, consultații, suport, găzduire, copii de rezervă, actualizări. <strong>Nu depinde de numărul de utilizatori.</strong> Majorabil doar prin acord comun.</td>
+    </tr>
+    <tr>
+      <td><strong>Licență Oracle plătită</strong> <span class="chip">opțional</span></td>
+      <td class="num">200 €/lună</td>
+      <td>lunar</td>
+      <td>Necesară doar la depășirea limitelor nivelului Always Free. În această variantă, abonamentul CRM devine <strong>200 €/lună</strong> — total 400 €/lună. Detalii în secțiunea 4.1.</td>
+    </tr>
+    <tr>
+      <td><strong>Variantă PostgreSQL</strong> <span class="chip">alternativă</span></td>
+      <td class="num">600 € + 150 €/lună</td>
+      <td>unic + lunar</td>
+      <td>Alternativă complet open-source, fără licență de bază de date. Conectarea este mai mare din cauza adaptării platformei. Diferențele funcționale — în secțiunea 4.2.</td>
+    </tr>
+    <tr>
+      <td><strong>Modul pentru magazine</strong> <span class="chip">opțional</span></td>
+      <td class="num">200 € + 50 €/lună</td>
+      <td>unic + lunar</td>
+      <td>Conectarea unui punct de vânzare sau a unui magazin online la CRM: comenzile, clienții și stocurile intră în același sistem. Se contractează separat, pentru fiecare magazin conectat.</td>
     </tr>
     <tr>
       <td><strong>Servicii la comandă</strong></td>
@@ -1287,7 +1385,30 @@
   </div>
   <p>La aceasta se adaugă doar costurile achitate direct furnizorilor externi — minutele de telefonie și mesajele SMS — la tarifele acestora, fără comision din partea noastră.</p>
 
-  <h3><span class="idx">11.2.</span> Dacă echipa de vânzări crește</h3>
+  <h3><span class="idx">11.2.</span> Costul pe cele trei variante de bază de date</h3>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Variantă</th><th>Conectare</th><th>Lunar</th><th>Total anul 1</th><th>Total 2 ani</th></tr>
+    <tr><td><strong>Oracle Always Free</strong> <span class="chip">standard</span></td><td class="num">300 €</td><td class="num">100 €</td><td class="num">1 500 €</td><td class="num">2 700 €</td></tr>
+    <tr><td><strong>Oracle licență plătită</strong></td><td class="num">300 €</td><td class="num">400 €</td><td class="num">5 100 €</td><td class="num">9 900 €</td></tr>
+    <tr><td><strong>PostgreSQL</strong></td><td class="num">600 €</td><td class="num">150 €</td><td class="num">2 400 €</td><td class="num">4 200 €</td></tr>
+  </table>
+  </div>
+  <div class="note ok"><strong>Pornirea se face pe Always Free.</strong> Nu vă cerem să plătiți de la început pentru o capacitate de care nu aveți nevoie. Trecerea pe licența plătită se discută abia atunci când volumele reale o impun, iar decizia se ia împreună, pe baza datelor din sistem — nu la semnarea contractului.</div>
+
+  <h3><span class="idx">11.3.</span> Opțiunea pentru magazine</h3>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Configurație</th><th>Conectare</th><th>Lunar</th><th>Total anul 1</th></tr>
+    <tr><td>CRM (Always Free), fără magazine</td><td class="num">300 €</td><td class="num">100 €</td><td class="num">1 500 €</td></tr>
+    <tr><td>CRM + 1 magazin</td><td class="num">500 €</td><td class="num">150 €</td><td class="num">2 300 €</td></tr>
+    <tr><td>CRM + 3 magazine</td><td class="num">900 €</td><td class="num">250 €</td><td class="num">3 900 €</td></tr>
+    <tr><td>CRM + 5 magazine</td><td class="num">1 300 €</td><td class="num">350 €</td><td class="num">5 500 €</td></tr>
+  </table>
+  </div>
+  <div class="note">Modulul pentru magazine este <strong>opțional</strong> și nu figurează în caietul de sarcini. Îl includem pentru că un CRM care vede comenzile din magazine, dar nu și clienții care le-au făcut, rămâne pe jumătate orb — iar funcțiile de clienți similari și scor de risc lucrează cu atât mai bine cu cât istoricul este mai complet.</div>
+
+  <h3><span class="idx">11.4.</span> Dacă echipa de vânzări crește</h3>
   <div class="table-wrap">
   <table>
     <tr><th>Manageri de vânzări</th><th>Abonament UNA.md/CRM</th><th>Model licențiat, estimativ</th><th>Diferență lunară</th></tr>
@@ -1299,7 +1420,7 @@
   </div>
   <div class="note ok"><strong>Nu este o greșeală de tipar.</strong> Abonamentul nu depinde de numărul de manageri. Creșterea echipei de vânzări nu costă nimic în plus — spre deosebire de modelul de licențiere per utilizator, unde fiecare angajare nouă înseamnă o plată lunară suplimentară pe toată durata folosirii sistemului.</div>
 
-  <h3><span class="idx">11.3.</span> Comparație cu o implementare amoCRM</h3>
+  <h3><span class="idx">11.5.</span> Comparație cu o implementare amoCRM</h3>
   <p>Ofertele-tip de implementare amoCRM din regiune presupun două componente: implementarea, o singură dată, și licențele, lunar, per utilizator. Comparația este făcută pentru o echipă de 10 persoane, pe doi ani.</p>
   <div class="table-wrap">
   <table>
@@ -1314,7 +1435,7 @@
   </div>
   <div class="note">Valorile din coloana centrală sunt estimări de piață, orientative, și pot varia în funcție de integrator și de pachetul de licențe ales. Coloana din dreapta este fermă și contractuală.</div>
 
-  <h3><span class="idx">11.4.</span> Efectul asupra activității</h3>
+  <h3><span class="idx">11.6.</span> Efectul asupra activității</h3>
   <div class="three-col">
     <div class="card">
       <h4>Timp economisit</h4>
@@ -1423,6 +1544,9 @@
         <li>Integrarea cu 1C, dacă păstrați sistemul contabil actual;</li>
         <li>Instruirea managerilor și a administrației;</li>
         <li>Ghidurile video, ambele module;</li>
+        <li><strong>Documentația API</strong>, predată la recepție, utilizabilă de dezvoltatori terți;</li>
+        <li>Integrarea de test cu un ERP open-source, ca demonstrație a API-ului;</li>
+        <li>Baza de date Oracle pe nivelul <strong>Always Free</strong> — cost de infrastructură zero;</li>
         <li>Găzduirea la TopHost și copiile de rezervă;</li>
         <li>Actualizările sistemului;</li>
         <li>Suportul și ajustările, permanent — fără expirare la 60 sau 90 de zile.</li>
@@ -1440,6 +1564,9 @@
       <ul>
         <li><strong>Servicii la comandă — 40 €</strong>, doar la solicitarea scrisă a beneficiarului;</li>
         <li><strong>Lucrări tehnice pentru calculatoare — 25 €/oră</strong> (secțiunea 15);</li>
+        <li><strong>Modul pentru magazine — 200 € + 50 €/lună</strong>, pentru fiecare magazin conectat (secțiunea 11.3);</li>
+        <li><strong>Licență Oracle plătită — 200 €/lună</strong>, doar la depășirea limitelor Always Free; abonamentul CRM devine în acest caz 200 €/lună (secțiunea 4.1);</li>
+        <li><strong>Variantă PostgreSQL — 600 € conectare + 150 €/lună</strong>, alternativă open-source (secțiunea 4.2);</li>
         <li><strong>Înlocuirea sistemului contabil 1C — 500 € + 50 €/utilizator</strong>, prezentată spre informare în secțiunea 17. Nu face parte din caietul de sarcini.</li>
       </ul>
     </div>
@@ -1526,8 +1653,40 @@
   </details>
 
   <details>
+    <summary>Ce este „Oracle Always Free" și de ce infrastructura nu costă nimic?</summary>
+    <div class="a">
+      <p>Este un nivel gratuit permanent al Oracle Autonomous Database — nu o perioadă de probă care expiră. Livrarea standard se face pe el, cu <strong>toate funcțiile vectoriale din secțiunea 6 active integral</strong>, iar costul lunar al infrastructurii de bază de date este zero. Plătiți doar conectarea de 300 € și abonamentul de 100 €/lună.</p>
+      <p>Nivelul gratuit are limite de capacitate. Când volumul de date sau numărul de utilizatori le depășește, se trece pe <strong>licența Oracle plătită</strong> — 200 €/lună, caz în care abonamentul CRM devine tot 200 €/lună. Decizia se ia atunci, împreună, pe baza cifrelor reale din sistem, nu preventiv la semnarea contractului.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Putem folosi PostgreSQL în loc de Oracle?</summary>
+    <div class="a">
+      <p>Da. Varianta PostgreSQL este integral funcțională pentru cele 22 de puncte din caietul de sarcini: <strong>600 € conectare și 150 €/lună</strong>. Conectarea este mai mare pentru că presupune adaptarea platformei; în schimb nu apare niciodată o licență de bază de date.</p>
+      <p>Ce se schimbă: căutarea semantică, clienții similari și scorul de risc rămân disponibile prin extensia vectorială a PostgreSQL. <strong>Select AI</strong> — întrebările în limbaj natural asupra propriilor date — și modelele de învățare automată în interiorul bazei sunt funcții specifice Oracle și nu sunt disponibile în această variantă. Tabelul complet, în secțiunea 4.2.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>API-ul rămâne la voi sau îl primim și noi?</summary>
+    <div class="a">
+      <p>Îl primiți. API-ul dezvoltat în cadrul proiectului este <strong>documentat și predat la recepție</strong>, împreună cu sistemul. Consecința practică cea mai importantă pentru dumneavoastră: <strong>dezvoltatorii dumneavoastră de 1C pot face singuri ajustările necesare pe partea de 1C</strong>, folosind documentația, fără să treacă prin noi și fără să ne achite ore. La fel, orice integrator terț poate construi conexiuni suplimentare, iar departamentul IT propriu poate scrie rapoarte și automatizări peste API.</p>
+      <p>Ca demonstrație funcțională, la etapa de implementare realizăm o <strong>integrare de test cu un sistem ERP open-source</strong> — ca să vedeți API-ul lucrând cu un sistem terț, nu doar descris în documentație. Este inclusă în conectare. Detalii în secțiunea 4.3.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Avem magazine. Se pot conecta la CRM?</summary>
+    <div class="a">
+      <p>Da, ca modul opțional: <strong>200 € conectare și 50 €/lună pentru fiecare magazin conectat</strong> — punct de vânzare fizic sau magazin online. Comenzile, clienții și stocurile intră în același sistem cu vânzările.</p>
+      <p>Nu figurează în caietul de sarcini, așa că nu îl includem implicit. Îl menționăm pentru că funcțiile de clienți similari și scor de risc din secțiunea 6 lucrează cu atât mai bine cu cât istoricul clientului este mai complet — iar un client care cumpără și în magazin, dar apare în CRM doar cu solicitările online, rămâne pe jumătate vizibil. Exemple de cost în secțiunea 11.3.</p>
+    </div>
+  </details>
+
+  <details>
     <summary>Prețul crește dacă adăugăm manageri?</summary>
-    <div class="a"><p>Nu. Nu există licențe per utilizator: 5, 10 sau 50 de manageri costă la fel — 100 €/lună. Puteți adăuga manageri, departamente și pâlnii fără ca abonamentul să se modifice. Aceasta este principala diferență economică față de amoCRM și Bitrix24, unde fiecare utilizator nou înseamnă o plată lunară suplimentară pe toată durata folosirii sistemului. Comparația pe patru dimensiuni de echipă se află în secțiunea 11.2.</p></div>
+    <div class="a"><p>Nu. Nu există licențe per utilizator: 5, 10 sau 50 de manageri costă la fel — 100 €/lună. Puteți adăuga manageri, departamente și pâlnii fără ca abonamentul să se modifice. Aceasta este principala diferență economică față de amoCRM și Bitrix24, unde fiecare utilizator nou înseamnă o plată lunară suplimentară pe toată durata folosirii sistemului. Comparația pe patru dimensiuni de echipă se află în secțiunea 11.4.</p></div>
   </details>
 
   <details>
@@ -1596,7 +1755,8 @@
       <ul>
         <li>Este <strong>inclusă în conectarea de 300 €</strong>, dacă păstrați 1C;</li>
         <li>Bidirecțională: nomenclator, prețuri și stocuri din 1C în CRM; tranzacția câștigată devine document în 1C; starea achitării revine în cartelă;</li>
-        <li>Nu vă cerem să schimbați nimic în contabilitate pentru a porni CRM-ul.</li>
+        <li>Nu vă cerem să schimbați nimic în contabilitate pentru a porni CRM-ul;</li>
+        <li><strong>API-ul este documentat și predat</strong>: ajustările pe partea de 1C pot fi făcute de dezvoltatorii dumneavoastră de 1C, fără să treacă prin noi (secțiunea 4.3).</li>
       </ul>
     </div>
     <div class="card">
@@ -1896,7 +2056,8 @@
 <footer>
   <p><span class="vat">Toate prețurile sunt exprimate în euro, fără TVA.</span> Ofertă valabilă 30 de zile de la data emiterii — 24 august 2026.</p>
   <p style="margin-top:10px">Document elaborat pentru <strong style="color:#fff">Prodcom Fit SRL</strong>, în atenția dlui <strong style="color:#fff">Iurie Barbaros</strong>, ca răspuns la solicitarea din 24 august 2026.</p>
-  <p style="margin-top:10px"><strong style="color:#fff">Structura financiară:</strong> 300 € conectare, o singură dată, totul inclus · 100 €/lună abonament de dezvoltare tip Basic, <strong style="color:#fff">fix indiferent de numărul de utilizatori</strong>, majorabil doar prin acord comun · 40 € servicii la comandă, opționale, doar la solicitare scrisă · 25 €/oră exclusiv lucrări tehnice de suport pentru calculatoare. <strong style="color:#fff">Total pe doi ani: 2 700 €.</strong></p>
+  <p style="margin-top:10px"><strong style="color:#fff">Structura financiară (livrare standard, pe Oracle Always Free):</strong> 300 € conectare, o singură dată, totul inclus · 100 €/lună abonament de dezvoltare tip Basic, <strong style="color:#fff">fix indiferent de numărul de utilizatori</strong>, majorabil doar prin acord comun · 40 € servicii la comandă, opționale, doar la solicitare scrisă · 25 €/oră exclusiv lucrări tehnice de suport pentru calculatoare. <strong style="color:#fff">Total pe doi ani: 2 700 €.</strong></p>
+  <p style="margin-top:10px"><strong style="color:#fff">Variante și opțiuni:</strong> licență Oracle plătită 200 €/lună, cu abonament CRM de 200 €/lună, doar la depășirea limitelor Always Free · alternativă PostgreSQL 600 € conectare și 150 €/lună · modul pentru magazine 200 € conectare și 50 €/lună, pentru fiecare magazin conectat. <strong style="color:#fff">Documentația API se predă la recepție</strong> și poate fi folosită de dezvoltatorii terți, inclusiv de cei care deservesc partea de 1C.</p>
   <p style="margin-top:10px">Durata minimă a contractului — 2 ani, începând după primele 2 luni de colaborare. Punere în exploatare în 2 săptămâni, în variantă de testare, cu răspunsuri pozitive la fiecare punct al caietului de sarcini. <strong style="color:#fff">Anexa 1</strong> reproduce integral caietul de sarcini, cu confirmarea prestatorului pentru fiecare dintre cele 22 de puncte, și constituie parte integrantă a contractului.</p>
   <p style="margin-top:10px">Înlocuirea sistemului contabil 1C (500 € migrare, apoi 50 €/utilizator activ) <strong style="color:#fff">nu face parte din caietul de sarcini</strong> și este prezentată exclusiv spre informare în secțiunea 17. Implementarea CRM-ului nu depinde de această decizie.</p>
   <p style="margin-top:14px; font-size:13px; opacity:.75">Deviza „facem revoluția" exprimă poziția furnizorului privind alegerea platformei, nu o obligație legală de a renunța la un anumit produs. <strong style="color:#fff">Legea nr. 195/2024 privind protecția datelor cu caracter personal, în vigoare din 23 august 2026, nu interzice nominal amoCRM, 1C sau vreun alt produs</strong> — impune însă operatorului de date să demonstreze fluxurile și garanțiile, sub sancțiuni de până la 2.000.000 lei sau 2 % din cifra de afaceri; a se vedea secțiunile 1.2 și 1.4. Prezentul document nu constituie consultanță juridică; recomandăm verificarea textului legii cu juristul companiei. Informația privind preluarea de către 1C a pachetului de control de 51 % în compania care dezvoltă amoCRM (octombrie 2016) provine din presa economică de specialitate și din anunțul public al conducerii amoCRM; valoarea tranzacției nu a fost dezvăluită oficial. Descrierile produselor terțe (amoCRM/Kommo, Bitrix24, 1C) sunt orientative și se bazează pe informații publice la data emiterii; mărcile aparțin deținătorilor lor de drept.</p>
