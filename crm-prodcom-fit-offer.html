@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertă CRM Autohton — Prodcom Fit SRL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            --color-primary: #1e3a8a;
+            --color-secondary: #0f766e;
+            --color-accent: #d97706;
+            --color-danger: #dc2626;
+            --color-success: #16a34a;
+            --color-warning: #ea580c;
+            --color-neutral: #6b7280;
+            --color-light: #f3f4f6;
+            --color-border: #e5e7eb;
+            --text-dark: #111827;
+            --text-light: #9ca3af;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: #ffffff;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--color-accent);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        .header .meta {
+            font-size: 0.95em;
+            opacity: 0.85;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meta-item strong {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .toc {
+            background: var(--color-light);
+            border-left: 4px solid var(--color-primary);
+            padding: 25px;
+            margin: 40px 0;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            color: var(--color-primary);
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+            columns: 2;
+            gap: 30px;
+        }
+
+        .toc li {
+            margin-bottom: 10px;
+            break-inside: avoid;
+        }
+
+        .toc a {
+            color: var(--color-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: var(--color-accent);
+        }
+
+        section {
+            margin: 50px 0;
+        }
+
+        h2 {
+            color: var(--color-primary);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--color-accent);
+        }
+
+        h3 {
+            color: var(--color-secondary);
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: var(--text-dark);
+            font-size: 1.1em;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .intro-box {
+            background: var(--color-light);
+            border-left: 4px solid var(--color-secondary);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 6px;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            background: #fffbeb;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #b45309;
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        tr:nth-child(even) {
+            background: var(--color-light);
+        }
+
+        tr:hover {
+            background: #fef3c7;
+        }
+
+        .module-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-secondary);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 6px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .module-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .module-card h4 {
+            color: var(--color-secondary);
+            margin-bottom: 10px;
+        }
+
+        .module-card .meta {
+            font-size: 0.9em;
+            color: var(--text-light);
+            margin-top: 10px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .pricing-card .price {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .pricing-card .period {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .pricing-card .description {
+            font-size: 0.95em;
+            margin-top: 15px;
+            opacity: 0.95;
+        }
+
+        .cost-table {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid var(--color-border);
+            align-items: center;
+        }
+
+        .cost-row.total {
+            background: var(--color-light);
+            font-weight: 600;
+            border-bottom: none;
+            border-top: 2px solid var(--color-primary);
+            margin-top: 10px;
+        }
+
+        .check-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .check-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .check-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-success);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .cross-list li:before {
+            content: "✗";
+            color: var(--color-danger);
+        }
+
+        .cross-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .cross-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .scenario-box {
+            background: #f0f9ff;
+            border: 1px solid #0284c7;
+            border-left: 4px solid #0284c7;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .scenario-box h4 {
+            color: #0284c7;
+            margin-bottom: 15px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            padding-left: 40px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--color-secondary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--color-secondary);
+        }
+
+        .timeline-item:after {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 25px;
+            width: 4px;
+            height: 40px;
+            background: var(--color-border);
+        }
+
+        .timeline-item:last-child:after {
+            display: none;
+        }
+
+        .timeline-item strong {
+            color: var(--color-secondary);
+        }
+
+        .faq-item {
+            background: white;
+            border: 1px solid var(--color-border);
+            margin: 15px 0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background: var(--color-light);
+            padding: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--color-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #e5e7eb;
+        }
+
+        .faq-answer {
+            padding: 15px;
+            display: none;
+            color: var(--text-dark);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-toggle {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .footer {
+            background: var(--color-primary);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+            font-size: 0.95em;
+        }
+
+        .footer p {
+            margin: 8px 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .toc ul {
+                columns: 1;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header .meta {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        .module-number {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+
+        .note {
+            background: #fef08a;
+            border-left: 4px solid #ca8a04;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+            font-size: 0.95em;
+        }
+
+        .success-box {
+            background: #dcfce7;
+            border-left: 4px solid #16a34a;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .alert-box {
+            background: #fee2e2;
+            border-left: 4px solid #dc2626;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        code {
+            background: var(--color-light);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: var(--color-danger);
+        }
+
+        pre {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 5px 5px 5px 0;
+        }
+
+        .badge-primary {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .roi-box {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .roi-box .label {
+            font-size: 0.95em;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .roi-box .value {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>CRM Autohton — Prodcom Fit SRL</h1>
+        <p class="subtitle">Soluție integrată de gestionare a relațiilor cu clienții cu suport 1C</p>
+        <div class="meta">
+            <div class="meta-item"><strong>Data:</strong> 24 august 2026</div>
+            <div class="meta-item"><strong>Validitate:</strong> 30 zile</div>
+            <div class="meta-item"><strong>Furnizor:</strong> UNA.md Solutions</div>
+            <div class="meta-item"><strong>Jurisdicție:</strong> Republica Moldova</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="toc">
+            <h2>Cuprins</h2>
+            <ul>
+                <li><a href="#descriere">1. Descrierea Serviciului</a></li>
+                <li><a href="#module">2. Cerințe Funcționale — 22 Module</a></li>
+                <li><a href="#preturi">3. Structura Prețurilor</a></li>
+                <li><a href="#timeline">4. Timeline Implementare</a></li>
+                <li><a href="#conditii">5. Termeni și Condiții</a></li>
+                <li><a href="#scenarii">6. Scenarii de Cost</a></li>
+                <li><a href="#faq">7. Întrebări Frecvente</a></li>
+                <li><a href="#contact">8. Contact și Resurse</a></li>
+            </ul>
+        </section>
+
+        <!-- SECȚIUNEA 1: DESCRIERE -->
+        <section id="descriere">
+            <h2>1. Descrierea Serviciului</h2>
+
+            <h3>1.1 Soluția CRM Propusă</h3>
+            <div class="intro-box">
+                <strong>Denumire:</strong> CRM Autohton Prodcom Fit — Versiunea 2026<br>
+                <strong>Tip:</strong> Sistem integrat de gestionare a relațiilor cu clienții, personalizat pentru vânzări B2B/B2C cu suport telefonie, email, messaging și integrare 1C.<br>
+                <strong>Hosting:</strong> TopHost Moldova (recomandat) sau OCI Cloud (opțional)
+            </div>
+
+            <h3>Componente Principale:</h3>
+            <ul class="check-list">
+                <li>Interfață web responsivă (acces desktop + mobil)</li>
+                <li>Bază de date hosted în Moldova (TopHost) sau cloud OCI</li>
+                <li>Integrări: 1C, Facebook/Instagram, Viber, SMS, Email, Telefonie IP</li>
+                <li>Moduli specialized: Pâlnii de vânzări, Automatizări, Analytics, Voice AI, Document Generator</li>
+                <li>Dashboard real-time cu KPI-uri și rapoarte configurabile</li>
+                <li>Sales Bot + Voice AI pentru calificarea și procesarea leadurilor</li>
+            </ul>
+
+            <h3>1.2 Opțiuni de Hosting</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Opțiune</th>
+                        <th>Locație</th>
+                        <th>Latență</th>
+                        <th>Preț</th>
+                        <th>Recomandare</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>TopHost Moldova</strong></td>
+                        <td>Chișinău</td>
+                        <td>&lt;50ms</td>
+                        <td>Inclus</td>
+                        <td>✓ Recomandat</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OCI Cloud</strong></td>
+                        <td>Frankfurt/Amsterdam</td>
+                        <td>80–120ms</td>
+                        <td>€200–400/lună</td>
+                        <td>Opțional</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hibrid</strong></td>
+                        <td>TopHost + OCI backup</td>
+                        <td>&lt;50ms</td>
+                        <td>+€100/lună</td>
+                        <td>Premium</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECȚIUNEA 2: MODULI -->
+        <section id="module">
+            <h2>2. Cerințe Funcționale — 22 Module de Implementare</h2>
+
+            <div class="module-card">
+                <h4><span class="module-number">1</span> Setări de Bază și Roluri Utilizatori</h4>
+                <p>Configurare titlu companie, tip companie, monedă, roluri utilizatori (Admin, Manager, Departament, Observator), grupuri de departamente cu delimitare vizualizării entităților.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 3 zile</span>
+                    <span><span class="badge badge-success">Inclus</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">2</span> Configurare Tipuri de Sarcini</h4>
+                <p>Definire tipuri de sarcini (Apel, Email, Întâlnire, Urmărire), asignare pictograme și culori, setare priorități și durate estimative.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 2 zile</span>
+                    <span><span class="badge badge-success">Inclus</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">3</span> Configurare Câmpuri Tranzacție</h4>
+                <p>Câmpuri standard pre-configurate (ID, Nume, Valoare, Etapă, Contacte, Companie, Manager). Câmpuri custom configurabile. Validări și constrangeri per etapă.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 4 zile</span>
+                    <span><span class="badge badge-success">Inclus + €50/10 câmpuri</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">4</span> Configurare Automatizări</h4>
+                <p>Reguli de automatizare cu trigger-uri (creație tranzacție, schimbare etapă, valoare peste prag). Cronometru proces cu escalare. Condiții complexe și scenarii automate.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 5–7 zile</span>
+                    <span><span class="badge badge-success">Inclus (15 automatizări) + €80/zi per 5 suplimentare</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">5</span> Pâlnia de Vânzări — Recepție Leaduri</h4>
+                <p>Pâlnie standard (Lead → Interes → Propunere → Negociere → Contract → Vânzare/Pierdută). Kanban board cu drag-drop. Integrare surse de leaduri (SMM, Messenger, Website, Apeluri, Email).</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 3 zile</span>
+                    <span><span class="badge badge-success">Inclus</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">6</span> Pâlnia Baza de Date — Cold Calling</h4>
+                <p>Bază de date prospectelor cu etiquetare automată. Workflow pentru cold calling. Atribuire contacte managerilor. Statistici și rapoarte conversie.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 3 zile</span>
+                    <span><span class="badge badge-success">Inclus</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">7</span> Telefonie IP — Integrare și Configurare</h4>
+                <p>Setup telefonie IP (Asterisk local sau Twilio Cloud). Click-to-dial din CRM. Înregistrare apeluri. Redirecționare inteligentă. Apeluri pierdute cu auto-reminder. Postprocesare apel cu sugestii IA.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 5 zile</span>
+                    <span><span class="badge badge-success">Inclus setup</span> + €0.05/min apeluri</span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">8</span> Import Bază de Date</h4>
+                <p>Import contacte și companii din Excel/CSV/Google Sheets. Mapare coloane. Validare și deduplicare automată. Asocieri automate. Raport import detaliat.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 1–2 zile</span>
+                    <span><span class="badge badge-success">Inclus (5,000 contacte) + €1/1000 suplimentare</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">9</span> Integrare Email — Corporativ și Personal</h4>
+                <p>Setup email corporate pe TopHost. Email personal conectare (Gmail, Yahoo, Outlook). Sincronizare 2-sensuri. Template-uri email predefinite cu variabile dinamice.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 2 zile</span>
+                    <span><span class="badge badge-success">Inclus</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">10</span> Website Lead API — Integrare Site Web</h4>
+                <p>API endpoint REST securizat. Conectare forme contact din website. Creare entități automate (Contact + Tranzacție). Personalizare per formă. Routing automat.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 3 zile</span>
+                    <span><span class="badge badge-success">Inclus (1 API + 3 forme) + €30/formă</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">11</span> Website Lead UTM — Analytics și Attribution</h4>
+                <p>Capturare UTM parameters din campanii. Stocaj în cartela client. Raport eficiență marketing (Lead-uri per sursă, conversie rate, ROI per campanie). Export în Google Sheets real-time.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 3 zile</span>
+                    <span><span class="badge badge-success">Inclus</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">12</span> Facebook Messenger + Lead-uri</h4>
+                <p>Conexiune Business Account. Capturare lead-uri din postări. Sincronizare conversații Messenger. Răspuns din CRM. Notificări real-time. Chatbot automat.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 3 zile</span>
+                    <span><span class="badge badge-success">Inclus</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">13</span> Instagram Direct + Lead-uri</h4>
+                <p>Conexiune Business Account Instagram. Capturare lead-uri din formele postări. Sincronizare DM. Răspuns din CRM. Support integrat în messenger.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 3 zile</span>
+                    <span><span class="badge badge-success">Inclus</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">14</span> Viber — Chatbot și Integrare</h4>
+                <p>Setup Viber Business Account. Creare chatbot cu meniu opțiuni. Conectare la CRM. Mesaje → Inbox CRM. Răspund manager direct din CRM. Campaign SMS + Viber.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 2 zile</span>
+                    <span><span class="badge badge-success">Inclus</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">15</span> Generator de Documente</h4>
+                <p>Creare template-uri (Proformi, Contract, Invoice, Ofertă). Variabile dinamice din CRM. Semnătură digitală și știmp. Editare și descărcare (PDF/DOCX). Biblioteca 10 template-uri standard.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 3 zile</span>
+                    <span><span class="badge badge-success">Inclus (10 template-uri) + €50/template custom</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">16</span> SMS Notificări și Marketing</h4>
+                <p>Setup SMS Gateway (Infobip, Vodafone, Twilio). Notificări tranzacționale automate. Template-uri SMS cu variabile. Campaign SMS manual. Analytics și compliance GDPR.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 2 zile</span>
+                    <span><span class="badge badge-success">Inclus setup</span> + €0.05/SMS</span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">17</span> Dashboard și Analytics Configurabile</h4>
+                <p>Dashboard Admin (Lead-uri noi, sursă lead-uri, vânzări totale, dinamică). Dashboard Manager (Pâlnii, sarcini, apeluri pierdute, statistici personale). Widget-uri real-time, filtre, export rapoarte (PDF/Excel/CSV).</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 4 zile</span>
+                    <span><span class="badge badge-success">Inclus</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">18</span> Sales Bot — Calificarea Lead-urilor</h4>
+                <p>Chatbot calificare cu branching logic. Opțiuni prezentate (Produse, Preț, Demo, Suport). Lead score automat (0–100). Creare tranzacție CRM cu score. Multi-channel (Viber, Messenger, Website).</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 5 zile</span>
+                    <span><span class="badge badge-success">Inclus</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">19</span> Voice AI — Transcripție și Insight-uri Automate</h4>
+                <p>Integrare Google Speech-to-Text / OpenAI Whisper. Auto-transcripție apeluri. Rezumat automat (subiecte, obiecții, promisiuni). Sentiment analysis. Keyword detection. Sync CRM. Coaching insights pentru vânzări.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 5 zile</span>
+                    <span><span class="badge badge-success">Inclus integrare</span> + €100–200/lună Voice AI</span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">20</span> Instruire Personal</h4>
+                <p><strong>Managers:</strong> 2 zile training (pâlnii, automatizări, telefonie, email, sarcini, colaborare).<br><strong>Administratori:</strong> 1 zi training (setări, analitică, rapoarte, conversie, audit).<br>Format: Live session + prezentare + Q&A + materiale + 30 zile suport.</p>
+                <div class="meta">
+                    <span><strong>Durată:</strong> 2–3 zile</span>
+                    <span><span class="badge badge-success">Inclus</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">21</span> Video Ghiduri și Tutorial-uri</h4>
+                <p><strong>Manager video:</strong> 20+ capitole (introd, pâlnii, automatizări, tranzacții, sarcini, colaborare + 4 scenarii de vânzări detaliate).<br><strong>Admin video:</strong> 10+ capitole (roluri, dashboard, rapoarte, conversie, câmpuri + 3 scenarii complexe).<br>Format: Screen recording, voiceover, subtitle, 1080p. Total ~3 ore material.</p>
+                <div class="meta">
+                    <span><strong>Durată implementare:</strong> 5 zile</span>
+                    <span><span class="badge badge-success">Inclus (20 video-uri)</span></span>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h4><span class="module-number">22</span> Support 60 Zile Post-Implementare</h4>
+                <p><strong>Perioadă:</strong> 60 zile de la Actul Predare-Primire. <strong>Inclus:</strong> Consultații ilimitată, modificări configurație, bug fixes, optimizare. <strong>Mesaje/chat:</strong> Response 4–6 ore. <strong>Video call support:</strong> 2 ore/săptămână.<br><strong>Post-suport:</strong> €25/oră (minimum €50), €80/h pentru lucru complex.</p>
+                <div class="meta">
+                    <span><strong>Perioadă:</strong> 60 zile</span>
+                    <span><span class="badge badge-success">Inclus</span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECȚIUNEA 3: PREȚURI -->
+        <section id="preturi">
+            <h2>3. Structura Prețurilor și Condiții Comerciale</h2>
+
+            <h3>3.1 Model de Plată Lunar</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Element</th>
+                        <th>Valoare</th>
+                        <th>Perioadă</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Abonament Lunar Dezvoltare</strong></td>
+                        <td>€100</td>
+                        <td>Lunar (recurent)</td>
+                        <td>Servicii AI, updates, suport 8×5</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Servicii Opționale la Comandă</strong></td>
+                        <td>€40</td>
+                        <td>Per comandă</td>
+                        <td>Features noi, integrări, consulturi</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Taxă Conexiune Inițială</strong></td>
+                        <td>€300</td>
+                        <td>Unică (la semnare)</td>
+                        <td>Setup, deployment, training, transfer date</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apeluri Telefonice</strong></td>
+                        <td>~€50–200</td>
+                        <td>Lunar (variabil)</td>
+                        <td>€0.05/min local, factură separată</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SMS Notificări</strong></td>
+                        <td>~€30–100</td>
+                        <td>Lunar (variabil)</td>
+                        <td>€0.05/SMS, factură separată</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Voice AI (Optional)</strong></td>
+                        <td>€100–200</td>
+                        <td>Lunar (opțional)</td>
+                        <td>Transcripție, rezumat, coaching</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cloud OCI Backup (Optional)</strong></td>
+                        <td>€100–150</td>
+                        <td>Lunar (opțional)</td>
+                        <td>Geo-distribuit, redundanță</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>3.2 Exemplu Cost Lunar (Scenario Tipic)</h3>
+            <div class="pricing-card">
+                <div class="period">Cost lunar estimat:</div>
+                <div class="cost-table">
+                    <div class="cost-row">
+                        <span>Abonament Dezvoltare</span>
+                        <span><strong>€100</strong></span>
+                    </div>
+                    <div class="cost-row">
+                        <span>Apeluri telefonice (100 min/lună)</span>
+                        <span><strong>€50</strong></span>
+                    </div>
+                    <div class="cost-row">
+                        <span>SMS (100 SMS/lună)</span>
+                        <span><strong>€30</strong></span>
+                    </div>
+                    <div class="cost-row total">
+                        <span>TOTAL LUNAR</span>
+                        <span class="price">€180</span>
+                    </div>
+                </div>
+                <div class="description">≈ 612 MDL la curs 3.4 | <strong>Anual (12 luni): €2,160</strong> (≈7,344 MDL)</div>
+            </div>
+
+            <h3>3.3 Plani de Abonament</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Plan</th>
+                        <th>Preț/Lună</th>
+                        <th>Inclus</th>
+                        <th>Ideal Pentru</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Starter</strong></td>
+                        <td>€100</td>
+                        <td>Dezvoltare, suport, 1 manager, 1 pâlnie</td>
+                        <td>Startup, mic business, test</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Professional</strong></td>
+                        <td>€150</td>
+                        <td>Starter + 5 manageri, 3 pâlnii, API site</td>
+                        <td>PME, 5–10 persoane vânzări</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Enterprise</strong></td>
+                        <td>€250</td>
+                        <td>Professional + 20 manageri, nelimitat, Voice AI, priorități, account manager</td>
+                        <td>Corp mari, multi-departament, complex workflows</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>3.4 Condiții Contract și Plată</h3>
+            <div class="intro-box">
+                <h4>Perioada Contractuală</h4>
+                <p><strong>Minim:</strong> 2 ani de la semnare<br>
+                <strong>Testare:</strong> Primele 2 luni sunt perioadă de evaluare/testing cu acces complet</p>
+
+                <h4>Plată Abonament</h4>
+                <p><strong>Frecvență:</strong> Lunar (invoice la 1-a zilei lunii)<br>
+                <strong>Metode:</strong> Transfer bancar EUR, Card EUR/MDL<br>
+                <strong>Scadență:</strong> 15 zile de la invoice</p>
+
+                <h4>Plată Taxă Conexiune (€300)</h4>
+                <p><strong>Datorată:</strong> La semnarea contractului (înainte de deployment)<br>
+                <strong>Nerefundabilă dacă:</strong> Renunță după 30 zile<br>
+                <strong>Refundabilă 50% dacă:</strong> Renunță în 15 zile și sistem nefolosit</p>
+
+                <h4>Anulare Contract</h4>
+                <p><strong>După 2 ani:</strong> Pot denuncia cu 30 zile notificare<br>
+                <strong>Datele:</strong> Export complet gratuit (CSV/JSON)<br>
+                <strong>Migrare:</strong> Suport advisory gratuit (20 ore) pentru alt CRM</p>
+            </div>
+        </section>
+
+        <!-- SECȚIUNEA 4: TIMELINE -->
+        <section id="timeline">
+            <h2>4. Timeline Implementare</h2>
+
+            <h3>Faza 1: Pre-Deployment (Săptămâna 1)</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <strong>Luni:</strong> Contract semnat, plată €300 → Account access
+                </div>
+                <div class="timeline-item">
+                    <strong>Marți:</strong> Creare conturi staff, export date vechi → CSV export, user list
+                </div>
+                <div class="timeline-item">
+                    <strong>Miercuri:</strong> Setup TopHost (serverele, SSL cert) → Server access, DNS
+                </div>
+                <div class="timeline-item">
+                    <strong>Joi:</strong> Import date, validare → Import report, data quality check
+                </div>
+                <div class="timeline-item">
+                    <strong>Vineri:</strong> Configurare module 1–6 → Demo account ready
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Milestone:</strong> Client testează în staging environment, raportează bugs. Feedback implementat următoarea zi.
+            </div>
+
+            <h3>Faza 2: Implementare Integrări (Săptămâni 2–3)</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <strong>Luni:</strong> Telefonie IP setup (Asterisk config)
+                </div>
+                <div class="timeline-item">
+                    <strong>Marți:</strong> Email + Facebook/Instagram integration
+                </div>
+                <div class="timeline-item">
+                    <strong>Miercuri:</strong> Viber Bot + SMS gateway setup
+                </div>
+                <div class="timeline-item">
+                    <strong>Joi:</strong> Website API + UTM setup
+                </div>
+                <div class="timeline-item">
+                    <strong>Vineri:</strong> Document generator + Voice AI activation
+                </div>
+            </div>
+
+            <div class="success-box">
+                <strong>Faza 2 Finală:</strong> Client pe producție (live data, real calls, real transactions).
+            </div>
+
+            <h3>Faza 3: Training și Finalizare (Săptămâna 4)</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <strong>Luni–Marți:</strong> Training managers (pâlnii, automatizări, apeluri, sarcini) — 8 ore
+                </div>
+                <div class="timeline-item">
+                    <strong>Miercuri:</strong> Training admin (dashboard, rapoarte, setări) — 4 ore
+                </div>
+                <div class="timeline-item">
+                    <strong>Joi:</strong> Go-live support (manager on-call) — 8 ore
+                </div>
+                <div class="timeline-item">
+                    <strong>Vineri:</strong> Post-deployment audit, documentație finală — 4 ore
+                </div>
+            </div>
+
+            <div class="success-box">
+                <strong>Finalizare:</strong> Semnare Act Predare-Primire. Începe suportul 60 zile (luni–vineri 8–18).
+            </div>
+
+            <h3>Rezumat Timeline</h3>
+            <pre>Săptămâna 1:   Setup inițial + data import
+Săptămâna 2–3: Integrări + configurare module
+Săptămâna 4:   Training + go-live production
+Ziua 30+:      Production support 60 zile (luni–vineri 8–18)</pre>
+        </section>
+
+        <!-- SECȚIUNEA 5: CONDIȚII -->
+        <section id="conditii">
+            <h2>5. Termeni și Condiții</h2>
+
+            <h3>5.1 Inclus vs. Non-Inclus</h3>
+            <div class="two-column">
+                <div>
+                    <h4>✓ Inclus în Pachet (€100/lună + €300 conexiune)</h4>
+                    <ul class="check-list">
+                        <li>Toate 22 module configurate</li>
+                        <li>Setup inițial și deployment (2 săptămâni)</li>
+                        <li>Transfer date din vechi sistem</li>
+                        <li>Training staff (2+1 zile)</li>
+                        <li>Video tutorial-uri (20+ video-uri)</li>
+                        <li>Telefonie IP setup</li>
+                        <li>Email corporate setup</li>
+                        <li>Facebook/Instagram/Viber integration</li>
+                        <li>SMS gateway setup</li>
+                        <li>Document generator + 10 template-uri</li>
+                        <li>Dashboard și rapoarte</li>
+                        <li>Sales Bot + Voice AI</li>
+                        <li>Backup zilnic (TopHost, 30 zile retention)</li>
+                        <li>Support 60 zile</li>
+                        <li>Minor updates și bug fixes</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>✗ Non-Inclus (Cost Suplimentar)</h4>
+                    <ul class="cross-list">
+                        <li>Voice AI Subscription: €100–200/lună</li>
+                        <li>Cloud OCI Backup: €100–150/lună</li>
+                        <li>Apeluri telefonice: €0.05/min</li>
+                        <li>SMS-uri: €0.05/SMS</li>
+                        <li>Minute Viber Bot: €0.02/min</li>
+                        <li>Integrări custom non-standard: €80/h</li>
+                        <li>Servicii post-suport: €25/h</li>
+                        <li>Extended support (6–12 luni): €200–350</li>
+                        <li>1C Accounting Integration: €150–300</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>5.2 Opțional — Integrare 1C Accounting</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Opțiune</th>
+                        <th>Cost</th>
+                        <th>Durată</th>
+                        <th>Descriere</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>A) API Custom</strong></td>
+                        <td>€300</td>
+                        <td>5 zile</td>
+                        <td>Middleware custom, bi-directional sync, auto-documente</td>
+                    </tr>
+                    <tr>
+                        <td><strong>B) Plug-in Standard</strong></td>
+                        <td>€150</td>
+                        <td>2 zile</td>
+                        <td>Plug-in preexistent (dacă versiune suportată)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>C) Manual Workflow</strong></td>
+                        <td>€0</td>
+                        <td>N/A</td>
+                        <td>Export manual din 1C → Import în CRM (nu se recomandă)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="success-box">
+                <strong>Recomandare pentru Prodcom Fit:</strong> Opțiunea A (Custom API) pentru sync automat real-time, reducere manual entry, și stoc actualizat live.
+            </div>
+
+            <h3>5.3 Garanții și Responsabilități</h3>
+            <p><strong>Furnizor garantează:</strong></p>
+            <ul class="check-list">
+                <li>Sistem disponibil 99.5% (uptime)</li>
+                <li>Backup zilnic cu retention 30 zile</li>
+                <li>Suport 60 zile; response &lt;4h urgent</li>
+                <li>Conformitate GDPR și data security standard</li>
+            </ul>
+
+            <p><strong>Client responsabil de:</strong></p>
+            <ul class="check-list">
+                <li>Licență 1C (dacă are)</li>
+                <li>Implementare procese interne</li>
+                <li>Instruire staff (furnizor face training)</li>
+                <li>Plată taxe și abonament</li>
+            </ul>
+
+            <h3>5.4 Limitări de Responsabilitate</h3>
+            <p>Furnizor NU răspunde pentru daunele indirecte (pierdere profit, business interruption). Maxim răspundere: 3 luni de abonament (€300 pentru plan €100/lună).</p>
+
+            <h3>5.5 Legea Aplicabilă</h3>
+            <p>Contract guvernat de legea Republicii Moldova. Dispute: Arbitrajul Camerei de Comerț Chișinău.</p>
+        </section>
+
+        <!-- SECȚIUNEA 6: SCENARII -->
+        <section id="scenarii">
+            <h2>6. Scenarii de Cost — Analiza Detaliată</h2>
+
+            <h3>Scenario 1: PME Mic (Startup)</h3>
+            <div class="scenario-box">
+                <h4>Profil: 5 salariați, 50 lead-uri/lună, vânzări €5,000/lună</h4>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Serviciu</th>
+                            <th>Cost/Lună</th>
+                            <th>Cost Anual Y1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Abonament Dev (€100/lună)</td>
+                            <td>€100</td>
+                            <td>€1,200</td>
+                        </tr>
+                        <tr>
+                            <td>Apeluri telefonice (50 apeluri × €0.05)</td>
+                            <td>€25–50</td>
+                            <td>€300–600</td>
+                        </tr>
+                        <tr>
+                            <td>SMS (20 SMS/lună)</td>
+                            <td>€1</td>
+                            <td>€12</td>
+                        </tr>
+                        <tr>
+                            <td>Conexiune inițială (unică)</td>
+                            <td>—</td>
+                            <td>€300</td>
+                        </tr>
+                        <tr style="background: var(--color-light); font-weight: 600;">
+                            <td><strong>TOTAL ANY 1</strong></td>
+                            <td><strong>€126–151</strong></td>
+                            <td><strong>€1,812–2,112</strong></td>
+                        </tr>
+                        <tr style="background: var(--color-light); font-weight: 600;">
+                            <td><strong>TOTAL ANY 2+</strong></td>
+                            <td><strong>€126–151</strong></td>
+                            <td><strong>€1,512–1,812</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Scenario 2: PME Medium (Established)</h3>
+            <div class="scenario-box">
+                <h4>Profil: 15 salariați, 200 lead-uri/lună, vânzări €50,000/lună, 3 pâlnii</h4>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Serviciu</th>
+                            <th>Cost/Lună</th>
+                            <th>Cost Anual Y1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Abonament Professional (€150/lună)</td>
+                            <td>€150</td>
+                            <td>€1,800</td>
+                        </tr>
+                        <tr>
+                            <td>Apeluri telefonice (300 apeluri/lună)</td>
+                            <td>€150</td>
+                            <td>€1,800</td>
+                        </tr>
+                        <tr>
+                            <td>SMS (100 SMS/lună)</td>
+                            <td>€5</td>
+                            <td>€60</td>
+                        </tr>
+                        <tr>
+                            <td>Voice AI (€100/lună, opțional)</td>
+                            <td>€100</td>
+                            <td>€1,200</td>
+                        </tr>
+                        <tr>
+                            <td>Conexiune + integrare 1C</td>
+                            <td>—</td>
+                            <td>€600</td>
+                        </tr>
+                        <tr style="background: var(--color-light); font-weight: 600;">
+                            <td><strong>TOTAL ANY 1</strong></td>
+                            <td><strong>€405</strong></td>
+                            <td><strong>€5,460</strong></td>
+                        </tr>
+                        <tr style="background: var(--color-light); font-weight: 600;">
+                            <td><strong>TOTAL ANY 2+</strong></td>
+                            <td><strong>€405</strong></td>
+                            <td><strong>€4,860</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="roi-box">
+                    <div class="label">Estimat ROI (Y1):</div>
+                    <div class="value">4.6x</div>
+                    <div class="description">Savings: 10h/săptămână × €50/h × 50 săpt = €25,000 vs Cost €5,460</div>
+                </div>
+            </div>
+
+            <h3>Scenario 3: Corporație Mare (Multi-departament)</h3>
+            <div class="scenario-box">
+                <h4>Profil: 50+ salariați, 1000 lead-uri/lună, vânzări €200,000+/lună, 5+ pâlnii</h4>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Serviciu</th>
+                            <th>Cost/Lună</th>
+                            <th>Cost Anual Y1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Abonament Enterprise (€250/lună)</td>
+                            <td>€250</td>
+                            <td>€3,000</td>
+                        </tr>
+                        <tr>
+                            <td>Apeluri telefonice (2000/lună)</td>
+                            <td>€1,000</td>
+                            <td>€12,000</td>
+                        </tr>
+                        <tr>
+                            <td>SMS (500 SMS/lună)</td>
+                            <td>€25</td>
+                            <td>€300</td>
+                        </tr>
+                        <tr>
+                            <td>Voice AI + transcripție (€150/lună)</td>
+                            <td>€150</td>
+                            <td>€1,800</td>
+                        </tr>
+                        <tr>
+                            <td>Extended support 24/7 (+€50/lună)</td>
+                            <td>€50</td>
+                            <td>€600</td>
+                        </tr>
+                        <tr>
+                            <td>Cloud OCI backup (€120/lună, opțional)</td>
+                            <td>€120</td>
+                            <td>€1,440</td>
+                        </tr>
+                        <tr>
+                            <td>Conexiune + integrări</td>
+                            <td>—</td>
+                            <td>€600</td>
+                        </tr>
+                        <tr style="background: var(--color-light); font-weight: 600;">
+                            <td><strong>TOTAL ANY 1</strong></td>
+                            <td><strong>€1,595</strong></td>
+                            <td><strong>€19,740</strong></td>
+                        </tr>
+                        <tr style="background: var(--color-light); font-weight: 600;">
+                            <td><strong>TOTAL ANY 2+</strong></td>
+                            <td><strong>€1,595</strong></td>
+                            <td><strong>€19,140</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECȚIUNEA 7: FAQ -->
+        <section id="faq">
+            <h2>7. Întrebări Frecvente (FAQ)</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>De cât timp este o derulare completă de implementare?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Răspuns:</strong> Implementarea durează 4 săptămâni în total:</p>
+                    <ul class="check-list">
+                        <li>Săptămâna 1: Setup inițial și import date</li>
+                        <li>Săptămânile 2–3: Integrări și configurare module</li>
+                        <li>Săptămâna 4: Training și go-live</li>
+                    </ul>
+                    <p>Testarea și ajustările sunt incluse în fiecare fază. Post-deployment, avem suport 60 zile inclus (luni–vineri 8–18).</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Ce se întâmplă dacă vreau să mă întorc la alt CRM după 2 ani?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Răspuns:</strong> După 2 ani, puteți denuncia contractul cu 30 zile notificare. Atunci:</p>
+                    <ul class="check-list">
+                        <li>Vă exportăm toate datele (contacte, tranzacții, rapoarte) în CSV/JSON gratuit</li>
+                        <li>Oferim suport advisory gratuit (20 ore) pentru migrare la alt sistem</li>
+                        <li>Datele rămân propriul dumneavoastră; nici o reținere</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Cât de mult va costa Voice AI dacă activez?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Răspuns:</strong> Voice AI (transcripție + rezumat + sentiment) costă <strong>€100–200/lună</strong> în funcție de volumul de apeluri:</p>
+                    <ul class="check-list">
+                        <li>100–300 apeluri/lună: €100</li>
+                        <li>300–500 apeluri/lună: €150</li>
+                        <li>500+ apeluri/lună: €200</li>
+                    </ul>
+                    <p>Este optional; nu este inclus în abonament standard. Puteți activa pe parcurs (nu doar la start).</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Cum funcționează integrarea cu 1C Accounting?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Răspuns:</strong> Integrarea 1C (opțional, €300 unică) conectează CRM ↔ 1C bidirectional:</p>
+                    <ul class="check-list">
+                        <li>Tranzacție CRM → Auto-creare document 1C (proforma, factură, bon livrare)</li>
+                        <li>Catalog produse 1C → Import preturi/disponibilitate în CRM</li>
+                        <li>Facturi 1C → Import în CRM pentru raportare (sales tracking)</li>
+                        <li>Sync automat zilnic</li>
+                    </ul>
+                    <p>Alternativ, export manual (€0 cost, dar manual entry pe dumneavoastră).</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Ce se include în suportul 60 zile după go-live?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Răspuns:</strong> Suportul 60 zile post-go-live include:</p>
+                    <ul class="check-list">
+                        <li>Consultații ilimitate (via chat, email)</li>
+                        <li>Response timp &lt;4h pentru urgent</li>
+                        <li>Modificări configurație (FĂRĂ cost)</li>
+                        <li>Bug fixes și optimizare</li>
+                        <li>2 ore/săptămână video call (pentru complex issues)</li>
+                        <li>Refresh training dacă necesar</li>
+                    </ul>
+                    <p>După 60 zile, modificările configurație devin €25/oră (minim €50 per comandă).</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Datele vor fi stocate în Moldova sau cloud?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Răspuns:</strong> Default, datele sunt stocate <strong>în Moldova (TopHost)</strong>, cu <strong>latență &lt;50ms</strong> și suport local 24/5.</p>
+                    <p>Opțiuni:</p>
+                    <ul class="check-list">
+                        <li><strong>TopHost Moldova (recomandată):</strong> Inclus, latență minima, compliance local</li>
+                        <li><strong>OCI Cloud:</strong> €200–400/lună adițional, geo-redundanță, auto-scaling</li>
+                        <li><strong>Hibrid:</strong> TopHost principal + OCI backup: +€100/lună</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Cum calculez ROI (return on investment)?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Răspuns:</strong> Pentru PME Medium (scenario 2):</p>
+                    <ul class="check-list">
+                        <li><strong>Investiție Y1:</strong> €5,460 (inclus conexiune, 1C, Voice AI)</li>
+                        <li><strong>Valoare salvată:</strong> 10h/săptămână × €50/h × 50 săpt = €25,000</li>
+                        <li><strong>ROI:</strong> €25,000 ÷ €5,460 = <strong>4.6x</strong></li>
+                    </ul>
+                    <p>La DVS., calculul depinde de:</p>
+                    <ul class="check-list">
+                        <li>Ore economisit (manual entry → automat)</li>
+                        <li>Creștere vânzări (lead-uri calificate mai bine → higher close rate)</li>
+                        <li>Volum apeluri și SMS</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Cum funcționează Sales Bot și calificarea automată?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Răspuns:</strong> Sales Bot (inclus) este un chatbot inteligent care:</p>
+                    <ul class="check-list">
+                        <li>Oferă meniu opțiuni: "Vreau să cunosc produsele" / "Preț" / "Demo" / "Suport"</li>
+                        <li>După răspuns, generează <strong>lead score 0–100</strong> (hot/warm/cold)</li>
+                        <li>Score 80+: Lead roșu (hot) → Atribuire imediată manager senior</li>
+                        <li>Score 50–79: Lead portocaliu (warm) → Atribuire manager standard</li>
+                        <li>Score &lt;50: Lead albastru (cold) → Cold calling pâlnie</li>
+                        <li>Auto-crează Contact + Tranzacție în CRM cu score</li>
+                    </ul>
+                    <p>Funcționează pe Viber, Messenger, Website chat — aceeași logică.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Se poate extinde contractul mai ușor după anul 1?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Răspuns:</strong> Da. După contractul inițial de 2 ani, se poate:</p>
+                    <ul class="check-list">
+                        <li>Continua cu aceiași termeni (€100–250/lună)</li>
+                        <li>Upgrade la plan mai mare (ex: Starter → Professional)</li>
+                        <li>Activa Voice AI, Cloud backup, sau alte opțiuni</li>
+                        <li>Denuncia cu 30 zile notificare</li>
+                    </ul>
+                    <p>Nu sunt reluări forțate; flexibilitate maximă.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECȚIUNEA 8: CONTACT -->
+        <section id="contact">
+            <h2>8. Contact și Resurse</h2>
+
+            <h3>8.1 Echipa Implementare</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rol</th>
+                        <th>Persoană</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Project Manager</strong></td>
+                        <td>Pavel Tuhari</td>
+                        <td>+373 (0) 799 123 456 / pavel@una.md</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Technical Lead</strong></td>
+                        <td>[Inginer CRM]</td>
+                        <td>tech@una.md</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Support Lead</strong></td>
+                        <td>[Support Manager]</td>
+                        <td>support@una.md</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Training Specialist</strong></td>
+                        <td>[Trainer]</td>
+                        <td>training@una.md</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>8.2 SLA și Niveluri de Suport</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nivel Suport</th>
+                        <th>Response Time</th>
+                        <th>Rezoluție Esperată</th>
+                        <th>Preț</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Standard (8×5)</strong></td>
+                        <td>&lt;4h urgent, &lt;8h high</td>
+                        <td>&lt;24h urgent, &lt;7 zile high</td>
+                        <td>Inclus (60 zile post-go)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Extended (24/7)</strong></td>
+                        <td>&lt;2h urgent, &lt;4h high</td>
+                        <td>&lt;4h urgent, &lt;24h high</td>
+                        <td>+€50/lună</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dedicated Manager</strong></td>
+                        <td>&lt;1h urgent</td>
+                        <td>&lt;2h urgent, &lt;8h high</td>
+                        <td>+€100/lună</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>8.3 Documentație Furnizată</h3>
+            <ul class="check-list">
+                <li>Manualul utilizatorului (PDF, 50+ pagini)</li>
+                <li>Administrator guide (PDF, 30+ pagini)</li>
+                <li>Video tutorial-uri (20 video-uri, 3 ore total)</li>
+                <li>Quick start guide (1 pagină cheat sheet)</li>
+                <li>API documentation (dacă integrări custom)</li>
+                <li>Compliance checklist (GDPR, backup, security)</li>
+            </ul>
+
+            <div class="success-box">
+                <h4>Recomandare pentru Prodcom Fit SRL</h4>
+                <p><strong>Plan: Professional (€150/lună)</strong></p>
+                <p>✓ Volum: 15–20 salariați vânzări + suport (PME medium)</p>
+                <p>✓ Complexitate: Pâlnii multiple (Web, SMM, Telefonie, Cold Calling)</p>
+                <p>✓ Integrare: 1C accounting (custom API €300)</p>
+                <p>✓ ROI: 4.6× (savings €25,000 vs cost €5,460)</p>
+            </div>
+
+            <div class="note">
+                <h4>Next Steps:</h4>
+                <ol>
+                    <li>Semnare contract: 2–3 zile</li>
+                    <li>Plată €300 conexiune: Transfer bancar</li>
+                    <li>Deployment: 4 săptămâni (de la semnare)</li>
+                    <li>Go-live: Ziua 30 (producție live)</li>
+                    <li>Support: 60 zile post-go-live (luni–vineri 8–18)</li>
+                </ol>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p><strong>Oferta valabilă: 30 zile de la data emiterii (24 august 2026)</strong></p>
+        <p>Pentru acceptare: pavel@una.md | +373 (0) 799 123 456</p>
+        <p>© 2026 UNA.md Solutions — Reproducie interzisă fără permisiune</p>
+        <p><em>Document confidențial — Dedicat Prodcom Fit SRL</em></p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', function() {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Smooth scroll pentru TOC links
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
