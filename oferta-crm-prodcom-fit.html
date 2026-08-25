@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UNA.md/CRM — Ofertă pentru Prodcom Fit SRL</title>
-<meta name="description" content="Ofertă comercială pentru implementarea unui sistem CRM autohton cu integrare 1C, găzduit în Republica Moldova. 22 module funcționale, conectare unică 300 €, abonament 100 €/lună. Ediția 2026.">
+<title>Facem revoluția — Înlocuirea 1C devine obligatorie · Ofertă pentru Prodcom Fit SRL</title>
+<meta name="description" content="Manifest și ofertă comercială: înlocuirea completă a 1C cu UNA.md, în regim automatizat, plus sistemul CRM cu cele 22 de module solicitate. Migrare 500 € preț fix, 50 €/utilizator lunar. Date găzduite în Republica Moldova.">
 <style>
   :root {
     --ink: #1c2733;
@@ -38,7 +38,7 @@
 
   /* ---------- Masthead ---------- */
   header.masthead {
-    background: linear-gradient(135deg, #1c2733 0%, #2c3e50 60%, #8c1d17 100%);
+    background: linear-gradient(135deg, #1c2733 0%, #2c3e50 55%, #8c1d17 100%);
     color: #fff;
     padding: 48px 56px 40px;
   }
@@ -51,15 +51,24 @@
     margin-bottom: 14px;
   }
   header.masthead h1 {
-    font-size: 34px;
-    line-height: 1.2;
+    font-size: 38px;
+    line-height: 1.15;
     font-weight: normal;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+  }
+  header.masthead h1 .rev {
+    display: block;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 15px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    opacity: .85;
+    margin-bottom: 10px;
   }
   header.masthead .subtitle {
     font-size: 18px;
     opacity: .92;
-    max-width: 760px;
+    max-width: 780px;
   }
   header.masthead .badges { margin-top: 22px; }
   .badge {
@@ -125,6 +134,56 @@
   @media (max-width: 860px) {
     main, header.masthead, footer { padding-left: 24px; padding-right: 24px; }
     .two-col, .three-col, .stat-row { grid-template-columns: 1fr; }
+    header.masthead h1 { font-size: 28px; }
+  }
+
+  /* ---------- Manifest ---------- */
+  .manifest {
+    background: var(--ink);
+    color: #eef1f4;
+    border-left: 6px solid var(--accent);
+    border-radius: 4px;
+    padding: 26px 30px;
+    margin: 22px 0;
+  }
+  .manifest .t {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    opacity: .7;
+    margin-bottom: 12px;
+  }
+  .manifest p { margin-bottom: 12px; font-size: 17.5px; }
+  .manifest p:last-child { margin-bottom: 0; }
+  .manifest strong { color: #fff; }
+  .manifest .big {
+    font-size: 23px;
+    line-height: 1.35;
+    display: block;
+    margin-bottom: 14px;
+  }
+  .teze { list-style: none; margin: 0; counter-reset: teza; }
+  .teze li {
+    position: relative;
+    padding-left: 52px;
+    margin-bottom: 16px;
+    font-size: 16.5px;
+  }
+  .teze li::before {
+    counter-increment: teza;
+    content: counter(teza);
+    position: absolute;
+    left: 0; top: 0;
+    width: 34px; height: 34px;
+    line-height: 32px;
+    text-align: center;
+    border: 2px solid var(--accent);
+    color: var(--accent-dark);
+    border-radius: 50%;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
   }
 
   /* ---------- Cards ---------- */
@@ -196,6 +255,11 @@
     background: var(--ok-soft);
     border-color: #9ecdb4;
     border-left-color: var(--ok);
+  }
+  .note.red {
+    background: #fdeceb;
+    border-color: #e2a9a5;
+    border-left-color: var(--accent);
   }
   .chip {
     display: inline-block;
@@ -340,11 +404,7 @@
     font-weight: bold;
     border-bottom: 1px solid var(--line);
   }
-  .spec .h .no {
-    display: inline-block;
-    min-width: 26px;
-    color: var(--ink-soft);
-  }
+  .spec .h .no { display: inline-block; min-width: 26px; color: var(--ink-soft); }
   .spec .q {
     padding: 13px 18px;
     font-size: 15.5px;
@@ -396,11 +456,7 @@
     margin-bottom: 26px;
     display: block;
   }
-  .sig .box .ln {
-    border-bottom: 1px solid var(--ink-soft);
-    height: 1px;
-    margin-bottom: 6px;
-  }
+  .sig .box .ln { border-bottom: 1px solid var(--ink-soft); height: 1px; margin-bottom: 6px; }
   .sig .box .cap { font-size: 13px; color: var(--ink-soft); }
   @media (max-width: 640px) { .sig { grid-template-columns: 1fr; gap: 30px; } }
 
@@ -449,24 +505,22 @@
 <div class="sheet">
 
 <header class="masthead">
-  <div class="kicker">Ofertă comercială · CRM autohton cu integrare 1C · 24 august 2026</div>
-  <h1>UNA.md/CRM — Sistem de vânzări cu integrare 1C</h1>
-  <p class="subtitle">Ofertă pentru <strong>Prodcom Fit SRL</strong>, în atenția dlui <strong>Iurie Barbaros</strong>. Sistem CRM dezvoltat și întreținut în Republica Moldova, cu date găzduite la <strong>TopHost (Chișinău)</strong> sau în cloud, la alegerea beneficiarului. Acoperă integral cele <strong>22 de cerințe</strong> din caietul de sarcini transmis, plus integrarea bidirecțională cu <strong>1C</strong>.</p>
+  <div class="kicker">Manifest și ofertă comercială · Ediția 2026</div>
+  <h1><span class="rev">Facem revoluția</span>Înlocuirea 1C devine obligatorie</h1>
+  <p class="subtitle">Ofertă pentru <strong>Prodcom Fit SRL</strong>, în atenția dlui <strong>Iurie Barbaros</strong>. Livrăm sistemul CRM cerut prin caietul de sarcini — toate cele 22 de puncte — și, în același proiect, <strong>înlocuim integral 1C cu UNA.md</strong>, în regim automatizat. Datele rămân în Republica Moldova. Începând din septembrie 2026, integrarea cu 1C nu mai este pentru noi o destinație, ci o punte de tranziție pe durată limitată.</p>
   <div class="badges">
     <span class="badge">22 module din caietul de sarcini</span>
-    <span class="badge">Integrare 1C — inclusă</span>
-    <span class="badge">Găzduire: TopHost Moldova / cloud</span>
-    <span class="badge">Dezvoltare asistată de IA</span>
-    <span class="badge">Limbi: RO / RU / EN</span>
+    <span class="badge">Migrarea completă de pe 1C</span>
+    <span class="badge">Preț fix, cu restituire dacă nu reușim</span>
+    <span class="badge">Găzduire: TopHost Chișinău</span>
     <span class="badge">Cod și date — la beneficiar</span>
-    <span class="badge">Caiet de sarcini — anexă contractuală</span>
-    <span class="badge">Opțional: înlocuirea integrală a 1C</span>
+    <span class="badge">Limbi: RO / RU / EN</span>
   </div>
   <div class="stat-row">
-    <div class="stat"><span class="v">300 € + 100 €/lună</span><span class="l">CRM: conectare unică și abonament fix</span></div>
-    <div class="stat"><span class="v">500 € + 50 €/user</span><span class="l">înlocuirea completă a 1C, opțional</span></div>
-    <div class="stat"><span class="v">2 săptămâni</span><span class="l">conectare CRM, în regim de test</span></div>
-    <div class="stat"><span class="v">22 module</span><span class="l">din caietul de sarcini, acoperite integral</span></div>
+    <div class="stat"><span class="v">800 €</span><span class="l">la start: CRM 300 € + migrare 1C 500 €</span></div>
+    <div class="stat"><span class="v">100 €/lună</span><span class="l">CRM, fix, indiferent de echipă</span></div>
+    <div class="stat"><span class="v">50 €/user</span><span class="l">lunar, doar utilizatori activi de contabilitate</span></div>
+    <div class="stat"><span class="v">0 €</span><span class="l">dacă reconcilierea soldurilor nu reușește</span></div>
   </div>
 </header>
 
@@ -475,15 +529,16 @@
 <nav class="toc">
   <h4>Cuprins</h4>
   <ol>
+    <li><a href="#manifest"><strong>Manifestul — de ce înlocuirea 1C devine obligatorie</strong></a></li>
     <li><a href="#rezumat">Rezumat pentru conducere</a></li>
     <li><a href="#conformitate">Matricea de conformitate cu cele 22 de cerințe</a></li>
     <li><a href="#arhitectura">Arhitectura soluției și găzduirea datelor</a></li>
     <li><a href="#functional">Funcționalitatea detaliată pe module</a></li>
-    <li><a href="#unuc">Integrarea cu 1C</a></li>
-    <li><a href="#inlocuire"><strong>Înlocuirea completă a 1C cu UNA.md</strong> — migrare 500 €, apoi 50 €/utilizator</a></li>
+    <li><a href="#migrare"><strong>Migrarea de pe 1C — nucleul proiectului</strong></a></li>
+    <li><a href="#punte">Puntea de tranziție: integrarea cu 1C, pe durată limitată</a></li>
     <li><a href="#ia">Inteligența artificială în sistem</a></li>
     <li><a href="#securitate">Securitatea datelor și găzduirea în Moldova</a></li>
-    <li><a href="#implementare">Etapele implementării — 2 săptămâni</a></li>
+    <li><a href="#implementare">Etapele implementării</a></li>
     <li><a href="#financiar">Partea financiară și lista de prețuri</a></li>
     <li><a href="#calcul">Exemple de calcul al costului</a></li>
     <li><a href="#instruire">Instruire, materiale video și suport</a></li>
@@ -496,47 +551,128 @@
 </nav>
 
 <!-- ============================================================ -->
+<section id="manifest">
+  <h2>1. Manifestul — de ce înlocuirea 1C devine obligatorie</h2>
+
+  <div class="manifest">
+    <div class="t">Poziția furnizorului · august 2026</div>
+    <span class="big">Douăzeci de ani am construit integrări cu 1C. Nu mai construim.</span>
+    <p>Începând din <strong>septembrie 2026</strong>, UNA.md nu mai livrează proiecte în care 1C rămâne sistemul contabil permanent al clientului. Integrarea continuă să existe — dar <strong>numai ca punte de tranziție</strong>, pe durata migrării, nu ca soluție finală.</p>
+    <p>Nu este o poziție politică. Este concluzia tehnică la care ajunge oricine încearcă să răspundă onest la o singură întrebare: <strong>cine poate audita ce face cu datele dumneavoastră un program al cărui cod nu îl vede nimeni din afară?</strong></p>
+  </div>
+
+  <h3><span class="idx">1.1.</span> Ce înseamnă „obligatoriu" — și ce nu înseamnă</h3>
+  <p>Formulăm acest lucru explicit, pentru ca nimeni să nu poată reproșa ulterior că a fost indus în eroare.</p>
+  <div class="two-col">
+    <div class="card">
+      <h4>Ce NU susținem</h4>
+      <ul>
+        <li><strong>Nu există astăzi o lege</strong> care să oblige companiile private din Republica Moldova să renunțe la 1C. Cine vă spune altceva vă vinde ceva prin frică;</li>
+        <li>Nu afirmăm că datele dumneavoastră au fost accesate — nu avem asemenea dovezi și nici investigația de presă nu le prezintă;</li>
+        <li>Nu susținem că 1C nu funcționează. Funcționează — de aceea a și ajuns la o cotă de peste 98 %.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Ce susținem</h4>
+      <ul>
+        <li><strong>Obligatoriu în oferta noastră:</strong> este condiția pe care o punem noi, ca furnizor, oricărui proiect nou început după septembrie 2026;</li>
+        <li><strong>Obligatoriu ca direcție deja luată:</strong> Ucraina a interzis produsul în instituțiile publice, Ministerul Apărării al RM a renunțat la el în 2021, iar Guvernul a recunoscut public necesitatea tranziției;</li>
+        <li><strong>Obligatoriu ca aritmetică:</strong> o migrare făcută acum, planificat, costă 500 €. Aceeași migrare făcută sub presiune, când devine urgentă, costă de câteva ori mai mult.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3><span class="idx">1.2.</span> Faptele pe care se sprijină decizia</h3>
+  <p>Pe 20 august 2026, <strong>Ziarul de Gardă</strong> a publicat investigația <em>„Independenți de Rusia? Principala amenințare, cu acces la banii și informațiile noastre"</em>. Printre cei intervievați se numără și <strong>Pavel Tuhari</strong>, fondatorul Unisim-Soft — compania din spatele acestei oferte.</p>
+  <div class="note"><strong>Vă invităm să citiți materialul integral înainte de a decide</strong> — este o sursă jurnalistică independentă, nu un material de marketing al furnizorului:<br>
+    <a href="https://www.zdg.md/investigatii/ancheta/video-independenti-de-rusia-principala-amenintare-cu-acces-la-banii-si-informatiile-noastre/" target="_blank" rel="noopener">zdg.md · Independenți de Rusia? Principala amenințare, cu acces la banii și informațiile noastre</a>
+  </div>
+  <p>Constatările principale, redate pe scurt și atribuite integral publicației:</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th style="width:230px">Constatare</th><th>Ce a documentat Ziarul de Gardă</th></tr>
+    <tr>
+      <td><strong>Amploarea dependenței</strong></td>
+      <td>Peste <strong>300 de instituții publice</strong> își gestionează evidențele financiare în 1C, iar produsul deține o poziție dominantă pe piața locală de peste <strong>20 de ani</strong>. Publicația citează o utilizare de peste 98 % în rândul companiilor.</td>
+    </tr>
+    <tr>
+      <td><strong>Contradicția cu strategia de securitate</strong></td>
+      <td>Strategia securității naționale, aprobată în 2024, indică Federația Rusă drept principala amenințare la adresa Republicii Moldova — în timp ce infrastructura contabilă a statului și a mediului de afaceri rămâne construită pe un produs rusesc.</td>
+    </tr>
+    <tr>
+      <td><strong>Poziția serviciilor ucrainene</strong></td>
+      <td>SBU a calificat 1C drept program de tip <em>spyware</em>, invocând <strong>codul sursă închis</strong>, <strong>imposibilitatea unui audit independent</strong> și riscul de acces neautorizat la date financiare, comerciale și cu caracter personal. După 2014 Ucraina a aplicat sancțiuni, iar în 2025 a interzis formal produsul în instituțiile publice.</td>
+    </tr>
+    <tr>
+      <td><strong>Legăturile grupului 1C</strong></td>
+      <td>Investigația documentează contracte ale companiilor din grupul 1C cu Ministerul rus al Apărării, Gazprom și Rosneft, în valoare de peste 561 de milioane de ruble, și descrie legăturile fondatorului grupului cu sectorul militar rus.</td>
+    </tr>
+    <tr>
+      <td><strong>Precedentul instituțional din Moldova</strong></td>
+      <td>Ministerul Apărării al Republicii Moldova a renunțat la 1C în <strong>2021</strong>, invocând limitările de securitate și transparență și imposibilitatea de a audita mecanismele interne ale produsului, trecând pe software dezvoltat local.</td>
+    </tr>
+    <tr>
+      <td><strong>Poziția autorităților</strong></td>
+      <td>Ministrul dezvoltării economice și digitalizării, Eugen Osmochescu, a recunoscut problema, precizând că tranziția presupune costuri considerabile și se va face gradual, fără a indica un termen.</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3><span class="idx">1.3.</span> Cele cinci teze ale revoluției</h3>
+  <ol class="teze">
+    <li><strong>Un sistem care nu poate fi auditat nu poate fi garantat.</strong> Cod închis înseamnă că nici furnizorul dumneavoastră local, nici auditorul, nici dumneavoastră nu puteți verifica ce face programul cu datele pe care le procesează. Nu este o acuzație — este o limitare structurală.</li>
+    <li><strong>Riscul real pentru o companie privată nu este spionajul, ci continuitatea.</strong> Actualizările pentru modificările Codului fiscal, plata licențelor și accesul la suport depind de un lanț pe care nu îl controlați. Declarațiile fiscale se depun oricum, la termen.</li>
+    <li><strong>Migrarea planificată costă de câteva ori mai puțin decât migrarea forțată.</strong> Astăzi aveți timp pentru exploatare în paralel și pentru verificarea soldurilor. Într-o migrare urgentă, acest lux dispare.</li>
+    <li><strong>Alternativa locală există și este verificată.</strong> Nu este un proiect de start-up: UNA.md deservește companii cu producție, comerț și servicii, iar Unisim-Soft activează din 2001. Ministerul Apărării a trecut pe software dezvoltat local încă din 2021.</li>
+    <li><strong>Un singur sistem în locul a două.</strong> Odată ce contabilitatea este în UNA.md, integrarea CRM ↔ 1C devine inutilă: vânzarea, stocurile și contabilitatea lucrează pe aceleași date. Dispare chiar problema pe care integrarea o rezolva.</li>
+  </ol>
+
+  <div class="note red"><strong>Angajamentul care face deviza credibilă:</strong> dacă la finalul migrării balanțele din UNA.md nu coincid cu cele din 1C, rămâneți în 1C și <strong>cei 500 € se restituie integral</strong>. Nu vindem o convingere — ne asumăm rezultatul. Detalii în secțiunea 6.</div>
+</section>
+
+<!-- ============================================================ -->
 <section id="rezumat">
-  <h2>1. Rezumat pentru conducere</h2>
-  <p class="lead">Propunem un <strong>CRM autohton</strong> — dezvoltat, găzduit și întreținut în Republica Moldova — care acoperă integral caietul de sarcini transmis de Prodcom Fit SRL (22 de puncte), inclusiv telefonia IP, canalele de mesagerie, generatorul de documente, Sales Bot, Voice AI și integrarea cu <strong>1C</strong>. Spre deosebire de modelul de licențiere al platformelor străine, aici nu plătiți per utilizator: plătiți <strong>o singură conectare</strong> și un <strong>abonament lunar fix de dezvoltare</strong>.</p>
+  <h2>2. Rezumat pentru conducere</h2>
+  <p class="lead">Oferta acoperă două lucruri într-un singur proiect: <strong>sistemul CRM</strong> descris în caietul de sarcini transmis pe 24 august 2026 — toate cele 22 de puncte — și <strong>înlocuirea integrală a 1C</strong> cu platforma UNA.md, în regim automatizat. Nu plătiți licențe per utilizator pentru CRM, iar migrarea are preț fix, indiferent de cât de complicată se dovedește a fi.</p>
   <div class="three-col">
     <div class="card">
       <h4>Ce primește compania</h4>
       <ul>
         <li>Toate cele 22 de module configurate și puse în funcțiune;</li>
-        <li>Integrare bidirecțională cu 1C — comenzile devin documente contabile fără reintroducere manuală;</li>
-        <li>Datele găzduite în Moldova, la TopHost, sau în cloud — la alegerea dumneavoastră;</li>
+        <li>Contabilitatea, fiscalitatea, salarizarea și stocurile mutate din 1C în UNA.md, cu soldurile reconciliate automat;</li>
+        <li>Un singur sistem pentru vânzări și contabilitate, pe aceeași bază de date;</li>
+        <li>Datele găzduite la TopHost, Chișinău;</li>
         <li>Instruire, ghiduri video și suport pe toată durata contractului.</li>
       </ul>
     </div>
     <div class="card">
       <h4>Ce NU mai trebuie să facă</h4>
       <ul>
-        <li>Să plătească licențe lunare per utilizator — numărul de manageri nu schimbă prețul;</li>
-        <li>Să depindă de un furnizor din altă jurisdicție pentru datele clienților săi;</li>
-        <li>Să comande separat fiecare ajustare — dezvoltarea curentă intră în abonament;</li>
-        <li>Să introducă de două ori aceleași date — în CRM și apoi în 1C.</li>
+        <li>Să plătească licențe lunare per utilizator pentru CRM — echipa poate crește fără costuri suplimentare;</li>
+        <li>Să introducă aceleași date de două ori, în CRM și apoi în contabilitate;</li>
+        <li>Să depindă, pentru actualizările legislative, de un lanț de distribuție din altă jurisdicție;</li>
+        <li>Să comande și să achite separat fiecare ajustare a configurației.</li>
       </ul>
     </div>
     <div class="card">
       <h4>Cât costă (fără TVA)</h4>
       <ul>
-        <li><strong>300 €</strong> — conectarea, o singură dată, totul inclus;</li>
-        <li><strong>100 €/lună</strong> — abonament de dezvoltare prin inteligență artificială, tip <em>Basic</em>; poate fi majorat <strong>doar prin acord comun</strong>;</li>
-        <li><strong>40 €</strong> — servicii la comandă, opționale, <strong>doar la dorința beneficiarului</strong>;</li>
-        <li><strong>25 €/oră</strong> — exclusiv lucrări tehnice de suport pentru calculatoare (vezi secțiunea 15);</li>
-        <li><strong>500 € + 50 €/utilizator/lună</strong> — opțional, înlocuirea completă a 1C (secțiunea 6).</li>
+        <li><strong>300 €</strong> — conectarea CRM, o singură dată;</li>
+        <li><strong>500 €</strong> — migrarea completă de pe 1C, <strong>preț fix</strong>, cu restituire dacă nu reușește;</li>
+        <li><strong>100 €/lună</strong> — abonament CRM, fix, majorabil doar prin acord comun;</li>
+        <li><strong>50 €/utilizator/lună</strong> — posturile de lucru de contabilitate, doar cele active;</li>
+        <li><strong>40 €</strong> — servicii la comandă, opționale;</li>
+        <li><strong>25 €/oră</strong> — exclusiv lucrări tehnice de suport pentru calculatoare (secțiunea 16).</li>
       </ul>
     </div>
   </div>
-  <div class="note"><strong>Două propuneri distincte, în același document.</strong> Prima — sistemul CRM cerut prin caietul de sarcini, cu integrare către 1C-ul pe care îl folosiți astăzi (secțiunile 2–5). A doua, opțională — <strong>înlocuirea integrală a 1C cu UNA.md</strong>, în regim automatizat, la preț fix de 500 € pentru migrare și 50 € pe utilizator activ lunar (secțiunea 6). Pot fi contractate separat sau împreună; motivele pentru care a doua merită analizată acum sunt expuse în secțiunea 6.1, pornind de la investigația publicată de Ziarul de Gardă.</div>
-  <div class="note ok"><strong>Principiul comercial:</strong> prețul nu crește odată cu echipa. Puteți adăuga manageri, pâlnii și departamente fără a renegocia abonamentul. Majorarea abonamentului de 100 €/lună este posibilă <strong>numai prin acord comun scris</strong>, niciodată unilateral.</div>
+  <div class="note ok"><strong>Exemplu pentru o echipă de 10 utilizatori CRM și 3 utilizatori de contabilitate:</strong> <strong>800 €</strong> la start (300 + 500) și <strong>250 €/lună</strong> (100 fix pentru CRM + 3 × 50 pentru contabilitate). Numărul de manageri de vânzări poate crește oricât — plata lunară pentru CRM rămâne 100 €.</div>
 </section>
 
 <!-- ============================================================ -->
 <section id="conformitate">
-  <h2>2. Matricea de conformitate cu cele 22 de cerințe</h2>
-  <p>Tabelul de mai jos urmează numerotarea exactă din caietul de sarcini transmis pe 24 august 2026. Fiecare punct este acoperit în livrarea standard, fără costuri suplimentare față de cele două poziții financiare din secțiunea 10.</p>
+  <h2>3. Matricea de conformitate cu cele 22 de cerințe</h2>
+  <p>Tabelul de mai jos urmează numerotarea exactă din caietul de sarcini transmis pe 24 august 2026. Fiecare punct este acoperit în livrarea standard, fără costuri suplimentare față de cele două poziții financiare din secțiunea 11.</p>
   <div class="table-wrap">
   <table>
     <tr><th style="width:52px">Nr.</th><th>Cerința din caietul de sarcini</th><th>Modul livrat</th><th style="width:92px">Status</th></tr>
@@ -571,7 +707,7 @@
 
 <!-- ============================================================ -->
 <section id="arhitectura">
-  <h2>3. Arhitectura soluției și găzduirea datelor</h2>
+  <h2>4. Arhitectura soluției și găzduirea datelor</h2>
   <p>Sistemul este construit pe o arhitectură web modernă, accesibilă din browser de pe orice dispozitiv — calculator, tabletă sau telefon — fără instalare pe stațiile de lucru. Managerii lucrează din birou, din teren sau de acasă, prin conexiune criptată.</p>
   <div class="arch">
     <div class="layer">
@@ -604,10 +740,10 @@
 
 <!-- ============================================================ -->
 <section id="functional">
-  <h2>4. Funcționalitatea detaliată pe module</h2>
+<h2>5. Funcționalitatea detaliată pe module</h2>
   <p>Mai jos, cele 22 de cerințe sunt grupate pe blocuri funcționale. Pentru fiecare bloc este indicat livrabilul concret — ce anume primiți la finalul configurării.</p>
 
-  <h3><span class="idx">4.1.</span> Fundația sistemului — cerințele 1, 2, 3</h3>
+  <h3><span class="idx">5.1.</span> Fundația sistemului — cerințele 1, 2, 3</h3>
   <div class="card">
     <ul>
       <li><strong>Contul CRM:</strong> denumirea companiei, tipul de activitate, domeniul de acces, moneda de lucru (MDL, cu posibilitate de EUR/USD și curs BNM actualizat automat);</li>
@@ -619,7 +755,7 @@
     <div class="doclist"><b>Livrabil:</b> structură de roluri aprobată de conducere · catalog de tipuri de sarcini cu pictograme · cartelă de tranzacție cu câmpurile Prodcom Fit și regulile de obligativitate pe etape.</div>
   </div>
 
-  <h3><span class="idx">4.2.</span> Automatizări și control al proceselor — cerința 4</h3>
+  <h3><span class="idx">5.2.</span> Automatizări și control al proceselor — cerința 4</h3>
   <div class="card">
     <ul>
       <li><strong>Declanșatori:</strong> schimbarea etapei, valoarea unui câmp, adăugarea unei etichete, depășirea unui prag valoric, sursa lead-ului, timpul scurs de la ultima interacțiune;</li>
@@ -630,7 +766,7 @@
     <div class="doclist"><b>Livrabil:</b> set de automatizări acoperind ciclul complet de vânzare al Prodcom Fit, cu termene și responsabili configurați împreună cu conducerea comercială.</div>
   </div>
 
-  <h3><span class="idx">4.3.</span> Pâlniile de vânzări — cerințele 5 și 6</h3>
+  <h3><span class="idx">5.3.</span> Pâlniile de vânzări — cerințele 5 și 6</h3>
   <div class="two-col">
     <div class="card">
       <h4>Pâlnia de recepție (cerința 5)</h4>
@@ -650,7 +786,7 @@
     </div>
   </div>
 
-  <h3><span class="idx">4.4.</span> Telefonia IP — cerința 7</h3>
+  <h3><span class="idx">5.4.</span> Telefonia IP — cerința 7</h3>
   <div class="card">
     <ul>
       <li><strong>Conectarea telefoniei</strong> la CRM și configurarea redirecționărilor: apelul clientului ajunge la managerul care se ocupă deja de el, nu la primul liber;</li>
@@ -662,7 +798,7 @@
     <div class="doclist"><b>Livrabil:</b> centrala conectată și testată cu numerele Prodcom Fit · scenariu de redirecționare aprobat · toate apelurile vizibile în cartelă. <b>Notă:</b> minutele de convorbire se achită direct operatorului telecom, ca și până acum.</div>
   </div>
 
-  <h3><span class="idx">4.5.</span> Migrarea bazei de clienți — cerința 8</h3>
+  <h3><span class="idx">5.5.</span> Migrarea bazei de clienți — cerința 8</h3>
   <div class="card">
     <ul>
       <li>Import din Excel, CSV sau din sistemul curent, cu <strong>asocierea corectă a entităților</strong>: contact ↔ companie ↔ tranzacție;</li>
@@ -673,7 +809,7 @@
     <div class="doclist"><b>Livrabil:</b> bază importată, verificată și confirmată de beneficiar · raport de import cu numărul de înregistrări, dubluri unificate și eventuale abateri.</div>
   </div>
 
-  <h3><span class="idx">4.6.</span> E-mail corporativ și personal — cerința 9</h3>
+  <h3><span class="idx">5.6.</span> E-mail corporativ și personal — cerința 9</h3>
   <div class="card">
     <ul>
       <li>Configurarea cutiei corporative (vânzări, ofertare, suport) și a cutiei personale <strong>pentru fiecare utilizator</strong>;</li>
@@ -683,7 +819,7 @@
     </ul>
   </div>
 
-  <h3><span class="idx">4.7.</span> Site web: API și analitică UTM — cerințele 10 și 11</h3>
+  <h3><span class="idx">5.7.</span> Site web: API și analitică UTM — cerințele 10 și 11</h3>
   <div class="two-col">
     <div class="card">
       <h4>Modulul API (cerința 10)</h4>
@@ -703,7 +839,7 @@
     </div>
   </div>
 
-  <h3><span class="idx">4.8.</span> Rețele sociale și mesagerie — cerințele 12, 13, 14</h3>
+  <h3><span class="idx">5.8.</span> Rețele sociale și mesagerie — cerințele 12, 13, 14</h3>
   <div class="card">
     <ul>
       <li><strong>Facebook:</strong> conectarea paginii business în pâlnie, fixarea tuturor solicitărilor din formularele din postări și preluarea corespondenței, cu răspuns direct din CRM;</li>
@@ -714,7 +850,7 @@
     <div class="doclist"><b>Livrabil:</b> trei canale conectate și testate cu conturile Prodcom Fit · niciun mesaj nu mai rămâne pe telefonul personal al unui angajat.</div>
   </div>
 
-  <h3><span class="idx">4.9.</span> Generatorul de documente — cerința 15</h3>
+  <h3><span class="idx">5.9.</span> Generatorul de documente — cerința 15</h3>
   <div class="card">
     <ul>
       <li>Generarea documentelor <strong>după șabloane, direct din cartela tranzacției</strong>: ofertă, factură proformă, contract, act;</li>
@@ -726,7 +862,7 @@
     <div class="doclist"><b>Livrabil:</b> șabloanele Prodcom Fit încărcate și testate · reguli de securitate pentru semnătură aprobate de conducere.</div>
   </div>
 
-  <h3><span class="idx">4.10.</span> SMS: notificări și marketing — cerința 16</h3>
+  <h3><span class="idx">5.10.</span> SMS: notificări și marketing — cerința 16</h3>
   <div class="card">
     <ul>
       <li>Expediere <strong>automată sau manuală</strong>, cu șabloane de conținut predefinit;</li>
@@ -737,7 +873,7 @@
     <div class="doclist"><b>Notă:</b> costul mesajelor se achită direct furnizorului de SMS gateway, la tariful acestuia; modulul, șabloanele și integrarea sunt incluse în ofertă.</div>
   </div>
 
-  <h3><span class="idx">4.11.</span> Dashboard și analitică — cerința 17</h3>
+  <h3><span class="idx">5.11.</span> Dashboard și analitică — cerința 17</h3>
   <div class="card">
     <ul>
       <li>Widgeturi grafice <strong>în timp real</strong>: numărul de lead-uri noi; sursa lead-urilor pe fiecare canal; numărul și suma vânzărilor pentru fiecare manager;</li>
@@ -748,7 +884,7 @@
     <div class="doclist"><b>Livrabil:</b> dashboard pentru conducere · dashboard pentru managerul de vânzări · raport zilnic automat pe e-mail.</div>
   </div>
 
-  <h3><span class="idx">4.12.</span> Sales Bot — cerința 18</h3>
+  <h3><span class="idx">5.12.</span> Sales Bot — cerința 18</h3>
   <div class="card">
     <ul>
       <li>La <strong>inițierea discuției</strong>, botul prezintă clientului variantele de produse și servicii disponibile;</li>
@@ -758,7 +894,7 @@
     </ul>
   </div>
 
-  <h3><span class="idx">4.13.</span> Voice AI — cerința 19</h3>
+  <h3><span class="idx">5.13.</span> Voice AI — cerința 19</h3>
   <div class="card">
     <ul>
       <li>Integrare cu CRM și <strong>generarea automată a rezumatelor apelurilor</strong> — conducerea vede esențialul fără a asculta înregistrarea;</li>
@@ -769,7 +905,7 @@
     <div class="doclist"><b>Livrabil:</b> modulul Voice AI conectat la telefonie, cu rezumate în limba română și marcarea automată a apelurilor problematice.</div>
   </div>
 
-  <h3><span class="idx">4.14.</span> Instruirea personalului — cerința 20</h3>
+  <h3><span class="idx">5.14.</span> Instruirea personalului — cerința 20</h3>
   <div class="two-col">
     <div class="card">
       <h4>Instruirea managerilor</h4>
@@ -789,7 +925,7 @@
     </div>
   </div>
 
-  <h3><span class="idx">4.15.</span> Ghiduri video — cerința 21</h3>
+  <h3><span class="idx">5.15.</span> Ghiduri video — cerința 21</h3>
   <div class="two-col">
     <div class="card">
       <h4>Modul manager</h4>
@@ -810,7 +946,7 @@
   </div>
   <div class="note ok">Ghidurile video rămân la dispoziția companiei permanent și se actualizează la fiecare modificare majoră a configurației — fiecare angajat nou se instruiește singur, fără a mai ocupa timpul echipei existente.</div>
 
-  <h3><span class="idx">4.16.</span> Suportul — cerința 22</h3>
+  <h3><span class="idx">5.16.</span> Suportul — cerința 22</h3>
   <div class="card">
     <ul>
       <li>Consultații privind utilizarea sistemului, pe toată durata contractului;</li>
@@ -823,105 +959,12 @@
 </section>
 
 <!-- ============================================================ -->
-<section id="unuc">
-  <h2>5. Integrarea cu 1C</h2>
-  <p>Aceasta a fost prima dumneavoastră întrebare și rămâne piesa centrală a ofertei. Integrarea este <strong>bidirecțională</strong> și inclusă în conectarea de 300 €, fără costuri separate.</p>
-  <div class="table-wrap">
-  <table>
-    <tr><th>Direcția</th><th>Ce se transferă</th><th>Ce rezolvă în practică</th></tr>
-    <tr>
-      <td><strong>1C → CRM</strong></td>
-      <td>Nomenclatorul de produse și servicii, prețurile curente, stocurile disponibile, lista de contragenți existenți.</td>
-      <td>Managerul întocmește oferta cu prețurile și disponibilitatea reale, nu cu cele memorate. Nu se mai promit clienților mărfuri care nu există în stoc.</td>
-    </tr>
-    <tr>
-      <td><strong>CRM → 1C</strong></td>
-      <td>Tranzacția câștigată devine document în 1C: comandă, factură proformă sau factură fiscală, cu contragentul și pozițiile completate.</td>
-      <td>Contabilitatea nu mai reintroduce manual datele. Se elimină decalajul dintre ce a vândut vânzarea și ce a înregistrat contabilitatea.</td>
-    </tr>
-    <tr>
-      <td><strong>1C → CRM (retur)</strong></td>
-      <td>Starea achitării: facturi emise, plăți încasate, solduri restante pe client.</td>
-      <td>Managerul vede în cartelă dacă clientul a achitat, fără a suna contabilitatea. Automatizările pot genera sarcini de recuperare a creanțelor.</td>
-    </tr>
-  </table>
-  </div>
-  <h3><span class="idx">5.1.</span> Regimul de sincronizare</h3>
-  <ul>
-    <li><strong>Automat, la interval configurabil</strong> (implicit — la fiecare 15 minute pentru stocuri și prețuri, imediat pentru documente);</li>
-    <li><strong>La eveniment:</strong> tranzacția trece pe etapa „Contract semnat" → documentul se creează în 1C în aceeași secundă;</li>
-    <li><strong>Manual, la cerere</strong> — buton de sincronizare pentru cazurile excepționale;</li>
-    <li><strong>Jurnal complet</strong> al schimburilor: ce s-a transferat, când, cu ce rezultat — pentru orice verificare ulterioară.</li>
-  </ul>
-  <div class="note"><strong>Precizare tehnică:</strong> integrarea funcționează cu versiunile 1C aflate în exploatare la Prodcom Fit. La etapa de analiză (ziua 1–2 a implementării) verificăm versiunea și configurația concretă și confirmăm scenariul de schimb. Dacă versiunea dumneavoastră necesită o abordare specifică, o comunicăm înainte de începerea lucrărilor, nu după.</div>
-</section>
+<section id="migrare">
+  <h2>6. Migrarea de pe 1C — nucleul proiectului</h2>
+  <p class="lead">Aceasta este partea care transformă oferta dintr-un proiect CRM într-o schimbare de infrastructură. Contabilitatea, fiscalitatea, salarizarea și stocurile se mută din 1C în UNA.md, <strong>fără ca cineva să reintroducă date manual</strong>, la <strong>preț fix de 500 €</strong> și cu restituire integrală dacă rezultatul nu se confirmă.</p>
 
-<!-- ============================================================ -->
-<section id="inlocuire">
-  <h2>6. Înlocuirea completă a 1C cu UNA.md, în regim automatizat</h2>
-  <p class="lead">Integrarea descrisă în secțiunea 5 presupune că 1C rămâne în exploatare. Pentru companiile care au decis să renunțe la 1C, propunem <strong>înlocuirea integrală</strong> a acestuia cu UNA.md — cu migrarea automatizată a datelor, la <strong>preț fix de 500 €</strong>, urmată de un abonament de <strong>50 € pe utilizator, pe lună</strong>.</p>
-
-  <h3><span class="idx">6.1.</span> De ce se pune astăzi această întrebare</h3>
-  <p>Pe 20 august 2026, <strong>Ziarul de Gardă</strong> a publicat investigația <em>„Independenți de Rusia? Principala amenințare, cu acces la banii și informațiile noastre"</em>, dedicată dependenței Republicii Moldova de software-ul contabil rusesc 1C. Printre persoanele intervievate se numără și <strong>Pavel Tuhari</strong>, fondatorul Unisim-Soft — compania care stă în spatele prezentei oferte.</p>
-  <div class="note"><strong>Recomandăm lectura integrală a materialului</strong> înainte de a lua o decizie — este o sursă independentă, nu un material de marketing al furnizorului:<br>
-    <a href="https://www.zdg.md/investigatii/ancheta/video-independenti-de-rusia-principala-amenintare-cu-acces-la-banii-si-informatiile-noastre/" target="_blank" rel="noopener">zdg.md · Independenți de Rusia? Principala amenințare, cu acces la banii și informațiile noastre</a>
-  </div>
-  <p>Principalele constatări ale investigației, redate aici pe scurt și atribuite integral publicației:</p>
-  <div class="table-wrap">
-  <table>
-    <tr><th style="width:230px">Constatare</th><th>Ce a documentat Ziarul de Gardă</th></tr>
-    <tr>
-      <td><strong>Amploarea dependenței</strong></td>
-      <td>Peste <strong>300 de instituții publice</strong> din Republica Moldova își gestionează evidențele financiare în 1C, iar produsul deține o poziție dominantă pe piața locală de peste <strong>20 de ani</strong>. Publicația citează o utilizare de peste 98 % în rândul companiilor.</td>
-    </tr>
-    <tr>
-      <td><strong>Contradicția cu strategia de securitate</strong></td>
-      <td>Strategia securității naționale, aprobată în 2024, indică Federația Rusă drept principala amenințare la adresa Republicii Moldova — în timp ce infrastructura contabilă a statului și a mediului de afaceri rămâne construită pe un produs rusesc.</td>
-    </tr>
-    <tr>
-      <td><strong>Poziția serviciilor ucrainene</strong></td>
-      <td>SBU a calificat 1C drept program de tip <em>spyware</em>, invocând <strong>codul sursă închis</strong>, <strong>imposibilitatea unui audit independent</strong> și riscul de acces neautorizat la date financiare, comerciale și cu caracter personal. După 2014 Ucraina a aplicat sancțiuni, iar în 2025 a interzis formal produsul în instituțiile publice.</td>
-    </tr>
-    <tr>
-      <td><strong>Legăturile grupului 1C</strong></td>
-      <td>Investigația documentează contracte ale companiilor din grupul 1C cu Ministerul rus al Apărării, Gazprom și Rosneft, în valoare de peste 561 de milioane de ruble, și descrie legăturile fondatorului grupului cu sectorul militar rus.</td>
-    </tr>
-    <tr>
-      <td><strong>Precedentul instituțional din Moldova</strong></td>
-      <td>Ministerul Apărării al Republicii Moldova a renunțat la 1C în <strong>2021</strong>, invocând limitările de securitate și transparență și imposibilitatea de a audita mecanismele interne ale produsului, trecând pe software dezvoltat local.</td>
-    </tr>
-    <tr>
-      <td><strong>Poziția autorităților</strong></td>
-      <td>Ministrul dezvoltării economice și digitalizării, Eugen Osmochescu, a recunoscut problema, precizând că tranziția presupune costuri considerabile și se va face gradual, fără a indica un termen.</td>
-    </tr>
-  </table>
-  </div>
-  <div class="note"><strong>Ce nu susținem.</strong> Nu afirmăm că datele fiecărui utilizator de 1C au fost accesate — investigația nu documentează așa ceva și nici noi nu o facem. Argumentul este de altă natură: <strong>un produs cu cod sursă închis, aflat sub jurisdicția unui stat identificat oficial ca principală amenințare, nu poate fi auditat independent</strong>. Riscul care se gestionează aici este de continuitate și de audit, nu o acuzație individuală.</div>
-
-  <h3><span class="idx">6.2.</span> Cele patru riscuri practice, pentru o companie ca Prodcom Fit</h3>
-  <div class="two-col">
-    <div class="card">
-      <h4>Riscuri de continuitate</h4>
-      <ul>
-        <li><strong>Actualizările legislative:</strong> dacă lanțul de distribuție sau plățile către furnizor sunt afectate de sancțiuni, actualizările pentru modificările Codului fiscal pot întârzia sau înceta — iar declarațiile se depun oricum;</li>
-        <li><strong>Plățile:</strong> restricțiile bancare asupra transferurilor pot bloca prelungirea licențelor și a suportului;</li>
-        <li><strong>Suportul:</strong> depinde de o rețea de parteneri a cărei stabilitate nu o controlați;</li>
-        <li><strong>Migrarea forțată:</strong> dacă devine obligatorie prin reglementare, se face sub presiune de timp și la un cost mult mai mare.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h4>Riscuri de audit și conformitate</h4>
-      <ul>
-        <li><strong>Codul închis:</strong> nu se poate verifica independent ce face programul cu datele pe care le procesează;</li>
-        <li><strong>Datele cu caracter personal:</strong> salariați, clienți, furnizori — răspunderea conform Legii nr. 133/2011 rămâne a companiei, indiferent de furnizorul de software;</li>
-        <li><strong>Cerințele partenerilor:</strong> tot mai mulți parteneri europeni includ în chestionarele de <em>due diligence</em> întrebări despre furnizorii de software și jurisdicția acestora;</li>
-        <li><strong>Licitațiile publice:</strong> criteriile de securitate a informației devin tot mai frecvente în caietele de sarcini.</li>
-      </ul>
-    </div>
-  </div>
-
-  <h3><span class="idx">6.3.</span> Ce înlocuiește concret UNA.md</h3>
-  <p>UNA.md nu este un modul de contabilitate simplificat, ci o platformă ERP completă, folosită de companii cu activitate de producție, comerț și servicii. Tabelul arată corespondența funcțională.</p>
+  <h3><span class="idx">6.1.</span> Ce înlocuiește concret UNA.md</h3>
+  <p>UNA.md nu este un modul de contabilitate simplificat, ci o platformă ERP completă, folosită de companii cu activitate de producție, comerț și servicii. Tabelul arată corespondența funcțională, zonă cu zonă.</p>
   <div class="table-wrap">
   <table>
     <tr><th style="width:250px">Zonă funcțională în 1C</th><th>Echivalentul în UNA.md</th><th class="ctr" style="width:96px">Acoperire</th></tr>
@@ -937,9 +980,9 @@
     <tr><td>Rapoarte proprii, configurate în timp</td><td>Constructor de rapoarte; cele existente se reproduc la migrare</td><td class="yes">✔ integral</td></tr>
   </table>
   </div>
-  <div class="note ok"><strong>În plus față de 1C:</strong> aceeași bază de date deservește și CRM-ul descris în această ofertă. Vânzarea, contabilitatea și stocurile lucrează pe aceleași date, fără sincronizări între sisteme diferite — dispare chiar problema pe care o rezolvă integrarea din secțiunea 5.</div>
+  <div class="note ok"><strong>În plus față de 1C:</strong> aceeași bază de date deservește și CRM-ul din secțiunea 5. Vânzarea, contabilitatea și stocurile lucrează pe aceleași date, fără sincronizări între sisteme diferite — dispare chiar problema pe care o rezolvă puntea de tranziție din secțiunea 7.</div>
 
-  <h3><span class="idx">6.4.</span> Cum decurge migrarea automatizată</h3>
+  <h3><span class="idx">6.2.</span> Cum decurge migrarea automatizată</h3>
   <p>Termenul „automatizat" nu este o formulă de marketing: datele nu se reintroduc manual. Conectorul citește direct structura bazei 1C și transferă conținutul, iar rezultatul se verifică automat, poziție cu poziție.</p>
   <ol class="timeline">
     <li>
@@ -970,7 +1013,7 @@
   </ol>
   <div class="note"><strong>Durata</strong> depinde de volumul de date și de numărul de modificări aduse configurației 1C — de regulă între 2 și 6 săptămâni, din care exploatarea în paralel ocupă o perioadă de raportare. <strong>Prețul rămâne fix, indiferent de durată.</strong></div>
 
-  <h3><span class="idx">6.5.</span> Prețul înlocuirii 1C</h3>
+  <h3><span class="idx">6.3.</span> Prețul migrării</h3>
   <div class="two-col">
     <div class="plan">
       <h4>Migrare completă</h4>
@@ -1003,7 +1046,7 @@
     </div>
   </div>
 
-  <h3><span class="idx">6.6.</span> Exemple de calcul</h3>
+  <h3><span class="idx">6.4.</span> Exemple de calcul pentru partea de contabilitate</h3>
   <div class="table-wrap">
   <table>
     <tr><th>Număr de utilizatori</th><th>Migrare, unic</th><th>Abonament lunar</th><th>Total anul 1</th><th>Total anul 2</th></tr>
@@ -1014,21 +1057,19 @@
   </div>
   <div class="note ok"><strong>Se achită doar utilizatorii activi.</strong> Dacă un post rămâne vacant sau un angajat pleacă, licența se eliberează și abonamentul scade din luna următoare. Nu există pachete minime impuse și nici plată în avans pe un an.</div>
 
-  <h3><span class="idx">6.7.</span> Relația cu oferta CRM din prezentul document</h3>
-  <p>Cele două propuneri sunt <strong>independente</strong> și pot fi contractate separat sau împreună. Structura lor de preț diferă pentru că natura serviciului diferă, iar acest lucru merită spus deschis:</p>
+  <h3><span class="idx">6.5.</span> De ce CRM-ul are preț fix, iar contabilitatea preț pe utilizator</h3>
+  <p>Diferența există și preferăm să o explicăm, nu să o ascundem în subsolul contractului.</p>
   <div class="table-wrap">
   <table>
-    <tr><th style="width:190px">Criteriu</th><th>CRM (secțiunile 1–5 și 7–16)</th><th>Înlocuirea 1C (prezenta secțiune)</th></tr>
+    <tr><th style="width:190px">Criteriu</th><th>CRM (secțiunile 3–5)</th><th>Contabilitate, după migrare (prezenta secțiune)</th></tr>
     <tr><td><strong>Obiectul</strong></td><td>Sistem de vânzări: pâlnii, telefonie, mesagerie, documente comerciale</td><td>Sistem ERP: contabilitate, fiscalitate, salarizare, stocuri</td></tr>
     <tr><td><strong>Plata inițială</strong></td><td class="num">300 €</td><td class="num">500 €</td></tr>
     <tr><td><strong>Plata lunară</strong></td><td>100 €, <strong>fix</strong>, indiferent de numărul de utilizatori</td><td>50 € <strong>per utilizator activ</strong></td></tr>
-    <tr><td><strong>De ce diferă</strong></td><td>Abonament de dezvoltare a unei configurații, nu licență de post de lucru</td><td>Licență de post de lucru contabil, cu actualizări legislative permanente</td></tr>
-    <tr><td><strong>Se pot contracta separat?</strong></td><td class="yes">✔ da</td><td class="yes">✔ da</td></tr>
+    <tr><td><strong>De ce diferă</strong></td><td>Abonament de dezvoltare a unei configurații — o singură configurație, folosită de oricâți manageri</td><td>Licență de post de lucru contabil, cu actualizări legislative permanente și suport per utilizator</td></tr>
   </table>
   </div>
-  <div class="note ok"><strong>Dacă se contractează ambele:</strong> CRM-ul și contabilitatea lucrează pe aceeași bază de date, iar integrarea descrisă în secțiunea 5 devine inutilă — nu mai există două sisteme între care să se sincronizeze ceva. Exemplu pentru o echipă cu 10 utilizatori CRM și 3 utilizatori contabilitate: <strong>800 € la start</strong> (300 + 500) și <strong>250 €/lună</strong> (100 fix + 3 × 50).</div>
 
-  <h3><span class="idx">6.8.</span> Ce garantăm la migrare</h3>
+  <h3><span class="idx">6.6.</span> Ce garantăm la migrare</h3>
   <ul class="check">
     <li><strong>Preț fix, 500 €</strong> — nu se renegociază în funcție de ce se descoperă în baza 1C;</li>
     <li><strong>Reconciliere integrală a soldurilor</strong> — migrarea se consideră finalizată doar dacă balanțele coincid, confirmat în scris de contabilul-șef;</li>
@@ -1036,11 +1077,54 @@
     <li><strong>Datele rămân ale dumneavoastră</strong> — baza 1C se arhivează și vă este predată; datele din UNA.md se exportă oricând, gratuit, în format deschis;</li>
     <li><strong>Dacă reconcilierea nu reușește</strong> — continuați în 1C, iar cei 500 € se restituie integral.</li>
   </ul>
+  <div class="note red"><strong>Aceasta este partea care ne costă pe noi, nu pe dumneavoastră.</strong> Un furnizor care declară înlocuirea 1C obligatorie și nu își asumă rezultatul vinde un slogan. Restituirea integrală în caz de eșec este ceea ce transformă deviza într-un angajament.</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="punte">
+  <h2>7. Puntea de tranziție: integrarea cu 1C, pe durată limitată</h2>
+  <p class="lead">Prima dumneavoastră întrebare a fost dacă dezvoltăm CRM cu integrare 1C. Răspunsul rămâne <strong>da</strong> — dar cu o precizare care ține de poziția din secțiunea 1: integrarea se livrează ca <strong>punte pe durata migrării</strong>, nu ca arhitectură permanentă.</p>
+
+  <h3><span class="idx">7.1.</span> De ce integrarea rămâne necesară</h3>
+  <p>Migrarea nu se face într-o singură noapte. Între momentul în care CRM-ul intră în exploatare — în 2 săptămâni — și momentul în care contabilitatea renunță definitiv la 1C trec câteva săptămâni de lucru în paralel. În tot acest interval, cele două sisteme trebuie să comunice, altfel echipa ar introduce datele de două ori exact în perioada cea mai încărcată.</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Direcția</th><th>Ce se transferă</th><th>Ce rezolvă în perioada de tranziție</th></tr>
+    <tr>
+      <td><strong>1C → CRM</strong></td>
+      <td>Nomenclatorul de produse și servicii, prețurile curente, stocurile disponibile, lista de contragenți existenți.</td>
+      <td>Managerul întocmește oferta cu prețurile și disponibilitatea reale. Nu se mai promit clienților mărfuri care nu există în stoc.</td>
+    </tr>
+    <tr>
+      <td><strong>CRM → 1C</strong></td>
+      <td>Tranzacția câștigată devine document în 1C: comandă, factură proformă sau factură fiscală, cu contragentul și pozițiile completate.</td>
+      <td>Contabilitatea nu reintroduce manual datele cât timp încă lucrează în 1C.</td>
+    </tr>
+    <tr>
+      <td><strong>1C → CRM (retur)</strong></td>
+      <td>Starea achitării: facturi emise, plăți încasate, solduri restante pe client.</td>
+      <td>Managerul vede în cartelă dacă clientul a achitat, fără a suna contabilitatea.</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3><span class="idx">7.2.</span> Regimul de sincronizare</h3>
+  <ul>
+    <li><strong>Automat, la interval configurabil</strong> — implicit la fiecare 15 minute pentru stocuri și prețuri, imediat pentru documente;</li>
+    <li><strong>La eveniment</strong> — tranzacția trece pe etapa „Contract semnat", documentul se creează în 1C în aceeași secundă;</li>
+    <li><strong>Manual, la cerere</strong> — buton de sincronizare pentru cazurile excepționale;</li>
+    <li><strong>Jurnal complet</strong> al schimburilor: ce s-a transferat, când, cu ce rezultat.</li>
+  </ul>
+
+  <h3><span class="idx">7.3.</span> Când se închide puntea</h3>
+  <p>La finalul etapei 5 din secțiunea 6.2 — trecerea definitivă — integrarea se dezactivează, pentru că nu mai are ce sincroniza: contabilitatea și vânzările sunt în același sistem, pe aceleași date. Din acel moment dispar și întreținerea conectorului, și clasa de erori pe care o produce orice sincronizare între două baze diferite.</p>
+  <div class="note"><strong>Precizare tehnică:</strong> puntea funcționează cu versiunile 1C aflate în exploatare la Prodcom Fit. La etapa de analiză verificăm versiunea și configurația concretă și confirmăm scenariul de schimb. Dacă versiunea dumneavoastră necesită o abordare specifică, o comunicăm <strong>înainte</strong> de începerea lucrărilor, nu după.</div>
+  <div class="note ok"><strong>Dacă decideți să rămâneți pe 1C:</strong> spunem deschis că nu este scenariul pe care îl recomandăm și nu îl mai livrăm ca proiect nou după septembrie 2026. Puteți contracta însă doar partea de CRM (300 € + 100 €/lună), cu puntea de integrare menținută pe perioada contractului. Decizia vă aparține integral — noi nu condiționăm livrarea CRM-ului de acceptarea migrării.</div>
 </section>
 
 <!-- ============================================================ -->
 <section id="ia">
-  <h2>7. Inteligența artificială în sistem</h2>
+  <h2>8. Inteligența artificială în sistem</h2>
   <p>Abonamentul lunar se numește <em>„servicii de dezvoltare prin inteligență artificială, tip Basic"</em> — și acesta este exact modelul de lucru. Inteligența artificială apare în trei roluri distincte.</p>
   <div class="three-col">
     <div class="card">
@@ -1073,7 +1157,7 @@
 
 <!-- ============================================================ -->
 <section id="securitate">
-  <h2>8. Securitatea datelor și găzduirea în Moldova</h2>
+  <h2>9. Securitatea datelor și găzduirea în Moldova</h2>
   <div class="two-col">
     <div class="card">
       <h4>Protecția tehnică</h4>
@@ -1099,7 +1183,7 @@
 
 <!-- ============================================================ -->
 <section id="implementare">
-  <h2>9. Etapele implementării — 2 săptămâni</h2>
+  <h2>10. Etapele implementării — 2 săptămâni</h2>
   <p>Conectarea și migrarea se realizează în <strong>2 săptămâni</strong>, în <strong>variantă de testare</strong>. Trecerea în exploatare reală se face numai după ce fiecare întrebare a beneficiarului a primit <strong>răspuns pozitiv</strong> și confirmat.</p>
   <ol class="timeline">
     <li>
@@ -1134,61 +1218,75 @@
     </li>
   </ol>
   <div class="note ok"><strong>Regula de recepție:</strong> nu considerăm implementarea finalizată până când nu confirmați, în scris, fiecare dintre cele 22 de puncte. Dacă un punct rămâne neconfirmat, lucrările continuă fără costuri suplimentare, până la confirmare.</div>
+  <div class="note ok"><strong>Migrarea contabilă rulează în paralel.</strong> Calendarul de mai sus priveşte partea de CRM. Migrarea de pe 1C (secțiunea 6) are propriul parcurs, de 2–6 săptămâni, şi nu blochează lansarea CRM-ului: în perioada de suprapunere lucrează puntea de integrare descrisă în secțiunea 7.</div>
 </section>
 
 <!-- ============================================================ -->
 <section id="financiar">
-  <h2>10. Partea financiară</h2>
-  <p>Structura este deliberat simplă: o plată unică la conectare și un abonament lunar fix. Fără licențe per utilizator, fără taxe de acces, fără tarifare orară pentru configurarea CRM.</p>
+  <h2>11. Partea financiară</h2>
+  <p>Structura este deliberat simplă: două plăți la start, două plăți lunare. Fără licențe per utilizator pentru CRM, fără taxe de acces, fără tarifare orară pentru configurarea sistemelor.</p>
 
   <div class="two-col">
     <div class="plan">
-      <h4>Conectare</h4>
-      <span class="big">300 €</span>
-      <span class="price-sub">o singură dată, la începutul colaborării</span>
+      <h4>La start</h4>
+      <span class="big">300 € + 500 €</span>
+      <span class="price-sub">conectarea CRM și migrarea de pe 1C, o singură dată</span>
       <ul class="check" style="margin-top:14px">
         <li>Analiza proceselor și specificația de configurare;</li>
         <li>Configurarea tuturor celor 22 de module;</li>
-        <li>Integrarea cu 1C, bidirecțională;</li>
+        <li>Puntea de integrare cu 1C pe perioada tranziției;</li>
         <li>Conectarea telefoniei, e-mailului și a canalelor de mesagerie;</li>
-        <li>Migrarea bazei de clienți;</li>
-        <li>Instruirea managerilor și a administrației;</li>
-        <li>Ghidurile video, modul manager și modul administrator;</li>
-        <li>Punerea în exploatare, în 2 săptămâni.</li>
+        <li>Migrarea automatizată a contabilității de pe 1C;</li>
+        <li>Reconcilierea soldurilor și exploatarea în paralel;</li>
+        <li>Instruirea vânzărilor și a contabilității;</li>
+        <li>Ghidurile video, modul manager și modul administrator.</li>
       </ul>
-      <div class="doclist"><b>Totul este inclus.</b> Nu există plăți suplimentare la etapa de implementare.</div>
+      <div class="doclist"><b>Preț fix.</b> Cei 500 € se restituie integral dacă reconcilierea soldurilor nu reușește.</div>
     </div>
     <div class="plan saas">
-      <h4>Abonament lunar</h4>
-      <span class="big">100 €/lună</span>
-      <span class="price-sub">servicii de dezvoltare prin inteligență artificială, tip <em>Basic</em></span>
+      <h4>Lunar</h4>
+      <span class="big">100 € + 50 €/user</span>
+      <span class="price-sub">abonament CRM fix și posturile de lucru de contabilitate</span>
       <ul class="check" style="margin-top:14px">
         <li>Dezvoltarea și ajustarea curentă a configurației;</li>
         <li>Consultații pentru utilizatori, nelimitat;</li>
         <li>Corectarea erorilor, cu prioritate;</li>
+        <li><strong>Actualizările legislative</strong> pentru contabilitate;</li>
         <li>Găzduirea la TopHost și copiile de rezervă;</li>
         <li>Actualizările sistemului;</li>
         <li>Suport prin chat și telefon, reacție în maximum 4 ore lucrătoare.</li>
       </ul>
-      <div class="doclist"><b>Majorare:</b> tariful de 100 €/lună poate fi majorat <b>doar prin acord comun</b>, niciodată unilateral.</div>
+      <div class="doclist"><b>Majorare:</b> abonamentul CRM de 100 €/lună poate fi majorat <b>doar prin acord comun</b>, niciodată unilateral.</div>
     </div>
   </div>
 
-  <h3><span class="idx">10.1.</span> Lista completă de prețuri</h3>
+  <h3><span class="idx">11.1.</span> Lista completă de prețuri</h3>
   <div class="table-wrap">
   <table>
     <tr><th>Poziție</th><th>Tarif</th><th>Regim</th><th>Ce cuprinde</th></tr>
     <tr>
-      <td><strong>Conectare</strong></td>
+      <td><strong>Conectare CRM</strong></td>
       <td class="num">300 €</td>
       <td>unic</td>
-      <td>Implementarea completă a celor 22 de module, integrarea 1C, migrarea datelor, instruirea, ghidurile video. <strong>Totul inclus.</strong></td>
+      <td>Implementarea completă a celor 22 de module, puntea de integrare 1C, migrarea bazei de clienți, instruirea, ghidurile video. <strong>Totul inclus.</strong></td>
     </tr>
     <tr>
-      <td><strong>Abonament dezvoltare, tip Basic</strong></td>
+      <td><strong>Migrarea completă de pe 1C</strong></td>
+      <td class="num">500 €</td>
+      <td>unic</td>
+      <td><strong>Preț fix.</strong> Analiza bazei 1C, transferul automat al datelor, reproducerea rapoartelor, reconcilierea soldurilor, exploatarea în paralel, instruirea contabilității, arhivarea bazei 1C. <strong>Restituire integrală dacă reconcilierea nu reușește.</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Abonament CRM, tip Basic</strong></td>
       <td class="num">100 €/lună</td>
+      <td>lunar, fix</td>
+      <td>Dezvoltare asistată de IA, ajustări, consultații, suport, găzduire, copii de rezervă, actualizări. <strong>Nu depinde de numărul de manageri.</strong> Majorabil doar prin acord comun.</td>
+    </tr>
+    <tr>
+      <td><strong>Posturi de lucru contabilitate</strong></td>
+      <td class="num">50 €/utilizator/lună</td>
       <td>lunar</td>
-      <td>Dezvoltare asistată de IA, ajustări, consultații, suport, găzduire, copii de rezervă, actualizări. Majorabil <strong>doar prin acord comun</strong>.</td>
+      <td>Licență de post de lucru, găzduire, copii de rezervă, <strong>actualizări legislative</strong>, actualizări funcționale, suport și ajustări. Se achită doar utilizatorii activi.</td>
     </tr>
     <tr>
       <td><strong>Servicii la comandă</strong></td>
@@ -1197,22 +1295,10 @@
       <td>Lucrări suplimentare, <strong>exclusiv la dorința beneficiarului</strong>. Nu se activează automat și nu se facturează fără solicitare scrisă.</td>
     </tr>
     <tr>
-      <td><strong>Migrarea completă de pe 1C</strong> <span class="chip">opțional</span></td>
-      <td class="num">500 €</td>
-      <td>unic</td>
-      <td><strong>Preț fix.</strong> Analiza bazei 1C, transferul automat al datelor, reproducerea rapoartelor, reconcilierea soldurilor, exploatarea în paralel, instruirea contabilității, arhivarea bazei 1C. Detalii în secțiunea 6.</td>
-    </tr>
-    <tr>
-      <td><strong>Abonament UNA.md după migrare</strong> <span class="chip">opțional</span></td>
-      <td class="num">50 €/utilizator/lună</td>
-      <td>lunar</td>
-      <td>Licență de post de lucru, găzduire, copii de rezervă, <strong>actualizări legislative</strong>, actualizări funcționale, suport și ajustări. Se achită doar pentru utilizatorii activi.</td>
-    </tr>
-    <tr>
       <td><strong>Lucrări tehnice de suport pentru calculatoare</strong></td>
       <td class="num">25 €/oră</td>
       <td>la solicitare</td>
-      <td><strong>Nu privește CRM-ul.</strong> Se referă strict la deservirea tehnică a calculatoarelor și a echipamentelor. Detalii în secțiunea 15.</td>
+      <td><strong>Nu privește nici CRM-ul, nici contabilitatea.</strong> Se referă strict la deservirea tehnică a calculatoarelor și a echipamentelor. Detalii în secțiunea 16.</td>
     </tr>
     <tr>
       <td>Minute de convorbire telefonică</td>
@@ -1229,7 +1315,7 @@
   </table>
   </div>
 
-  <h3><span class="idx">10.2.</span> Condițiile contractuale</h3>
+  <h3><span class="idx">11.2.</span> Condițiile contractuale</h3>
   <div class="table-wrap">
   <table>
     <tr><th style="width:230px">Condiție</th><th>Formulare</th></tr>
@@ -1238,8 +1324,16 @@
       <td><strong>2 ani</strong>, care încep să curgă <strong>după primele 2 luni de colaborare</strong>. Primele două luni sunt o perioadă de verificare reciprocă: dacă sistemul nu corespunde așteptărilor, colaborarea poate înceta fără penalități.</td>
     </tr>
     <tr>
-      <td><strong>Termenul de conectare</strong></td>
-      <td><strong>2 săptămâni</strong> pentru conectare și migrare, în <strong>variantă de testare</strong>. Trecerea în exploatare reală — numai cu <strong>răspuns pozitiv la fiecare întrebare</strong> din caietul de sarcini.</td>
+      <td><strong>Termenul de conectare CRM</strong></td>
+      <td><strong>2 săptămâni</strong> pentru conectare și migrarea bazei de clienți, în <strong>variantă de testare</strong>. Trecerea în exploatare reală — numai cu <strong>răspuns pozitiv la fiecare întrebare</strong> din caietul de sarcini.</td>
+    </tr>
+    <tr>
+      <td><strong>Termenul migrării contabile</strong></td>
+      <td>De regulă <strong>2–6 săptămâni</strong>, în funcție de volumul de date, din care o perioadă completă de raportare se lucrează în paralel. Prețul rămâne fix indiferent de durata efectivă.</td>
+    </tr>
+    <tr>
+      <td><strong>Garanția migrării</strong></td>
+      <td>Dacă balanțele din UNA.md nu coincid cu cele din 1C, rămâneți în 1C, iar <strong>cei 500 € se restituie integral</strong>. Baza 1C vă este predată arhivată în ambele situații.</td>
     </tr>
     <tr>
       <td><strong>Majorarea abonamentului</strong></td>
@@ -1264,25 +1358,40 @@
 
 <!-- ============================================================ -->
 <section id="calcul">
-  <h2>11. Exemple de calcul al costului</h2>
+  <h2>12. Exemple de calcul al costului</h2>
 
-  <h3><span class="idx">11.1.</span> Costul total pentru Prodcom Fit SRL</h3>
+  <h3><span class="idx">12.1.</span> Costul total pentru Prodcom Fit SRL</h3>
+  <p>Scenariul de referință: <strong>10 utilizatori CRM</strong> în vânzări și <strong>3 utilizatori</strong> în contabilitate, cu înlocuirea completă a 1C.</p>
   <div class="table-wrap">
   <table>
     <tr><th>Perioadă</th><th>Poziții</th><th>Cost</th></tr>
-    <tr><td><strong>Anul 1</strong></td><td>Conectare 300 € + abonament 12 × 100 €</td><td class="num">1 500 €</td></tr>
-    <tr><td><strong>Anul 2</strong></td><td>Abonament 12 × 100 €</td><td class="num">1 200 €</td></tr>
-    <tr class="total"><td><strong>Total 2 ani</strong></td><td>Contractul minim, integral</td><td class="num">2 700 €</td></tr>
-    <tr><td colspan="2" style="text-align:right"><em>Cost mediu lunar pe durata contractului</em></td><td class="num">112,50 €</td></tr>
+    <tr><td><strong>La start</strong></td><td>Conectare CRM 300 € + migrare 1C 500 €</td><td class="num">800 €</td></tr>
+    <tr><td><strong>Lunar</strong></td><td>Abonament CRM 100 € (fix) + 3 × 50 € contabilitate</td><td class="num">250 €</td></tr>
+    <tr><td><strong>Anul 1</strong></td><td>800 € la start + 12 × 250 €</td><td class="num">3 800 €</td></tr>
+    <tr><td><strong>Anul 2</strong></td><td>12 × 250 €</td><td class="num">3 000 €</td></tr>
+    <tr class="total"><td><strong>Total 2 ani</strong></td><td>Contractul minim, integral</td><td class="num">6 800 €</td></tr>
+    <tr><td colspan="2" style="text-align:right"><em>Cost mediu lunar pe durata contractului</em></td><td class="num">283 €</td></tr>
   </table>
   </div>
   <p>La aceasta se adaugă doar costurile achitate direct furnizorilor externi — minutele de telefonie și mesajele SMS — la tarifele acestora, fără comision din partea noastră.</p>
 
-  <h3><span class="idx">11.2.</span> Comparație cu modelul de licențiere per utilizator</h3>
-  <p>Ofertele-tip de implementare amoCRM din regiune presupun două componente: implementarea (o singură dată) și licențele (lunar, per utilizator). Tabelul compară cele două modele pentru o echipă de 10 persoane, pe doi ani.</p>
+  <h3><span class="idx">12.2.</span> Dacă echipa de vânzări crește</h3>
   <div class="table-wrap">
   <table>
-    <tr><th>Poziție</th><th>Model licențiat (10 utilizatori)</th><th>Oferta UNA.md/CRM</th></tr>
+    <tr><th>Manageri de vânzări</th><th>Abonament CRM</th><th>Contabilitate (3 utilizatori)</th><th>Total lunar</th></tr>
+    <tr><td>5 manageri</td><td class="num">100 €</td><td class="num">150 €</td><td class="num">250 €</td></tr>
+    <tr><td>10 manageri</td><td class="num">100 €</td><td class="num">150 €</td><td class="num">250 €</td></tr>
+    <tr><td>25 manageri</td><td class="num">100 €</td><td class="num">150 €</td><td class="num">250 €</td></tr>
+    <tr><td>50 manageri</td><td class="num">100 €</td><td class="num">150 €</td><td class="num">250 €</td></tr>
+  </table>
+  </div>
+  <div class="note ok"><strong>Nu este o greșeală de tipar.</strong> Abonamentul CRM nu depinde de numărul de manageri. Creșterea echipei de vânzări nu costă nimic în plus — spre deosebire de modelul de licențiere per utilizator, unde fiecare angajare nouă înseamnă o plată lunară suplimentară.</div>
+
+  <h3><span class="idx">12.3.</span> Comparație cu modelul de licențiere per utilizator</h3>
+  <p>Ofertele-tip de implementare amoCRM din regiune presupun două componente: implementarea, o singură dată, și licențele, lunar, per utilizator. Comparația este făcută pentru o echipă de 10 persoane, pe doi ani, <strong>fără</strong> partea de contabilitate — pentru a compara lucruri comparabile.</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Poziție</th><th>Model licențiat (10 utilizatori)</th><th>Oferta UNA.md</th></tr>
     <tr><td>Implementare, o singură dată</td><td class="num">1 500 – 3 500 €</td><td class="num">300 €</td></tr>
     <tr><td>Licențe lunare</td><td class="num">~150 – 250 €/lună</td><td class="num">0 €</td></tr>
     <tr><td>Abonament de dezvoltare și suport</td><td class="num">tarifat orar după 60–90 zile</td><td class="num">100 €/lună, inclus</td></tr>
@@ -1292,12 +1401,12 @@
   </div>
   <div class="note">Valorile din coloana centrală sunt estimări de piață, orientative, și pot varia în funcție de integrator și de pachetul de licențe ales. Coloana din dreapta este fermă și contractuală.</div>
 
-  <h3><span class="idx">11.3.</span> Efectul asupra activității</h3>
+  <h3><span class="idx">12.4.</span> Efectul asupra activității</h3>
   <div class="three-col">
     <div class="card">
       <h4>Timp economisit</h4>
       <ul>
-        <li>Introducerea documentelor în 1C — eliminată prin integrare;</li>
+        <li>Introducerea documentelor în contabilitate — eliminată, este același sistem;</li>
         <li>Căutarea corespondenței pe canale — un singur fir pe cartelă;</li>
         <li>Întocmirea rapoartelor — automat, în dashboard.</li>
       </ul>
@@ -1311,11 +1420,11 @@
       </ul>
     </div>
     <div class="card">
-      <h4>Control</h4>
+      <h4>Risc eliminat</h4>
       <ul>
-        <li>Conducerea vede planul lunar în timp real;</li>
-        <li>Eficiența campaniilor — după vânzări reale, nu după clicuri;</li>
-        <li>Baza de clienți rămâne în companie, nu în telefoanele angajaților.</li>
+        <li>Actualizările legislative nu mai depind de un lanț din altă jurisdicție;</li>
+        <li>Sistemul poate fi auditat, iar datele rămân în țară;</li>
+        <li>Migrarea se face planificat, nu sub presiune.</li>
       </ul>
     </div>
   </div>
@@ -1323,7 +1432,7 @@
 
 <!-- ============================================================ -->
 <section id="instruire">
-  <h2>12. Instruire, materiale video și suport</h2>
+  <h2>13. Instruire, materiale video și suport</h2>
   <div class="table-wrap">
   <table>
     <tr><th style="width:200px">Componentă</th><th>Conținut</th><th style="width:130px">Regim</th></tr>
@@ -1335,7 +1444,7 @@
     <tr><td><strong>Suport curent</strong></td><td>Consultații, ajustări în limita funcționalului contractat, corectarea erorilor.</td><td class="ctr">inclus, permanent</td></tr>
   </table>
   </div>
-  <h3><span class="idx">12.1.</span> Termene de reacție</h3>
+  <h3><span class="idx">13.1.</span> Termene de reacție</h3>
   <div class="table-wrap">
   <table>
     <tr><th>Prioritate</th><th>Exemple</th><th>Reacție</th><th>Rezolvare</th></tr>
@@ -1349,7 +1458,7 @@
 
 <!-- ============================================================ -->
 <section id="comparatie">
-  <h2>13. Comparație cu amoCRM, Bitrix24 și alte soluții</h2>
+  <h2>14. Comparație cu amoCRM, Bitrix24 și alte soluții</h2>
   <p>Caietul de sarcini transmis face referire la amoCRM. Tabelul arată unde diferă propunerea noastră față de platformele consacrate.</p>
   <div class="table-wrap">
   <table>
@@ -1374,18 +1483,21 @@
   </table>
   </div>
   <div class="note"><strong>Unde platformele mari rămân mai puternice:</strong> ecosistem de sute de widgeturi terțe, comunitate internațională largă și instrumente de marketing avansate. Dacă acestea sunt decisive pentru dumneavoastră, o spunem deschis. Pentru profilul descris în caietul de sarcini — echipă de vânzări, telefonie, mesagerie, documente și 1C — soluția locală acoperă integral necesarul, la un cost semnificativ mai mic și cu datele în țară.</div>
+  <div class="note"><strong>Precizare privind ultima linie:</strong> cifra de 2 700 € acoperă exclusiv partea de CRM pe doi ani, pentru a fi comparabilă cu ofertele de licențiere amoCRM şi Bitrix24. Costul înlocuirii 1C se adaugă separat şi este detaliat în secțiunile 6.4 şi 12.1.</div>
 </section>
 
 <!-- ============================================================ -->
 <section id="inclus">
-  <h2>14. Ce este inclus și ce se tarifează separat</h2>
+  <h2>15. Ce este inclus și ce se tarifează separat</h2>
   <div class="two-col">
     <div class="card">
-      <h4>Inclus în 300 € + 100 €/lună</h4>
+      <h4>Inclus în 800 € la start + abonamentele lunare</h4>
       <ul class="check">
         <li>Toate cele 22 de module din caietul de sarcini;</li>
-        <li>Integrarea bidirecțională cu 1C;</li>
-        <li>Conectarea telefoniei IP și configurarea scenariilor de apel;</li>
+        <li>Migrarea automatizată a contabilității de pe 1C;</li>
+        <li>Reconcilierea soldurilor și exploatarea în paralel;</li>
+        <li>Puntea de integrare cu 1C pe perioada tranziției;</li>
+        <li>Conectarea telefoniei IP și scenariile de apel;</li>
         <li>E-mail corporativ și personal, pentru fiecare utilizator;</li>
         <li>Facebook, Instagram, Viber — conectate și testate;</li>
         <li>API pentru site și analitica UTM;</li>
@@ -1394,10 +1506,10 @@
         <li>Dashboard, rapoarte, plan de vânzări;</li>
         <li>Sales Bot și Voice AI;</li>
         <li>Migrarea bazei de clienți;</li>
-        <li>Instruirea managerilor și a administrației;</li>
+        <li>Instruirea vânzărilor, a administrației și a contabilității;</li>
         <li>Ghidurile video, ambele module;</li>
+        <li>Actualizările legislative pentru contabilitate;</li>
         <li>Găzduirea la TopHost și copiile de rezervă;</li>
-        <li>Actualizările sistemului;</li>
         <li>Suportul și ajustările, permanent.</li>
       </ul>
     </div>
@@ -1407,17 +1519,18 @@
         <li><strong>Minutele de telefonie</strong> — la tariful operatorului dumneavoastră; noi nu intermediem și nu adăugăm comision;</li>
         <li><strong>Mesajele SMS</strong> — la tariful gateway-ului ales; modulul și integrarea sunt incluse;</li>
         <li><strong>Numele de domeniu</strong>, dacă doriți o adresă proprie pentru sistem;</li>
-        <li><strong>Licențele 1C</strong> — cele pe care compania le deține deja.</li>
+        <li><strong>Licențele 1C existente</strong> — până la finalizarea migrării; după aceea, nu se mai reînnoiesc.</li>
       </ul>
       <div class="doclist"><b>Observație:</b> aceste poziții nu sunt venituri ale furnizorului. Le enumerăm pentru transparență bugetară, nu ca extra-costuri ale proiectului.</div>
     </div>
   </div>
-  <div class="note ok"><strong>Ce nu apare în această ofertă și nici nu va apărea:</strong> taxe de activare per utilizator, taxe de acces la API, comisioane pe volumul de tranzacții, plăți pentru exportul propriilor date sau tarife de „migrare la ieșire".</div>
+  <div class="note ok"><strong>Ce nu apare în această ofertă și nici nu va apărea:</strong> taxe de activare per utilizator pentru CRM, taxe de acces la API, comisioane pe volumul de tranzacții sau de documente, plăți pentru exportul propriilor date și tarife de „migrare la ieșire".</div>
+  <div class="note red"><strong>Economia care se vede abia din anul doi:</strong> odată migrarea încheiată, dispar licențele 1C, abonamentele de actualizare și orele facturate pentru ajustări în configurația 1C. Pentru majoritatea companiilor de talia Prodcom Fit, această economie acoperă singură o parte semnificativă din abonamentul lunar către noi.</div>
 </section>
 
 <!-- ============================================================ -->
 <section id="tehnic">
-  <h2>15. Precizare importantă: tariful de 25 €/oră</h2>
+  <h2>16. Precizare importantă: tariful de 25 €/oră</h2>
   <div class="note">
     <p><strong>Atragem în mod special atenția asupra acestui punct, pentru a evita orice neînțelegere ulterioară.</strong></p>
     <p>Tariful de <strong>25 € pe oră</strong> menționat în ofertă se referă <strong>exclusiv la lucrările tehnice de suport pentru calculatoare</strong> — deservirea echipamentelor și a infrastructurii de birou. <strong>Nu are nicio legătură cu CRM-ul</strong>, cu configurarea, dezvoltarea sau ajustarea acestuia.</p>
@@ -1438,7 +1551,7 @@
     <div class="card">
       <h4>NU se tarifează — intră în abonament</h4>
       <ul class="check">
-        <li>Orice ajustare a configurației CRM;</li>
+        <li>Orice ajustare a configurației CRM sau a contabilității;</li>
         <li>Câmpuri noi, etape noi, automatizări noi;</li>
         <li>Șabloane noi de documente sau de SMS;</li>
         <li>Rapoarte și widgeturi suplimentare în dashboard;</li>
@@ -1455,20 +1568,30 @@
 
 <!-- ============================================================ -->
 <section id="faq">
-  <h2>16. Întrebări frecvente</h2>
+  <h2>17. Întrebări frecvente</h2>
 
   <details open>
     <summary>Dezvoltați CRM cu integrare 1C?</summary>
-    <div class="a"><p>Da. Integrarea cu 1C este bidirecțională și inclusă în conectarea de 300 €, fără cost separat: nomenclatorul, prețurile și stocurile vin din 1C în CRM, iar tranzacțiile câștigate devin documente în 1C. La etapa de analiză verificăm versiunea concretă aflată în exploatare la Prodcom Fit și confirmăm scenariul de schimb înainte de a începe lucrările.</p>
-    <p>Dacă însă intenția este de a <strong>renunța la 1C</strong>, nu doar de a comunica cu el, secțiunea 6 descrie varianta de înlocuire integrală: migrare automatizată la preț fix de 500 € și abonament de 50 € pe utilizator activ lunar.</p></div>
+    <div class="a">
+      <p>Da — cu o precizare care ține de poziția noastră din secțiunea 1. Integrarea este bidirecțională, inclusă în conectarea de 300 €, și acoperă nomenclatorul, prețurile, stocurile, documentele și starea achitării. O livrăm însă ca <strong>punte de tranziție</strong>, pe perioada migrării, nu ca arhitectură permanentă (secțiunea 7).</p>
+      <p>Ținta proiectului este secțiunea 6: <strong>înlocuirea integrală a 1C</strong>, la preț fix de 500 €, după care puntea se închide pentru că nu mai are ce sincroniza.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Chiar este obligatorie înlocuirea 1C? Există o lege?</summary>
+    <div class="a">
+      <p><strong>Nu, nu există astăzi o lege</strong> care să oblige companiile private din Republica Moldova să renunțe la 1C, și nu vă vom spune contrariul ca să grăbim o semnătură. Spunem exact ce stă în spatele devizei:</p>
+      <p><strong>Obligatoriu în oferta noastră</strong> — este condiția pe care o punem noi, ca furnizor, proiectelor noi începute după septembrie 2026. <strong>Obligatoriu ca direcție</strong> — Ucraina a interzis produsul în instituțiile publice din 2025, Ministerul Apărării al RM a renunțat în 2021, iar Strategia securității naționale din 2024 indică Federația Rusă drept principala amenințare. <strong>Obligatoriu ca aritmetică</strong> — o migrare planificată costă 500 €; una făcută sub presiune costă de câteva ori mai mult.</p>
+      <p>Decizia rămâne integral a dumneavoastră. Putem livra și doar partea de CRM, dacă alegeți să rămâneți deocamdată pe 1C.</p>
+    </div>
   </details>
 
   <details>
     <summary>De ce ar trebui să renunțăm la 1C acum, dacă funcționează?</summary>
     <div class="a">
-      <p>Nu vă spunem că 1C nu funcționează — funcționează, și tocmai de aceea a ajuns la o cotă de piață de peste 98 % în Moldova. Argumentul este de altă natură și îl expune, mai bine decât orice material de vânzare, <a href="https://www.zdg.md/investigatii/ancheta/video-independenti-de-rusia-principala-amenintare-cu-acces-la-banii-si-informatiile-noastre/" target="_blank" rel="noopener">investigația Ziarului de Gardă</a> din august 2026, la care am fost și noi intervievați.</p>
-      <p>Pe scurt: produsul are cod sursă închis, nu poate fi auditat independent și se află sub jurisdicția unui stat identificat oficial, prin Strategia securității naționale din 2024, drept principala amenințare la adresa Republicii Moldova. Serviciul de securitate al Ucrainei l-a calificat drept <em>spyware</em>, iar din 2025 este interzis în instituțiile publice ucrainene. Ministerul Apărării al Republicii Moldova a renunțat la el încă din 2021.</p>
-      <p>Pentru o companie privată, riscul practic nu este spionajul, ci <strong>continuitatea</strong>: actualizările legislative, plata licențelor și suportul depind de un lanț pe care nu îl controlați. Dacă tranziția devine la un moment dat obligatorie sau urgentă, se face sub presiune de timp și costă considerabil mai mult decât 500 €.</p>
+      <p>Nu susținem că 1C nu funcționează — funcționează, și de aceea a ajuns la o cotă de peste 98 %. Argumentul este altul și îl expune, mai bine decât orice material de vânzare, <a href="https://www.zdg.md/investigatii/ancheta/video-independenti-de-rusia-principala-amenintare-cu-acces-la-banii-si-informatiile-noastre/" target="_blank" rel="noopener">investigația Ziarului de Gardă</a> din august 2026, la care am fost și noi intervievați.</p>
+      <p>Produsul are cod sursă închis și nu poate fi auditat independent — nici de dumneavoastră, nici de auditor, nici de noi. Pentru o companie privată, riscul practic nu este spionajul, ci <strong>continuitatea</strong>: actualizările pentru modificările Codului fiscal, plata licențelor și accesul la suport depind de un lanț pe care nu îl controlați, iar declarațiile fiscale se depun oricum, la termen.</p>
     </div>
   </details>
 
@@ -1476,7 +1599,7 @@
     <summary>Ce înseamnă concret „migrare automatizată" și cât durează?</summary>
     <div class="a">
       <p>Înseamnă că nimeni nu reintroduce date manual. Conectorul citește direct structura bazei 1C și transferă planul de conturi, contragenții, nomenclatorul, stocurile, mijloacele fixe, salariații, contractele, soldurile și istoricul documentelor. Apoi sistemul <strong>compară automat balanța din 1C cu cea din UNA.md</strong>, cont cu cont și contragent cu contragent, și emite un raport de reconciliere.</p>
-      <p>Durata obișnuită este de 2–6 săptămâni, din care o perioadă de raportare se lucrează <strong>în paralel</strong> în ambele sisteme, pentru comparație. <strong>Prețul de 500 € rămâne fix indiferent de durată</strong>, de volumul de date sau de câte modificări are configurația dumneavoastră de 1C.</p>
+      <p>Durata obișnuită este de 2–6 săptămâni, din care o perioadă de raportare se lucrează <strong>în paralel</strong> în ambele sisteme. <strong>Prețul de 500 € rămâne fix</strong> indiferent de durată, de volumul de date sau de câte modificări are configurația dumneavoastră de 1C.</p>
     </div>
   </details>
 
@@ -1487,12 +1610,12 @@
 
   <details>
     <summary>De ce CRM-ul costă 100 € fix, iar contabilitatea 50 € de utilizator?</summary>
-    <div class="a"><p>Pentru că sunt servicii de natură diferită, iar preferăm să spunem asta deschis, nu să ascundem diferența. Cei 100 €/lună pentru CRM sunt un <strong>abonament de dezvoltare a unei configurații</strong> — o singură configurație, pe care o folosesc oricâți manageri. Cei 50 €/utilizator pentru contabilitate sunt o <strong>licență de post de lucru</strong>, care include actualizările legislative permanente — Cod fiscal, SNC, formulare de raportare — și suportul pentru fiecare contabil în parte. Se achită doar utilizatorii activi: dacă un post rămâne vacant, licența se eliberează și abonamentul scade din luna următoare.</p></div>
+    <div class="a"><p>Pentru că sunt servicii de natură diferită, iar preferăm să spunem asta deschis. Cei 100 €/lună pentru CRM sunt un <strong>abonament de dezvoltare a unei configurații</strong> — o singură configurație, pe care o folosesc oricâți manageri. Cei 50 €/utilizator pentru contabilitate sunt o <strong>licență de post de lucru</strong>, care include actualizările legislative permanente — Cod fiscal, SNC, formulare de raportare — și suportul pentru fiecare contabil în parte. Se achită doar utilizatorii activi: dacă un post rămâne vacant, licența se eliberează și abonamentul scade din luna următoare.</p></div>
   </details>
 
   <details>
-    <summary>De ce abonamentul este de doar 100 € pe lună?</summary>
-    <div class="a"><p>Pentru că dezvoltarea curentă se execută asistat de inteligență artificială. Lucrările care la un integrator clasic ar însemna câteva ore facturate se realizează în interiorul abonamentului. Acesta este și motivul pentru care ajustările configurației sunt incluse, nu tarifate orar. Tariful poate fi majorat doar prin acord comun — nu există indexări automate.</p></div>
+    <summary>Prețul crește dacă adăugăm manageri de vânzări?</summary>
+    <div class="a"><p>Nu. Pentru CRM nu există licențe per utilizator: 5, 10 sau 50 de manageri costă la fel — 100 €/lună. Crește doar partea de contabilitate, și doar dacă adăugați posturi de lucru contabile noi. Aceasta este principala diferență economică față de amoCRM și Bitrix24, unde fiecare utilizator nou înseamnă o plată lunară suplimentară.</p></div>
   </details>
 
   <details>
@@ -1502,22 +1625,17 @@
 
   <details>
     <summary>Cele 2 săptămâni de conectare sunt realiste?</summary>
-    <div class="a"><p>Da, în varianta de testare — sistemul devine funcțional și accesibil echipei dumneavoastră în acest interval. Trecerea în exploatare reală se face însă numai după ce fiecare punct din caietul de sarcini primește un răspuns pozitiv, confirmat în scris. Dacă un punct rămâne neconfirmat, continuăm lucrările fără costuri suplimentare până la confirmare.</p></div>
-  </details>
-
-  <details>
-    <summary>Prețul crește dacă adăugăm manageri?</summary>
-    <div class="a"><p>Nu. Nu există licențe per utilizator. Puteți adăuga manageri, departamente și pâlnii fără ca abonamentul să se modifice. Aceasta este principala diferență economică față de amoCRM și Bitrix24, unde fiecare utilizator nou înseamnă o plată lunară suplimentară.</p></div>
+    <div class="a"><p>Da, pentru partea de CRM, în varianta de testare — sistemul devine funcțional și accesibil echipei în acest interval. Trecerea în exploatare reală se face numai după ce fiecare punct din caietul de sarcini primește un răspuns pozitiv, confirmat în scris. Migrarea contabilității are propriul calendar, de 2–6 săptămâni, și se desfășoară în paralel, fără să blocheze lansarea CRM-ului.</p></div>
   </details>
 
   <details>
     <summary>Unde vor fi stocate datele clienților noștri?</summary>
-    <div class="a"><p>Recomandarea noastră este <strong>TopHost, Chișinău</strong> — datele rămân fizic în Republica Moldova, sub jurisdicția națională, cu viteză maximă pentru utilizatorii din țară. Costul găzduirii este inclus în abonament. Dacă politica internă a companiei preferă cloud-ul (regiuni UE), varianta rămâne disponibilă, fără schimbarea funcționalului. Comutarea între cele două este posibilă și după implementare.</p></div>
+    <div class="a"><p>La <strong>TopHost, Chișinău</strong> — datele rămân fizic în Republica Moldova, sub jurisdicție națională, cu viteză maximă pentru utilizatorii din țară. Costul găzduirii este inclus în abonament. Dacă politica internă a companiei preferă cloud-ul în regiuni UE, varianta rămâne disponibilă fără schimbarea funcționalului, iar comutarea este posibilă și după implementare.</p></div>
   </details>
 
   <details>
     <summary>Ce se întâmplă cu datele dacă încetăm colaborarea?</summary>
-    <div class="a"><p>Datele aparțin Prodcom Fit SRL. Le exportăm integral, în format deschis (Excel, CSV, JSON), oricând și fără taxă — inclusiv la încetarea contractului. Nu percepem tarife de „migrare la ieșire" și nu condiționăm exportul de achitarea vreunei sume suplimentare.</p></div>
+    <div class="a"><p>Datele aparțin Prodcom Fit SRL. Le exportăm integral, în format deschis (Excel, CSV, JSON), oricând și fără taxă — inclusiv la încetarea contractului. Nu percepem tarife de „migrare la ieșire" și nu condiționăm exportul de achitarea vreunei sume suplimentare. Ar fi contradictoriu ca un furnizor care vă cere să scăpați de dependența de un sistem închis să vă lege de al său.</p></div>
   </details>
 
   <details>
@@ -1526,18 +1644,18 @@
   </details>
 
   <details>
-    <summary>Tariful de 25 €/oră se va aplica pentru modificările din CRM?</summary>
-    <div class="a"><p><strong>Nu.</strong> Tariful de 25 €/oră privește exclusiv lucrările tehnice de suport pentru calculatoare — deservirea echipamentelor de birou, sistemul de operare, rețeaua, imprimantele. Orice modificare, ajustare sau extindere a configurației CRM este inclusă în abonamentul lunar. Am detaliat această distincție în secțiunea 15, tocmai pentru a nu lăsa loc de interpretare.</p></div>
-  </details>
-
-  <details>
-    <summary>Ce se întâmplă dacă avem nevoie de o funcție care nu figurează în cele 22 de puncte?</summary>
-    <div class="a"><p>Dacă se încadrează în logica funcțională a sistemului — un câmp nou, un raport nou, o automatizare nouă, un canal reconfigurat — intră în abonamentul lunar. Dacă presupune o direcție complet nouă, o discutăm separat, cu volum și cost estimate înainte de a începe, ca serviciu la comandă. În ambele situații, nimic nu se execută fără acordul dumneavoastră prealabil.</p></div>
+    <summary>Tariful de 25 €/oră se va aplica pentru modificările din sistem?</summary>
+    <div class="a"><p><strong>Nu.</strong> Tariful de 25 €/oră privește exclusiv lucrările tehnice de suport pentru calculatoare — deservirea echipamentelor de birou, sistemul de operare, rețeaua, imprimantele. Orice modificare, ajustare sau extindere a configurației CRM sau a contabilității este inclusă în abonamentele lunare. Am detaliat această distincție în secțiunea 16, tocmai pentru a nu lăsa loc de interpretare.</p></div>
   </details>
 
   <details>
     <summary>Cine ne asigură suportul și în ce limbă?</summary>
     <div class="a"><p>Echipa noastră, direct — nu prin parteneri sau revânzători. Comunicarea se face în română, rusă sau engleză, în fusul orar local, prin chat și telefon. Termenul de reacție este de maximum 4 ore lucrătoare pentru solicitările obișnuite și sub 2 ore pentru situațiile critice.</p></div>
+  </details>
+
+  <details>
+    <summary>Ce se întâmplă dacă avem nevoie de o funcție care nu figurează în cele 22 de puncte?</summary>
+    <div class="a"><p>Dacă se încadrează în logica funcțională a sistemului — un câmp nou, un raport nou, o automatizare nouă, un canal reconfigurat — intră în abonamentul lunar. Dacă presupune o direcție complet nouă, o discutăm separat, cu volum și cost estimate înainte de a începe, ca serviciu la comandă. În ambele situații, nimic nu se execută fără acordul dumneavoastră prealabil.</p></div>
   </details>
 </section>
 
@@ -1558,37 +1676,37 @@
   <div class="spec">
     <div class="h"><span class="no">1.</span> Setări de bază și roluri utilizatori</div>
     <div class="q"><span class="ref">Text original · punctul 1.1</span>Crearea și setarea contului CRM: titlului, tipului companiei, domen de acces, moneda. Ajustarea drepturilor utilizatorilor, editare și vizualizare a tranzacțiilor și contactelor după nivelul ierarhic de acces. Configurarea grupurilor după departamente și delimitarea vizualizării entităților de sistem (pâlnie, e-mail, analitică, dashboard).</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Contul se configurează cu denumirea, tipul de activitate, domeniul de acces și moneda de lucru ale Prodcom Fit SRL. Drepturile se stabilesc separat pentru tranzacții și pentru contacte, pe nivel ierarhic. Grupurile pe departamente delimitează accesul la pâlnii, e-mail, analitică și dashboard. Structura de roluri se aprobă de conducere la etapa de analiză (zilele 1–2). <em>Vezi secțiunea 4.1.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Contul se configurează cu denumirea, tipul de activitate, domeniul de acces și moneda de lucru ale Prodcom Fit SRL. Drepturile se stabilesc separat pentru tranzacții și pentru contacte, pe nivel ierarhic. Grupurile pe departamente delimitează accesul la pâlnii, e-mail, analitică și dashboard. Structura de roluri se aprobă de conducere la etapa de analiză (zilele 1–2). <em>Vezi secțiunea 5.1.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">2.</span> Configurare Tipuri de sarcini</div>
     <div class="q"><span class="ref">Text original · punctul 2.1</span>Scrierea și inserarea tipurilor de sarcini necesare, atribuind către fiecare propria pictogramă, care să reprezinte textul sarcinii.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Catalogul de tipuri se compune împreună cu conducerea comercială (apel, întâlnire, ofertă, contract, livrare, reapelare și altele solicitate), fiecare tip primind pictogramă proprie, recunoscută vizual în lista de sarcini. <em>Vezi secțiunea 4.1.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Catalogul de tipuri se compune împreună cu conducerea comercială (apel, întâlnire, ofertă, contract, livrare, reapelare și altele solicitate), fiecare tip primind pictogramă proprie, recunoscută vizual în lista de sarcini. <em>Vezi secțiunea 5.1.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">3.</span> Configurare Câmpuri tranzacție</div>
     <div class="q"><span class="ref">Text original · punctul 3.1</span>Ajustarea câmpurilor cartelei tranzacției pentru informație detaliată despre clienți și formare ulterior a rapoartelor. Configurarea obligativității și ordine de completare a câmpurilor conform etapelor.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Constructorul de cartelă acoperă toate tipurile de câmpuri (text, număr, sumă, dată, listă, bifă, telefon, e-mail). Obligativitatea și ordinea de completare se configurează <strong>pe etape</strong>: tranzacția nu poate fi mutată mai departe cu date lipsă. Structura câmpurilor este proiectată astfel încât rapoartele ulterioare să se poată forma fără prelucrări manuale. <em>Vezi secțiunea 4.1.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Constructorul de cartelă acoperă toate tipurile de câmpuri (text, număr, sumă, dată, listă, bifă, telefon, e-mail). Obligativitatea și ordinea de completare se configurează <strong>pe etape</strong>: tranzacția nu poate fi mutată mai departe cu date lipsă. Structura câmpurilor este proiectată astfel încât rapoartele ulterioare să se poată forma fără prelucrări manuale. <em>Vezi secțiunea 5.1.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">4.</span> Configurare Automatizări</div>
     <div class="q"><span class="ref">Text original · punctul 4.1</span>Generarea și fixarea automatizărilor pentru procese cu atribuirea responsabililor și termenii aferenți în dependență de etapă, valoarea câmpurilor din tranzacție, tag-uri sau alți triggeri (declanșatori). Stabilirea cronometrului de proces și generare sarcină pentru evitarea stagnării sau pierderii tranzacției.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Motorul de reguli acoperă toți declanșatorii enumerați — etapa, valoarea câmpului, eticheta, precum și timpul scurs, pragul valoric și sursa lead-ului. Cronometrul de proces se stabilește per etapă, cu generarea sarcinii și escaladarea la conducere în caz de depășire. Regula „nicio tranzacție fără sarcină activă" se impune de sistem. <em>Vezi secțiunea 4.2.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Motorul de reguli acoperă toți declanșatorii enumerați — etapa, valoarea câmpului, eticheta, precum și timpul scurs, pragul valoric și sursa lead-ului. Cronometrul de proces se stabilește per etapă, cu generarea sarcinii și escaladarea la conducere în caz de depășire. Regula „nicio tranzacție fără sarcină activă" se impune de sistem. <em>Vezi secțiunea 5.2.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">5.</span> Pâlnia de vânzări</div>
     <div class="q"><span class="ref">Text original · punctul 5.1</span>Palnia pentru recepționarea leadurilor care vin din campanii de reclamă SMM, mesajelor din messengere, solicitări de pe site, apeluri pentru prelucrarea imediată.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Toate cele patru surse enumerate — campanii SMM, messengere, formulare de pe site și apeluri — converg într-o singură pâlnie de recepție. Prelucrarea imediată este asigurată prin cronometrul de primă reacție, cu alertă dacă lead-ul nu a fost contactat în intervalul stabilit de conducere. <em>Vezi secțiunea 4.3.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Toate cele patru surse enumerate — campanii SMM, messengere, formulare de pe site și apeluri — converg într-o singură pâlnie de recepție. Prelucrarea imediată este asigurată prin cronometrul de primă reacție, cu alertă dacă lead-ul nu a fost contactat în intervalul stabilit de conducere. <em>Vezi secțiunea 5.3.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">6.</span> Pâlnia baza de date</div>
     <div class="q"><span class="ref">Text original · punctul 6.1</span>Palnia de apeluri reci.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, ca pâlnie <strong>separată</strong> de cea de vânzări, pentru a nu amesteca contactele reci cu lead-urile calde. Include distribuirea automată a listelor între manageri, evidența tentativelor per contact și trecerea automată în pâlnia de vânzări la primul semn de interes. <em>Vezi secțiunea 4.3.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, ca pâlnie <strong>separată</strong> de cea de vânzări, pentru a nu amesteca contactele reci cu lead-urile calde. Include distribuirea automată a listelor între manageri, evidența tentativelor per contact și trecerea automată în pâlnia de vânzări la primul semn de interes. <em>Vezi secțiunea 5.3.</em></div>
   </div>
 
   <h3><span class="idx">A1.2.</span> Cerințele 7–11 · Telefonie, date, e-mail și site</h3>
@@ -1596,31 +1714,31 @@
   <div class="spec">
     <div class="h"><span class="no">7.</span> Telefonie IP</div>
     <div class="q"><span class="ref">Text original · punctul 7.1</span>Conexiunea și configurarea telefoniei cu sistemul CRM. Configurarea apelurilor și a redirecționării conform managerilor, clientului în CRM. Apel direct din amoCRM, printr-un singur click - când apăsați pe numărul clientului sistemul inițiază apel către client. Crearea automată a contactului / tranzacției conform apelului - toate apelurile de intrare și de ieșire se înregistrează și se crează o tranzacție. Sarcini pentru apelurile pierdute - dacă managerul nu a preluat apelul, sistemul îi va reaminti să contacteze clientul dat.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu toate cele patru funcții enumerate: redirecționare către managerul care se ocupă deja de client, apel dintr-un singur clic, creare automată a contactului și tranzacției pentru numerele necunoscute, sarcină de reapelare pentru apelurile pierdute. Suplimentar, înregistrarea convorbirii se atașează cartelei și este audibilă direct din CRM. <strong>Minutele de convorbire se achită direct operatorului telecom</strong>, fără comision din partea prestatorului. <em>Vezi secțiunea 4.4.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu toate cele patru funcții enumerate: redirecționare către managerul care se ocupă deja de client, apel dintr-un singur clic, creare automată a contactului și tranzacției pentru numerele necunoscute, sarcină de reapelare pentru apelurile pierdute. Suplimentar, înregistrarea convorbirii se atașează cartelei și este audibilă direct din CRM. <strong>Minutele de convorbire se achită direct operatorului telecom</strong>, fără comision din partea prestatorului. <em>Vezi secțiunea 5.4.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">8.</span> Import baza de date</div>
     <div class="q"><span class="ref">Text original · punctul 8.1</span>Importul bazei de date a potențialilor clienți în amoCRM, cu asocierea entităților între contact, companie, tranzacție și atribuirea datelor corespunzătoare din bază pentru cartelele tranzacției, contactului și companiei.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu asocierea corectă contact ↔ companie ↔ tranzacție și repartizarea datelor din fișierul-sursă în câmpurile potrivite ale celor trei cartele. Suplimentar față de cerință: verificarea și unificarea dublurilor, import de test cu raport de control prezentat beneficiarului, iar importul final se execută <strong>numai după aprobarea dumneavoastră</strong>. <em>Vezi secțiunea 4.5.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu asocierea corectă contact ↔ companie ↔ tranzacție și repartizarea datelor din fișierul-sursă în câmpurile potrivite ale celor trei cartele. Suplimentar față de cerință: verificarea și unificarea dublurilor, import de test cu raport de control prezentat beneficiarului, iar importul final se execută <strong>numai după aprobarea dumneavoastră</strong>. <em>Vezi secțiunea 5.5.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">9.</span> Integrare E-mail</div>
     <div class="q"><span class="ref">Text original · punctul 9.1</span>Configurarea e-mail corporativ și e-mail personal pentru fiecare utilizator.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, pentru fiecare utilizator. Corespondența se atașează automat cartelei clientului, astfel încât istoricul rămâne în companie inclusiv după plecarea unui angajat. Include șabloane cu completare automată din datele tranzacției și sarcină generată automat dacă un e-mail rămâne fără răspuns. <em>Vezi secțiunea 4.6.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, pentru fiecare utilizator. Corespondența se atașează automat cartelei clientului, astfel încât istoricul rămâne în companie inclusiv după plecarea unui angajat. Include șabloane cu completare automată din datele tranzacției și sarcină generată automat dacă un e-mail rămâne fără răspuns. <em>Vezi secțiunea 5.6.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">10.</span> Website Lead API</div>
     <div class="q"><span class="ref">Text original · punctul 10.1</span>Programare modul API pentru schimbul de date între site și amoCRM, conectarea formelor curente din site, crearea contactului, tranzacției și asocierea între ele.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Modulul API se programează de către prestator; se conectează <strong>formularele existente</strong> de pe site, fără a fi necesară refacerea lor. Contactul și tranzacția se creează automat, cu asocierea corectă între ele. <em>Vezi secțiunea 4.7.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Modulul API se programează de către prestator; se conectează <strong>formularele existente</strong> de pe site, fără a fi necesară refacerea lor. Contactul și tranzacția se creează automat, cu asocierea corectă între ele. <em>Vezi secțiunea 5.7.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">11.</span> Website Lead UTM</div>
     <div class="q"><span class="ref">Text original · punctul 11.1</span>Configurarea site-urilor pentru a transmite lead-urile din formele de contact în CRM, împreună cu informațiile analitice precum UTM. În cartela creată a clientului vor fi informație despre sursa (fb, insta, google ads) și campania de unde am primit leadul. Permite eficientizarea campaniilor de marketing datorită evidenței eficienței marketingului din perspectiva vânzărilor reale, nu doar a solicitărilor.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. În cartela clientului apar sursa (fb, insta, google ads) și campania de proveniență. Raportul de eficiență se construiește <strong>pe vânzări reale</strong>, nu pe numărul de solicitări, și include costul per lead, costul per client și rata de conversie pe fiecare canal. <em>Vezi secțiunea 4.7.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. În cartela clientului apar sursa (fb, insta, google ads) și campania de proveniență. Raportul de eficiență se construiește <strong>pe vânzări reale</strong>, nu pe numărul de solicitări, și include costul per lead, costul per client și rata de conversie pe fiecare canal. <em>Vezi secțiunea 5.7.</em></div>
   </div>
 
   <h3><span class="idx">A1.3.</span> Cerințele 12–17 · Canale de comunicare, documente, SMS, analitică</h3>
@@ -1628,37 +1746,37 @@
   <div class="spec">
     <div class="h"><span class="no">12.</span> Facebook Mess + Lead-uri</div>
     <div class="q"><span class="ref">Text original · punctul 12.1</span>Conectarea contului de facebook în pâlania amoCRM, pentru a fixa toate solicitările din formularele din postări. Conectarea corespondenței paginii business către amoCRM pentru fixarea mesajelor cu posibilitatea de a răspunde la ele direct din CRM.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: fixarea solicitărilor din formularele din postări și preluarea corespondenței paginii business, cu răspuns direct din cartela tranzacției. Conectarea se testează cu conturile reale ale Prodcom Fit la zilele 6–8 ale implementării. <em>Vezi secțiunea 4.8.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: fixarea solicitărilor din formularele din postări și preluarea corespondenței paginii business, cu răspuns direct din cartela tranzacției. Conectarea se testează cu conturile reale ale Prodcom Fit la zilele 6–8 ale implementării. <em>Vezi secțiunea 5.8.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">13.</span> Instagram Direct + Lead-uri</div>
     <div class="q"><span class="ref">Text original · punctul 13.1</span>Conectarea contului de Instagram în pâlania amoCRM, pentru a fixa toate solicitările din formularele din postări. Conectarea corespondenței contului Instagram către amoCRM pentru fixarea mesajelor cu posibilitatea de a răspunde la ele direct din CRM.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: fixarea solicitărilor din postări și preluarea mesajelor Direct, cu răspuns direct din CRM. Mesajele intră în același fir cronologic cu apelurile, e-mailurile și celelalte canale. <em>Vezi secțiunea 4.8.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: fixarea solicitărilor din postări și preluarea mesajelor Direct, cu răspuns direct din CRM. Mesajele intră în același fir cronologic cu apelurile, e-mailurile și celelalte canale. <em>Vezi secțiunea 5.8.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">14.</span> Viber Privat</div>
     <div class="q"><span class="ref">Text original · punctul 14.1</span>Crearea chat bot-ului viber și conectarea acestuia la amoCRM, cu posibilitatea de a comunica direct din CRM.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: crearea chat-bot-ului Viber, conectarea la CRM și comunicarea directă din cartela tranzacției. Scenariul botului este comun cu Sales Bot (punctul 18), astfel încât calificarea lead-ului funcționează identic pe toate canalele. <em>Vezi secțiunile 4.8 și 4.12.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: crearea chat-bot-ului Viber, conectarea la CRM și comunicarea directă din cartela tranzacției. Scenariul botului este comun cu Sales Bot (punctul 18), astfel încât calificarea lead-ului funcționează identic pe toate canalele. <em>Vezi secțiunile 5.8 și 5.12.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">15.</span> Generator Documente</div>
     <div class="q"><span class="ref">Text original · punctul 15.1</span>Inserare modul pentru generarea documentelor conform șabloanelor direct din cartela tranzacției. Inserarea valorilor câmpurilor din tranzacție și din cartela contactului. Inserarea automată a semnăturii / ștampilei, aplicându-se reguli de securitate. Posibilitatea de a edita sau a actualiza documentul în caz ca au fost efectuate careva modificări. Posibilitatea de a descărca documentele în format PDF sau docx.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu toate cele cinci elemente enumerate: generare din cartelă după șablon, inserarea automată a valorilor din tranzacție și din cartela contactului, aplicarea semnăturii și ștampilei cu reguli de securitate (cine are dreptul și pentru ce sume), editarea și actualizarea documentului cu păstrarea versiunilor anterioare, descărcare în <strong>PDF sau DOCX</strong>. Șabloanele reale ale companiei se încarcă și se testează la zilele 9–10. <em>Vezi secțiunea 4.9.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu toate cele cinci elemente enumerate: generare din cartelă după șablon, inserarea automată a valorilor din tranzacție și din cartela contactului, aplicarea semnăturii și ștampilei cu reguli de securitate (cine are dreptul și pentru ce sume), editarea și actualizarea documentului cu păstrarea versiunilor anterioare, descărcare în <strong>PDF sau DOCX</strong>. Șabloanele reale ale companiei se încarcă și se testează la zilele 9–10. <em>Vezi secțiunea 5.9.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">16.</span> SMS Notificări și Marketing</div>
     <div class="q"><span class="ref">Text original · punctul 16.1</span>Inserarea modulului care generează și expediaza automat sau manual a SMS, crearea șabloanelor cu conținut predefinit. Inserarea informației tranzacționale, precum numele de contact, tipul serviciului, data interacțiunii, conform etapei și a tipului de tranzacție. Divizarea șabloanelor în funcție de departament și pâlnie.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: expediere automată sau manuală, șabloane cu conținut predefinit, inserarea datelor tranzacționale (nume de contact, tip de serviciu, data interacțiunii) în funcție de etapă și de tipul tranzacției, divizarea șabloanelor <strong>pe departament și pe pâlnie</strong>. Suplimentar: evidența livrărilor și gestionarea dezabonărilor, conform Legii nr. 133/2011. <strong>Costul mesajelor se achită direct furnizorului de SMS gateway</strong>, la tariful acestuia. <em>Vezi secțiunea 4.10.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: expediere automată sau manuală, șabloane cu conținut predefinit, inserarea datelor tranzacționale (nume de contact, tip de serviciu, data interacțiunii) în funcție de etapă și de tipul tranzacției, divizarea șabloanelor <strong>pe departament și pe pâlnie</strong>. Suplimentar: evidența livrărilor și gestionarea dezabonărilor, conform Legii nr. 133/2011. <strong>Costul mesajelor se achită direct furnizorului de SMS gateway</strong>, la tariful acestuia. <em>Vezi secțiunea 5.10.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">17.</span> Configurare Dashboard</div>
     <div class="q"><span class="ref">Text original · punctul 17.1</span>Inserarea informației analitice din amoCRM. Configurarea widgeturilor grafice care arată în timp real informațiile importante cum ar fi: numărul de lead-uri noi, sursa de leaduri de pe fiecare canal, numarul si suma vanzarilor pentru fiecare manager, dinamica leadurilor noi și a vânzărilor în perioade de timp selectate. Îndeplinirea planului de vânzări lunar, trimestrial și anual.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu toate widgeturile enumerate: lead-uri noi, sursa pe fiecare canal, numărul și suma vânzărilor per manager, dinamica pe perioade selectabile și <strong>îndeplinirea planului lunar, trimestrial și anual</strong>. Suplimentar: export în Excel și PDF, plus expedierea automată a raportului către conducere la ora stabilită. <em>Vezi secțiunea 4.11.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu toate widgeturile enumerate: lead-uri noi, sursa pe fiecare canal, numărul și suma vânzărilor per manager, dinamica pe perioade selectabile și <strong>îndeplinirea planului lunar, trimestrial și anual</strong>. Suplimentar: export în Excel și PDF, plus expedierea automată a raportului către conducere la ora stabilită. <em>Vezi secțiunea 5.11.</em></div>
   </div>
 
   <h3><span class="idx">A1.4.</span> Cerințele 18–22 · Inteligență artificială, instruire, suport</h3>
@@ -1666,25 +1784,25 @@
   <div class="spec">
     <div class="h"><span class="no">18.</span> Sales Bot</div>
     <div class="q"><span class="ref">Text original · punctul 18.1</span>Configurare sales bot pentru calificarea leadului. În momentul inițierii discuției, salesbot-ului va oferi clientului variantele de produse/servicii disponibile.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: la inițierea discuției, botul prezintă variantele de produse și servicii disponibile și califică lead-ul prin întrebări scurte. Rezultatul calificării determină traseul — lead calificat către manager senior, lead nedecis în pâlnia de nurturing, lead necalificat în baza de date. Un singur scenariu funcționează pe Viber, Messenger, Instagram Direct și chatul de pe site. <em>Vezi secțiunea 4.12.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: la inițierea discuției, botul prezintă variantele de produse și servicii disponibile și califică lead-ul prin întrebări scurte. Rezultatul calificării determină traseul — lead calificat către manager senior, lead nedecis în pâlnia de nurturing, lead necalificat în baza de date. Un singur scenariu funcționează pe Viber, Messenger, Instagram Direct și chatul de pe site. <em>Vezi secțiunea 5.12.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">19.</span> Voice AI</div>
     <div class="q"><span class="ref">Text original · punctul 19.1</span>Implementarea modulului Voice AI cu integrare în amoCRM, configurarea generării rezumatelor automate ale apelurilor, identificarea conversațiilor cu feedback negativ și sincronizarea datelor extrase în CRM.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu toate cele trei funcții enumerate: rezumate automate ale apelurilor, identificarea conversațiilor cu feedback negativ (cu alertarea imediată a responsabilului) și sincronizarea datelor extrase în CRM — obiecțiile clientului, angajamentele managerului, pașii următori, completate automat în cartelă. Rezumatele se generează în limba română. <em>Vezi secțiunea 4.13.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu toate cele trei funcții enumerate: rezumate automate ale apelurilor, identificarea conversațiilor cu feedback negativ (cu alertarea imediată a responsabilului) și sincronizarea datelor extrase în CRM — obiecțiile clientului, angajamentele managerului, pașii următori, completate automat în cartelă. Rezumatele se generează în limba română. <em>Vezi secțiunea 5.13.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">20.</span> Instruire personal</div>
     <div class="q"><span class="ref">Text original · punctul 20.1</span>Instruirea personalului, cu explicarea termenilor și exemplificarea procesului de lucru ținând cont de fiecare detaliu ce poate apărea în cadrul tranzacției, în dependență de fiecare pâlnie. Instruirea administratiei, cu explicarea termenilor și exemplificarea lucrului legat de analitică, statistică, rapoarte, conversie, editarea câmpurilor prestabilite.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, în ambele componente: instruirea managerilor pe fiecare pâlnie, cu parcurgerea situațiilor care pot apărea în cadrul unei tranzacții, și instruirea administrației pe analitică, statistică, rapoarte, conversie și editarea câmpurilor prestabilite. Exercițiile se fac pe datele reale ale companiei, nu pe exemple abstracte. <strong>Instruirea angajaților noi rămâne inclusă și după implementare</strong>, pe toată durata contractului. <em>Vezi secțiunile 4.14 și 12.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, în ambele componente: instruirea managerilor pe fiecare pâlnie, cu parcurgerea situațiilor care pot apărea în cadrul unei tranzacții, și instruirea administrației pe analitică, statistică, rapoarte, conversie și editarea câmpurilor prestabilite. Exercițiile se fac pe datele reale ale companiei, nu pe exemple abstracte. <strong>Instruirea angajaților noi rămâne inclusă și după implementare</strong>, pe toată durata contractului. <em>Vezi secțiunile 5.14 și 13.</em></div>
   </div>
 
   <div class="spec">
     <div class="h"><span class="no">21.</span> Tutorial Video</div>
     <div class="q"><span class="ref">Text original · punctul 21.1</span>Video ghid - modul manager: Noțiuni generale, Pâlnia de vânzări, Automatizări, Lucrul cu tranzacțiile, Lucrul cu sarcinile, interacțiunea managerilor pe marginea la aceeași tranzacție. Descrierea detaliată a fiecărui scenariu de vânzări în crm începând de la primirea solicitării de la clienți de pe diferite canale și realizare vânzării până la etapa de succes sau refuz. Video ghid - modul administrator: Grupuri de utilizatori și drepturi, analitică, statistică, rapoarte, conversie, editarea câmpurilor prestabilite.</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, ambele module, cu toate capitolele enumerate — inclusiv descrierea detaliată a fiecărui scenariu de vânzări, de la primirea solicitării pe oricare canal până la etapa de succes sau refuz. Materialele rămân la dispoziția companiei <strong>permanent</strong> și se actualizează la fiecare modificare majoră a configurației, fără cost suplimentar. <em>Vezi secțiunea 4.15.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, ambele module, cu toate capitolele enumerate — inclusiv descrierea detaliată a fiecărui scenariu de vânzări, de la primirea solicitării pe oricare canal până la etapa de succes sau refuz. Materialele rămân la dispoziția companiei <strong>permanent</strong> și se actualizează la fiecare modificare majoră a configurației, fără cost suplimentar. <em>Vezi secțiunea 5.15.</em></div>
   </div>
 
   <div class="spec">
@@ -1693,7 +1811,7 @@
     <div class="r"><span class="lbl">Confirmarea prestatorului · depășit în favoarea beneficiarului</span>
       <p>Textul original conține termene diferite în același punct — titlul indică 60 de zile, prima frază menționează 90 de zile, iar ultima se referă la 60 de zile de la semnarea actului de predare-primire. <strong>Propunerea noastră elimină ambiguitatea prin renunțarea la termenul-limită:</strong></p>
       <p>consultațiile privind utilizarea sistemului și <strong>modificările la configurația curentă, în limita funcționalului contractat, rămân fără costuri suplimentare atât timp cât abonamentul lunar este activ</strong> — nu 60 și nici 90 de zile. Nu se aplică niciun tarif orar pentru ajustarea CRM, la nicio etapă a colaborării.</p>
-      <p>Tariful de <strong>25 €/oră</strong> menționat în original se păstrează în ofertă, dar <strong>exclusiv pentru lucrările tehnice de suport pentru calculatoare</strong> — deservirea echipamentelor de birou, sistemul de operare, rețeaua, imprimantele. Distincția este detaliată în <em>secțiunea 15</em>, tocmai pentru a nu lăsa loc de interpretare la facturare.</p>
+      <p>Tariful de <strong>25 €/oră</strong> menționat în original se păstrează în ofertă, dar <strong>exclusiv pentru lucrările tehnice de suport pentru calculatoare</strong> — deservirea echipamentelor de birou, sistemul de operare, rețeaua, imprimantele. Distincția este detaliată în <em>secțiunea 16</em>, tocmai pentru a nu lăsa loc de interpretare la facturare.</p>
     </div>
   </div>
 
@@ -1702,7 +1820,7 @@
   <div class="spec">
     <div class="h"><span class="no">+</span> Integrare 1C</div>
     <div class="q"><span class="ref">Text original · mesajul din 24 august 2026, ora 11:51</span>„Dezvoltați CRM cu integrare 1C, Pavel?" — respectiv, solicitarea unei cotații pentru un asemenea CRM implementat, cu precizarea ulterioară: „Vrem ofertă CRM autohton. E posibil datele să fie hostuite în Moldova la TopHost sau pe cloud".</div>
-    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, în ambele componente ale solicitării. <strong>Integrarea 1C este bidirecțională</strong> — nomenclator, prețuri și stocuri din 1C în CRM; tranzacțiile câștigate devin documente în 1C; starea achitării revine în cartela clientului. <strong>Găzduirea</strong> se realizează la TopHost, Chișinău (variantă recomandată, cost inclus în abonament) sau în cloud, la alegerea beneficiarului, cu posibilitatea de comutare și ulterior. <em>Vezi secțiunile 3 și 5.</em></div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, în ambele componente ale solicitării. <strong>Integrarea 1C este bidirecțională</strong> şi se livrează ca punte pe durata migrării (secțiunea 7), ţinta fiind înlocuirea integrală a 1C (secțiunea 6). Pe fond — nomenclator, prețuri și stocuri din 1C în CRM; tranzacțiile câștigate devin documente în 1C; starea achitării revine în cartela clientului. <strong>Găzduirea</strong> se realizează la TopHost, Chișinău (variantă recomandată, cost inclus în abonament) sau în cloud, la alegerea beneficiarului, cu posibilitatea de comutare și ulterior. <em>Vezi secțiunile 4, 6 și 7.</em></div>
   </div>
 
   <h3><span class="idx">A1.6.</span> Recepția lucrărilor pe baza acestei anexe</h3>
@@ -1728,11 +1846,10 @@
 <footer>
   <p><span class="vat">Toate prețurile sunt exprimate în euro, fără TVA.</span> Ofertă valabilă 30 de zile de la data emiterii — 24 august 2026.</p>
   <p style="margin-top:10px">Document elaborat pentru <strong style="color:#fff">Prodcom Fit SRL</strong>, în atenția dlui <strong style="color:#fff">Iurie Barbaros</strong>, ca răspuns la solicitarea din 24 august 2026.</p>
-  <p style="margin-top:10px"><strong style="color:#fff">Sistemul CRM:</strong> <strong style="color:#fff">300 € conectare</strong> (unic, totul inclus) · <strong style="color:#fff">100 €/lună</strong> abonament de dezvoltare tip Basic, majorabil doar prin acord comun · <strong style="color:#fff">40 €</strong> servicii la comandă, opționale · <strong style="color:#fff">25 €/oră</strong> exclusiv lucrări tehnice de suport pentru calculatoare.</p>
-  <p style="margin-top:10px"><strong style="color:#fff">Înlocuirea completă a 1C</strong> (opțional, secțiunea 6): <strong style="color:#fff">500 €</strong> preț fix pentru migrarea automatizată, cu restituire integrală dacă reconcilierea soldurilor nu reușește · apoi <strong style="color:#fff">50 €/utilizator activ/lună</strong>, cu actualizările legislative incluse.</p>
-  <p style="margin-top:10px">Durata minimă a contractului — 2 ani, începând după primele 2 luni de colaborare. Conectare și migrare în 2 săptămâni, în variantă de testare, cu răspunsuri pozitive la fiecare punct al caietului de sarcini.</p>
-  <p style="margin-top:10px"><strong style="color:#fff">Anexa 1</strong> reproduce integral caietul de sarcini transmis pe 24 august 2026, cu confirmarea prestatorului pentru fiecare dintre cele 22 de puncte, și constituie parte integrantă a contractului.</p>
-  <p style="margin-top:14px; font-size:13px; opacity:.75">Document informativ, ediția 2026. Specificațiile tehnice se confirmă la etapa de analiză. Descrierile produselor terțe (amoCRM, Bitrix24, 1C) sunt orientative și se bazează pe informații publice la data emiterii; mărcile aparțin deținătorilor lor de drept.</p>
+  <p style="margin-top:10px"><strong style="color:#fff">La start:</strong> 300 € conectare CRM + 500 € migrarea completă de pe 1C, preț fix, cu <strong style="color:#fff">restituire integrală dacă reconcilierea soldurilor nu reușește</strong>.</p>
+  <p style="margin-top:10px"><strong style="color:#fff">Lunar:</strong> 100 € abonament CRM, fix, indiferent de numărul de manageri, majorabil doar prin acord comun · 50 € per utilizator activ de contabilitate, cu actualizările legislative incluse · 40 € servicii la comandă, opționale · 25 €/oră exclusiv lucrări tehnice de suport pentru calculatoare.</p>
+  <p style="margin-top:10px">Durata minimă a contractului — 2 ani, începând după primele 2 luni de colaborare. <strong style="color:#fff">Anexa 1</strong> reproduce integral caietul de sarcini transmis pe 24 august 2026, cu confirmarea prestatorului pentru fiecare dintre cele 22 de puncte, și constituie parte integrantă a contractului.</p>
+  <p style="margin-top:14px; font-size:13px; opacity:.75">Deviza „înlocuirea 1C devine obligatorie" exprimă condiția pe care furnizorul o pune proiectelor noi începute după septembrie 2026 și direcția deja luată la nivel instituțional, nu o obligație legală în vigoare pentru companiile private din Republica Moldova — a se vedea secțiunea 1.1. Constatările atribuite Ziarului de Gardă aparțin publicației. Descrierile produselor terțe (1C, amoCRM, Bitrix24) sunt orientative și se bazează pe informații publice la data emiterii; mărcile aparțin deținătorilor lor de drept.</p>
 </footer>
 
 </div>
