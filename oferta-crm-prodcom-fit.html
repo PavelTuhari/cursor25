@@ -321,6 +321,89 @@
   details .a { padding: 12px 18px; font-size: 15.5px; }
   details .a p:last-child { margin-bottom: 0; }
 
+  /* ---------- Caiet de sarcini (anexă) ---------- */
+  .spec {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    background: var(--paper);
+  }
+  .spec .h {
+    background: var(--chip-bg);
+    padding: 9px 16px;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--accent-dark);
+    font-weight: bold;
+    border-bottom: 1px solid var(--line);
+  }
+  .spec .h .no {
+    display: inline-block;
+    min-width: 26px;
+    color: var(--ink-soft);
+  }
+  .spec .q {
+    padding: 13px 18px;
+    font-size: 15.5px;
+    border-left: 4px solid var(--note-line);
+    background: #fffdf7;
+  }
+  .spec .q .ref {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    display: block;
+    margin-bottom: 5px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .spec .r {
+    padding: 12px 18px;
+    font-size: 14.5px;
+    background: var(--ok-soft);
+    border-top: 1px solid var(--line);
+    border-left: 4px solid var(--ok);
+  }
+  .spec .r .lbl {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--ok);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .spec .r p:last-child { margin-bottom: 0; }
+  .sig {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+  .sig .box { font-size: 15px; }
+  .sig .box .role {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--ink-soft);
+    margin-bottom: 26px;
+    display: block;
+  }
+  .sig .box .ln {
+    border-bottom: 1px solid var(--ink-soft);
+    height: 1px;
+    margin-bottom: 6px;
+  }
+  .sig .box .cap { font-size: 13px; color: var(--ink-soft); }
+  @media (max-width: 640px) { .sig { grid-template-columns: 1fr; gap: 30px; } }
+
   /* ---------- TOC & footer ---------- */
   .toc {
     background: var(--paper-soft);
@@ -375,6 +458,7 @@
     <span class="badge">Dezvoltare asistată de IA</span>
     <span class="badge">Limbi: RO / RU / EN</span>
     <span class="badge">Cod și date — la beneficiar</span>
+    <span class="badge">Caiet de sarcini — anexă contractuală</span>
   </div>
   <div class="stat-row">
     <div class="stat"><span class="v">300 €</span><span class="l">conectare, o singură dată</span></div>
@@ -404,6 +488,7 @@
     <li><a href="#inclus">Ce este inclus și ce se tarifează separat</a></li>
     <li><a href="#tehnic">Precizare importantă: tariful de 25 €/oră</a></li>
     <li><a href="#faq">Întrebări frecvente</a></li>
+    <li><a href="#caiet"><strong>Anexa 1 — Caietul de sarcini, reprodus integral</strong></a></li>
   </ol>
 </nav>
 
@@ -476,6 +561,7 @@
   </table>
   </div>
   <div class="note ok"><strong>Diferență față de oferta-tip a integratorilor amoCRM:</strong> la punctul 22, suportul nu se oprește după 60 sau 90 de zile. Atât timp cât abonamentul lunar este activ, consultațiile și ajustările în limita funcționalului contractat rămân incluse — nu se aplică niciun tarif orar pentru configurarea CRM.</div>
+  <p>Tabelul de mai sus este un rezumat. <strong>Caietul de sarcini este reprodus integral, cuvânt cu cuvânt, în <a href="#caiet" style="color:var(--accent-dark)">Anexa 1</a></strong>, unde fiecare punct este însoțit de confirmarea scrisă a prestatorului. Anexa devine parte integrantă a contractului și servește drept listă de verificare la recepția lucrărilor.</p>
 </section>
 
 <!-- ============================================================ -->
@@ -1228,6 +1314,188 @@
   </details>
 </section>
 
+<!-- ============================================================ -->
+<section id="caiet">
+  <h2>Anexa 1 — Caietul de sarcini, reprodus integral</h2>
+  <p class="lead">Textul de mai jos reproduce <strong>integral și nemodificat</strong> caietul de sarcini transmis de Prodcom Fit SRL pe 24 august 2026. Sub fiecare punct este consemnată confirmarea prestatorului — modul concret în care cerința este acoperită în livrare. Această anexă devine <strong>parte integrantă a contractului</strong> și constituie lista de verificare la recepția lucrărilor.</p>
+
+  <div class="note"><strong>Două precizări de lectură, valabile pentru întreaga anexă:</strong>
+    <ul style="margin-top:8px; margin-bottom:0">
+      <li>Caietul de sarcini a fost redactat pentru o implementare pe platforma <em>amoCRM</em> și menționează această denumire în mai multe puncte. În prezenta ofertă, orice referire la „amoCRM" se citește ca <strong>„sistemul CRM"</strong> — funcționalitatea descrisă se livrează integral pe platforma UNA.md/CRM, cu datele găzduite în Republica Moldova.</li>
+      <li>Numerotarea, formulările și ortografia originalului sunt păstrate ca atare, pentru a permite compararea directă cu documentul transmis.</li>
+    </ul>
+  </div>
+
+  <h3><span class="idx">A1.1.</span> Cerințele 1–6 · Configurarea sistemului și pâlniile</h3>
+
+  <div class="spec">
+    <div class="h"><span class="no">1.</span> Setări de bază și roluri utilizatori</div>
+    <div class="q"><span class="ref">Text original · punctul 1.1</span>Crearea și setarea contului CRM: titlului, tipului companiei, domen de acces, moneda. Ajustarea drepturilor utilizatorilor, editare și vizualizare a tranzacțiilor și contactelor după nivelul ierarhic de acces. Configurarea grupurilor după departamente și delimitarea vizualizării entităților de sistem (pâlnie, e-mail, analitică, dashboard).</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Contul se configurează cu denumirea, tipul de activitate, domeniul de acces și moneda de lucru ale Prodcom Fit SRL. Drepturile se stabilesc separat pentru tranzacții și pentru contacte, pe nivel ierarhic. Grupurile pe departamente delimitează accesul la pâlnii, e-mail, analitică și dashboard. Structura de roluri se aprobă de conducere la etapa de analiză (zilele 1–2). <em>Vezi secțiunea 4.1.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">2.</span> Configurare Tipuri de sarcini</div>
+    <div class="q"><span class="ref">Text original · punctul 2.1</span>Scrierea și inserarea tipurilor de sarcini necesare, atribuind către fiecare propria pictogramă, care să reprezinte textul sarcinii.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Catalogul de tipuri se compune împreună cu conducerea comercială (apel, întâlnire, ofertă, contract, livrare, reapelare și altele solicitate), fiecare tip primind pictogramă proprie, recunoscută vizual în lista de sarcini. <em>Vezi secțiunea 4.1.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">3.</span> Configurare Câmpuri tranzacție</div>
+    <div class="q"><span class="ref">Text original · punctul 3.1</span>Ajustarea câmpurilor cartelei tranzacției pentru informație detaliată despre clienți și formare ulterior a rapoartelor. Configurarea obligativității și ordine de completare a câmpurilor conform etapelor.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Constructorul de cartelă acoperă toate tipurile de câmpuri (text, număr, sumă, dată, listă, bifă, telefon, e-mail). Obligativitatea și ordinea de completare se configurează <strong>pe etape</strong>: tranzacția nu poate fi mutată mai departe cu date lipsă. Structura câmpurilor este proiectată astfel încât rapoartele ulterioare să se poată forma fără prelucrări manuale. <em>Vezi secțiunea 4.1.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">4.</span> Configurare Automatizări</div>
+    <div class="q"><span class="ref">Text original · punctul 4.1</span>Generarea și fixarea automatizărilor pentru procese cu atribuirea responsabililor și termenii aferenți în dependență de etapă, valoarea câmpurilor din tranzacție, tag-uri sau alți triggeri (declanșatori). Stabilirea cronometrului de proces și generare sarcină pentru evitarea stagnării sau pierderii tranzacției.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Motorul de reguli acoperă toți declanșatorii enumerați — etapa, valoarea câmpului, eticheta, precum și timpul scurs, pragul valoric și sursa lead-ului. Cronometrul de proces se stabilește per etapă, cu generarea sarcinii și escaladarea la conducere în caz de depășire. Regula „nicio tranzacție fără sarcină activă" se impune de sistem. <em>Vezi secțiunea 4.2.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">5.</span> Pâlnia de vânzări</div>
+    <div class="q"><span class="ref">Text original · punctul 5.1</span>Palnia pentru recepționarea leadurilor care vin din campanii de reclamă SMM, mesajelor din messengere, solicitări de pe site, apeluri pentru prelucrarea imediată.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Toate cele patru surse enumerate — campanii SMM, messengere, formulare de pe site și apeluri — converg într-o singură pâlnie de recepție. Prelucrarea imediată este asigurată prin cronometrul de primă reacție, cu alertă dacă lead-ul nu a fost contactat în intervalul stabilit de conducere. <em>Vezi secțiunea 4.3.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">6.</span> Pâlnia baza de date</div>
+    <div class="q"><span class="ref">Text original · punctul 6.1</span>Palnia de apeluri reci.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, ca pâlnie <strong>separată</strong> de cea de vânzări, pentru a nu amesteca contactele reci cu lead-urile calde. Include distribuirea automată a listelor între manageri, evidența tentativelor per contact și trecerea automată în pâlnia de vânzări la primul semn de interes. <em>Vezi secțiunea 4.3.</em></div>
+  </div>
+
+  <h3><span class="idx">A1.2.</span> Cerințele 7–11 · Telefonie, date, e-mail și site</h3>
+
+  <div class="spec">
+    <div class="h"><span class="no">7.</span> Telefonie IP</div>
+    <div class="q"><span class="ref">Text original · punctul 7.1</span>Conexiunea și configurarea telefoniei cu sistemul CRM. Configurarea apelurilor și a redirecționării conform managerilor, clientului în CRM. Apel direct din amoCRM, printr-un singur click - când apăsați pe numărul clientului sistemul inițiază apel către client. Crearea automată a contactului / tranzacției conform apelului - toate apelurile de intrare și de ieșire se înregistrează și se crează o tranzacție. Sarcini pentru apelurile pierdute - dacă managerul nu a preluat apelul, sistemul îi va reaminti să contacteze clientul dat.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu toate cele patru funcții enumerate: redirecționare către managerul care se ocupă deja de client, apel dintr-un singur clic, creare automată a contactului și tranzacției pentru numerele necunoscute, sarcină de reapelare pentru apelurile pierdute. Suplimentar, înregistrarea convorbirii se atașează cartelei și este audibilă direct din CRM. <strong>Minutele de convorbire se achită direct operatorului telecom</strong>, fără comision din partea prestatorului. <em>Vezi secțiunea 4.4.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">8.</span> Import baza de date</div>
+    <div class="q"><span class="ref">Text original · punctul 8.1</span>Importul bazei de date a potențialilor clienți în amoCRM, cu asocierea entităților între contact, companie, tranzacție și atribuirea datelor corespunzătoare din bază pentru cartelele tranzacției, contactului și companiei.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu asocierea corectă contact ↔ companie ↔ tranzacție și repartizarea datelor din fișierul-sursă în câmpurile potrivite ale celor trei cartele. Suplimentar față de cerință: verificarea și unificarea dublurilor, import de test cu raport de control prezentat beneficiarului, iar importul final se execută <strong>numai după aprobarea dumneavoastră</strong>. <em>Vezi secțiunea 4.5.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">9.</span> Integrare E-mail</div>
+    <div class="q"><span class="ref">Text original · punctul 9.1</span>Configurarea e-mail corporativ și e-mail personal pentru fiecare utilizator.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, pentru fiecare utilizator. Corespondența se atașează automat cartelei clientului, astfel încât istoricul rămâne în companie inclusiv după plecarea unui angajat. Include șabloane cu completare automată din datele tranzacției și sarcină generată automat dacă un e-mail rămâne fără răspuns. <em>Vezi secțiunea 4.6.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">10.</span> Website Lead API</div>
+    <div class="q"><span class="ref">Text original · punctul 10.1</span>Programare modul API pentru schimbul de date între site și amoCRM, conectarea formelor curente din site, crearea contactului, tranzacției și asocierea între ele.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. Modulul API se programează de către prestator; se conectează <strong>formularele existente</strong> de pe site, fără a fi necesară refacerea lor. Contactul și tranzacția se creează automat, cu asocierea corectă între ele. <em>Vezi secțiunea 4.7.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">11.</span> Website Lead UTM</div>
+    <div class="q"><span class="ref">Text original · punctul 11.1</span>Configurarea site-urilor pentru a transmite lead-urile din formele de contact în CRM, împreună cu informațiile analitice precum UTM. În cartela creată a clientului vor fi informație despre sursa (fb, insta, google ads) și campania de unde am primit leadul. Permite eficientizarea campaniilor de marketing datorită evidenței eficienței marketingului din perspectiva vânzărilor reale, nu doar a solicitărilor.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral. În cartela clientului apar sursa (fb, insta, google ads) și campania de proveniență. Raportul de eficiență se construiește <strong>pe vânzări reale</strong>, nu pe numărul de solicitări, și include costul per lead, costul per client și rata de conversie pe fiecare canal. <em>Vezi secțiunea 4.7.</em></div>
+  </div>
+
+  <h3><span class="idx">A1.3.</span> Cerințele 12–17 · Canale de comunicare, documente, SMS, analitică</h3>
+
+  <div class="spec">
+    <div class="h"><span class="no">12.</span> Facebook Mess + Lead-uri</div>
+    <div class="q"><span class="ref">Text original · punctul 12.1</span>Conectarea contului de facebook în pâlania amoCRM, pentru a fixa toate solicitările din formularele din postări. Conectarea corespondenței paginii business către amoCRM pentru fixarea mesajelor cu posibilitatea de a răspunde la ele direct din CRM.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: fixarea solicitărilor din formularele din postări și preluarea corespondenței paginii business, cu răspuns direct din cartela tranzacției. Conectarea se testează cu conturile reale ale Prodcom Fit la zilele 6–8 ale implementării. <em>Vezi secțiunea 4.8.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">13.</span> Instagram Direct + Lead-uri</div>
+    <div class="q"><span class="ref">Text original · punctul 13.1</span>Conectarea contului de Instagram în pâlania amoCRM, pentru a fixa toate solicitările din formularele din postări. Conectarea corespondenței contului Instagram către amoCRM pentru fixarea mesajelor cu posibilitatea de a răspunde la ele direct din CRM.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: fixarea solicitărilor din postări și preluarea mesajelor Direct, cu răspuns direct din CRM. Mesajele intră în același fir cronologic cu apelurile, e-mailurile și celelalte canale. <em>Vezi secțiunea 4.8.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">14.</span> Viber Privat</div>
+    <div class="q"><span class="ref">Text original · punctul 14.1</span>Crearea chat bot-ului viber și conectarea acestuia la amoCRM, cu posibilitatea de a comunica direct din CRM.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: crearea chat-bot-ului Viber, conectarea la CRM și comunicarea directă din cartela tranzacției. Scenariul botului este comun cu Sales Bot (punctul 18), astfel încât calificarea lead-ului funcționează identic pe toate canalele. <em>Vezi secțiunile 4.8 și 4.12.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">15.</span> Generator Documente</div>
+    <div class="q"><span class="ref">Text original · punctul 15.1</span>Inserare modul pentru generarea documentelor conform șabloanelor direct din cartela tranzacției. Inserarea valorilor câmpurilor din tranzacție și din cartela contactului. Inserarea automată a semnăturii / ștampilei, aplicându-se reguli de securitate. Posibilitatea de a edita sau a actualiza documentul în caz ca au fost efectuate careva modificări. Posibilitatea de a descărca documentele în format PDF sau docx.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu toate cele cinci elemente enumerate: generare din cartelă după șablon, inserarea automată a valorilor din tranzacție și din cartela contactului, aplicarea semnăturii și ștampilei cu reguli de securitate (cine are dreptul și pentru ce sume), editarea și actualizarea documentului cu păstrarea versiunilor anterioare, descărcare în <strong>PDF sau DOCX</strong>. Șabloanele reale ale companiei se încarcă și se testează la zilele 9–10. <em>Vezi secțiunea 4.9.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">16.</span> SMS Notificări și Marketing</div>
+    <div class="q"><span class="ref">Text original · punctul 16.1</span>Inserarea modulului care generează și expediaza automat sau manual a SMS, crearea șabloanelor cu conținut predefinit. Inserarea informației tranzacționale, precum numele de contact, tipul serviciului, data interacțiunii, conform etapei și a tipului de tranzacție. Divizarea șabloanelor în funcție de departament și pâlnie.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: expediere automată sau manuală, șabloane cu conținut predefinit, inserarea datelor tranzacționale (nume de contact, tip de serviciu, data interacțiunii) în funcție de etapă și de tipul tranzacției, divizarea șabloanelor <strong>pe departament și pe pâlnie</strong>. Suplimentar: evidența livrărilor și gestionarea dezabonărilor, conform Legii nr. 133/2011. <strong>Costul mesajelor se achită direct furnizorului de SMS gateway</strong>, la tariful acestuia. <em>Vezi secțiunea 4.10.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">17.</span> Configurare Dashboard</div>
+    <div class="q"><span class="ref">Text original · punctul 17.1</span>Inserarea informației analitice din amoCRM. Configurarea widgeturilor grafice care arată în timp real informațiile importante cum ar fi: numărul de lead-uri noi, sursa de leaduri de pe fiecare canal, numarul si suma vanzarilor pentru fiecare manager, dinamica leadurilor noi și a vânzărilor în perioade de timp selectate. Îndeplinirea planului de vânzări lunar, trimestrial și anual.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu toate widgeturile enumerate: lead-uri noi, sursa pe fiecare canal, numărul și suma vânzărilor per manager, dinamica pe perioade selectabile și <strong>îndeplinirea planului lunar, trimestrial și anual</strong>. Suplimentar: export în Excel și PDF, plus expedierea automată a raportului către conducere la ora stabilită. <em>Vezi secțiunea 4.11.</em></div>
+  </div>
+
+  <h3><span class="idx">A1.4.</span> Cerințele 18–22 · Inteligență artificială, instruire, suport</h3>
+
+  <div class="spec">
+    <div class="h"><span class="no">18.</span> Sales Bot</div>
+    <div class="q"><span class="ref">Text original · punctul 18.1</span>Configurare sales bot pentru calificarea leadului. În momentul inițierii discuției, salesbot-ului va oferi clientului variantele de produse/servicii disponibile.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral: la inițierea discuției, botul prezintă variantele de produse și servicii disponibile și califică lead-ul prin întrebări scurte. Rezultatul calificării determină traseul — lead calificat către manager senior, lead nedecis în pâlnia de nurturing, lead necalificat în baza de date. Un singur scenariu funcționează pe Viber, Messenger, Instagram Direct și chatul de pe site. <em>Vezi secțiunea 4.12.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">19.</span> Voice AI</div>
+    <div class="q"><span class="ref">Text original · punctul 19.1</span>Implementarea modulului Voice AI cu integrare în amoCRM, configurarea generării rezumatelor automate ale apelurilor, identificarea conversațiilor cu feedback negativ și sincronizarea datelor extrase în CRM.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, cu toate cele trei funcții enumerate: rezumate automate ale apelurilor, identificarea conversațiilor cu feedback negativ (cu alertarea imediată a responsabilului) și sincronizarea datelor extrase în CRM — obiecțiile clientului, angajamentele managerului, pașii următori, completate automat în cartelă. Rezumatele se generează în limba română. <em>Vezi secțiunea 4.13.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">20.</span> Instruire personal</div>
+    <div class="q"><span class="ref">Text original · punctul 20.1</span>Instruirea personalului, cu explicarea termenilor și exemplificarea procesului de lucru ținând cont de fiecare detaliu ce poate apărea în cadrul tranzacției, în dependență de fiecare pâlnie. Instruirea administratiei, cu explicarea termenilor și exemplificarea lucrului legat de analitică, statistică, rapoarte, conversie, editarea câmpurilor prestabilite.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, în ambele componente: instruirea managerilor pe fiecare pâlnie, cu parcurgerea situațiilor care pot apărea în cadrul unei tranzacții, și instruirea administrației pe analitică, statistică, rapoarte, conversie și editarea câmpurilor prestabilite. Exercițiile se fac pe datele reale ale companiei, nu pe exemple abstracte. <strong>Instruirea angajaților noi rămâne inclusă și după implementare</strong>, pe toată durata contractului. <em>Vezi secțiunile 4.14 și 11.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">21.</span> Tutorial Video</div>
+    <div class="q"><span class="ref">Text original · punctul 21.1</span>Video ghid - modul manager: Noțiuni generale, Pâlnia de vânzări, Automatizări, Lucrul cu tranzacțiile, Lucrul cu sarcinile, interacțiunea managerilor pe marginea la aceeași tranzacție. Descrierea detaliată a fiecărui scenariu de vânzări în crm începând de la primirea solicitării de la clienți de pe diferite canale și realizare vânzării până la etapa de succes sau refuz. Video ghid - modul administrator: Grupuri de utilizatori și drepturi, analitică, statistică, rapoarte, conversie, editarea câmpurilor prestabilite.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, ambele module, cu toate capitolele enumerate — inclusiv descrierea detaliată a fiecărui scenariu de vânzări, de la primirea solicitării pe oricare canal până la etapa de succes sau refuz. Materialele rămân la dispoziția companiei <strong>permanent</strong> și se actualizează la fiecare modificare majoră a configurației, fără cost suplimentar. <em>Vezi secțiunea 4.15.</em></div>
+  </div>
+
+  <div class="spec">
+    <div class="h"><span class="no">22.</span> Support 60 zile</div>
+    <div class="q"><span class="ref">Text original · punctul 22.1</span>În decurs de 90 de zile Prestatorul oferă consultații Beneficiarului privind utilizarea sistemului. Beneficiarul beneficiază de modificări la configurația curentă în limita funcționalului pe care îl acoperă prezentul contract fără costuri suplimentare. La expirarea termenului de suport, 60 de zile după semnarea actului de predare - primire, ajustările sistemului vor fi contra sumei de 25euro /oră.</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · depășit în favoarea beneficiarului</span>
+      <p>Textul original conține termene diferite în același punct — titlul indică 60 de zile, prima frază menționează 90 de zile, iar ultima se referă la 60 de zile de la semnarea actului de predare-primire. <strong>Propunerea noastră elimină ambiguitatea prin renunțarea la termenul-limită:</strong></p>
+      <p>consultațiile privind utilizarea sistemului și <strong>modificările la configurația curentă, în limita funcționalului contractat, rămân fără costuri suplimentare atât timp cât abonamentul lunar este activ</strong> — nu 60 și nici 90 de zile. Nu se aplică niciun tarif orar pentru ajustarea CRM, la nicio etapă a colaborării.</p>
+      <p>Tariful de <strong>25 €/oră</strong> menționat în original se păstrează în ofertă, dar <strong>exclusiv pentru lucrările tehnice de suport pentru calculatoare</strong> — deservirea echipamentelor de birou, sistemul de operare, rețeaua, imprimantele. Distincția este detaliată în <em>secțiunea 14</em>, tocmai pentru a nu lăsa loc de interpretare la facturare.</p>
+    </div>
+  </div>
+
+  <h3><span class="idx">A1.5.</span> Cerință suplimentară, formulată în corespondență</h3>
+
+  <div class="spec">
+    <div class="h"><span class="no">+</span> Integrare 1C</div>
+    <div class="q"><span class="ref">Text original · mesajul din 24 august 2026, ora 11:51</span>„Dezvoltați CRM cu integrare 1C, Pavel?" — respectiv, solicitarea unei cotații pentru un asemenea CRM implementat, cu precizarea ulterioară: „Vrem ofertă CRM autohton. E posibil datele să fie hostuite în Moldova la TopHost sau pe cloud".</div>
+    <div class="r"><span class="lbl">Confirmarea prestatorului · inclus</span>Se livrează integral, în ambele componente ale solicitării. <strong>Integrarea 1C este bidirecțională</strong> — nomenclator, prețuri și stocuri din 1C în CRM; tranzacțiile câștigate devin documente în 1C; starea achitării revine în cartela clientului. <strong>Găzduirea</strong> se realizează la TopHost, Chișinău (variantă recomandată, cost inclus în abonament) sau în cloud, la alegerea beneficiarului, cu posibilitatea de comutare și ulterior. <em>Vezi secțiunile 3 și 5.</em></div>
+  </div>
+
+  <h3><span class="idx">A1.6.</span> Recepția lucrărilor pe baza acestei anexe</h3>
+  <p>La finalul celor 2 săptămâni de implementare, această anexă se parcurge <strong>punct cu punct, în prezența beneficiarului</strong>. Fiecare dintre cele 22 de cerințe, plus integrarea 1C, primește confirmare separată în scris.</p>
+  <div class="note ok"><strong>Regula de recepție:</strong> trecerea în exploatare reală se face numai cu <strong>răspuns pozitiv la fiecare punct</strong>. Dacă un punct rămâne neconfirmat, lucrările continuă <strong>fără costuri suplimentare</strong> până la confirmarea lui. Termenul contractual de 2 ani începe să curgă abia după primele 2 luni de colaborare efectivă.</div>
+
+  <div class="sig">
+    <div class="box">
+      <span class="role">Beneficiar</span>
+      <div class="ln"></div>
+      <span class="cap">Prodcom Fit SRL · nume, funcție, semnătură, data</span>
+    </div>
+    <div class="box">
+      <span class="role">Prestator</span>
+      <div class="ln"></div>
+      <span class="cap">UNA.md Solutions · nume, funcție, semnătură, data</span>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer>
@@ -1235,6 +1503,7 @@
   <p style="margin-top:10px">Document elaborat pentru <strong style="color:#fff">Prodcom Fit SRL</strong>, în atenția dlui <strong style="color:#fff">Iurie Barbaros</strong>, ca răspuns la solicitarea din 24 august 2026.</p>
   <p style="margin-top:10px">Structura financiară: <strong style="color:#fff">300 € conectare</strong> (unic, totul inclus) · <strong style="color:#fff">100 €/lună</strong> abonament de dezvoltare tip Basic, majorabil doar prin acord comun · <strong style="color:#fff">40 €</strong> servicii la comandă, opționale · <strong style="color:#fff">25 €/oră</strong> exclusiv lucrări tehnice de suport pentru calculatoare.</p>
   <p style="margin-top:10px">Durata minimă a contractului — 2 ani, începând după primele 2 luni de colaborare. Conectare și migrare în 2 săptămâni, în variantă de testare, cu răspunsuri pozitive la fiecare punct al caietului de sarcini.</p>
+  <p style="margin-top:10px"><strong style="color:#fff">Anexa 1</strong> reproduce integral caietul de sarcini transmis pe 24 august 2026, cu confirmarea prestatorului pentru fiecare dintre cele 22 de puncte, și constituie parte integrantă a contractului.</p>
   <p style="margin-top:14px; font-size:13px; opacity:.75">Document informativ, ediția 2026. Specificațiile tehnice se confirmă la etapa de analiză. Descrierile produselor terțe (amoCRM, Bitrix24, 1C) sunt orientative și se bazează pe informații publice la data emiterii; mărcile aparțin deținătorilor lor de drept.</p>
 </footer>
 
