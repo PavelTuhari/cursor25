@@ -1,0 +1,661 @@
+{
+  "schemaVersion": 2,
+  "entities": [
+    {
+      "name": "categories",
+      "table": "categories",
+      "endpoint": "/catalog/categories",
+      "direction": "pull",
+      "syncMode": "delta",
+      "primaryKey": "id",
+      "cursorField": "updated_at",
+      "order": 10,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "parent_id",
+          "type": "text",
+          "index": true
+        },
+        {
+          "name": "name",
+          "type": "localized"
+        },
+        {
+          "name": "slug",
+          "type": "text"
+        },
+        {
+          "name": "image_url",
+          "type": "text"
+        },
+        {
+          "name": "icon",
+          "type": "text"
+        },
+        {
+          "name": "sort_order",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "product_count",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "default": 1
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "index": true
+        }
+      ]
+    },
+    {
+      "name": "products",
+      "table": "products",
+      "endpoint": "/catalog/products",
+      "direction": "pull",
+      "syncMode": "delta",
+      "primaryKey": "id",
+      "cursorField": "updated_at",
+      "order": 20,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "sku",
+          "type": "text",
+          "index": true
+        },
+        {
+          "name": "barcode",
+          "type": "text",
+          "index": true
+        },
+        {
+          "name": "category_id",
+          "type": "text",
+          "index": true
+        },
+        {
+          "name": "name",
+          "type": "localized"
+        },
+        {
+          "name": "description",
+          "type": "localized"
+        },
+        {
+          "name": "brand",
+          "type": "text"
+        },
+        {
+          "name": "image_url",
+          "type": "text"
+        },
+        {
+          "name": "images",
+          "type": "json"
+        },
+        {
+          "name": "price",
+          "type": "real",
+          "default": 0
+        },
+        {
+          "name": "old_price",
+          "type": "real"
+        },
+        {
+          "name": "discount_percent",
+          "type": "integer",
+          "default": 0,
+          "index": true
+        },
+        {
+          "name": "unit",
+          "type": "text"
+        },
+        {
+          "name": "unit_size",
+          "type": "real"
+        },
+        {
+          "name": "unit_price",
+          "type": "real"
+        },
+        {
+          "name": "stock_status",
+          "type": "text",
+          "default": "in_stock"
+        },
+        {
+          "name": "promo_id",
+          "type": "text",
+          "index": true
+        },
+        {
+          "name": "promo_ends_at",
+          "type": "datetime"
+        },
+        {
+          "name": "rating",
+          "type": "real"
+        },
+        {
+          "name": "sort_order",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "default": 1
+        },
+        {
+          "name": "search_text",
+          "type": "text"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "index": true
+        }
+      ],
+      "indexes": [
+        {
+          "name": "idx_products_category",
+          "columns": [
+            "category_id",
+            "sort_order"
+          ]
+        },
+        {
+          "name": "idx_products_discount",
+          "columns": [
+            "discount_percent",
+            "price"
+          ]
+        }
+      ],
+      "searchColumns": [
+        "search_text",
+        "brand",
+        "sku",
+        "barcode"
+      ]
+    },
+    {
+      "name": "banners",
+      "table": "banners",
+      "endpoint": "/content/banners",
+      "direction": "pull",
+      "syncMode": "full",
+      "primaryKey": "id",
+      "order": 30,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "placement",
+          "type": "text",
+          "index": true
+        },
+        {
+          "name": "title",
+          "type": "localized"
+        },
+        {
+          "name": "subtitle",
+          "type": "localized"
+        },
+        {
+          "name": "image_url",
+          "type": "text"
+        },
+        {
+          "name": "action",
+          "type": "json"
+        },
+        {
+          "name": "starts_at",
+          "type": "datetime"
+        },
+        {
+          "name": "ends_at",
+          "type": "datetime"
+        },
+        {
+          "name": "sort_order",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "name": "promotions",
+      "table": "promotions",
+      "endpoint": "/promo/flyers",
+      "direction": "pull",
+      "syncMode": "delta",
+      "primaryKey": "id",
+      "cursorField": "updated_at",
+      "order": 40,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "title",
+          "type": "localized"
+        },
+        {
+          "name": "subtitle",
+          "type": "localized"
+        },
+        {
+          "name": "cover_url",
+          "type": "text"
+        },
+        {
+          "name": "pdf_url",
+          "type": "text"
+        },
+        {
+          "name": "pages",
+          "type": "json"
+        },
+        {
+          "name": "store_ids",
+          "type": "json"
+        },
+        {
+          "name": "starts_at",
+          "type": "datetime",
+          "index": true
+        },
+        {
+          "name": "ends_at",
+          "type": "datetime",
+          "index": true
+        },
+        {
+          "name": "sort_order",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "index": true
+        }
+      ]
+    },
+    {
+      "name": "stores",
+      "table": "stores",
+      "endpoint": "/network/stores",
+      "direction": "pull",
+      "syncMode": "full",
+      "primaryKey": "id",
+      "order": 50,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "code",
+          "type": "text"
+        },
+        {
+          "name": "name",
+          "type": "localized"
+        },
+        {
+          "name": "city",
+          "type": "localized"
+        },
+        {
+          "name": "address",
+          "type": "localized"
+        },
+        {
+          "name": "phone",
+          "type": "text"
+        },
+        {
+          "name": "latitude",
+          "type": "real"
+        },
+        {
+          "name": "longitude",
+          "type": "real"
+        },
+        {
+          "name": "working_hours",
+          "type": "json"
+        },
+        {
+          "name": "services",
+          "type": "json"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "default": 1
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "name": "loyalty_account",
+      "table": "loyalty_account",
+      "endpoint": "/loyalty/account",
+      "direction": "pull",
+      "syncMode": "full",
+      "requiresAuth": true,
+      "primaryKey": "id",
+      "order": 60,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "card_number",
+          "type": "text"
+        },
+        {
+          "name": "barcode",
+          "type": "text"
+        },
+        {
+          "name": "holder_name",
+          "type": "text"
+        },
+        {
+          "name": "points",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "tier",
+          "type": "text"
+        },
+        {
+          "name": "tier_progress",
+          "type": "real"
+        },
+        {
+          "name": "next_tier",
+          "type": "text"
+        },
+        {
+          "name": "valid_until",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "name": "profile",
+      "table": "profile",
+      "endpoint": "/account/profile",
+      "direction": "bidirectional",
+      "syncMode": "full",
+      "pushMode": "rest",
+      "conflict": "last_write_wins",
+      "requiresAuth": true,
+      "primaryKey": "id",
+      "order": 65,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "phone",
+          "type": "text"
+        },
+        {
+          "name": "email",
+          "type": "text"
+        },
+        {
+          "name": "first_name",
+          "type": "text"
+        },
+        {
+          "name": "last_name",
+          "type": "text"
+        },
+        {
+          "name": "birthday",
+          "type": "text"
+        },
+        {
+          "name": "city",
+          "type": "text"
+        },
+        {
+          "name": "marketing_opt_in",
+          "type": "boolean",
+          "default": 0
+        },
+        {
+          "name": "registered_at",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "name": "shopping_list_items",
+      "table": "shopping_list_items",
+      "endpoint": "/list/items",
+      "direction": "bidirectional",
+      "syncMode": "delta",
+      "pushMode": "rest",
+      "conflict": "last_write_wins",
+      "requiresAuth": false,
+      "primaryKey": "id",
+      "cursorField": "updated_at",
+      "order": 70,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "product_id",
+          "type": "text",
+          "index": true
+        },
+        {
+          "name": "title",
+          "type": "text"
+        },
+        {
+          "name": "quantity",
+          "type": "real",
+          "default": 1
+        },
+        {
+          "name": "unit",
+          "type": "text"
+        },
+        {
+          "name": "note",
+          "type": "text"
+        },
+        {
+          "name": "is_done",
+          "type": "boolean",
+          "default": 0
+        },
+        {
+          "name": "sort_order",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "index": true
+        }
+      ]
+    },
+    {
+      "name": "favorites",
+      "table": "favorites",
+      "endpoint": "/account/favorites",
+      "direction": "bidirectional",
+      "syncMode": "delta",
+      "pushMode": "batch",
+      "conflict": "last_write_wins",
+      "primaryKey": "id",
+      "cursorField": "updated_at",
+      "order": 80,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "product_id",
+          "type": "text",
+          "index": true
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "index": true
+        }
+      ],
+      "requiresAuth": true
+    },
+    {
+      "name": "receipts",
+      "table": "receipts",
+      "endpoint": "/account/receipts",
+      "direction": "pull",
+      "syncMode": "delta",
+      "requiresAuth": true,
+      "primaryKey": "id",
+      "cursorField": "updated_at",
+      "order": 90,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "number",
+          "type": "text"
+        },
+        {
+          "name": "store_id",
+          "type": "text",
+          "index": true
+        },
+        {
+          "name": "purchased_at",
+          "type": "datetime",
+          "index": true
+        },
+        {
+          "name": "total",
+          "type": "real",
+          "default": 0
+        },
+        {
+          "name": "discount_total",
+          "type": "real",
+          "default": 0
+        },
+        {
+          "name": "points_earned",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "points_spent",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "payment_method",
+          "type": "text"
+        },
+        {
+          "name": "fiscal_code",
+          "type": "text"
+        },
+        {
+          "name": "items",
+          "type": "json"
+        },
+        {
+          "name": "item_count",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "index": true
+        }
+      ],
+      "indexes": [
+        {
+          "name": "idx_receipts_date",
+          "columns": [
+            "purchased_at",
+            "total"
+          ]
+        }
+      ],
+      "searchColumns": [
+        "number",
+        "fiscal_code"
+      ]
+    }
+  ]
+}

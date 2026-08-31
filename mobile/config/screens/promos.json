@@ -1,0 +1,39 @@
+{
+  "id": "promos",
+  "titleKey": "screen.promos",
+  "refreshable": true,
+  "blocks": [
+    {
+      "id": "promos-active",
+      "type": "promo_flyers",
+      "titleKey": "promos.active",
+      "props": {
+        "layout": "grid",
+        "columns": 2,
+        "source": {
+          "entity": "promotions",
+          "where": [{ "field": "ends_at", "op": ">=", "value": "$today", "orNull": true }],
+          "orderBy": [{ "field": "sort_order", "dir": "asc" }],
+          "limit": 50
+        }
+      }
+    },
+    {
+      "id": "promos-products",
+      "type": "product_grid",
+      "titleKey": "promos.products",
+      "props": {
+        "columns": 2,
+        "source": {
+          "entity": "products",
+          "where": [
+            { "field": "discount_percent", "op": ">", "value": 0 },
+            { "field": "is_active", "op": "=", "value": 1 }
+          ],
+          "orderBy": [{ "field": "discount_percent", "dir": "desc" }],
+          "limit": 60
+        }
+      }
+    }
+  ]
+}

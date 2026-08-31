@@ -1,0 +1,45 @@
+{
+  "id": "profile",
+  "titleKey": "screen.profile",
+  "refreshable": true,
+  "blocks": [
+    { "id": "profile-header", "type": "profile_header", "props": {} },
+    {
+      "id": "profile-login",
+      "type": "login_prompt",
+      "visibleIf": { "auth": "anonymous" },
+      "props": { "titleKey": "auth.prompt_title", "textKey": "auth.prompt_text" }
+    },
+    {
+      "id": "profile-purchases",
+      "type": "purchase_history",
+      "titleKey": "account.recent_purchases",
+      "visibleIf": { "feature": "purchaseHistory", "auth": "required" },
+      "props": {
+        "limit": 3,
+        "source": {
+          "entity": "receipts",
+          "orderBy": [{ "field": "purchased_at", "dir": "desc" }],
+          "limit": 3
+        },
+        "moreAction": { "type": "navigate", "screen": "receipts" }
+      }
+    },
+    {
+      "id": "profile-menu",
+      "type": "menu_list",
+      "props": {
+        "items": [
+          { "id": "account", "titleKey": "menu.account", "icon": "user", "visibleIf": { "feature": "account", "auth": "required" }, "action": { "type": "navigate", "screen": "account" } },
+          { "id": "receipts", "titleKey": "menu.receipts", "icon": "receipt", "visibleIf": { "feature": "purchaseHistory", "auth": "required" }, "action": { "type": "navigate", "screen": "receipts" } },
+          { "id": "favorites", "titleKey": "menu.favorites", "icon": "heart", "visibleIf": { "feature": "favorites" }, "action": { "type": "navigate", "screen": "favorites" } },
+          { "id": "stores", "titleKey": "menu.stores", "icon": "pin", "visibleIf": { "feature": "stores" }, "action": { "type": "navigate", "screen": "stores" } },
+          { "id": "settings", "titleKey": "menu.settings", "icon": "gear", "action": { "type": "navigate", "screen": "settings" } },
+          { "id": "support", "titleKey": "menu.support", "icon": "info", "action": { "type": "url", "url": "https://una.md/support" } }
+        ]
+      }
+    },
+    { "id": "profile-sync", "type": "sync_status", "props": {} },
+    { "id": "profile-logout", "type": "logout_button", "visibleIf": { "auth": "required" }, "props": {} }
+  ]
+}

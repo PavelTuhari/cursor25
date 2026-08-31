@@ -1,0 +1,14 @@
+[
+  {
+    "id": "loy-1",
+    "card_number": "4841234500017",
+    "barcode": "4841234500017",
+    "holder_name": "Ion Popescu",
+    "points": 1280,
+    "tier": "Silver",
+    "tier_progress": 0.64,
+    "next_tier": "Gold",
+    "valid_until": "2027-12-31T00:00:00Z",
+    "updated_at": "2026-08-20T08:00:00Z"
+  }
+]

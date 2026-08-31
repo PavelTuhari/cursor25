@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "UNA Market",
+    "slug": "una-md-retail",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "unamarket",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#E10915"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "md.una.retail"
+    },
+    "android": {
+      "package": "md.una.retail",
+      "adaptiveIcon": {
+        "backgroundColor": "#E10915"
+      }
+    },
+    "plugins": [
+      "expo-sqlite",
+      "expo-localization",
+      "expo-secure-store"
+    ],
+    "extra": {
+      "apiBaseUrl": "https://api.una.md/retail/v1",
+      "tenantId": "demo"
+    }
+  }
+}

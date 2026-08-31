@@ -1,0 +1,13 @@
+{
+  "type": "tabs",
+  "initialTab": "home",
+  "tabs": [
+    { "id": "home", "screen": "home", "icon": "home", "titleKey": "tab.home" },
+    { "id": "catalog", "screen": "catalog", "icon": "grid", "titleKey": "tab.catalog" },
+    { "id": "promos", "screen": "promos", "icon": "tag", "titleKey": "tab.promos", "visibleIf": { "feature": "promoFlyers" } },
+    { "id": "list", "screen": "list", "icon": "list", "titleKey": "tab.list", "visibleIf": { "feature": "shoppingList" }, "badge": "shoppingListCount" },
+    { "id": "loyalty", "screen": "loyalty", "icon": "card", "titleKey": "tab.loyalty", "visibleIf": { "feature": "loyalty" } },
+    { "id": "profile", "screen": "profile", "icon": "user", "titleKey": "tab.profile" }
+  ],
+  "modals": ["product", "category", "search", "promo", "store", "settings"]
+}
