@@ -1,0 +1,28 @@
+{
+  "id": "coupons",
+  "titleKey": "screen.coupons",
+  "refreshable": true,
+  "blocks": [
+    {
+      "id": "coupons-list",
+      "type": "coupon_strip",
+      "titleKey": "coupons.personal",
+      "visibleIf": { "feature": "coupons", "auth": "required" },
+      "props": {
+        "layout": "list",
+        "source": {
+          "entity": "coupons",
+          "where": [{ "field": "ends_at", "op": ">=", "value": "$now", "orNull": true }],
+          "orderBy": [{ "field": "ends_at", "dir": "asc" }],
+          "limit": 50
+        }
+      }
+    },
+    {
+      "id": "coupons-login",
+      "type": "login_prompt",
+      "visibleIf": { "auth": "anonymous" },
+      "props": { "titleKey": "auth.prompt_title", "textKey": "auth.prompt_text" }
+    }
+  ]
+}

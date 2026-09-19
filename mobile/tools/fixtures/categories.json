@@ -1,0 +1,194 @@
+[
+  {
+    "id": "cat-dairy",
+    "parent_id": null,
+    "name": {
+      "ro": "Lactate",
+      "ru": "Молочные продукты",
+      "en": "Dairy"
+    },
+    "slug": "dairy",
+    "image_url": "https://cdn.una.md/retail/categories/cat-dairy.png",
+    "icon": "🥛",
+    "sort_order": 10,
+    "product_count": 2,
+    "is_active": true,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "cat-bakery",
+    "parent_id": null,
+    "name": {
+      "ro": "Panificație",
+      "ru": "Хлеб и выпечка",
+      "en": "Bakery"
+    },
+    "slug": "bakery",
+    "image_url": "https://cdn.una.md/retail/categories/cat-bakery.png",
+    "icon": "🥖",
+    "sort_order": 20,
+    "product_count": 3,
+    "is_active": true,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "cat-meat",
+    "parent_id": null,
+    "name": {
+      "ro": "Carne și mezeluri",
+      "ru": "Мясо и колбасы",
+      "en": "Meat"
+    },
+    "slug": "meat",
+    "image_url": "https://cdn.una.md/retail/categories/cat-meat.png",
+    "icon": "🍖",
+    "sort_order": 30,
+    "product_count": 3,
+    "is_active": true,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "cat-produce",
+    "parent_id": null,
+    "name": {
+      "ro": "Fructe și legume",
+      "ru": "Фрукты и овощи",
+      "en": "Fruit & veg"
+    },
+    "slug": "produce",
+    "image_url": "https://cdn.una.md/retail/categories/cat-produce.png",
+    "icon": "🍎",
+    "sort_order": 40,
+    "product_count": 4,
+    "is_active": true,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "cat-drinks",
+    "parent_id": null,
+    "name": {
+      "ro": "Băuturi",
+      "ru": "Напитки",
+      "en": "Drinks"
+    },
+    "slug": "drinks",
+    "image_url": "https://cdn.una.md/retail/categories/cat-drinks.png",
+    "icon": "🧃",
+    "sort_order": 50,
+    "product_count": 2,
+    "is_active": true,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "cat-frozen",
+    "parent_id": null,
+    "name": {
+      "ro": "Congelate",
+      "ru": "Заморозка",
+      "en": "Frozen"
+    },
+    "slug": "frozen",
+    "image_url": "https://cdn.una.md/retail/categories/cat-frozen.png",
+    "icon": "🧊",
+    "sort_order": 60,
+    "product_count": 2,
+    "is_active": true,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "cat-sweets",
+    "parent_id": null,
+    "name": {
+      "ro": "Dulciuri",
+      "ru": "Сладости",
+      "en": "Sweets"
+    },
+    "slug": "sweets",
+    "image_url": "https://cdn.una.md/retail/categories/cat-sweets.png",
+    "icon": "🍫",
+    "sort_order": 70,
+    "product_count": 2,
+    "is_active": true,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "cat-home",
+    "parent_id": null,
+    "name": {
+      "ro": "Menaj",
+      "ru": "Товары для дома",
+      "en": "Household"
+    },
+    "slug": "home",
+    "image_url": "https://cdn.una.md/retail/categories/cat-home.png",
+    "icon": "🧽",
+    "sort_order": 80,
+    "product_count": 2,
+    "is_active": true,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "cat-dairy-milk",
+    "parent_id": "cat-dairy",
+    "name": {
+      "ro": "Lapte",
+      "ru": "Молоко",
+      "en": "Milk"
+    },
+    "slug": "cat-dairy-milk",
+    "image_url": "https://cdn.una.md/retail/categories/cat-dairy-milk.png",
+    "icon": null,
+    "sort_order": 11,
+    "product_count": 2,
+    "is_active": true,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "cat-dairy-cheese",
+    "parent_id": "cat-dairy",
+    "name": {
+      "ro": "Brânzeturi",
+      "ru": "Сыры",
+      "en": "Cheese"
+    },
+    "slug": "cat-dairy-cheese",
+    "image_url": "https://cdn.una.md/retail/categories/cat-dairy-cheese.png",
+    "icon": null,
+    "sort_order": 12,
+    "product_count": 2,
+    "is_active": true,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "cat-drinks-water",
+    "parent_id": "cat-drinks",
+    "name": {
+      "ro": "Apă",
+      "ru": "Вода",
+      "en": "Water"
+    },
+    "slug": "cat-drinks-water",
+    "image_url": "https://cdn.una.md/retail/categories/cat-drinks-water.png",
+    "icon": null,
+    "sort_order": 51,
+    "product_count": 1,
+    "is_active": true,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "cat-drinks-juice",
+    "parent_id": "cat-drinks",
+    "name": {
+      "ro": "Sucuri",
+      "ru": "Соки",
+      "en": "Juice"
+    },
+    "slug": "cat-drinks-juice",
+    "image_url": "https://cdn.una.md/retail/categories/cat-drinks-juice.png",
+    "icon": null,
+    "sort_order": 52,
+    "product_count": 1,
+    "is_active": true,
+    "updated_at": "2026-08-20T08:00:00Z"
+  }
+]

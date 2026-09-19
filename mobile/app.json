@@ -1,0 +1,57 @@
+{
+  "expo": {
+    "name": "UNA Market",
+    "slug": "una-md-retail",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "unamarket",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#E10915"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "md.una.retail",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Camera este folosită pentru scanarea codurilor de bare."
+      }
+    },
+    "android": {
+      "package": "md.una.retail",
+      "adaptiveIcon": {
+        "backgroundColor": "#E10915"
+      },
+      "permissions": [
+        "CAMERA",
+        "POST_NOTIFICATIONS",
+        "VIBRATE"
+      ]
+    },
+    "plugins": [
+      "expo-sqlite",
+      "expo-localization",
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Permite accesul la cameră pentru a scana codurile de bare ale produselor."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#E10915"
+        }
+      ]
+    ],
+    "extra": {
+      "apiBaseUrl": "https://api.una.md/retail/v1",
+      "tenantId": "demo"
+    }
+  }
+}

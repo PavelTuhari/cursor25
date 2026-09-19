@@ -1,0 +1,410 @@
+[
+  {
+    "id": "rcp-1001",
+    "number": "2026000001",
+    "store_id": "st-01",
+    "purchased_at": "2026-08-22T18:42:00Z",
+    "total": 51.3,
+    "discount_total": 3.6,
+    "points_earned": 5,
+    "points_spent": 0,
+    "payment_method": "card",
+    "fiscal_code": "MD000100005130",
+    "items": [
+      {
+        "product_id": "p-1001",
+        "name": {
+          "ro": "Lapte 2.5% 1 L",
+          "ru": "Молоко 2,5% 1 л",
+          "en": "Milk 2.5% 1 L"
+        },
+        "quantity": 1,
+        "unit": "l",
+        "price": 17.9,
+        "total": 17.9,
+        "discount": 3.6
+      },
+      {
+        "product_id": "p-7002",
+        "name": {
+          "ro": "Biscuiți cu ovăz 300 g",
+          "ru": "Печенье овсяное 300 г",
+          "en": "Oat biscuits 300 g"
+        },
+        "quantity": 1,
+        "unit": "kg",
+        "price": 24.5,
+        "total": 24.5,
+        "discount": 0.0
+      },
+      {
+        "product_id": "p-2003",
+        "name": {
+          "ro": "Croasant cu ciocolată 70 g",
+          "ru": "Круассан с шоколадом 70 г",
+          "en": "Chocolate croissant 70 g"
+        },
+        "quantity": 1,
+        "unit": "buc",
+        "price": 8.9,
+        "total": 8.9,
+        "discount": 0.0
+      }
+    ],
+    "item_count": 3,
+    "updated_at": "2026-08-22T18:42:00Z"
+  },
+  {
+    "id": "rcp-1002",
+    "number": "2026000002",
+    "store_id": "st-01",
+    "purchased_at": "2026-08-19T11:05:00Z",
+    "total": 144.2,
+    "discount_total": 5.1,
+    "points_earned": 14,
+    "points_spent": 0,
+    "payment_method": "cash",
+    "fiscal_code": "MD000200014419",
+    "items": [
+      {
+        "product_id": "p-6002",
+        "name": {
+          "ro": "Legume pentru supă 400 g",
+          "ru": "Овощи для супа 400 г",
+          "en": "Soup vegetables 400 g"
+        },
+        "quantity": 1,
+        "unit": "kg",
+        "price": 26.9,
+        "total": 26.9,
+        "discount": 5.1
+      },
+      {
+        "product_id": "p-7002",
+        "name": {
+          "ro": "Biscuiți cu ovăz 300 g",
+          "ru": "Печенье овсяное 300 г",
+          "en": "Oat biscuits 300 g"
+        },
+        "quantity": 3,
+        "unit": "kg",
+        "price": 24.5,
+        "total": 73.5,
+        "discount": 0.0
+      },
+      {
+        "product_id": "p-5002",
+        "name": {
+          "ro": "Suc de mere 1 L",
+          "ru": "Сок яблочный 1 л",
+          "en": "Apple juice 1 L"
+        },
+        "quantity": 2,
+        "unit": "l",
+        "price": 21.9,
+        "total": 43.8,
+        "discount": 0.0
+      }
+    ],
+    "item_count": 3,
+    "updated_at": "2026-08-19T11:05:00Z"
+  },
+  {
+    "id": "rcp-1003",
+    "number": "2026000003",
+    "store_id": "st-02",
+    "purchased_at": "2026-08-14T19:20:00Z",
+    "total": 149.9,
+    "discount_total": 19.8,
+    "points_earned": 14,
+    "points_spent": 150,
+    "payment_method": "card",
+    "fiscal_code": "MD000300014990",
+    "items": [
+      {
+        "product_id": "p-1001",
+        "name": {
+          "ro": "Lapte 2.5% 1 L",
+          "ru": "Молоко 2,5% 1 л",
+          "en": "Milk 2.5% 1 L"
+        },
+        "quantity": 1,
+        "unit": "l",
+        "price": 17.9,
+        "total": 17.9,
+        "discount": 3.6
+      },
+      {
+        "product_id": "p-1003",
+        "name": {
+          "ro": "Brânză de vaci 5% 500 g",
+          "ru": "Творог 5% 500 г",
+          "en": "Cottage cheese 5% 500 g"
+        },
+        "quantity": 3,
+        "unit": "kg",
+        "price": 34.5,
+        "total": 103.5,
+        "discount": 16.2
+      },
+      {
+        "product_id": "p-2001",
+        "name": {
+          "ro": "Pâine albă 500 g",
+          "ru": "Хлеб белый 500 г",
+          "en": "White bread 500 g"
+        },
+        "quantity": 3,
+        "unit": "kg",
+        "price": 9.5,
+        "total": 28.5,
+        "discount": 0.0
+      }
+    ],
+    "item_count": 3,
+    "updated_at": "2026-08-14T19:20:00Z"
+  },
+  {
+    "id": "rcp-1004",
+    "number": "2026000004",
+    "store_id": "st-01",
+    "purchased_at": "2026-08-08T13:31:00Z",
+    "total": 101.6,
+    "discount_total": 3.0,
+    "points_earned": 10,
+    "points_spent": 0,
+    "payment_method": "card",
+    "fiscal_code": "MD000400010160",
+    "items": [
+      {
+        "product_id": "p-5002",
+        "name": {
+          "ro": "Suc de mere 1 L",
+          "ru": "Сок яблочный 1 л",
+          "en": "Apple juice 1 L"
+        },
+        "quantity": 3,
+        "unit": "l",
+        "price": 21.9,
+        "total": 65.7,
+        "discount": 0.0
+      },
+      {
+        "product_id": "p-2001",
+        "name": {
+          "ro": "Pâine albă 500 g",
+          "ru": "Хлеб белый 500 г",
+          "en": "White bread 500 g"
+        },
+        "quantity": 2,
+        "unit": "kg",
+        "price": 9.5,
+        "total": 19.0,
+        "discount": 0.0
+      },
+      {
+        "product_id": "p-7001",
+        "name": {
+          "ro": "Ciocolată cu lapte 90 g",
+          "ru": "Шоколад молочный 90 г",
+          "en": "Milk chocolate 90 g"
+        },
+        "quantity": 1,
+        "unit": "kg",
+        "price": 16.9,
+        "total": 16.9,
+        "discount": 3.0
+      }
+    ],
+    "item_count": 3,
+    "updated_at": "2026-08-08T13:31:00Z"
+  },
+  {
+    "id": "rcp-1005",
+    "number": "2026000005",
+    "store_id": "st-03",
+    "purchased_at": "2026-07-30T17:58:00Z",
+    "total": 133.7,
+    "discount_total": 7.1,
+    "points_earned": 13,
+    "points_spent": 0,
+    "payment_method": "cash",
+    "fiscal_code": "MD000500013369",
+    "items": [
+      {
+        "product_id": "p-5003",
+        "name": {
+          "ro": "Bere blondă 0.5 L",
+          "ru": "Пиво светлое 0,5 л",
+          "en": "Lager 0.5 L"
+        },
+        "quantity": 1,
+        "unit": "l",
+        "price": 15.4,
+        "total": 15.4,
+        "discount": 3.5
+      },
+      {
+        "product_id": "p-2003",
+        "name": {
+          "ro": "Croasant cu ciocolată 70 g",
+          "ru": "Круассан с шоколадом 70 г",
+          "en": "Chocolate croissant 70 g"
+        },
+        "quantity": 1,
+        "unit": "buc",
+        "price": 8.9,
+        "total": 8.9,
+        "discount": 0.0
+      },
+      {
+        "product_id": "p-1001",
+        "name": {
+          "ro": "Lapte 2.5% 1 L",
+          "ru": "Молоко 2,5% 1 л",
+          "en": "Milk 2.5% 1 L"
+        },
+        "quantity": 1,
+        "unit": "l",
+        "price": 17.9,
+        "total": 17.9,
+        "discount": 3.6
+      },
+      {
+        "product_id": "p-1006",
+        "name": {
+          "ro": "Iaurt natural 330 g",
+          "ru": "Йогурт натуральный 330 г",
+          "en": "Natural yoghurt 330 g"
+        },
+        "quantity": 1,
+        "unit": "kg",
+        "price": 12.6,
+        "total": 12.6,
+        "discount": 0.0
+      },
+      {
+        "product_id": "p-4002",
+        "name": {
+          "ro": "Cartofi 1 kg",
+          "ru": "Картофель 1 кг",
+          "en": "Potatoes 1 kg"
+        },
+        "quantity": 1,
+        "unit": "kg",
+        "price": 11.5,
+        "total": 11.5,
+        "discount": 0.0
+      },
+      {
+        "product_id": "p-3002",
+        "name": {
+          "ro": "Salam de casă 350 g",
+          "ru": "Колбаса домашняя 350 г",
+          "en": "Home salami 350 g"
+        },
+        "quantity": 1,
+        "unit": "kg",
+        "price": 67.4,
+        "total": 67.4,
+        "discount": 0.0
+      }
+    ],
+    "item_count": 6,
+    "updated_at": "2026-07-30T17:58:00Z"
+  },
+  {
+    "id": "rcp-1006",
+    "number": "2026000006",
+    "store_id": "st-02",
+    "purchased_at": "2026-07-21T12:09:00Z",
+    "total": 811.0,
+    "discount_total": 110.0,
+    "points_earned": 81,
+    "points_spent": 0,
+    "payment_method": "card",
+    "fiscal_code": "MD000600081100",
+    "items": [
+      {
+        "product_id": "p-1004",
+        "name": {
+          "ro": "Cașcaval Rossiyskiy 300 g",
+          "ru": "Сыр Российский 300 г",
+          "en": "Cheese Rossiyskiy 300 g"
+        },
+        "quantity": 2,
+        "unit": "kg",
+        "price": 62.0,
+        "total": 124.0,
+        "discount": 0.0
+      },
+      {
+        "product_id": "p-3003",
+        "name": {
+          "ro": "Ceafă de porc 1 kg",
+          "ru": "Свиная шея 1 кг",
+          "en": "Pork neck 1 kg"
+        },
+        "quantity": 3,
+        "unit": "kg",
+        "price": 129.0,
+        "total": 387.0,
+        "discount": 60.0
+      },
+      {
+        "product_id": "p-8001",
+        "name": {
+          "ro": "Detergent vase 1 L",
+          "ru": "Средство для посуды 1 л",
+          "en": "Dish soap 1 L"
+        },
+        "quantity": 1,
+        "unit": "l",
+        "price": 54.9,
+        "total": 54.9,
+        "discount": 10.0
+      },
+      {
+        "product_id": "p-5004",
+        "name": {
+          "ro": "Cafea măcinată 250 g",
+          "ru": "Кофе молотый 250 г",
+          "en": "Ground coffee 250 g"
+        },
+        "quantity": 2,
+        "unit": "kg",
+        "price": 89.0,
+        "total": 178.0,
+        "discount": 40.0
+      },
+      {
+        "product_id": "p-2003",
+        "name": {
+          "ro": "Croasant cu ciocolată 70 g",
+          "ru": "Круассан с шоколадом 70 г",
+          "en": "Chocolate croissant 70 g"
+        },
+        "quantity": 1,
+        "unit": "buc",
+        "price": 8.9,
+        "total": 8.9,
+        "discount": 0.0
+      },
+      {
+        "product_id": "p-1002",
+        "name": {
+          "ro": "Lapte 3.2% 0.9 L",
+          "ru": "Молоко 3,2% 0,9 л",
+          "en": "Milk 3.2% 0.9 L"
+        },
+        "quantity": 3,
+        "unit": "l",
+        "price": 19.4,
+        "total": 58.2,
+        "discount": 0.0
+      }
+    ],
+    "item_count": 6,
+    "updated_at": "2026-07-21T12:09:00Z"
+  }
+]

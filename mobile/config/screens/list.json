@@ -1,0 +1,22 @@
+{
+  "id": "list",
+  "titleKey": "screen.list",
+  "refreshable": true,
+  "blocks": [
+    {
+      "id": "list-main",
+      "type": "shopping_list",
+      "props": {
+        "allowManualItems": true,
+        "showTotals": true,
+        "groupDoneAtBottom": true,
+        "suggestions": {
+          "entity": "products",
+          "where": [{ "field": "discount_percent", "op": ">", "value": 0 }],
+          "orderBy": [{ "field": "discount_percent", "dir": "desc" }],
+          "limit": 10
+        }
+      }
+    }
+  ]
+}
