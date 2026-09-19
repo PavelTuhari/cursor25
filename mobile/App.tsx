@@ -41,6 +41,9 @@ export default function App(): React.ReactElement {
       try {
         const driver = await ExpoSqlDriver.open();
         const extra = Constants.expoConfig?.extra as { apiBaseUrl?: string } | undefined;
+        // A dev or staging run can point the app at another backend without
+        // editing app.json: EXPO_PUBLIC_API_BASE_URL=http://localhost:4000 npx expo start
+        const devApiBaseUrl = process.env.EXPO_PUBLIC_API_BASE_URL ?? extra?.apiBaseUrl;
         const instance = await bootstrap({
           driver,
           // The token goes to the platform keystore, not to the app database.
@@ -48,7 +51,7 @@ export default function App(): React.ReactElement {
           pushAdapter: new ExpoPushAdapter(Constants.expoConfig?.extra?.eas?.projectId as string | undefined),
           deviceLocales: Localization.getLocales().map((locale) => locale.languageTag),
           // Dev and staging builds point the app at their own backend.
-          apiBaseUrl: __DEV__ ? extra?.apiBaseUrl : undefined,
+          apiBaseUrl: __DEV__ ? devApiBaseUrl : undefined,
         });
         setRuntime(instance);
 

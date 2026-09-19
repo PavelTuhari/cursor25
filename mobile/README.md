@@ -47,10 +47,10 @@ npm run start:mock          # http://localhost:4000
 npm start
 ```
 
-Приложение в dev-режиме берёт адрес API из `app.json` → `expo.extra.apiBaseUrl`
-(по умолчанию `https://api.una.md/retail/v1`; для работы с моком укажите
-`http://localhost:4000`). Значение из dev-сборки всегда важнее того, что приходит
-с сервера.
+Приложение в dev-режиме берёт адрес API из переменной `EXPO_PUBLIC_API_BASE_URL`,
+а если её нет — из `app.json` → `expo.extra.apiBaseUrl` (по умолчанию
+`https://api.una.md/retail/v1`). Значение из dev-сборки всегда важнее того, что
+приходит с сервера, поэтому переключение на мок не требует правок в конфигурации.
 
 ## Ручной прогон и акт тестирования
 
@@ -59,7 +59,7 @@ npm start
 
 ```bash
 npm run start:mock                 # данные: мок-API на http://localhost:4000
-npx expo start --web --port 8081   # приложение (expo.extra.apiBaseUrl → мок)
+EXPO_PUBLIC_API_BASE_URL=http://localhost:4000 npx expo start --web --port 8081
 
 # обход по сценариям покупателя со скриншотами
 SHOTS_DIR=./shots node tools/screenshot-tour.mjs
