@@ -52,6 +52,27 @@ npm start
 `http://localhost:4000`). Значение из dev-сборки всегда важнее того, что приходит
 с сервера.
 
+## Ручной прогон и акт тестирования
+
+Приложение запускается и в браузере — это же самый быстрый способ посмотреть экраны и
+снять скриншоты для отчёта:
+
+```bash
+npm run start:mock                 # данные: мок-API на http://localhost:4000
+npx expo start --web --port 8081   # приложение (expo.extra.apiBaseUrl → мок)
+
+# обход по сценариям покупателя со скриншотами
+SHOTS_DIR=./shots node tools/screenshot-tour.mjs
+
+# HTML-акт: скриншоты + результаты автотестов в одном файле
+npx jest --ci --json --outputFile=./jest.json
+node tools/build-test-report.mjs ./shots ./jest.json docs/testing/act.html
+```
+
+Мок-API подменяет ссылки на картинки на собственные заглушки, поэтому экраны выглядят
+как настоящие даже без доступа к CDN. Готовый акт лежит в
+[`docs/testing/`](docs/testing/).
+
 ## Проверки
 
 ```bash

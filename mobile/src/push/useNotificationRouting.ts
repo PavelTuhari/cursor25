@@ -8,15 +8,21 @@ import * as Notifications from 'expo-notifications';
 import { resolveNotificationRoute } from './routing';
 
 // Notifications that arrive while the app is open are worth showing: a "your
-// order is ready" banner is the point of the feature.
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowBanner: true,
-    shouldShowList: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
-  }),
-});
+// order is ready" banner is the point of the feature. Platforms without push
+// (web, a build without the module) throw here, and that must not take the
+// whole app down.
+try {
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowBanner: true,
+      shouldShowList: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+    }),
+  });
+} catch {
+  // No notification support on this platform.
+}
 
 export type NavigateFn = (screen: string, params?: Record<string, unknown>) => void;
 
@@ -29,9 +35,14 @@ export function useNotificationRouting(navigate: NavigateFn, ready: boolean): vo
       if (route) navigate(route.screen, route.params);
     };
 
-    // A cold start through a notification has no live event to listen for.
-    void Notifications.getLastNotificationResponseAsync().then(open);
-    const subscription = Notifications.addNotificationResponseReceivedListener(open);
-    return () => subscription.remove();
+    try {
+      // A cold start through a notification has no live event to listen for.
+      void Notifications.getLastNotificationResponseAsync().then(open, () => undefined);
+      const subscription = Notifications.addNotificationResponseReceivedListener(open);
+      return () => subscription.remove();
+    } catch {
+      // Push is unavailable here; the rest of the app is unaffected.
+      return undefined;
+    }
   }, [navigate, ready]);
 }

@@ -97,11 +97,21 @@ function bearer(req) {
 
 const port = Number(process.argv.includes('--port') ? process.argv[process.argv.indexOf('--port') + 1] : 4000);
 
+// The app also runs in a browser (web target, screenshots, manual QA), so the
+// mock backend answers cross-origin requests.
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Authorization, Content-Type, X-Tenant, X-App-Platform',
+  'Access-Control-Max-Age': '600',
+};
+
 function send(res, status, body) {
   const payload = body === undefined ? '' : JSON.stringify(body);
   res.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
     'Cache-Control': 'no-store',
+    ...CORS_HEADERS,
   });
   res.end(payload);
 }
@@ -111,6 +121,39 @@ async function readBody(req) {
   for await (const chunk of req) chunks.push(chunk);
   if (chunks.length === 0) return undefined;
   return JSON.parse(Buffer.concat(chunks).toString('utf8'));
+}
+
+/**
+ * Fixture images point at the production CDN, which a developer machine cannot
+ * reach. The mock rewrites them to itself and serves a labelled placeholder, so
+ * the app looks like the real thing during manual QA and screenshots.
+ */
+const CDN_PREFIX = 'https://cdn.una.md/';
+
+function localizeImages(value) {
+  if (typeof value === 'string') {
+    return value.startsWith(CDN_PREFIX) ? `http://localhost:${port}/cdn/${value.slice(CDN_PREFIX.length)}` : value;
+  }
+  if (Array.isArray(value)) return value.map(localizeImages);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, localizeImages(item)]));
+  }
+  return value;
+}
+
+const PLACEHOLDER_COLORS = ['#E10915', '#00723F', '#1F4E8C', '#B45309', '#6D28D9', '#0E7490'];
+
+function placeholderSvg(path) {
+  const label = decodeURIComponent(path.split('/').pop() ?? '').replace(/\.(png|jpg|jpeg|webp)$/i, '');
+  let hash = 0;
+  for (const char of label) hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
+  const color = PLACEHOLDER_COLORS[hash % PLACEHOLDER_COLORS.length];
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="${color}" opacity="0.10"/>
+  <circle cx="300" cy="250" r="110" fill="${color}" opacity="0.28"/>
+  <text x="300" y="470" font-family="system-ui, sans-serif" font-size="30" fill="${color}"
+        text-anchor="middle">${label.slice(0, 22)}</text>
+</svg>`;
 }
 
 function pullCollection(name, url) {
@@ -128,7 +171,7 @@ function pullCollection(name, url) {
   const last = page.at(-1);
 
   return {
-    items: page,
+    items: page.map(localizeImages),
     deleted: from ? deletions[name] ?? [] : [],
     cursor: last?.updated_at ?? from ?? null,
     has_more: hasMore,
@@ -164,12 +207,25 @@ function appConfigPayload() {
       api: { baseUrl: `http://localhost:${port}` },
       features: { ...app.features, productReviews: false },
     },
+    theme: { images: { placeholder: `http://localhost:${port}/cdn/placeholder.png` } },
   };
 }
 
 const server = createServer(async (req, res) => {
   const url = new URL(req.url ?? '/', `http://localhost:${port}`);
   const path = url.pathname.replace(/\/+$/, '') || '/';
+
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204, CORS_HEADERS);
+    res.end();
+    return;
+  }
+
+  if (path.startsWith('/cdn/')) {
+    res.writeHead(200, { 'Content-Type': 'image/svg+xml', 'Cache-Control': 'no-store', ...CORS_HEADERS });
+    res.end(placeholderSvg(path));
+    return;
+  }
 
   if (path === '/app-config') return send(res, 200, appConfigPayload());
   if (path === '/health') return send(res, 200, { ok: true });
