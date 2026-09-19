@@ -1,0 +1,13 @@
+import { chromium } from 'playwright';
+const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH, args: ['--no-sandbox'] });
+const page = await (await browser.newContext({ viewport: { width: 390, height: 844 }, locale: 'ru-MD' })).newPage();
+page.on('console', (m) => { if (m.type() === 'error' && !m.text().includes('hydration')) console.log('CONSOLE', m.text().slice(0, 240)); });
+await page.goto('http://localhost:8081', { waitUntil: 'domcontentloaded', timeout: 240000 });
+await page.waitForTimeout(30000);
+console.log('HOME:', (await page.innerText('body')).slice(0, 200).replace(/\n/g, ' | '));
+const tab = page.getByText('Профиль', { exact: true }).filter({ visible: true }).last();
+const box = await tab.boundingBox();
+await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+await page.waitForTimeout(3000);
+console.log('PROFILE:', (await page.innerText('body')).slice(0, 700).replace(/\n/g, ' | '));
+await browser.close();
