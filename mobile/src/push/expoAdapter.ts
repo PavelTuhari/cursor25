@@ -16,7 +16,8 @@ export class ExpoPushAdapter implements PushAdapter {
   constructor(private readonly projectId?: string) {}
 
   get isDevice(): boolean {
-    return Device.isDevice;
+    // Push needs a real iOS/Android device: no simulator, no web.
+    return Device.isDevice && (Platform.OS === 'ios' || Platform.OS === 'android');
   }
 
   async getPermissionStatus(): Promise<PermissionStatus> {
