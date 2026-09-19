@@ -69,6 +69,9 @@ async function tap(text, { exact = true, last = false, wait = 1500 } = {}) {
   log.push(`OK   tap "${text}"`);
 }
 
+/** Tab labels sit at the bottom, so the last visible match is the tab. */
+const goTab = (name) => tap(name, { exact: true, last: true, wait: 2000 });
+
 /**
  * Steps start from the tab bar. A stack screen (a coupon list, an order) hides
  * it, and the header arrow is unreliable in the web renderer, so the tour
