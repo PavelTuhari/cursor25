@@ -14,6 +14,15 @@ export class Repository<T extends EntityRecord = EntityRecord> {
     readonly entity: EntityConfig,
   ) {}
 
+  /**
+   * Whether a local write has to reach the server. A `local` entity (the cart)
+   * has nobody to send it to: queuing a job for it would pile up work the sync
+   * engine never drains and inflate the "pending changes" counter.
+   */
+  private get pushesLocalWrites(): boolean {
+    return this.entity.direction === 'push' || this.entity.direction === 'bidirectional';
+  }
+
   async query(query: DataQuery, ctx: QueryContext): Promise<T[]> {
     const compiled = buildSelect(this.entity, { ...query, entity: this.entity.name }, ctx);
     const rows = await this.driver.select<Record<string, SqlValue>>(compiled.sql, compiled.params);
@@ -64,9 +73,12 @@ export class Repository<T extends EntityRecord = EntityRecord> {
       throw new Error(`local record for "${this.entity.name}" needs a string primary key`);
     }
     await this.driver.transaction(async () => {
-      const { sql, params } = buildUpsert(this.entity, record, { ...options, dirty: true });
+      const { sql, params } = buildUpsert(this.entity, record, {
+        ...options,
+        dirty: this.pushesLocalWrites,
+      });
       await this.driver.execute(sql, params);
-      if (this.entity.direction !== 'pull') {
+      if (this.pushesLocalWrites) {
         await enqueueOutbox(this.driver, {
           entity: this.entity.name,
           op: 'upsert',
@@ -80,7 +92,7 @@ export class Repository<T extends EntityRecord = EntityRecord> {
   async deleteLocal(id: string): Promise<void> {
     await this.driver.transaction(async () => {
       await this.driver.execute(`DELETE FROM ${this.entity.table} WHERE ${this.entity.primaryKey} = ?`, [id]);
-      if (this.entity.direction !== 'pull') {
+      if (this.pushesLocalWrites) {
         await enqueueOutbox(this.driver, {
           entity: this.entity.name,
           op: 'delete',

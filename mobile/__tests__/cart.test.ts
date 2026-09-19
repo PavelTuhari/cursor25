@@ -1,4 +1,4 @@
-import { cartTotals, clampQuantity, lineTotal, type CartLine } from '../src/domain/cart';
+import { cartTotals, clampQuantity, lineTotal, repriceLines, type CartLine } from '../src/domain/cart';
 import {
   activeCoupons,
   couponDiscount,
@@ -91,6 +91,38 @@ describe('cart totals', () => {
     expect(clampQuantity(0, cartConfig)).toBe(0);
     expect(clampQuantity(-3, cartConfig)).toBe(0);
     expect(clampQuantity(999, cartConfig)).toBe(cartConfig.maxQuantityPerItem);
+  });
+});
+
+describe('re-pricing the basket', () => {
+  it('follows the catalogue when a price changed', () => {
+    const prices = new Map([['p-1001', 19.9]]);
+    const { lines: repriced, changed } = repriceLines(lines, (id) => prices.get(id));
+
+    expect(changed).toHaveLength(1);
+    expect(repriced[0]!.price).toBe(19.9);
+    // A product missing from the catalogue keeps the price it was added at.
+    expect(repriced[1]!.price).toBe(9.5);
+  });
+
+  it('leaves everything alone when nothing moved', () => {
+    const prices = new Map([
+      ['p-1001', 17.9],
+      ['p-2001', 9.5],
+    ]);
+    const { lines: repriced, changed } = repriceLines(lines, (id) => prices.get(id));
+    expect(changed).toEqual([]);
+    expect(repriced[0]).toBe(lines[0]);
+  });
+
+  it('ignores rounding noise below a ban', () => {
+    const prices = new Map([['p-1001', 17.902]]);
+    expect(repriceLines(lines, (id) => prices.get(id)).changed).toEqual([]);
+  });
+
+  it('skips manually added lines that have no product', () => {
+    const manual: CartLine[] = [{ id: 'c9', title: 'Ceva', price: 5, quantity: 1 }];
+    expect(repriceLines(manual, () => 9).changed).toEqual([]);
   });
 });
 

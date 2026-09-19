@@ -97,6 +97,29 @@ function isFreeDelivery(total: number, config: CartConfig): boolean {
   return config.freeDeliveryFrom > 0 && total >= config.freeDeliveryFrom;
 }
 
+/**
+ * Re-prices basket lines from the catalogue.
+ *
+ * A line stores the price it was added at; prices change with every sync, and
+ * ordering at a price the shop no longer offers would be wrong for both sides.
+ * Lines whose product is gone from the catalogue keep their stored price.
+ */
+export function repriceLines(
+  lines: CartLine[],
+  priceOf: (productId: string) => number | undefined,
+): { lines: CartLine[]; changed: CartLine[] } {
+  const changed: CartLine[] = [];
+  const result = lines.map((line) => {
+    if (!line.product_id) return line;
+    const current = priceOf(line.product_id);
+    if (current === undefined || Math.abs(current - (line.price ?? 0)) < 0.005) return line;
+    const updated = { ...line, price: current };
+    changed.push(updated);
+    return updated;
+  });
+  return { lines: result, changed };
+}
+
 /** Keeps a quantity inside 1…`maxQuantityPerItem`; 0 means "remove the line". */
 export function clampQuantity(quantity: number, config: CartConfig): number {
   if (quantity <= 0) return 0;

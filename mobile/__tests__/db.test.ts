@@ -239,6 +239,23 @@ describe('repository', () => {
     await db.close();
   });
 
+  it('queues nothing for a device-only entity', async () => {
+    const { db, driver } = await openTestDatabase();
+    const cart = db.repository('cart_items');
+
+    await cart.saveLocal({ id: 'cart-1', product_id: 'p-1', quantity: 2, price: 17.9 });
+    await cart.saveLocal({ id: 'cart-2', product_id: 'p-2', quantity: 1, price: 9.5 });
+    await cart.deleteLocal('cart-2');
+
+    // Nothing to push: a queued job here would never be drained.
+    expect(await pendingCount(driver)).toBe(0);
+    expect(await cart.dirtyCount()).toBe(0);
+
+    const rows = await cart.query({ entity: 'cart_items' }, { locale: 'ro' });
+    expect(rows.map((row) => row.id)).toEqual(['cart-1']);
+    await db.close();
+  });
+
   it('never lets a server deletion drop a pending local change', async () => {
     const { db } = await openTestDatabase();
     const list = db.repository('shopping_list_items');

@@ -12,6 +12,7 @@ import { translate, type EntityRecord } from '../db/records';
 import {
   cartTotals,
   clampQuantity,
+  repriceLines,
   type CartLine,
   type CartTotals,
   type Fulfillment,
@@ -68,9 +69,27 @@ export function CartProvider({ children }: { children: React.ReactNode }): React
       { entity: 'cart_items', orderBy: [{ field: 'added_at', dir: 'asc' }], limit: 500 },
       { locale },
     );
-    setItems(rows);
+
+    // Prices move with every sync; the basket follows the catalogue.
+    const productIds = rows
+      .map((row) => row.product_id)
+      .filter((id): id is string => typeof id === 'string' && id.length > 0);
+    const products = productIds.length
+      ? await db.repository('products').query(
+          { entity: 'products', select: ['id', 'price'], where: [{ field: 'id', op: 'in', value: productIds }] },
+          { locale },
+        )
+      : [];
+    const priceById = new Map(products.map((product) => [String(product.id), Number(product.price ?? 0)]));
+
+    const { lines, changed } = repriceLines(rows, (productId) => priceById.get(productId));
+    for (const line of changed) {
+      await repository.saveLocal({ ...line, updated_at: new Date().toISOString() });
+    }
+
+    setItems(lines);
     setLoading(false);
-  }, [repository, locale]);
+  }, [repository, db, locale]);
 
   useEffect(() => {
     void reload();
@@ -78,8 +97,8 @@ export function CartProvider({ children }: { children: React.ReactNode }): React
 
   const persist = useCallback(
     async (line: CartLine) => {
-      // A local table has no outbox: a plain upsert is the whole write.
-      await repository.upsertFromServer({ ...line, updated_at: new Date().toISOString() }, new Date().toISOString());
+      // `cart_items` is a local entity, so this write queues nothing.
+      await repository.saveLocal({ ...line, updated_at: new Date().toISOString() });
       await reload();
     },
     [repository, reload],
@@ -110,7 +129,7 @@ export function CartProvider({ children }: { children: React.ReactNode }): React
 
   const remove = useCallback<CartValue['remove']>(
     async (id) => {
-      await repository.deleteFromServer([id]);
+      await repository.deleteLocal(id);
       await reload();
     },
     [repository, reload],
