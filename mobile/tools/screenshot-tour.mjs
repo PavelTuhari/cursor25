@@ -53,9 +53,28 @@ async function alive() {
 async function tap(text, { exact = true, last = false, wait = 1500 } = {}) {
   const base = page.getByText(text, { exact });
   const locator = last ? base.last() : base.first();
-  await locator.click({ timeout: 15000 });
+  try {
+    await locator.click({ timeout: 8000 });
+  } catch (error) {
+    // React Native Web wraps labels in pressables that re-render on tap, so a
+    // strict actionability check can time out on a button that works fine.
+    log.push(`WARN forced tap "${text}": ${String(error).split('\n')[1] ?? ''}`.trim());
+    await locator.click({ timeout: 8000, force: true });
+  }
   await page.waitForTimeout(wait);
   log.push(`OK   tap "${text}"`);
+}
+
+/** Steps start from the tab bar; a stack screen left open would hide it. */
+async function ensureTabs() {
+  for (let i = 0; i < 4; i += 1) {
+    const tab = page.getByText('Профиль', { exact: true }).last();
+    if (await tab.isVisible().catch(() => false)) return;
+    const back = page.getByLabel('Go back').first();
+    if (!(await back.isVisible().catch(() => false))) return;
+    await back.click({ timeout: 8000 }).catch(() => undefined);
+    await page.waitForTimeout(1000);
+  }
 }
 
 const goTab = (name) => tap(name, { exact: true, last: true, wait: 2000 });
@@ -77,6 +96,7 @@ async function goBack(times = 1) {
 async function step(name, fn) {
   try {
     await alive();
+    await ensureTabs();
     await fn();
   } catch (error) {
     log.push(`FAIL ${name}: ${String(error).split('\n')[0].slice(0, 140)}`);
