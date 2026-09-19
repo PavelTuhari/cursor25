@@ -143,7 +143,9 @@ await step('receipts', async () => {
   await tap('История покупок');
   await page.waitForTimeout(2000);
   await shot('receipts');
-  await page.locator('text=/\\d{2}\\.\\d{2}\\.\\d{4}/').filter({ visible: true }).first().click({ timeout: 15000, force: true });
+  // Receipt rows lead with "DD.MM, HH:MM".
+  await page.locator('text=/^\\d{2}\\.\\d{2}, \\d{2}:\\d{2}$/').filter({ visible: true }).first()
+    .click({ timeout: 15000, force: true });
   await page.waitForTimeout(2000);
   await shot('receipt-detail');
 });
