@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "entities": [
     {
       "name": "categories",
@@ -541,6 +541,56 @@
       ]
     },
     {
+      "name": "cart_items",
+      "table": "cart_items",
+      "direction": "local",
+      "syncMode": "full",
+      "primaryKey": "id",
+      "order": 75,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "product_id",
+          "type": "text",
+          "index": true
+        },
+        {
+          "name": "quantity",
+          "type": "real",
+          "default": 1
+        },
+        {
+          "name": "unit",
+          "type": "text"
+        },
+        {
+          "name": "price",
+          "type": "real",
+          "default": 0
+        },
+        {
+          "name": "title",
+          "type": "text"
+        },
+        {
+          "name": "image_url",
+          "type": "text"
+        },
+        {
+          "name": "added_at",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
       "name": "favorites",
       "table": "favorites",
       "endpoint": "/account/favorites",
@@ -569,6 +619,98 @@
         }
       ],
       "requiresAuth": true
+    },
+    {
+      "name": "coupons",
+      "table": "coupons",
+      "endpoint": "/account/coupons",
+      "direction": "bidirectional",
+      "syncMode": "delta",
+      "pushMode": "batch",
+      "conflict": "last_write_wins",
+      "requiresAuth": true,
+      "primaryKey": "id",
+      "cursorField": "updated_at",
+      "order": 85,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "code",
+          "type": "text"
+        },
+        {
+          "name": "title",
+          "type": "localized"
+        },
+        {
+          "name": "description",
+          "type": "localized"
+        },
+        {
+          "name": "image_url",
+          "type": "text"
+        },
+        {
+          "name": "barcode",
+          "type": "text"
+        },
+        {
+          "name": "discount_type",
+          "type": "text"
+        },
+        {
+          "name": "discount_value",
+          "type": "real",
+          "default": 0
+        },
+        {
+          "name": "min_order_total",
+          "type": "real",
+          "default": 0
+        },
+        {
+          "name": "product_ids",
+          "type": "json"
+        },
+        {
+          "name": "category_ids",
+          "type": "json"
+        },
+        {
+          "name": "starts_at",
+          "type": "datetime"
+        },
+        {
+          "name": "ends_at",
+          "type": "datetime",
+          "index": true
+        },
+        {
+          "name": "is_activated",
+          "type": "boolean",
+          "default": 0
+        },
+        {
+          "name": "activated_at",
+          "type": "datetime"
+        },
+        {
+          "name": "used_at",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "index": true
+        }
+      ],
+      "searchColumns": [
+        "code"
+      ]
     },
     {
       "name": "receipts",
@@ -655,6 +797,126 @@
       "searchColumns": [
         "number",
         "fiscal_code"
+      ]
+    },
+    {
+      "name": "orders",
+      "table": "orders",
+      "endpoint": "/account/orders",
+      "direction": "bidirectional",
+      "syncMode": "delta",
+      "pushMode": "rest",
+      "conflict": "server_wins",
+      "requiresAuth": true,
+      "primaryKey": "id",
+      "cursorField": "updated_at",
+      "order": 95,
+      "columns": [
+        {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true
+        },
+        {
+          "name": "number",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "index": true,
+          "default": "new"
+        },
+        {
+          "name": "fulfillment",
+          "type": "text",
+          "default": "pickup"
+        },
+        {
+          "name": "store_id",
+          "type": "text",
+          "index": true
+        },
+        {
+          "name": "address",
+          "type": "text"
+        },
+        {
+          "name": "phone",
+          "type": "text"
+        },
+        {
+          "name": "comment",
+          "type": "text"
+        },
+        {
+          "name": "slot_date",
+          "type": "text"
+        },
+        {
+          "name": "slot_time",
+          "type": "text"
+        },
+        {
+          "name": "items",
+          "type": "json"
+        },
+        {
+          "name": "item_count",
+          "type": "integer",
+          "default": 0
+        },
+        {
+          "name": "subtotal",
+          "type": "real",
+          "default": 0
+        },
+        {
+          "name": "discount_total",
+          "type": "real",
+          "default": 0
+        },
+        {
+          "name": "delivery_fee",
+          "type": "real",
+          "default": 0
+        },
+        {
+          "name": "total",
+          "type": "real",
+          "default": 0
+        },
+        {
+          "name": "coupon_code",
+          "type": "text"
+        },
+        {
+          "name": "payment_method",
+          "type": "text",
+          "default": "cash"
+        },
+        {
+          "name": "placed_at",
+          "type": "datetime",
+          "index": true
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "index": true
+        }
+      ],
+      "indexes": [
+        {
+          "name": "idx_orders_placed",
+          "columns": [
+            "placed_at",
+            "status"
+          ]
+        }
+      ],
+      "searchColumns": [
+        "number"
       ]
     }
   ]

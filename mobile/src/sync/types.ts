@@ -29,7 +29,7 @@ export interface BatchResponse {
 
 export interface EntitySyncResult {
   entity: string;
-  skipped?: 'not_authenticated' | 'push_only' | 'disabled';
+  skipped?: 'not_authenticated' | 'push_only' | 'disabled' | 'local_only';
   pulled: number;
   deleted: number;
   pushed: number;

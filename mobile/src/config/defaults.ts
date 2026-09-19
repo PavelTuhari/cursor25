@@ -13,6 +13,10 @@ import listScreen from '@config/screens/list.json';
 import loyaltyScreen from '@config/screens/loyalty.json';
 import storesScreen from '@config/screens/stores.json';
 import profileScreen from '@config/screens/profile.json';
+import cartScreen from '@config/screens/cart.json';
+import ordersScreen from '@config/screens/orders.json';
+import couponsScreen from '@config/screens/coupons.json';
+import receiptsScreen from '@config/screens/receipts.json';
 import ro from '@config/l10n/ro.json';
 import ru from '@config/l10n/ru.json';
 import en from '@config/l10n/en.json';
@@ -36,6 +40,10 @@ for (const screen of [
   loyaltyScreen,
   storesScreen,
   profileScreen,
+  cartScreen,
+  ordersScreen,
+  couponsScreen,
+  receiptsScreen,
 ] as unknown as ScreenConfig[]) {
   screens[screen.id] = screen;
 }

@@ -15,6 +15,7 @@ import { Database } from './db/database';
 import type { SqlDriver } from './db/driver';
 import { getKv, setKv } from './db/migrator';
 import { resolveLocale } from './i18n';
+import { PushService, type PushAdapter } from './push/pushService';
 import { SyncEngine } from './sync/syncEngine';
 import { BLOCK_TYPE_NAMES } from './ui/blocks/blockTypes';
 import type { ThemeMode } from './ui/theme';
@@ -28,6 +29,7 @@ export interface Runtime {
   api: ApiClient;
   sync: SyncEngine;
   auth: AuthService;
+  push: PushService;
   locale: string;
   themeMode: ThemeMode;
   storeId: string | null;
@@ -44,6 +46,8 @@ export interface BootstrapOptions {
   fetchImpl?: FetchLike;
   /** Where the session token is kept; defaults to the database-backed store. */
   storage?: SecureStorage;
+  /** Native push bridge; without one the app simply never registers a token. */
+  pushAdapter?: PushAdapter;
   /**
    * Overrides `api.baseUrl` from any configuration source. Dev and staging
    * builds set it (from `expo.extra.apiBaseUrl`) to talk to a local or test
@@ -51,6 +55,15 @@ export interface BootstrapOptions {
    */
   apiBaseUrl?: string;
 }
+
+/** Stands in for the native bridge on platforms and builds without push. */
+const unsupportedPushAdapter: PushAdapter = {
+  platform: 'unknown',
+  isDevice: false,
+  getPermissionStatus: async () => 'undetermined',
+  requestPermission: async () => 'undetermined',
+  getToken: async () => null,
+};
 
 /** Applies the build-level API base URL override, if there is one. */
 function withApiBaseUrl(bundle: ConfigBundle, baseUrl: string | undefined): ConfigBundle {
@@ -119,6 +132,16 @@ export async function bootstrap(options: BootstrapOptions): Promise<Runtime> {
     isAuthenticated: () => auth.isAuthenticated(),
   });
 
+  let activeLocale = config.app.app.defaultLocale;
+  const push = new PushService({
+    api,
+    driver: db.driver,
+    config: config.app.push,
+    adapter: options.pushAdapter ?? unsupportedPushAdapter,
+    locale: () => activeLocale,
+    userId: () => auth.getSession()?.userId ?? null,
+  });
+
   const [storedLocale, storedTheme, storedStore] = await Promise.all([
     db.getSetting('locale'),
     db.getSetting('themeMode'),
@@ -130,12 +153,15 @@ export async function bootstrap(options: BootstrapOptions): Promise<Runtime> {
       ? storedLocale
       : resolveLocale(options.deviceLocales, config.app.app.locales, config.app.app.defaultLocale);
 
+  activeLocale = locale;
+
   const runtime: Runtime = {
     config,
     db,
     api,
     sync,
     auth,
+    push,
     locale,
     themeMode: (storedTheme as ThemeMode | null) ?? 'system',
     storeId: storedStore && storedStore.length > 0 ? storedStore : null,
@@ -162,6 +188,7 @@ export async function bootstrap(options: BootstrapOptions): Promise<Runtime> {
         api.setConfig(bundle.app.api);
         sync.setConfig(bundle.app);
         auth.setConfig(bundle.app.api.auth);
+        push.setConfig(bundle.app.push);
         return bundle;
       } catch (error) {
         // `failOpen` keeps the app usable on the last known good configuration.

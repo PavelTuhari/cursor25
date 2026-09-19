@@ -168,6 +168,16 @@ describe('pull', () => {
     await db.close();
   });
 
+  it('never sends a device-only entity to the API', async () => {
+    const stub = new FetchStub();
+    const { db, engine } = await makeEngine(stub, { authenticated: true });
+
+    const result = await engine.syncEntity(entity('cart_items'));
+    expect(result.skipped).toBe('local_only');
+    expect(stub.calls).toHaveLength(0);
+    await db.close();
+  });
+
   it('pulls the account entities once the user is signed in', async () => {
     const stub = new FetchStub();
     stub.on('GET /account/receipts', {
@@ -331,7 +341,10 @@ describe('sync run', () => {
     const { db, engine } = await makeEngine(stub);
     const report = await engine.sync();
     expect(report.entities.map((item) => item.entity)).toEqual(
-      [...bundle.entities.entities].sort((a, b) => a.order - b.order).map((item) => item.name),
+      [...bundle.entities.entities]
+        .filter((item) => item.direction !== 'local')
+        .sort((a, b) => a.order - b.order)
+        .map((item) => item.name),
     );
     await db.close();
   });
@@ -346,6 +359,6 @@ function entity(name: string) {
 /** Every pull endpoint except the ones a test stubs itself. */
 function otherEndpoints(...excluded: string[]): string[] {
   return bundle.entities.entities
-    .filter((item) => !excluded.includes(item.endpoint))
+    .filter((item) => item.endpoint !== undefined && !excluded.includes(item.endpoint))
     .map((item) => `GET ${item.endpoint}`);
 }

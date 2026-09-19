@@ -1,0 +1,25 @@
+{
+  "id": "orders",
+  "titleKey": "screen.orders",
+  "refreshable": true,
+  "blocks": [
+    {
+      "id": "orders-list",
+      "type": "order_list",
+      "visibleIf": { "feature": "onlineOrders", "auth": "required" },
+      "props": {
+        "source": {
+          "entity": "orders",
+          "orderBy": [{ "field": "placed_at", "dir": "desc" }],
+          "limit": 100
+        }
+      }
+    },
+    {
+      "id": "orders-login",
+      "type": "login_prompt",
+      "visibleIf": { "auth": "anonymous" },
+      "props": { "titleKey": "auth.prompt_title", "textKey": "auth.prompt_text" }
+    }
+  ]
+}

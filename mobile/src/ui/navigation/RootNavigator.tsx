@@ -3,17 +3,27 @@
  * icons, titles and visibility rules all come from the config bundle, and the
  * stack screens above them are the fixed set of detail screens.
  */
-import React from 'react';
-import { NavigationContainer, useNavigation, type NavigationProp } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
+import {
+  NavigationContainer,
+  createNavigationContainerRef,
+  useNavigation,
+  type NavigationProp,
+} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useApp, useT, useTheme } from '../../state/AppContext';
+import { useNotificationRouting } from '../../push/useNotificationRouting';
+import { useCart } from '../../state/CartContext';
 import { useShoppingList } from '../../state/ShoppingListContext';
 import { Icon } from '../components/Icon';
 import { AccountScreen } from '../screens/AccountScreen';
 import { BlocksScreen } from '../screens/BlocksScreen';
 import { CategoryScreen } from '../screens/CategoryScreen';
+import { CheckoutScreen } from '../screens/CheckoutScreen';
+import { OrderScreen } from '../screens/OrderScreen';
+import { ScanScreen } from '../screens/ScanScreen';
 import { LoginScreen } from '../screens/LoginScreen';
 import { ReceiptScreen } from '../screens/ReceiptScreen';
 import { FavoritesScreen } from '../screens/FavoritesScreen';
@@ -24,6 +34,8 @@ import { SettingsScreen } from '../screens/SettingsScreen';
 import { StoreScreen } from '../screens/StoreScreen';
 import { isVisible } from '../visibility';
 import type { RootStackParamList } from './types';
+
+const navigationRef = createNavigationContainerRef<RootStackParamList>();
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -44,7 +56,14 @@ function TabsNavigator(): React.ReactElement {
   const t = useT();
   const { config, isAuthenticated, locale } = useApp();
   const list = useShoppingList();
+  const cart = useCart();
   const navigate = useNavigate();
+
+  const badgeCount = (badge: string | undefined): number | undefined => {
+    if (badge === 'shoppingListCount' && list.count > 0) return list.count;
+    if (badge === 'cartCount' && cart.count > 0) return cart.count;
+    return undefined;
+  };
 
   const tabs = config.navigation.tabs.filter((tab) =>
     isVisible(tab.visibleIf, {
@@ -72,7 +91,7 @@ function TabsNavigator(): React.ReactElement {
           options={{
             title: t(tab.titleKey),
             tabBarIcon: ({ color }) => <Icon name={tab.icon} size={22} color={color} />,
-            tabBarBadge: tab.badge === 'shoppingListCount' && list.count > 0 ? list.count : undefined,
+            tabBarBadge: badgeCount(tab.badge),
           }}
         >
           {() => <BlocksScreen screenId={tab.screen} navigate={navigate} />}
@@ -125,6 +144,41 @@ function ReceiptRoute({ route }: { route: { params: RootStackParamList['receipt'
   return <ReceiptScreen receiptId={route.params.receiptId} />;
 }
 
+function OrdersRoute(): React.ReactElement {
+  const navigate = useNavigate();
+  return <BlocksScreen screenId="orders" navigate={navigate} />;
+}
+
+function OrderRoute({ route }: { route: { params: RootStackParamList['order'] } }): React.ReactElement {
+  const navigate = useNavigate();
+  return <OrderScreen orderId={route.params.orderId} navigate={navigate} />;
+}
+
+function CouponsRoute(): React.ReactElement {
+  const navigate = useNavigate();
+  return <BlocksScreen screenId="coupons" navigate={navigate} />;
+}
+
+function CheckoutRoute(): React.ReactElement {
+  const navigate = useNavigate();
+  return <CheckoutScreen navigate={navigate} />;
+}
+
+function ScanRoute(): React.ReactElement {
+  const navigate = useNavigate();
+  return <ScanScreen navigate={navigate} />;
+}
+
+function ListRoute(): React.ReactElement {
+  const navigate = useNavigate();
+  return <BlocksScreen screenId="list" navigate={navigate} />;
+}
+
+function PromosRoute(): React.ReactElement {
+  const navigate = useNavigate();
+  return <BlocksScreen screenId="promos" navigate={navigate} />;
+}
+
 function LoginRoute(): React.ReactElement {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   return <LoginScreen onSignedIn={() => navigation.goBack()} />;
@@ -133,9 +187,20 @@ function LoginRoute(): React.ReactElement {
 export function RootNavigator(): React.ReactElement {
   const theme = useTheme();
   const t = useT();
+  const [ready, setReady] = useState(false);
+
+  // Notifications may arrive before the navigator exists, so routing waits for it.
+  const navigateFromNotification = useCallback((screen: string, params?: Record<string, unknown>) => {
+    if (!navigationRef.isReady()) return;
+    const navigate = navigationRef.navigate as (name: string, params?: Record<string, unknown>) => void;
+    navigate(screen, params);
+  }, []);
+  useNotificationRouting(navigateFromNotification, ready);
 
   return (
     <NavigationContainer
+      ref={navigationRef}
+      onReady={() => setReady(true)}
       theme={{
         dark: theme.mode === 'dark',
         colors: {
@@ -174,6 +239,13 @@ export function RootNavigator(): React.ReactElement {
         <Stack.Screen name="account" component={AccountScreen} options={{ title: t('screen.account') }} />
         <Stack.Screen name="receipts" component={ReceiptsRoute} options={{ title: t('screen.receipts') }} />
         <Stack.Screen name="receipt" component={ReceiptRoute} options={{ title: t('screen.receipts') }} />
+        <Stack.Screen name="checkout" component={CheckoutRoute} options={{ title: t('screen.checkout') }} />
+        <Stack.Screen name="orders" component={OrdersRoute} options={{ title: t('screen.orders') }} />
+        <Stack.Screen name="order" component={OrderRoute} options={{ title: t('screen.order') }} />
+        <Stack.Screen name="coupons" component={CouponsRoute} options={{ title: t('screen.coupons') }} />
+        <Stack.Screen name="scan" component={ScanRoute} options={{ title: t('screen.scan') }} />
+        <Stack.Screen name="list" component={ListRoute} options={{ title: t('screen.list') }} />
+        <Stack.Screen name="promos" component={PromosRoute} options={{ title: t('screen.promos') }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

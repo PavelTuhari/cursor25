@@ -7,6 +7,7 @@ import { formatDate } from '../../domain/dates';
 import { formatPrice, formatUnitPrice } from '../../domain/price';
 import { useApp, useT, useTheme } from '../../state/AppContext';
 import { useEntityQuery, useEntityRecord } from '../../state/useEntityQuery';
+import { useCart } from '../../state/CartContext';
 import { useShoppingList } from '../../state/ShoppingListContext';
 import type { BlockProps } from '../blocks/types';
 import { Badge, Button, EmptyState, LoadingBlock, Section } from '../components/base';
@@ -23,6 +24,7 @@ export function ProductScreen({
   const t = useT();
   const { config, locale } = useApp();
   const list = useShoppingList();
+  const cart = useCart();
   const { data, loading } = useEntityRecord<ProductRecord>('products', productId);
   const product = data[0];
 
@@ -102,11 +104,34 @@ export function ProductScreen({
               : t('product.in_stock')}
         </Text>
 
+        {config.app.features.cart ? (
+          <Button
+            label={
+              cart.quantityOf(productId) > 0
+                ? t('cart.in_cart', { quantity: cart.quantityOf(productId) })
+                : t('cart.to_cart')
+            }
+            icon="cart"
+            disabled={product.stock_status === 'out_of_stock'}
+            onPress={() =>
+              void cart.add({
+                id: productId,
+                name: product.name,
+                price: product.price ?? 0,
+                unit: product.unit ?? null,
+                image_url: product.image_url ?? null,
+              })
+            }
+            style={{ marginTop: theme.spacing.md }}
+          />
+        ) : null}
+
         <Button
           label={inList ? t('product.in_list') : t('product.add_to_list')}
           icon={inList ? 'check' : 'plus'}
+          variant={config.app.features.cart ? 'secondary' : 'primary'}
           onPress={() => void list.addProduct({ id: productId, name: product.name, unit: product.unit })}
-          style={{ marginTop: theme.spacing.md }}
+          style={{ marginTop: config.app.features.cart ? 0 : theme.spacing.md }}
         />
 
         {description ? (

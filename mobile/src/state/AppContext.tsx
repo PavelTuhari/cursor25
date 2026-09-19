@@ -7,11 +7,12 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useS
 
 import { ApiClient } from '../api/client';
 import type { AuthService } from '../auth/authService';
+import type { PushService } from '../push/pushService';
 import type { Session } from '../auth/types';
 import type { ConfigBundle } from '../config/types';
 import type { Database } from '../db/database';
 import { createTranslator, type Translator } from '../i18n';
-import type { SyncEngine } from '../sync/syncEngine';
+import type { SyncEngine, SyncOptions } from '../sync/syncEngine';
 import type { SyncReport } from '../sync/types';
 import { resolveTheme, type Theme, type ThemeMode } from '../ui/theme';
 
@@ -28,6 +29,7 @@ export interface AppContextValue {
   api: ApiClient;
   sync: SyncEngine;
   auth: AuthService;
+  push: PushService;
   theme: Theme;
   themeMode: ThemeMode;
   setThemeMode: (mode: ThemeMode) => void;
@@ -44,7 +46,7 @@ export interface AppContextValue {
   /** Increments after every write or sync so screens re-run their queries. */
   dataVersion: number;
   invalidate: () => void;
-  runSync: (force?: boolean) => Promise<SyncReport | null>;
+  runSync: (options?: SyncOptions) => Promise<SyncReport | null>;
   isFeatureEnabled: (feature: string | undefined) => boolean;
 }
 
@@ -56,6 +58,7 @@ export interface AppProviderProps {
   api: ApiClient;
   sync: SyncEngine;
   auth: AuthService;
+  push: PushService;
   initialLocale: string;
   initialThemeMode: ThemeMode;
   initialStoreId: string | null;
@@ -66,7 +69,7 @@ export interface AppProviderProps {
 }
 
 export function AppProvider(props: AppProviderProps): React.ReactElement {
-  const { config, db, api, sync, auth, systemScheme, onPersist } = props;
+  const { config, db, api, sync, auth, push, systemScheme, onPersist } = props;
   const [locale, setLocaleState] = useState(props.initialLocale);
   const [themeMode, setThemeModeState] = useState<ThemeMode>(props.initialThemeMode);
   const [storeId, setStoreIdState] = useState<string | null>(props.initialStoreId);
@@ -96,8 +99,10 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
     return auth.subscribe((next) => {
       setSession(next);
       setDataVersion((version) => version + 1);
+      // Personal pushes follow the account: re-register silently, never ask here.
+      if (next) void push.register(false);
     });
-  }, [auth]);
+  }, [auth, push]);
 
   const setLocale = useCallback(
     (next: string) => {
@@ -125,10 +130,10 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
   );
 
   const runSync = useCallback(
-    async (force = false): Promise<SyncReport | null> => {
+    async (options: SyncOptions = {}): Promise<SyncReport | null> => {
       setSyncStatus((status) => ({ ...status, running: true, error: null }));
       try {
-        const report = await sync.sync({ force });
+        const report = await sync.sync(options);
         const pending = await sync.pendingChanges();
         setSyncStatus({
           running: false,
@@ -151,9 +156,10 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
   );
 
   const logout = useCallback(async () => {
+    await push.unregister();
     await auth.logout();
     setSyncStatus((status) => ({ ...status, error: null }));
-  }, [auth]);
+  }, [auth, push]);
 
   const isFeatureEnabled = useCallback(
     (feature: string | undefined) => (feature ? config.app.features[feature] === true : true),
@@ -166,6 +172,7 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
     api,
     sync,
     auth,
+    push,
     theme,
     themeMode,
     setThemeMode,

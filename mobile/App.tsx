@@ -12,8 +12,10 @@ import { ExpoSecureStorage } from './src/auth/expoSecureStorage';
 import { KvStorage } from './src/auth/secureStorage';
 import { bootstrap, type Runtime } from './src/bootstrap';
 import { ExpoSqlDriver } from './src/db/expoDriver';
+import { ExpoPushAdapter } from './src/push/expoAdapter';
 import { AppProvider } from './src/state/AppContext';
 import { useAutoSync } from './src/state/useAutoSync';
+import { CartProvider } from './src/state/CartContext';
 import { ShoppingListProvider } from './src/state/ShoppingListContext';
 import { RootNavigator } from './src/ui/navigation/RootNavigator';
 
@@ -43,11 +45,18 @@ export default function App(): React.ReactElement {
           driver,
           // The token goes to the platform keystore, not to the app database.
           storage: new ExpoSecureStorage(new KvStorage(driver)),
+          pushAdapter: new ExpoPushAdapter(Constants.expoConfig?.extra?.eas?.projectId as string | undefined),
           deviceLocales: Localization.getLocales().map((locale) => locale.languageTag),
           // Dev and staging builds point the app at their own backend.
           apiBaseUrl: __DEV__ ? extra?.apiBaseUrl : undefined,
         });
         setRuntime(instance);
+
+        // Push is registered silently: the permission dialog belongs in context
+        // (after sign-in or from settings), not on the first launch.
+        if (!instance.config.app.push.askOnFirstLaunch) {
+          void instance.push.register(false);
+        }
 
         // The app is usable immediately; config refresh and the first sync run behind it.
         void instance.refreshRemoteConfig().then((updated) => {
@@ -87,6 +96,7 @@ export default function App(): React.ReactElement {
         api={runtime.api}
         sync={runtime.sync}
         auth={runtime.auth}
+        push={runtime.push}
         initialLocale={runtime.locale}
         initialThemeMode={runtime.themeMode}
         initialStoreId={runtime.storeId}
@@ -95,9 +105,11 @@ export default function App(): React.ReactElement {
         onPersist={(key, value) => void runtime.db.setSetting(key, value)}
       >
         <ShoppingListProvider>
-          <AutoSync />
-          <StatusBar style="auto" />
-          <RootNavigator />
+          <CartProvider>
+            <AutoSync />
+            <StatusBar style="auto" />
+            <RootNavigator />
+          </CartProvider>
         </ShoppingListProvider>
       </AppProvider>
     </SafeAreaProvider>

@@ -10,7 +10,7 @@ import { asAction, runAction } from '../actions';
 import { Card, EmptyState, LoadingBlock, Section } from '../components/base';
 import { Icon } from '../components/Icon';
 import { ProductCard, type ProductRecord } from '../components/ProductCard';
-import { blockNumber, blockQuery, blockString, type BlockProps } from './types';
+import { blockBoolean, blockNumber, blockQuery, blockString, type BlockProps } from './types';
 
 function useBlockTitle(block: BlockProps['block']): string | undefined {
   const t = useT();
@@ -23,28 +23,53 @@ function useBlockTitle(block: BlockProps['block']): string | undefined {
 export function SearchBarBlock({ block, navigate }: BlockProps): React.ReactElement {
   const theme = useTheme();
   const t = useT();
+  const { config } = useApp();
   const placeholderKey = blockString(block, 'placeholderKey') ?? 'search.placeholder';
   const target = blockString(block, 'target') ?? 'search';
+  const showScanner = blockBoolean(block, 'showScanner', false) && config.app.features.scanner === true;
 
   return (
-    <Pressable
-      accessibilityRole="search"
-      onPress={() => navigate(target)}
+    <View
       style={{
         marginHorizontal: theme.spacing.lg,
         marginTop: theme.spacing.md,
-        backgroundColor: theme.colors.surface,
-        borderRadius: theme.radius.pill,
-        paddingVertical: theme.spacing.md,
-        paddingHorizontal: theme.spacing.lg,
         flexDirection: 'row',
         alignItems: 'center',
         gap: theme.spacing.sm,
       }}
     >
-      <Icon name="search" size={18} color={theme.colors.textMuted} />
-      <Text style={{ color: theme.colors.textMuted, fontSize: theme.typography.sizes.md }}>{t(placeholderKey)}</Text>
-    </Pressable>
+      <Pressable
+        accessibilityRole="search"
+        onPress={() => navigate(target)}
+        style={{
+          flex: 1,
+          backgroundColor: theme.colors.surface,
+          borderRadius: theme.radius.pill,
+          paddingVertical: theme.spacing.md,
+          paddingHorizontal: theme.spacing.lg,
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: theme.spacing.sm,
+        }}
+      >
+        <Icon name="search" size={18} color={theme.colors.textMuted} />
+        <Text style={{ color: theme.colors.textMuted, fontSize: theme.typography.sizes.md }}>{t(placeholderKey)}</Text>
+      </Pressable>
+      {showScanner ? (
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={t('scan.open')}
+          onPress={() => navigate('scan')}
+          style={{
+            backgroundColor: theme.colors.surface,
+            borderRadius: theme.radius.pill,
+            padding: theme.spacing.md,
+          }}
+        >
+          <Icon name="camera" size={20} color={theme.colors.text} />
+        </Pressable>
+      ) : null}
+    </View>
   );
 }
 

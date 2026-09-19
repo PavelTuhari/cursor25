@@ -116,6 +116,87 @@ describe('account area against the mock API', () => {
   }, 30_000);
 });
 
+describe('shopping and ordering against the mock API', () => {
+  it('keeps the basket on the device and turns it into an order the server confirms', async () => {
+    const driver = new NodeSqlDriver(':memory:');
+    const runtime = await startApp(driver);
+    const request = await runtime.auth.requestCode('+37360123456');
+    await runtime.auth.verifyCode('+37360123456', request.devCode ?? '', request.requestId);
+    await runtime.sync.sync();
+
+    const ctx = { locale: 'ro' };
+    const cart = runtime.db.repository('cart_items');
+    await cart.upsertFromServer(
+      { id: 'cart-1', product_id: 'p-1001', title: 'Lapte', price: 17.9, quantity: 2, added_at: '2026-08-23T12:00:00Z' },
+      '2026-08-23T12:00:00Z',
+    );
+
+    // The cart is device-only: a sync run does not even visit it.
+    const report = await runtime.sync.sync();
+    expect(report.entities.map((item) => item.entity)).not.toContain('cart_items');
+    expect(await cart.query({ entity: 'cart_items' }, ctx)).toHaveLength(1);
+
+    await runtime.db.repository('orders').saveLocal({
+      id: 'ord-e2e-1',
+      status: 'new',
+      fulfillment: 'pickup',
+      store_id: 'st-01',
+      phone: '+37360123456',
+      items: [{ product_id: 'p-1001', title: 'Lapte', quantity: 2, price: 17.9, total: 35.8 }],
+      item_count: 1,
+      subtotal: 35.8,
+      total: 35.8,
+      placed_at: '2026-08-23T12:05:00Z',
+      updated_at: '2026-08-23T12:05:00Z',
+    });
+    expect(await pendingCount(driver)).toBe(1);
+
+    const push = await runtime.sync.sync({ entities: ['orders'] });
+    expect(push.pushed).toBe(1);
+    expect(await pendingCount(driver)).toBe(0);
+
+    // The backend assigned a number and confirmed it; the local row follows.
+    const orders = await runtime.db.repository('orders').query({ entity: 'orders' }, ctx);
+    expect(orders[0]).toMatchObject({ id: 'ord-e2e-1', status: 'confirmed' });
+    expect(String(orders[0]!.number)).toMatch(/^A\d{6}$/);
+
+    await driver.close();
+  }, 30_000);
+
+  it('activates a coupon and sends the activation in one batch', async () => {
+    const driver = new NodeSqlDriver(':memory:');
+    const runtime = await startApp(driver);
+    const request = await runtime.auth.requestCode('+37360123456');
+    await runtime.auth.verifyCode('+37360123456', request.devCode ?? '', request.requestId);
+    await runtime.sync.sync();
+
+    const ctx = { locale: 'ro' };
+    const coupons = runtime.db.repository('coupons');
+    const available = await coupons.query({ entity: 'coupons' }, ctx);
+    expect(available.length).toBeGreaterThan(0);
+
+    const target = available.find((coupon) => coupon.is_activated === false);
+    expect(target).toBeDefined();
+    await coupons.saveLocal({
+      ...target,
+      is_activated: true,
+      activated_at: '2026-08-23T12:10:00Z',
+      updated_at: '2026-08-23T12:10:00Z',
+    });
+
+    const report = await runtime.sync.sync({ entities: ['coupons'] });
+    expect(report.pushed).toBe(1);
+    expect(await pendingCount(driver)).toBe(0);
+
+    const stored = await coupons.query(
+      { entity: 'coupons', where: [{ field: 'id', op: '=', value: String(target!.id) }] },
+      ctx,
+    );
+    expect(stored[0]?.is_activated).toBe(true);
+    await driver.close();
+  }, 30_000);
+});
+
 describe('app against the mock API', () => {
   it('fills the offline database from the API and serves screen queries from it', async () => {
     const driver = new NodeSqlDriver(':memory:');

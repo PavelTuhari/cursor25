@@ -8,7 +8,11 @@ import {
   validateNavigationConfig,
   validateThemeConfig,
 } from '../src/config/validate';
-import { loadBundle } from './helpers';
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
+
+import { bundledConfig } from '../src/config/defaults';
+import { CONFIG_DIR, loadBundle } from './helpers';
 
 const blockTypes = [...BLOCK_TYPE_NAMES];
 
@@ -29,6 +33,21 @@ describe('bundled configuration', () => {
       const missing = keys.filter((key) => dictionary[key] === undefined);
       expect({ locale, missing }).toEqual({ locale, missing: [] });
     }
+  });
+
+  it('bundles every screen that exists on disk', () => {
+    // The bundler needs an explicit import per screen; this catches a forgotten one.
+    const onDisk = readdirSync(join(CONFIG_DIR, 'screens'))
+      .filter((file) => file.endsWith('.json'))
+      .map((file) => file.replace(/\.json$/, ''))
+      .sort();
+    expect(Object.keys(bundledConfig.screens).sort()).toEqual(onDisk);
+  });
+
+  it('matches the configuration the CLI validator reads from disk', () => {
+    expect(bundledConfig.app).toEqual(bundle.app);
+    expect(bundledConfig.navigation).toEqual(bundle.navigation);
+    expect(bundledConfig.entities).toEqual(bundle.entities);
   });
 
   it('only uses block types the app implements', () => {
@@ -151,9 +170,9 @@ describe('navigation validation', () => {
   it('warns about a feature flag that is not declared', () => {
     const bundle = loadBundle();
     const navigation = structuredClone(bundle.navigation);
-    navigation.tabs[1]!.visibleIf = { feature: 'coupons' };
+    navigation.tabs[1]!.visibleIf = { feature: 'giftCards' };
     const result = validateNavigationConfig(navigation, bundle.screens, bundle.app.features);
-    expect(result.warnings.join()).toContain('coupons');
+    expect(result.warnings.join()).toContain('giftCards');
   });
 });
 

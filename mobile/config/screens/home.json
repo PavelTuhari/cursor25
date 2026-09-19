@@ -6,7 +6,11 @@
     {
       "id": "home-search",
       "type": "search_bar",
-      "props": { "placeholderKey": "search.placeholder", "target": "search" }
+      "props": {
+        "placeholderKey": "search.placeholder",
+        "target": "search",
+        "showScanner": true
+      }
     },
     {
       "id": "home-hero",
@@ -17,11 +21,30 @@
         "source": {
           "entity": "banners",
           "where": [
-            { "field": "placement", "op": "=", "value": "home" },
-            { "field": "starts_at", "op": "<=", "value": "$now", "orNull": true },
-            { "field": "ends_at", "op": ">=", "value": "$now", "orNull": true }
+            {
+              "field": "placement",
+              "op": "=",
+              "value": "home"
+            },
+            {
+              "field": "starts_at",
+              "op": "<=",
+              "value": "$now",
+              "orNull": true
+            },
+            {
+              "field": "ends_at",
+              "op": ">=",
+              "value": "$now",
+              "orNull": true
+            }
           ],
-          "orderBy": [{ "field": "sort_order", "dir": "asc" }],
+          "orderBy": [
+            {
+              "field": "sort_order",
+              "dir": "asc"
+            }
+          ],
           "limit": 8
         }
       }
@@ -29,8 +52,16 @@
     {
       "id": "home-loyalty",
       "type": "loyalty_card",
-      "visibleIf": { "feature": "loyalty" },
-      "props": { "compact": true, "action": { "type": "navigate", "screen": "loyalty" } }
+      "visibleIf": {
+        "feature": "loyalty"
+      },
+      "props": {
+        "compact": true,
+        "action": {
+          "type": "navigate",
+          "screen": "loyalty"
+        }
+      }
     },
     {
       "id": "home-categories",
@@ -42,13 +73,28 @@
         "source": {
           "entity": "categories",
           "where": [
-            { "field": "parent_id", "op": "is null" },
-            { "field": "is_active", "op": "=", "value": 1 }
+            {
+              "field": "parent_id",
+              "op": "is null"
+            },
+            {
+              "field": "is_active",
+              "op": "=",
+              "value": 1
+            }
           ],
-          "orderBy": [{ "field": "sort_order", "dir": "asc" }],
+          "orderBy": [
+            {
+              "field": "sort_order",
+              "dir": "asc"
+            }
+          ],
           "limit": 8
         },
-        "moreAction": { "type": "navigate", "screen": "catalog" }
+        "moreAction": {
+          "type": "navigate",
+          "screen": "catalog"
+        }
       }
     },
     {
@@ -60,26 +106,97 @@
         "source": {
           "entity": "products",
           "where": [
-            { "field": "discount_percent", "op": ">", "value": 0 },
-            { "field": "is_active", "op": "=", "value": 1 }
+            {
+              "field": "discount_percent",
+              "op": ">",
+              "value": 0
+            },
+            {
+              "field": "is_active",
+              "op": "=",
+              "value": 1
+            }
           ],
-          "orderBy": [{ "field": "discount_percent", "dir": "desc" }],
+          "orderBy": [
+            {
+              "field": "discount_percent",
+              "dir": "desc"
+            }
+          ],
           "limit": 20
         },
-        "moreAction": { "type": "navigate", "screen": "category", "params": { "preset": "deals" } }
+        "moreAction": {
+          "type": "navigate",
+          "screen": "category",
+          "params": {
+            "preset": "deals"
+          }
+        }
+      }
+    },
+    {
+      "id": "home-coupons",
+      "type": "coupon_strip",
+      "titleKey": "coupons.personal",
+      "visibleIf": {
+        "feature": "coupons",
+        "auth": "required"
+      },
+      "props": {
+        "layout": "carousel",
+        "moreAction": {
+          "type": "navigate",
+          "screen": "coupons"
+        },
+        "source": {
+          "entity": "coupons",
+          "where": [
+            {
+              "field": "ends_at",
+              "op": ">=",
+              "value": "$now",
+              "orNull": true
+            }
+          ],
+          "orderBy": [
+            {
+              "field": "ends_at",
+              "dir": "asc"
+            }
+          ],
+          "limit": 10
+        }
       }
     },
     {
       "id": "home-flyers",
       "type": "promo_flyers",
       "titleKey": "home.flyers",
-      "visibleIf": { "feature": "promoFlyers" },
+      "visibleIf": {
+        "feature": "promoFlyers"
+      },
       "props": {
         "layout": "carousel",
         "source": {
           "entity": "promotions",
-          "where": [{ "field": "ends_at", "op": ">=", "value": "$today", "orNull": true }],
-          "orderBy": [{ "field": "sort_order", "dir": "asc" }, { "field": "starts_at", "dir": "desc" }],
+          "where": [
+            {
+              "field": "ends_at",
+              "op": ">=",
+              "value": "$today",
+              "orNull": true
+            }
+          ],
+          "orderBy": [
+            {
+              "field": "sort_order",
+              "dir": "asc"
+            },
+            {
+              "field": "starts_at",
+              "dir": "desc"
+            }
+          ],
           "limit": 6
         }
       }
@@ -92,8 +209,19 @@
         "cardWidth": 156,
         "source": {
           "entity": "products",
-          "where": [{ "field": "is_active", "op": "=", "value": 1 }],
-          "orderBy": [{ "field": "updated_at", "dir": "desc" }],
+          "where": [
+            {
+              "field": "is_active",
+              "op": "=",
+              "value": 1
+            }
+          ],
+          "orderBy": [
+            {
+              "field": "updated_at",
+              "dir": "desc"
+            }
+          ],
           "limit": 20
         }
       }
@@ -102,17 +230,28 @@
       "id": "home-store",
       "type": "store_locator_card",
       "titleKey": "home.stores",
-      "visibleIf": { "feature": "stores" },
-      "props": { "limit": 3, "action": { "type": "navigate", "screen": "stores" } }
+      "visibleIf": {
+        "feature": "stores"
+      },
+      "props": {
+        "limit": 3,
+        "action": {
+          "type": "navigate",
+          "screen": "stores"
+        }
+      }
     },
     {
       "id": "home-info",
       "type": "info_banner",
       "props": {
-        "titleKey": "home.info_title",
-        "textKey": "home.info_text",
-        "icon": "info",
-        "action": { "type": "url", "url": "https://una.md" }
+        "titleKey": "home.list_title",
+        "textKey": "home.list_text",
+        "icon": "list",
+        "action": {
+          "type": "navigate",
+          "screen": "list"
+        }
       }
     }
   ]

@@ -13,6 +13,14 @@ export type RootStackParamList = {
   account: undefined;
   receipts: undefined;
   receipt: { receiptId: string };
+  cart: undefined;
+  checkout: undefined;
+  orders: undefined;
+  order: { orderId: string };
+  coupons: undefined;
+  scan: undefined;
+  list: undefined;
+  promos: undefined;
 };
 
 export type ScreenName = keyof RootStackParamList;

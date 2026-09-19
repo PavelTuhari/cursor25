@@ -228,6 +228,60 @@ export function validateAppConfig(input: unknown, c = new Collector()): Validati
     );
   }
 
+  if (isObject(cfg.cart)) {
+    c.require(
+      `${path}.cart.fulfillment`,
+      Array.isArray(cfg.cart.fulfillment) &&
+        cfg.cart.fulfillment.length > 0 &&
+        cfg.cart.fulfillment.every((item) => item === 'pickup' || item === 'delivery'),
+      'must list at least one of "pickup", "delivery"',
+    );
+    for (const field of ['minOrderTotal', 'deliveryFee', 'freeDeliveryFrom'] as const) {
+      c.require(
+        `${path}.cart.${field}`,
+        typeof cfg.cart[field] === 'number' && cfg.cart[field] >= 0,
+        'must be a number >= 0',
+      );
+    }
+    c.require(
+      `${path}.cart.maxQuantityPerItem`,
+      isPositiveNumber(cfg.cart.maxQuantityPerItem),
+      'must be > 0',
+    );
+    if (Array.isArray(cfg.cart.fulfillment) && cfg.cart.fulfillment.includes('delivery')) {
+      c.require(
+        `${path}.cart.slotHours`,
+        Array.isArray(cfg.cart.slotHours) && cfg.cart.slotHours.length > 0,
+        'delivery needs at least one time slot',
+      );
+      c.require(`${path}.cart.slotDays`, isPositiveNumber(cfg.cart.slotDays), 'must be > 0');
+    }
+    if (
+      typeof cfg.cart.freeDeliveryFrom === 'number' &&
+      typeof cfg.cart.minOrderTotal === 'number' &&
+      cfg.cart.freeDeliveryFrom > 0 &&
+      cfg.cart.freeDeliveryFrom < cfg.cart.minOrderTotal
+    ) {
+      c.warn(`${path}.cart.freeDeliveryFrom`, 'below the minimum order total, so delivery is always free');
+    }
+  }
+
+  if (isObject(cfg.push) && cfg.push.enabled) {
+    c.require(
+      `${path}.push.registerEndpoint`,
+      isString(cfg.push.registerEndpoint) && cfg.push.registerEndpoint.startsWith('/'),
+      'required to send the device token to the backend',
+    );
+  }
+
+  if (isObject(cfg.scanner)) {
+    c.require(
+      `${path}.scanner.formats`,
+      Array.isArray(cfg.scanner.formats) && cfg.scanner.formats.length > 0,
+      'must list at least one barcode format',
+    );
+  }
+
   if (isObject(cfg.loyalty)) {
     c.require(
       `${path}.loyalty.barcodeFormat`,
@@ -310,16 +364,25 @@ export function validateEntitiesConfig(input: unknown, c = new Collector()): Val
     if (isString(entity.table) && entity.table.startsWith('_')) {
       c.error(`${p}.table`, 'the "_" prefix is reserved for internal tables');
     }
-    c.require(`${p}.endpoint`, isString(entity.endpoint) && entity.endpoint.startsWith('/'), 'must start with "/"');
+    if (entity.direction === 'local') {
+      // A device-only table has nothing to talk to.
+      if (entity.endpoint) c.warn(`${p}.endpoint`, 'ignored for a local entity');
+    } else {
+      c.require(
+        `${p}.endpoint`,
+        isString(entity.endpoint) && entity.endpoint.startsWith('/'),
+        'must start with "/"',
+      );
+    }
     c.require(
       `${p}.direction`,
-      ['pull', 'push', 'bidirectional'].includes(entity.direction),
-      'must be pull | push | bidirectional',
+      ['pull', 'push', 'bidirectional', 'local'].includes(entity.direction),
+      'must be pull | push | bidirectional | local',
     );
     c.require(`${p}.syncMode`, ['delta', 'full'].includes(entity.syncMode), 'must be delta | full');
     c.require(`${p}.order`, typeof entity.order === 'number', 'must be a number');
 
-    if (entity.syncMode === 'delta') {
+    if (entity.syncMode === 'delta' && entity.direction !== 'local') {
       c.require(`${p}.cursorField`, isString(entity.cursorField), 'delta sync requires a cursorField');
     }
 
@@ -350,7 +413,7 @@ export function validateEntitiesConfig(input: unknown, c = new Collector()): Val
     if (entity.cursorField) {
       c.require(`${p}.cursorField`, columnNames.has(entity.cursorField), `"${entity.cursorField}" is not a declared column`);
     }
-    if (entity.direction !== 'pull' && !entity.conflict) {
+    if (entity.direction !== 'pull' && entity.direction !== 'local' && !entity.conflict) {
       c.warn(`${p}.conflict`, 'writable entity without a conflict policy defaults to server_wins');
     }
     (entity.searchColumns ?? []).forEach((column, j) => {

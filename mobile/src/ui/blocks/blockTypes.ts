@@ -21,6 +21,9 @@ export const BLOCK_TYPE_NAMES = [
   'logout_button',
   'purchase_history',
   'receipt_list',
+  'cart',
+  'order_list',
+  'coupon_strip',
   'menu_list',
   'sync_status',
 ] as const;

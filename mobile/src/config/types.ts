@@ -111,6 +111,31 @@ export interface AccountConfig {
   receiptBarcodeFormat: 'ean13' | 'code128';
 }
 
+export interface CartConfig {
+  fulfillment: Array<'pickup' | 'delivery'>;
+  minOrderTotal: number;
+  deliveryFee: number;
+  /** Order total from which delivery is free; 0 disables the rule. */
+  freeDeliveryFrom: number;
+  slotDays: number;
+  slotHours: string[];
+  maxQuantityPerItem: number;
+}
+
+export interface PushConfig {
+  enabled: boolean;
+  registerEndpoint: string;
+  /** Asking on first launch converts worse than asking in context. */
+  askOnFirstLaunch: boolean;
+  topics: string[];
+}
+
+export interface ScannerConfig {
+  formats: string[];
+  /** Adds the scanned product straight to the shopping list instead of opening it. */
+  addToListOnScan: boolean;
+}
+
 export interface SearchConfig {
   minChars: number;
   historySize: number;
@@ -128,6 +153,9 @@ export interface AppConfig {
   catalog: CatalogConfig;
   search: SearchConfig;
   account: AccountConfig;
+  cart: CartConfig;
+  push: PushConfig;
+  scanner: ScannerConfig;
 }
 
 /* ------------------------------------------------------------------ theme */
@@ -290,14 +318,16 @@ export interface IndexConfig {
   unique?: boolean;
 }
 
-export type SyncDirection = 'pull' | 'push' | 'bidirectional';
+/** `local` entities live only on the device and are never synchronised. */
+export type SyncDirection = 'pull' | 'push' | 'bidirectional' | 'local';
 export type SyncMode = 'delta' | 'full';
 export type ConflictPolicy = 'server_wins' | 'client_wins' | 'last_write_wins';
 
 export interface EntityConfig {
   name: string;
   table: string;
-  endpoint: string;
+  /** Required for every direction except `local`. */
+  endpoint?: string;
   direction: SyncDirection;
   syncMode: SyncMode;
   primaryKey: string;

@@ -166,6 +166,63 @@ GET /app-config?tenant={tenantId}&config_version={configVersion}
 Объекты сливаются со встроенной конфигурацией, массивы заменяются. Ответ, не прошедший
 валидацию, игнорируется — приложение остаётся на предыдущей конфигурации.
 
+## Заказы
+
+Заказ создаётся на устройстве (идентификатор генерируется там же, поэтому повторная
+отправка идемпотентна) и уходит как `PUT /account/orders/{id}`:
+
+```json
+{
+  "id": "ord_m1a2b3", "status": "new", "fulfillment": "delivery",
+  "store_id": null, "address": "str. Dacia 47, ap. 12", "phone": "+37360123456",
+  "slot_date": "2026-08-24", "slot_time": "12:00-14:00",
+  "items": [{ "product_id": "p-1001", "title": "Lapte 2.5% 1 L", "quantity": 2,
+              "unit": "l", "price": 17.9, "total": 35.8 }],
+  "item_count": 1, "subtotal": 35.8, "discount_total": 0, "delivery_fee": 39,
+  "total": 74.8, "coupon_code": null, "payment_method": "cash",
+  "placed_at": "2026-08-23T12:05:00Z", "updated_at": "2026-08-23T12:05:00Z"
+}
+```
+
+Ответ — канонический заказ: сервер присваивает `number`, выставляет `status`
+(`new` → `confirmed` → `picking` → `ready` / `delivering` → `completed`, либо
+`cancelled`) и его версия записывается поверх локальной (`conflict: server_wins`).
+Отмена приходит тем же `PUT` со `status: "cancelled"`. Дальнейшие изменения статуса
+приложение забирает дельта-синхронизацией.
+
+## Купоны
+
+`GET /account/coupons` отдаёт персональные купоны:
+
+```json
+{
+  "id": "cpn-1001", "code": "LACTATE10",
+  "title": { "ro": "-10% la lactate", "ru": "-10% на молочное" },
+  "discount_type": "percent", "discount_value": 10, "min_order_total": 0,
+  "category_ids": ["cat-dairy"], "product_ids": [],
+  "starts_at": "2026-08-01T00:00:00Z", "ends_at": "2026-09-30T20:59:59Z",
+  "is_activated": false, "used_at": null, "updated_at": "2026-08-20T08:00:00Z"
+}
+```
+
+Активация уходит пачкой в `POST /account/coupons/batch` (`op: "upsert"` с
+`is_activated: true` и `activated_at`). `discount_type` — `percent` или `amount`;
+пустые `product_ids`/`category_ids` означают «весь чек».
+
+## Push-уведомления
+
+```
+POST   /account/push-token   { "token": "ExponentPushToken[…]", "platform": "android",
+                               "locale": "ro", "user_id": "usr-1001",
+                               "topics": ["promotions", "orders", "personal"] }
+→ 204
+DELETE /account/push-token/{token}   → 204   (при выходе из аккаунта)
+```
+
+Полезная нагрузка уведомления задаёт переход: либо `{"screen": "order", "params": {"orderId": "…"}}`,
+либо короткая форма `{"type": "order", "order_id": "…"}`. Приложение принимает только
+известные экраны и только строковые параметры — всё остальное игнорируется.
+
 ## Формат чека
 
 Позиции чека приходят в поле `items` как JSON-массив, поэтому история покупок читается
@@ -201,6 +258,9 @@ GET /app-config?tenant={tenantId}&config_version={configVersion}
 | `loyalty_account` | `/loyalty/account` | pull (auth) | full |
 | `profile` | `/account/profile` | bidirectional (auth) | full, REST |
 | `receipts` | `/account/receipts` | pull (auth) | delta |
+| `coupons` | `/account/coupons` | bidirectional (auth) | delta, batch |
+| `orders` | `/account/orders` | bidirectional (auth) | delta, REST |
+| `cart_items` | — | local (не синхронизируется) | — |
 | `shopping_list_items` | `/list/items` | bidirectional | delta, REST |
 | `favorites` | `/account/favorites` | bidirectional | delta, batch |
 

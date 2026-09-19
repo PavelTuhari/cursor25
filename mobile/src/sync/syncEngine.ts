@@ -32,6 +32,14 @@ export interface SyncEngineOptions {
   onProgress?: (result: EntitySyncResult) => void;
 }
 
+/** Every synced entity declares an endpoint; the type allows none for local ones. */
+function endpointOf(entity: EntityConfig): string {
+  if (!entity.endpoint) {
+    throw new Error(`entity "${entity.name}" has no endpoint but is configured as "${entity.direction}"`);
+  }
+  return entity.endpoint;
+}
+
 interface PushResult {
   pushed: number;
   failed: number;
@@ -82,6 +90,8 @@ export class SyncEngine {
     const results: EntitySyncResult[] = [];
 
     const entities = [...this.options.db.entities]
+      // Device-only tables (the cart) have nothing to exchange with the server.
+      .filter((entity) => entity.direction !== 'local')
       .filter((entity) => !options.entities || options.entities.includes(entity.name))
       .sort((a, b) => a.order - b.order);
 
@@ -107,6 +117,12 @@ export class SyncEngine {
   async syncEntity(entity: EntityConfig, options: SyncOptions = {}): Promise<EntitySyncResult> {
     const started = this.now().getTime();
     const result: EntitySyncResult = { entity: entity.name, pulled: 0, deleted: 0, pushed: 0, failed: 0, durationMs: 0 };
+
+    if (entity.direction === 'local') {
+      result.skipped = 'local_only';
+      result.durationMs = this.now().getTime() - started;
+      return result;
+    }
 
     const authenticated = this.options.isAuthenticated ? this.options.isAuthenticated() : true;
     if (entity.requiresAuth && !authenticated) {
@@ -146,6 +162,7 @@ export class SyncEngine {
   /* ------------------------------------------------------------------ pull */
 
   private async pullEntity(entity: EntityConfig, force: boolean): Promise<{ pulled: number; deleted: number }> {
+    const endpoint = endpointOf(entity);
     const repository = this.options.db.repository(entity.name);
     const state = await getSyncState(this.options.db.driver, entity.name);
     const fullSync = entity.syncMode === 'full' || force || !state?.cursor;
@@ -160,7 +177,7 @@ export class SyncEngine {
     const seenIds: string[] = [];
 
     for (let page = 0; page < this.options.config.sync.maxPagesPerEntity; page += 1) {
-      const response: PullResponse = await this.options.api.request<PullResponse>(entity.endpoint, {
+      const response: PullResponse = await this.options.api.request<PullResponse>(endpoint, {
         query: {
           updated_since: cursor ?? undefined,
           cursor: pageCursor,
@@ -267,6 +284,7 @@ export class SyncEngine {
   }
 
   private async pushRest(entity: EntityConfig, jobs: OutboxJob[], now: Date): Promise<PushResult> {
+    const endpoint = endpointOf(entity);
     let pushed = 0;
     let failed = 0;
     const dropped: string[] = [];
@@ -274,13 +292,13 @@ export class SyncEngine {
     for (const job of jobs) {
       try {
         if (job.op === 'delete') {
-          await this.options.api.request(`${entity.endpoint}/${encodeURIComponent(job.record_id)}`, {
+          await this.options.api.request(`${endpoint}/${encodeURIComponent(job.record_id)}`, {
             method: 'DELETE',
           });
         } else {
           const payload = job.payload ? JSON.parse(job.payload) : {};
           const record = await this.options.api.request<Record<string, unknown> | undefined>(
-            `${entity.endpoint}/${encodeURIComponent(job.record_id)}`,
+            `${endpoint}/${encodeURIComponent(job.record_id)}`,
             { method: 'PUT', body: payload },
           );
           await this.applyServerEcho(entity, job.record_id, record, now);
@@ -318,7 +336,7 @@ export class SyncEngine {
 
     let response: BatchResponse;
     try {
-      response = await this.options.api.request<BatchResponse>(`${entity.endpoint}/batch`, {
+      response = await this.options.api.request<BatchResponse>(`${endpointOf(entity)}/batch`, {
         method: 'POST',
         body: { operations },
       });

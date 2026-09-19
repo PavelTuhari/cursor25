@@ -73,11 +73,14 @@
     "promoFlyers": true,
     "search": true,
     "productReviews": false,
-    "cart": false,
-    "onlineOrders": false,
+    "cart": true,
+    "onlineOrders": true,
     "account": true,
     "purchaseHistory": true,
-    "eReceipts": true
+    "eReceipts": true,
+    "coupons": true,
+    "push": true,
+    "scanner": true
   },
   "loyalty": {
     "barcodeFormat": "ean13",
@@ -111,5 +114,43 @@
     "showMarketingOptIn": true,
     "receiptsPageSize": 50,
     "receiptBarcodeFormat": "code128"
+  },
+  "cart": {
+    "fulfillment": [
+      "pickup",
+      "delivery"
+    ],
+    "minOrderTotal": 150,
+    "deliveryFee": 39,
+    "freeDeliveryFrom": 500,
+    "slotDays": 3,
+    "slotHours": [
+      "10:00-12:00",
+      "12:00-14:00",
+      "14:00-16:00",
+      "16:00-18:00",
+      "18:00-20:00"
+    ],
+    "maxQuantityPerItem": 30
+  },
+  "push": {
+    "enabled": true,
+    "registerEndpoint": "/account/push-token",
+    "askOnFirstLaunch": false,
+    "topics": [
+      "promotions",
+      "orders",
+      "personal"
+    ]
+  },
+  "scanner": {
+    "formats": [
+      "ean13",
+      "ean8",
+      "upc_a",
+      "code128",
+      "qr"
+    ],
+    "addToListOnScan": false
   }
 }

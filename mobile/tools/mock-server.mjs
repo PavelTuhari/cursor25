@@ -26,8 +26,25 @@ for (const file of readdirSync(fixturesDir)) {
 // Writable collections start empty: they are owned by the client.
 collections.shopping_list_items ??= [];
 collections.favorites ??= [];
+collections.orders ??= [];
 
-const deletions = { shopping_list_items: [], favorites: [] };
+const deletions = { shopping_list_items: [], favorites: [], coupons: [], orders: [] };
+
+let orderCounter = 0;
+
+/** A real backend assigns the number and confirms the order; so does this one. */
+function acceptOrder(id, data) {
+  const existing = collections.orders.find((item) => item.id === id);
+  if (existing) {
+    return upsert('orders', id, { ...existing, ...data, number: existing.number });
+  }
+  orderCounter += 1;
+  return upsert('orders', id, {
+    ...data,
+    number: `A${String(orderCounter).padStart(6, '0')}`,
+    status: data.status === 'cancelled' ? 'cancelled' : 'confirmed',
+  });
+}
 
 const ROUTES = [
   { path: '/catalog/categories', collection: 'categories' },
@@ -38,6 +55,8 @@ const ROUTES = [
   { path: '/loyalty/account', collection: 'loyalty_account', auth: true },
   { path: '/account/profile', collection: 'profile', writable: true, auth: true },
   { path: '/account/receipts', collection: 'receipts', auth: true },
+  { path: '/account/coupons', collection: 'coupons', writable: true, batch: true, auth: true },
+  { path: '/account/orders', collection: 'orders', writable: true, auth: true, orders: true },
   { path: '/list/items', collection: 'shopping_list_items', writable: true },
   { path: '/account/favorites', collection: 'favorites', writable: true, batch: true, auth: true },
 ];
@@ -48,6 +67,7 @@ const ROUTES = [
  */
 const DEV_CODE = '1234';
 const sessions = new Map();
+const pushTokens = new Map();
 let sessionCounter = 0;
 
 function issueTokens(phone) {
@@ -154,6 +174,18 @@ const server = createServer(async (req, res) => {
   if (path === '/app-config') return send(res, 200, appConfigPayload());
   if (path === '/health') return send(res, 200, { ok: true });
 
+  if (path === '/account/push-token' && req.method === 'POST') {
+    const body = (await readBody(req)) ?? {};
+    if (!body.token) return send(res, 422, { error: 'token required' });
+    pushTokens.set(body.token, { platform: body.platform, user_id: body.user_id, locale: body.locale });
+    return send(res, 204);
+  }
+
+  if (path.startsWith('/account/push-token/') && req.method === 'DELETE') {
+    pushTokens.delete(decodeURIComponent(path.slice('/account/push-token/'.length)));
+    return send(res, 204);
+  }
+
   if (path.startsWith('/auth/')) {
     if (req.method !== 'POST') return send(res, 405, { error: 'POST only' });
     const body = (await readBody(req)) ?? {};
@@ -219,7 +251,9 @@ const server = createServer(async (req, res) => {
 
   if (req.method === 'PUT' && rest) {
     const body = await readBody(req);
-    return send(res, 200, upsert(route.collection, decodeURIComponent(rest), body ?? {}));
+    const id = decodeURIComponent(rest);
+    if (route.orders) return send(res, 200, acceptOrder(id, body ?? {}));
+    return send(res, 200, upsert(route.collection, id, body ?? {}));
   }
 
   if (req.method === 'DELETE' && rest) {

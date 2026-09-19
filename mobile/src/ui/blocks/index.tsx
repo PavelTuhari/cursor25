@@ -19,6 +19,7 @@ import {
 } from './catalog';
 import { InfoBannerBlock, LoyaltyCardBlock, PromoFlyersBlock } from './promo';
 import { LoginPromptBlock, LogoutButtonBlock, PurchaseHistoryBlock, ReceiptListBlock } from './account';
+import { CartBlock, CouponStripBlock, OrderListBlock } from './commerce';
 import {
   MenuListBlock,
   ProfileHeaderBlock,
@@ -48,6 +49,9 @@ export const BLOCK_REGISTRY: Record<string, BlockComponent> = {
   logout_button: LogoutButtonBlock,
   purchase_history: PurchaseHistoryBlock,
   receipt_list: ReceiptListBlock,
+  cart: CartBlock,
+  order_list: OrderListBlock,
+  coupon_strip: CouponStripBlock,
   menu_list: MenuListBlock,
   sync_status: SyncStatusBlock,
 };

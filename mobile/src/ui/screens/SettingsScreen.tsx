@@ -1,5 +1,5 @@
 /** Language, theme and synchronisation settings. */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
 import { useApp, useT, useTheme } from '../../state/AppContext';
@@ -12,7 +12,13 @@ const LOCALE_LABELS: Record<string, string> = { ro: 'Română', ru: 'Русск�
 export function SettingsScreen(): React.ReactElement {
   const theme = useTheme();
   const t = useT();
-  const { config, locale, setLocale, themeMode, setThemeMode, syncStatus, runSync } = useApp();
+  const { config, locale, setLocale, themeMode, setThemeMode, syncStatus, runSync, push } = useApp();
+  const [pushStatus, setPushStatus] = useState<string>('undetermined');
+
+  useEffect(() => {
+    // Reflects the real permission state, which the shopper may change in the OS.
+    void push.register(false).then((result) => setPushStatus(result.status));
+  }, [push]);
 
   const modes: ThemeMode[] = ['system', 'light', 'dark'];
 
@@ -57,6 +63,30 @@ export function SettingsScreen(): React.ReactElement {
         ))}
       </Card>
 
+      {config.app.features.push && config.app.push.enabled ? (
+        <Card>
+          <View style={{ gap: theme.spacing.sm }}>
+            <Text style={{ color: theme.colors.text, fontSize: theme.typography.sizes.md }}>{t('settings.push')}</Text>
+            {pushStatus === 'granted' ? (
+              <Text style={{ color: theme.colors.success, fontSize: theme.typography.sizes.sm }}>
+                {t('settings.push_granted')}
+              </Text>
+            ) : pushStatus === 'denied' ? (
+              <Text style={{ color: theme.colors.textMuted, fontSize: theme.typography.sizes.sm }}>
+                {t('settings.push_denied')}
+              </Text>
+            ) : (
+              <Button
+                label={t('settings.push_enable')}
+                icon="bell"
+                variant="secondary"
+                onPress={() => void push.register(true).then((result) => setPushStatus(result.status))}
+              />
+            )}
+          </View>
+        </Card>
+      ) : null}
+
       <Card>
         <View style={{ gap: theme.spacing.sm }}>
           <Text style={{ color: theme.colors.text, fontSize: theme.typography.sizes.md }}>{t('sync.title')}</Text>
@@ -65,7 +95,7 @@ export function SettingsScreen(): React.ReactElement {
               {t('sync.pending', { count: syncStatus.pending })}
             </Text>
           ) : null}
-          <Button label={t('sync.now')} icon="refresh" variant="secondary" disabled={syncStatus.running} onPress={() => void runSync(true)} />
+          <Button label={t('sync.now')} icon="refresh" variant="secondary" disabled={syncStatus.running} onPress={() => void runSync({ force: true })} />
         </View>
       </Card>
 

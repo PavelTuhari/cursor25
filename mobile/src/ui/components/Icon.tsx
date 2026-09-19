@@ -31,6 +31,12 @@ const GLYPHS: Record<string, string> = {
   receipt: '▤',
   logout: '⇥',
   lock: '⚿',
+  cart: '🛒',
+  bag: '▣',
+  camera: '⛶',
+  bell: '☖',
+  truck: '⇢',
+  store: '⌂',
   warning: '⚠',
 };
 
