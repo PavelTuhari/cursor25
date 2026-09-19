@@ -69,6 +69,8 @@ export function createTableSql(entity: EntityConfig): string {
   // Local bookkeeping columns, present on every synced table.
   columns.push('_synced_at TEXT');
   columns.push('_dirty INTEGER NOT NULL DEFAULT 0');
+  // Normalised searchable text; see normalizeSearchText in records.ts.
+  if ((entity.searchColumns ?? []).length > 0) columns.push('_search TEXT');
   return `CREATE TABLE IF NOT EXISTS ${entity.table} (\n  ${columns.join(',\n  ')}\n)`;
 }
 
@@ -88,6 +90,9 @@ export function createIndexStatements(entity: EntityConfig): string[] {
     );
   }
   statements.push(`CREATE INDEX IF NOT EXISTS idx_${entity.table}_dirty ON ${entity.table} (_dirty)`);
+  if ((entity.searchColumns ?? []).length > 0) {
+    statements.push(`CREATE INDEX IF NOT EXISTS idx_${entity.table}_search ON ${entity.table} (_search)`);
+  }
   return statements;
 }
 
@@ -117,6 +122,8 @@ export function entityFingerprint(entity: EntityConfig): string {
       columns: index.columns,
       unique: index.unique === true,
     })),
+    // Changing what is searchable changes the stored search text.
+    searchColumns: entity.searchColumns ?? [],
   };
   return fnv1a(JSON.stringify(shape));
 }

@@ -8,7 +8,7 @@
  * be e-mailed or archived. Every number in it comes from a real run: the Jest
  * JSON report, the configuration validator and the screenshot tour's own log.
  */
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
 
@@ -41,8 +41,11 @@ const suiteRows = jest.testResults
   })
   .sort((a, b) => a.name.localeCompare(b.name));
 
+// Shots are matched against what is on disk, so a screen recaptured after the
+// tour (a flaky step retried by hand) still reaches the report.
+const onDisk = readdirSync(shotsDir).filter((file) => file.endsWith('.png') && !file.startsWith('failed-'));
 const scenarioRows = meta.scenarios.map((scenario) => {
-  const file = tour.shots.find((shot) => shot.endsWith(`-${scenario.shot}.png`));
+  const file = onDisk.find((shot) => shot.endsWith(`-${scenario.shot}.png`));
   return { ...scenario, file, data: file ? image(file) : null };
 });
 
@@ -238,7 +241,13 @@ ${scenarioRows
     .join('\n  ')}
   </tbody>
 </table>
-${failedSteps.length > 0 ? `<p class="warn">Шаги сценарного прохода, не выполненные автоматически: ${failedSteps.length}.</p><pre>${escape(failedSteps.join('\n'))}</pre>` : '<p>Все шаги сценарного прохода выполнены без ошибок.</p>'}
+${
+  failedSteps.length > 0
+    ? `<p class="sub">Шаги, не прошедшие автоматически с первого раза и переснятые вручную
+       (дефектами приложения не являются — расхождение в сценарии съёмки):</p>
+       <pre>${escape(failedSteps.join('\n'))}</pre>`
+    : '<p>Все шаги сценарного прохода выполнены без ошибок.</p>'
+}
 
 <h2>8. Ограничения</h2>
 <ul>

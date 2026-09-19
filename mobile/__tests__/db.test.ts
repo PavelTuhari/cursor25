@@ -3,7 +3,7 @@ import { getKv } from '../src/db/migrator';
 import { NodeSqlDriver } from '../src/db/nodeDriver';
 import { Database } from '../src/db/database';
 import { buildSelect, QueryConfigError, resolveValue } from '../src/db/queryBuilder';
-import { buildUpsert, decodeRow, encodeValue, translate } from '../src/db/records';
+import { buildSearchText, buildUpsert, decodeRow, encodeValue, normalizeSearchText, translate } from '../src/db/records';
 import { pendingCount } from '../src/db/outbox';
 import { getSyncState } from '../src/db/syncState';
 import { loadBundle, openTestDatabase } from './helpers';
@@ -144,10 +144,12 @@ describe('query builder', () => {
     expect(compiled.params.every((param) => typeof param === 'string' && param.startsWith('%'))).toBe(true);
   });
 
-  it('requires each search term to match some searchable column', () => {
-    const compiled = buildSelect(productsEntity, { entity: 'products', search: 'lapte jlc' }, ctx);
+  it('requires every term to appear in the row, in any language', () => {
+    const compiled = buildSelect(productsEntity, { entity: 'products', search: 'Lapte JLC' }, ctx);
     expect(compiled.sql.match(/AND/g)?.length).toBe(1);
-    expect(compiled.params).toHaveLength(productsEntity.searchColumns!.length * 2);
+    // One bound term per word, matched against the normalised search column.
+    expect(compiled.params).toEqual(['%lapte%', '%jlc%']);
+    expect(compiled.sql).toContain('_search');
   });
 });
 
@@ -196,6 +198,69 @@ describe('record conversion', () => {
     expect(translate(value, 'ro', 'en', 'fallback')).toBe('Молоко');
     expect(translate({ ro: 'Lapte', ru: 'Молоко' }, 'ru', 'ro')).toBe('Молоко');
     expect(translate(null, 'ro', 'en', 'fallback')).toBe('fallback');
+  });
+});
+
+describe('searchable text', () => {
+  it('folds case and diacritics the way SQLite cannot', () => {
+    expect(normalizeSearchText('Brânză de vacă')).toBe('branza de vaca');
+    expect(normalizeSearchText('Pâine  ȘI  ceai')).toBe('paine si ceai');
+    // Cyrillic marks fold too (й → и, ё → е), which makes search forgiving;
+    // both the stored text and the query go through the same folding.
+    expect(normalizeSearchText('  Кофе   МОЛОТЫЙ ')).toBe('кофе молотыи');
+    expect(normalizeSearchText('Ёлка')).toBe(normalizeSearchText('елка'));
+  });
+
+  it('flattens every searchable column, including localized ones', () => {
+    const text = buildSearchText(productsEntity, {
+      id: 'p-1',
+      search_text: 'Cafea măcinată Кофе молотый',
+      brand: 'Lavazza',
+      sku: 'SKU5004',
+      barcode: '4845004000000',
+    });
+    expect(text).toContain('cafea macinata');
+    expect(text).toContain(normalizeSearchText('кофе молотый'));
+    expect(text).toContain('lavazza');
+  });
+
+  it('finds Russian and Romanian products whatever the case', async () => {
+    const { db } = await openTestDatabase();
+    const products = db.repository('products');
+    await products.upsertManyFromServer(
+      [
+        {
+          id: 'p-5004',
+          name: { ro: 'Cafea măcinată 250 g', ru: 'Кофе молотый 250 г' },
+          search_text: 'Cafea măcinată 250 g Кофе молотый 250 г Lavazza',
+          brand: 'Lavazza',
+          price: 89,
+        },
+        {
+          id: 'p-1003',
+          name: { ro: 'Brânză de vaci', ru: 'Творог' },
+          search_text: 'Brânză de vaci Творог JLC',
+          brand: 'JLC',
+          price: 34.5,
+        },
+      ],
+      '2026-08-23T10:00:00Z',
+    );
+
+    const find = async (search: string) =>
+      (await products.query({ entity: 'products', search }, { locale: 'ru' })).map((row) => row.id);
+
+    // The bug this covers: SQLite's LOWER() leaves Cyrillic untouched.
+    expect(await find('кофе')).toEqual(['p-5004']);
+    expect(await find('КОФЕ')).toEqual(['p-5004']);
+    expect(await find('Кофе молотый')).toEqual(['p-5004']);
+    expect(await find('lavazza')).toEqual(['p-5004']);
+    // Diacritics are folded, so a keyboard without them still finds the product.
+    expect(await find('branza')).toEqual(['p-1003']);
+    expect(await find('BRÂNZĂ')).toEqual(['p-1003']);
+    expect(await find('творог jlc')).toEqual(['p-1003']);
+    expect(await find('шоколад')).toEqual([]);
+    await db.close();
   });
 });
 

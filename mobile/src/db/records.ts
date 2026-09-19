@@ -8,6 +8,47 @@ import type { SqlValue } from './driver';
 
 export type EntityRecord = Record<string, unknown>;
 
+/** Local column holding the searchable text of a row, already normalised. */
+export const SEARCH_COLUMN = '_search';
+
+/**
+ * SQLite's own LOWER() only folds ASCII, so "Кофе" never matches "кофе" and
+ * "brânză" never matches "branza". Normalising in JavaScript — where the
+ * Unicode tables live — and storing the result is what makes search work in
+ * Romanian and Russian.
+ */
+export function normalizeSearchText(value: string): string {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/** Flattens a record's searchable columns (including localized JSON) into one string. */
+export function buildSearchText(entity: EntityConfig, record: EntityRecord): string | null {
+  const columns = entity.searchColumns ?? [];
+  if (columns.length === 0) return null;
+
+  const parts: string[] = [];
+  const collect = (value: unknown): void => {
+    if (value === null || value === undefined) return;
+    if (typeof value === 'string' || typeof value === 'number') {
+      parts.push(String(value));
+      return;
+    }
+    if (Array.isArray(value)) {
+      value.forEach(collect);
+      return;
+    }
+    if (typeof value === 'object') Object.values(value as Record<string, unknown>).forEach(collect);
+  };
+
+  for (const column of columns) collect(record[column]);
+  return normalizeSearchText(parts.join(' '));
+}
+
 function parseJson(value: SqlValue, fallback: unknown): unknown {
   if (typeof value !== 'string' || value.length === 0) return fallback;
   try {
@@ -101,6 +142,12 @@ export function buildUpsert(
 
   columns.push('_synced_at', '_dirty');
   params.push(options.syncedAt ?? null, options.dirty ? 1 : 0);
+
+  const searchText = buildSearchText(entity, record);
+  if (searchText !== null) {
+    columns.push(SEARCH_COLUMN);
+    params.push(searchText);
+  }
 
   const placeholders = columns.map(() => '?').join(', ');
   const updates = columns

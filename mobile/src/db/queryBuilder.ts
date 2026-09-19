@@ -7,6 +7,7 @@
  */
 import type { DataQuery, EntityConfig, QueryCondition, QueryValue } from '../config/types';
 import type { SqlValue } from './driver';
+import { normalizeSearchText, SEARCH_COLUMN } from './records';
 
 export interface QueryContext {
   locale: string;
@@ -24,7 +25,7 @@ export class QueryConfigError extends Error {
 }
 
 /** Local bookkeeping columns that configuration may filter on. */
-const INTERNAL_COLUMNS = ['_synced_at', '_dirty'];
+const INTERNAL_COLUMNS = ['_synced_at', '_dirty', '_search'];
 
 export interface CompiledQuery {
   sql: string;
@@ -121,22 +122,19 @@ function compileCondition(
 }
 
 function compileSearch(entity: EntityConfig, search: string, params: SqlValue[]): string | null {
-  const columns = entity.searchColumns ?? [];
-  if (columns.length === 0) {
+  if ((entity.searchColumns ?? []).length === 0) {
     throw new QueryConfigError(`entity "${entity.name}" declares no searchColumns`);
   }
-  const terms = search.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const terms = normalizeSearchText(search).split(' ').filter(Boolean);
   if (terms.length === 0) return null;
 
-  // Every term must appear in at least one searchable column (AND of ORs).
-  const clauses = terms.map((term) => {
-    const perColumn = columns.map((column) => {
+  // Every term must appear in the row's normalised search text.
+  return terms
+    .map((term) => {
       params.push(`%${term}%`);
-      return `LOWER(COALESCE(${assertColumn(entity, column)}, '')) LIKE ?`;
-    });
-    return `(${perColumn.join(' OR ')})`;
-  });
-  return clauses.join(' AND ');
+      return `COALESCE(${SEARCH_COLUMN}, '') LIKE ?`;
+    })
+    .join(' AND ');
 }
 
 export function buildSelect(entity: EntityConfig, query: DataQuery, ctx: QueryContext): CompiledQuery {
