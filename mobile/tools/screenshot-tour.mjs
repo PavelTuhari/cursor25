@@ -69,32 +69,23 @@ async function tap(text, { exact = true, last = false, wait = 1500 } = {}) {
   log.push(`OK   tap "${text}"`);
 }
 
-/** Steps start from the tab bar; a stack screen left open would hide it. */
+/**
+ * Steps start from the tab bar. A stack screen (a coupon list, an order) hides
+ * it, and the header arrow is unreliable in the web renderer, so the tour
+ * returns the cheap way: back in history, and a reload if that did not land.
+ */
 async function ensureTabs() {
-  for (let i = 0; i < 4; i += 1) {
+  for (let attempt = 0; attempt < 3; attempt += 1) {
     const tab = page.getByText('Профиль', { exact: true }).filter({ visible: true }).last();
     if (await tab.isVisible().catch(() => false)) return;
-    const back = page.getByLabel('Go back').first();
-    if (!(await back.isVisible().catch(() => false))) return;
-    await back.click({ timeout: 8000 }).catch(() => undefined);
-    await page.waitForTimeout(1000);
-  }
-}
-
-const goTab = (name) => tap(name, { exact: true, last: true, wait: 2000 });
-
-/** Stack screens hide the tab bar, so the header arrow is the way out. */
-async function goBack(times = 1) {
-  for (let i = 0; i < times; i += 1) {
-    const back = page.getByLabel('Go back').first();
-    if (await back.isVisible().catch(() => false)) {
-      await back.click({ timeout: 8000 });
+    if (attempt === 0) {
+      await page.goBack({ timeout: 10000 }).catch(() => undefined);
     } else {
-      await page.goBack({ timeout: 15000 }).catch(() => undefined);
+      await page.goto(APP_URL, { waitUntil: 'domcontentloaded', timeout: 120000 }).catch(() => undefined);
+      await page.waitForTimeout(12000);
     }
-    await page.waitForTimeout(1200);
+    await page.waitForTimeout(1500);
   }
-  log.push(`OK   back x${times}`);
 }
 
 async function step(name, fn) {
@@ -142,7 +133,6 @@ await step('coupons', async () => {
   await shot('coupons');
   await tap('Активировать', { wait: 2500 });
   await shot('coupon-activated');
-  await goBack();
 });
 
 await step('receipts', async () => {
@@ -153,7 +143,6 @@ await step('receipts', async () => {
   await page.locator('text=/\\d{2}\\.\\d{2}\\.\\d{4}/').filter({ visible: true }).first().click({ timeout: 15000, force: true });
   await page.waitForTimeout(2000);
   await shot('receipt-detail');
-  await goBack(2);
 });
 
 await step('catalog', async () => {
@@ -170,7 +159,6 @@ await step('product', async () => {
   await shot('product');
   await tap('В корзину', { wait: 2000 });
   await shot('product-added');
-  await goBack(2);
 });
 
 await step('search', async () => {
@@ -179,7 +167,6 @@ await step('search', async () => {
   await page.getByPlaceholder('Поиск товаров, брендов…').filter({ visible: true }).first().fill('кофе');
   await page.waitForTimeout(3000);
   await shot('search');
-  await goBack();
 });
 
 await step('cart', async () => {
@@ -200,42 +187,36 @@ await step('checkout', async () => {
   await shot('checkout-filled');
   await tap('Отправить заказ', { wait: 9000 });
   await shot('order');
-  await goBack(2);
 });
 
 await step('orders', async () => {
   await goTab('Профиль');
   await tap('Мои заказы', { wait: 2500 });
   await shot('orders');
-  await goBack();
 });
 
 await step('list', async () => {
   await goTab('Профиль');
   await tap('Список покупок', { wait: 2000 });
   await shot('shopping-list');
-  await goBack();
 });
 
 await step('promos', async () => {
   await goTab('Профиль');
   await tap('Каталоги акций', { wait: 2500 });
   await shot('promos');
-  await goBack();
 });
 
 await step('stores', async () => {
   await goTab('Профиль');
   await tap('Магазины', { wait: 2500 });
   await shot('stores');
-  await goBack();
 });
 
 await step('settings', async () => {
   await goTab('Профиль');
   await tap('Настройки', { wait: 2000 });
   await shot('settings');
-  await goBack();
 });
 
 await step('dark', async () => {
