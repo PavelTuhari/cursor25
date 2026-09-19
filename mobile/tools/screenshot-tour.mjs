@@ -53,14 +53,16 @@ async function alive() {
 async function tap(text, { exact = true, last = false, wait = 1500 } = {}) {
   const base = page.getByText(text, { exact });
   const locator = last ? base.last() : base.first();
-  try {
-    await locator.click({ timeout: 8000 });
-  } catch (error) {
-    // React Native Web wraps labels in pressables that re-render on tap, so a
-    // strict actionability check can time out on a button that works fine.
-    log.push(`WARN forced tap "${text}": ${String(error).split('\n')[1] ?? ''}`.trim());
-    await locator.click({ timeout: 8000, force: true });
-  }
+  await locator.waitFor({ state: 'visible', timeout: 15000 });
+  await locator.scrollIntoViewIfNeeded({ timeout: 5000 }).catch(() => undefined);
+
+  // React Native Web nests labels inside pressables whose parents opt out of
+  // pointer events, which trips Playwright's actionability checks. A plain
+  // mouse click on the label's centre is what a finger does anyway.
+  const box = await locator.boundingBox();
+  if (!box) throw new Error(`no box for "${text}"`);
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+
   await page.waitForTimeout(wait);
   log.push(`OK   tap "${text}"`);
 }
