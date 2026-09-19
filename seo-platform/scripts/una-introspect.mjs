@@ -99,12 +99,25 @@ async function main() {
     process.exit(2);
   }
 
+  // Прокси поддерживается драйвером только для TCPS-эндпоинтов: при
+  // PROTOCOL=TCP он вернёт NJS-512. Для обычного слушателя нужен прямой
+  // сетевой доступ к порту, поэтому HTTPS_PROXY сам по себе не подставляется.
+  const proxy = process.env.UNA_HTTPS_PROXY;
+  const proxyOptions = {};
+  if (proxy) {
+    const url = new URL(proxy.includes('://') ? proxy : `http://${proxy}`);
+    proxyOptions.httpsProxy = url.hostname;
+    proxyOptions.httpsProxyPort = Number(url.port || 80);
+    console.error(`Через прокси ${proxyOptions.httpsProxy}:${proxyOptions.httpsProxyPort}`);
+  }
+
   console.error('Подключение...');
   connection = await oracledb.getConnection({
     user,
     password,
     connectString: process.env.UNA_ORACLE_DSN ?? DEFAULT_DESCRIPTOR,
     connectTimeout: Number(process.env.UNA_ORACLE_TIMEOUT ?? 15),
+    ...proxyOptions,
   });
   console.error('Подключено.');
 
@@ -297,6 +310,16 @@ async function main() {
 
 main().catch(async (error) => {
   console.error('Не удалось снять структуру:', error.message);
+  const hint = {
+    'NJS-510': 'порт слушателя недоступен по сети: проверьте firewall и VPN до 4024/1521',
+    'NJS-512': 'прокси в thin-режиме работает только с PROTOCOL=TCPS; для обычного TCP нужен прямой доступ',
+    'ORA-01017': 'неверный логин или пароль',
+    'ORA-12514': 'слушатель не знает такого SERVICE_NAME',
+    'ORA-28000': 'учётная запись заблокирована',
+  };
+  for (const [code, text] of Object.entries(hint)) {
+    if (String(error.message).includes(code)) console.error(`Вероятная причина: ${text}`);
+  }
   if (connection) await connection.close().catch(() => {});
   process.exit(1);
 });
