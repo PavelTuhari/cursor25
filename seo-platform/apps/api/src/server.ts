@@ -10,6 +10,9 @@ import { ClaudeRunner } from './runner/claude-runner.js';
 import { RunWorker } from './runner/worker.js';
 import { buildRegistry, registryConfigFromEnv } from './runner/registry.js';
 import { Scheduler } from './scheduler.js';
+import { ConfigStore } from './config/store.js';
+import { EnvSecretResolver } from './config/secrets.js';
+import { PublishingService } from './publishing.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -59,9 +62,9 @@ async function openDb(connectionString: string): Promise<Db> {
  * По умолчанию выключен: исполнение плейбука тратит деньги, поэтому включаться
  * оно должно осознанно, а не потому что сервис поднялся.
  */
-async function startWorker(db: Db): Promise<AbortController | null> {
-  if ((process.env['RUNNER'] ?? 'off') !== 'claude') {
-    console.warn('[runner] выключен (RUNNER=off): запуски будут копиться в очереди');
+async function startWorker(db: Db, config: ConfigStore): Promise<AbortController | null> {
+  if (!(await config.get<boolean>('runner.enabled'))) {
+    console.warn('[runner] выключен: запуски будут копиться в очереди');
     return null;
   }
   const { default: Anthropic } = await import('@anthropic-ai/sdk');
@@ -74,7 +77,7 @@ async function startWorker(db: Db): Promise<AbortController | null> {
   const worker = new RunWorker({
     db,
     runner,
-    allowMissingTools: process.env['RUNNER_ALLOW_MISSING_TOOLS'] === 'true',
+    allowMissingTools: await config.get<boolean>('runner.allow_missing_tools'),
   });
   const controller = new AbortController();
   void worker.loop(controller.signal);
@@ -88,18 +91,26 @@ async function main(): Promise<void> {
 
   const db = await openDb(connectionString);
   const templates = loadTemplateDir(resolveTemplatesDir());
-  const app = buildApp({ db, una: resolveGateway(), templates });
+  const config = new ConfigStore(db);
+  const secrets = new EnvSecretResolver();
+  const publishing = new PublishingService({ db, config, secrets });
+  const app = buildApp({ db, una: resolveGateway(), templates, config, secrets, publishing });
 
-  const worker = await startWorker(db);
+  const worker = await startWorker(db, config);
 
   let scheduler: AbortController | null = null;
-  if (process.env['SCHEDULER'] === 'on') {
+  if (await config.get<boolean>('scheduler.enabled')) {
     scheduler = new AbortController();
     void new Scheduler(db, templates).loop(scheduler.signal);
     console.log('[scheduler] включён, проверка расписаний раз в минуту');
   } else {
-    console.warn('[scheduler] выключен (SCHEDULER=off): расписания не срабатывают');
+    console.warn('[scheduler] выключен: расписания не срабатывают');
   }
+
+  console.log(
+    `[publishing] ${(await config.get<boolean>('publishing.enabled')) ? 'включена' : 'выключена'}, ` +
+      `утверждение человеком: ${(await config.get<boolean>('publishing.require_approval')) ? 'обязательно' : 'ОТКЛЮЧЕНО'}`,
+  );
 
   const port = Number(process.env['PORT'] ?? 3000);
   await app.listen({ port, host: '0.0.0.0' });

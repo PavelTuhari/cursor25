@@ -13,7 +13,9 @@ const NAV = [
   { href: '/schedules', label: 'Расписания' },
   { href: '/runs', label: 'Сессии' },
   { href: '/approvals', label: 'Очередь утверждения' },
+  { href: '/channels', label: 'Каналы' },
   { href: '/budget', label: 'Бюджет и документы' },
+  { href: '/settings', label: 'Настройки' },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

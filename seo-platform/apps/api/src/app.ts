@@ -7,9 +7,13 @@ import type { UnaGateway } from './una/gateway.js';
 import { createPlaybook, type SiteRow } from './playbooks.js';
 import { isValidCron, nextRunAt } from './cron.js';
 import { Scheduler } from './scheduler.js';
+import { ConfigStore } from './config/store.js';
+import { EnvSecretResolver, type SecretResolver } from './config/secrets.js';
+import { PublishingService } from './publishing.js';
+import { isPublishableChannel } from './runner/connectors/social/index.js';
 import {
-  approvalInput, budgetCheckInput, generateInput, reportInput, runInput, scheduleInput,
-  siteInput, unaDocInput,
+  approvalInput, budgetCheckInput, channelAccountInput, generateInput, publicationInput,
+  reportInput, runInput, scheduleInput, settingInput, siteInput, unaDocInput,
 } from './schemas.js';
 
 export interface AppDeps {
@@ -18,12 +22,18 @@ export interface AppDeps {
   templates: Map<string, PlaybookTemplate>;
   /** Источник времени; вынесен ради воспроизводимых тестов. */
   now?: () => Date;
+  config?: ConfigStore;
+  secrets?: SecretResolver;
+  publishing?: PublishingService;
 }
 
 export function buildApp(deps: AppDeps): FastifyInstance {
   const app = Fastify({ logger: false });
   const { db, una, templates } = deps;
   const now = deps.now ?? (() => new Date());
+  const config = deps.config ?? new ConfigStore(db);
+  const secrets = deps.secrets ?? new EnvSecretResolver();
+  const publishing = deps.publishing ?? new PublishingService({ db, config, secrets });
 
   async function audit(entry: {
     actor: string;
@@ -264,6 +274,158 @@ export function buildApp(deps: AppDeps): FastifyInstance {
       target: id, payload: { reason: input.reason },
     });
     return { id, decision: input.decision };
+  });
+
+  // ------------------------------------------------------------ настройки
+  app.get('/settings', async (request) => {
+    const { site_id } = request.query as { site_id?: string };
+    return { items: await config.describe(site_id) };
+  });
+
+  app.put('/settings', async (request) => {
+    const input = settingInput.parse(request.body);
+    try {
+      await config.set(input.key, input.value, input.actor, input.site_id);
+    } catch (error) {
+      throw ApiError.badRequest((error as Error).message);
+    }
+    await audit({
+      actor: input.actor, actor_kind: 'user', action: 'setting.update',
+      target: input.key, payload: { value: input.value, site_id: input.site_id ?? null },
+    });
+    return { key: input.key, value: input.value };
+  });
+
+  // --------------------------------------------------- подключения каналов
+  app.get('/channel-accounts', async (request) => {
+    const { site_id } = request.query as { site_id?: string };
+    const { rows } = await db.query(
+      `SELECT a.id, a.site_id, a.channel_id, a.external_id, a.display_name, a.credentials_ref,
+              a.config, a.sandbox, a.enabled, a.rate_limit_per_day, a.last_checked_at,
+              a.last_check_status, a.last_check_error, s.domain,
+              COALESCE(u.published, 0) AS published_today
+         FROM channel_accounts a
+         JOIN sites s ON s.id = a.site_id
+         LEFT JOIN channel_usage u ON u.account_id = a.id AND u.usage_date = CURRENT_DATE
+        WHERE ($1::uuid IS NULL OR a.site_id = $1)
+        ORDER BY s.domain, a.channel_id`,
+      [site_id ?? null],
+    );
+    // Наружу отдаём только имя секрета: значение не покидает сервер.
+    return { items: rows };
+  });
+
+  app.post('/channel-accounts', async (request, reply) => {
+    const input = channelAccountInput.parse(request.body);
+    if (!isPublishableChannel(input.channel_id)) {
+      throw ApiError.badRequest(
+        `Для канала "${input.channel_id}" публикация не реализована. ` +
+          'Доступны: facebook, instagram, linkedin, telegram',
+      );
+    }
+    const site = await db.query(`SELECT id FROM sites WHERE id = $1`, [input.site_id]);
+    if (site.rows.length === 0) throw ApiError.notFound('Сайт');
+
+    // Секрет должен существовать до сохранения подключения: иначе проблема
+    // всплывёт в момент публикации, когда исправлять поздно.
+    if (!(await secrets.has(input.credentials_ref))) {
+      throw ApiError.badRequest(
+        `Секрет по ссылке "${input.credentials_ref}" недоступен. ` +
+          'Задайте переменную окружения с этим именем и повторите.',
+      );
+    }
+
+    const { rows } = await db.query<{ id: string }>(
+      `INSERT INTO channel_accounts (site_id, channel_id, external_id, display_name,
+                                     credentials_ref, config, sandbox, enabled, rate_limit_per_day)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+       ON CONFLICT (site_id, channel_id, external_id) DO NOTHING
+       RETURNING id`,
+      [input.site_id, input.channel_id, input.external_id, input.display_name,
+       input.credentials_ref, JSON.stringify(input.config), input.sandbox, input.enabled,
+       input.rate_limit_per_day ?? null],
+    );
+    if (rows.length === 0) throw ApiError.conflict('Такое подключение уже заведено');
+    await audit({
+      actor: 'panel', actor_kind: 'user', action: 'channel.connect',
+      target: `${input.channel_id}:${input.external_id}`, payload: { sandbox: input.sandbox },
+    });
+    return reply.status(201).send({ id: rows[0]!.id });
+  });
+
+  app.post('/channel-accounts/:id/verify', async (request) => {
+    const { id } = request.params as { id: string };
+    return publishing.verify(id);
+  });
+
+  app.delete('/channel-accounts/:id', async (request) => {
+    const { id } = request.params as { id: string };
+    const { rows } = await db.query(`DELETE FROM channel_accounts WHERE id = $1 RETURNING id`, [id]);
+    if (rows.length === 0) throw ApiError.notFound('Подключение канала');
+    return { id, deleted: true };
+  });
+
+  // ------------------------------------------------------------ публикации
+  app.post('/publications', async (request, reply) => {
+    const input = publicationInput.parse(request.body);
+    const account = await db.query<{ channel_id: string }>(
+      `SELECT channel_id FROM channel_accounts WHERE id = $1 AND site_id = $2`,
+      [input.account_id, input.site_id],
+    );
+    if (account.rows.length === 0) {
+      throw ApiError.badRequest('Подключение не найдено или принадлежит другому сайту');
+    }
+    const { rows } = await db.query<{ id: string }>(
+      `INSERT INTO publications (site_id, channel_id, account_id, artifact_id, campaign_code,
+                                 locale, format, title, body, external_url, status)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,'draft') RETURNING id`,
+      [input.site_id, account.rows[0]!.channel_id, input.account_id, input.artifact_id ?? null,
+       input.campaign_code ?? null, input.locale, input.format, input.title, input.body,
+       input.link ?? null],
+    );
+    return reply.status(201).send({ id: rows[0]!.id, status: 'draft' });
+  });
+
+  app.get('/publications', async (request) => {
+    const { site_id, status } = request.query as { site_id?: string; status?: string };
+    const { rows } = await db.query(
+      `SELECT p.*, a.display_name AS account_name, a.sandbox
+         FROM publications p
+         LEFT JOIN channel_accounts a ON a.id = p.account_id
+        WHERE ($1::uuid IS NULL OR p.site_id = $1)
+          AND ($2::text IS NULL OR p.status = $2)
+        ORDER BY p.created_at DESC LIMIT 200`,
+      [site_id ?? null, status ?? null],
+    );
+    return { items: rows };
+  });
+
+  app.post('/publications/:id/approve', async (request) => {
+    const { id } = request.params as { id: string };
+    const input = approvalInput.parse(request.body);
+    if (/(^|_)(ai|bot)(_|$)/i.test(input.actor) || input.actor.toUpperCase().endsWith('_BOT')) {
+      throw ApiError.forbidden('AI-сессия не может утверждать публикации');
+    }
+    const status = input.decision === 'approve' ? 'approved' : 'skipped';
+    const { rows } = await db.query<{ id: string; status: string }>(
+      `UPDATE publications SET status = $2 WHERE id = $1 AND status IN ('draft','failed')
+       RETURNING id, status`,
+      [id, status],
+    );
+    if (rows.length === 0) {
+      throw ApiError.conflict('Публикация не в том статусе, чтобы её утверждать');
+    }
+    await audit({
+      actor: input.actor, actor_kind: 'user', action: `publication.${input.decision}`, target: id,
+    });
+    return rows[0];
+  });
+
+  app.post('/publications/:id/publish', async (request) => {
+    const { id } = request.params as { id: string };
+    const body = request.body as { actor?: string; dry_run?: boolean };
+    if (!body?.actor) throw ApiError.badRequest('Ожидалось поле actor');
+    return publishing.publish(id, body.actor, { dryRun: body.dry_run === true });
   });
 
   // ----------------------------------------------------------- расписания

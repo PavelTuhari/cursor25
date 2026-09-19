@@ -48,6 +48,8 @@ export const api = {
   get: <T>(path: string) => call<T>(path),
   post: <T>(path: string, body: unknown) =>
     call<T>(path, { method: 'POST', body: JSON.stringify(body) }),
+  put: <T>(path: string, body: unknown) =>
+    call<T>(path, { method: 'PUT', body: JSON.stringify(body) }),
   del: <T>(path: string) => call<T>(path, { method: 'DELETE' }),
 };
 

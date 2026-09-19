@@ -98,6 +98,41 @@ export const scheduleInput = z.object({
   enabled: z.boolean().default(true),
 });
 
+export const channelAccountInput = z.object({
+  site_id: z.string().uuid(),
+  channel_id: z.string().min(1),
+  external_id: z.string().min(1),
+  display_name: z.string().default(''),
+  /** Имя секрета, а не сам секрет: значение платформа читает из окружения или Vault. */
+  credentials_ref: z.string().min(1).refine(
+    (value) => !/^[A-Za-z0-9_\-]{20,}$/.test(value) || value.startsWith('env:') || value.startsWith('vault://'),
+    'Похоже на сам секрет. Укажите ссылку вида env:ИМЯ или vault://путь',
+  ),
+  config: z.record(z.unknown()).default({}),
+  sandbox: z.boolean().default(true),
+  enabled: z.boolean().default(true),
+  rate_limit_per_day: z.number().int().positive().optional(),
+});
+
+export const settingInput = z.object({
+  key: z.string().min(1),
+  value: z.unknown(),
+  site_id: z.string().uuid().optional(),
+  actor: z.string().default('panel'),
+});
+
+export const publicationInput = z.object({
+  site_id: z.string().uuid(),
+  account_id: z.string().uuid(),
+  locale: z.string().default('ru-MD'),
+  format: z.string().default('post'),
+  title: z.string().default(''),
+  body: z.string().min(1, 'текст публикации обязателен'),
+  link: z.string().url().optional(),
+  campaign_code: z.string().optional(),
+  artifact_id: z.string().uuid().optional(),
+});
+
 export const unaDocInput = z.object({
   ext_system: z.string().min(1),
   ext_id: z.string().min(1),
