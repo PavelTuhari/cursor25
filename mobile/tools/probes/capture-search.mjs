@@ -1,0 +1,16 @@
+import { chromium } from 'playwright';
+const OUT = process.env.SHOTS_DIR;
+const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH, args: ['--no-sandbox'] });
+const page = await (await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, locale: 'ru-MD' })).newPage();
+await page.goto('http://localhost:8081', { waitUntil: 'domcontentloaded', timeout: 240000 });
+await page.waitForTimeout(30000);
+const el = page.getByText('Поиск товаров, брендов…', { exact: true }).filter({ visible: true }).first();
+await el.waitFor({ state: 'visible', timeout: 20000 });
+const box = await el.boundingBox();
+await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+await page.waitForTimeout(1500);
+await page.getByPlaceholder('Поиск товаров, брендов…').filter({ visible: true }).first().fill('кофе');
+await page.waitForTimeout(4000);
+await page.screenshot({ path: `${OUT}/14-search.png` });
+console.log('search:', (await page.innerText('body')).slice(0, 160).replace(/\n/g, ' | '));
+await browser.close();
