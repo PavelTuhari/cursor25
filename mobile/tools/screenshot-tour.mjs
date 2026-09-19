@@ -51,13 +51,15 @@ async function alive() {
 }
 
 async function tap(text, { exact = true, last = false, wait = 1500 } = {}) {
-  const base = page.getByText(text, { exact });
+  // Tab screens stay mounted when hidden, so the same label can exist several
+  // times in the DOM; only the one on screen is worth tapping.
+  const base = page.getByText(text, { exact }).filter({ visible: true });
   const locator = last ? base.last() : base.first();
   await locator.waitFor({ state: 'visible', timeout: 15000 });
   await locator.scrollIntoViewIfNeeded({ timeout: 5000 }).catch(() => undefined);
 
   // React Native Web nests labels inside pressables whose parents opt out of
-  // pointer events, which trips Playwright's actionability checks. A plain
+  // pointer events, which trips Playwright's actionability checks; a plain
   // mouse click on the label's centre is what a finger does anyway.
   const box = await locator.boundingBox();
   if (!box) throw new Error(`no box for "${text}"`);
@@ -70,7 +72,7 @@ async function tap(text, { exact = true, last = false, wait = 1500 } = {}) {
 /** Steps start from the tab bar; a stack screen left open would hide it. */
 async function ensureTabs() {
   for (let i = 0; i < 4; i += 1) {
-    const tab = page.getByText('Профиль', { exact: true }).last();
+    const tab = page.getByText('Профиль', { exact: true }).filter({ visible: true }).last();
     if (await tab.isVisible().catch(() => false)) return;
     const back = page.getByLabel('Go back').first();
     if (!(await back.isVisible().catch(() => false))) return;
@@ -118,10 +120,10 @@ await step('login', async () => {
   await shot('profile-anonymous');
   await tap('Войти');
   await shot('login-phone');
-  await page.getByPlaceholder('+373 60 123 456').first().fill('060123456');
+  await page.getByPlaceholder('+373 60 123 456').filter({ visible: true }).first().fill('060123456');
   await tap('Получить код');
   await shot('login-code');
-  await page.getByPlaceholder('••••').first().fill('1234');
+  await page.getByPlaceholder('••••').filter({ visible: true }).first().fill('1234');
   await page.waitForTimeout(400);
   await tap('Подтвердить', { wait: 8000 });
   await shot('profile-signed-in');
@@ -148,7 +150,7 @@ await step('receipts', async () => {
   await tap('История покупок');
   await page.waitForTimeout(2000);
   await shot('receipts');
-  await page.locator('text=/\\d{2}\\.\\d{2}\\.\\d{4}/').first().click({ timeout: 15000 });
+  await page.locator('text=/\\d{2}\\.\\d{2}\\.\\d{4}/').filter({ visible: true }).first().click({ timeout: 15000, force: true });
   await page.waitForTimeout(2000);
   await shot('receipt-detail');
   await goBack(2);
@@ -163,7 +165,7 @@ await step('catalog', async () => {
 });
 
 await step('product', async () => {
-  await page.locator('text=/Молоко 2,5%/').first().click({ timeout: 15000 });
+  await page.locator('text=/Молоко 2,5%/').filter({ visible: true }).first().click({ timeout: 15000, force: true });
   await page.waitForTimeout(2000);
   await shot('product');
   await tap('В корзину', { wait: 2000 });
@@ -174,7 +176,7 @@ await step('product', async () => {
 await step('search', async () => {
   await goTab('Главная');
   await tap('Поиск товаров, брендов…', { wait: 1200 });
-  await page.getByPlaceholder('Поиск товаров, брендов…').first().fill('кофе');
+  await page.getByPlaceholder('Поиск товаров, брендов…').filter({ visible: true }).first().fill('кофе');
   await page.waitForTimeout(3000);
   await shot('search');
   await goBack();
@@ -184,7 +186,7 @@ await step('cart', async () => {
   await goTab('Корзина');
   await shot('cart-below-minimum');
   for (let i = 0; i < 9; i += 1) {
-    await page.getByLabel('+').first().click({ timeout: 8000 });
+    await page.getByLabel('+').filter({ visible: true }).first().click({ timeout: 8000, force: true });
     await page.waitForTimeout(300);
   }
   await page.waitForTimeout(1200);
