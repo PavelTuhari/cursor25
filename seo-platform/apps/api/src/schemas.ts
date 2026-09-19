@@ -41,6 +41,11 @@ export const generateInput = z.object({
 export const runInput = z.object({
   playbook_id: z.string().uuid(),
   trigger: z.enum(['manual', 'schedule', 'event']).default('manual'),
+  /**
+   * worker   — запуск встаёт в очередь, его исполнит раннер платформы;
+   * external — исполняет внешний агент, он же присылает отчёт сам.
+   */
+  execution: z.enum(['worker', 'external']).default('worker'),
 });
 
 export const reportInput = z.object({

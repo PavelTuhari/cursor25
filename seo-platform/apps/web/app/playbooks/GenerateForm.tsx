@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import type { Site, Template } from '@/lib/api';
-import { generatePlaybookAction, type GenerateResult } from './actions';
+import { generatePlaybookAction, startRunAction, type GenerateResult } from './actions';
 
 /**
  * Форма генерации плейбука.
@@ -27,6 +27,7 @@ export function GenerateForm({
   const [secretRef, setSecretRef] = useState('vault://una/seo-ai-bot');
   const [pending, setPending] = useState(false);
   const [result, setResult] = useState<GenerateResult | null>(null);
+  const [runMessage, setRunMessage] = useState<string | null>(null);
 
   const template = useMemo(() => templates.find((t) => t.code === code), [templates, code]);
   const needsUna = template?.phase === 6;
@@ -54,6 +55,7 @@ export function GenerateForm({
         setResult({ ok: false, error: `Параметры не разобрались как JSON: ${(error as Error).message}` });
         return;
       }
+      setRunMessage(null);
       setResult(
         await generatePlaybookAction({
           site_id: siteId,
@@ -155,8 +157,28 @@ export function GenerateForm({
       {result && result.ok && (
         <div style={{ marginTop: 16 }}>
           <div className="notice ok">
-            Готов: <span className="mono">{result.file_path}</span>
+            <div className="row" style={{ justifyContent: 'space-between' }}>
+              <span>
+                Готов: <span className="mono">{result.file_path}</span>
+              </span>
+              <button
+                disabled={pending}
+                onClick={async () => {
+                  setPending(true);
+                  const started = await startRunAction(result.id);
+                  setRunMessage(started.message);
+                  setPending(false);
+                }}
+              >
+                Поставить в очередь
+              </button>
+            </div>
           </div>
+          {runMessage && (
+            <div className="notice info" style={{ marginTop: 10 }}>
+              {runMessage}
+            </div>
+          )}
           {result.warnings.length > 0 && (
             <div className="notice info" style={{ marginTop: 10 }}>
               Предупреждения валидатора:

@@ -48,7 +48,11 @@ async function realRunId(): Promise<string> {
       },
     })
   ).json();
-  const run = await app.inject({ method: 'POST', url: '/runs', payload: { playbook_id: playbook.id } });
+  const run = await app.inject({
+    method: 'POST',
+    url: '/runs',
+    payload: { playbook_id: playbook.id, execution: 'external' },
+  });
   return run.json().id as string;
 }
 

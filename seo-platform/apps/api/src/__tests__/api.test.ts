@@ -143,9 +143,20 @@ describe('запуски и артефакты', () => {
   async function startRun() {
     const site = await siteOnce();
     const playbook = (await generateArticle(site.id)).json();
-    const run = await app.inject({ method: 'POST', url: '/runs', payload: { playbook_id: playbook.id } });
+    const run = await app.inject({
+      method: 'POST',
+      url: '/runs',
+      payload: { playbook_id: playbook.id, execution: 'external' },
+    });
     return run.json() as { id: string };
   }
+
+  it('по умолчанию запуск встаёт в очередь для раннера платформы', async () => {
+    const site = await siteOnce();
+    const playbook = (await generateArticle(site.id)).json();
+    const queued = await app.inject({ method: 'POST', url: '/runs', payload: { playbook_id: playbook.id } });
+    expect(queued.json().status).toBe('queued');
+  });
 
   it('запускает сессию и принимает отчёт с артефактами', async () => {
     const run = await startRun();
@@ -208,7 +219,11 @@ describe('очередь утверждения', () => {
   async function pendingArtifact() {
     const site = await createSite();
     const playbook = (await generateArticle(site.id)).json();
-    const run = (await app.inject({ method: 'POST', url: '/runs', payload: { playbook_id: playbook.id } })).json();
+    const run = (await app.inject({
+      method: 'POST',
+      url: '/runs',
+      payload: { playbook_id: playbook.id, execution: 'external' },
+    })).json();
     await app.inject({
       method: 'POST',
       url: `/runs/${run.id}/report`,

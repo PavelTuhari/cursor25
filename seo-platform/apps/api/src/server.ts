@@ -6,6 +6,8 @@ import { PgDb, PgliteDb, type Db } from './db.js';
 import { MockUnaGateway } from './una/mock-gateway.js';
 import { OracleUnaGateway } from './una/oracle-gateway.js';
 import type { UnaGateway } from './una/gateway.js';
+import { ClaudeRunner } from './runner/claude-runner.js';
+import { RunWorker } from './runner/worker.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -49,6 +51,30 @@ async function openDb(connectionString: string): Promise<Db> {
   return db;
 }
 
+/**
+ * Запускает раннер сессий, если он включён.
+ *
+ * По умолчанию выключен: исполнение плейбука тратит деньги, поэтому включаться
+ * оно должно осознанно, а не потому что сервис поднялся.
+ */
+async function startWorker(db: Db): Promise<AbortController | null> {
+  if ((process.env['RUNNER'] ?? 'off') !== 'claude') {
+    console.warn('[runner] выключен (RUNNER=off): запуски будут копиться в очереди');
+    return null;
+  }
+  const { default: Anthropic } = await import('@anthropic-ai/sdk');
+  const runner = new ClaudeRunner({ client: new Anthropic() });
+  const worker = new RunWorker({
+    db,
+    runner,
+    allowMissingTools: process.env['RUNNER_ALLOW_MISSING_TOOLS'] === 'true',
+  });
+  const controller = new AbortController();
+  void worker.loop(controller.signal);
+  console.log('[runner] claude запущен, очередь обрабатывается');
+  return controller;
+}
+
 async function main(): Promise<void> {
   const connectionString = process.env['DATABASE_URL'];
   if (!connectionString) throw new Error('Не задан DATABASE_URL');
@@ -57,12 +83,15 @@ async function main(): Promise<void> {
   const templates = loadTemplateDir(resolveTemplatesDir());
   const app = buildApp({ db, una: resolveGateway(), templates });
 
+  const worker = await startWorker(db);
+
   const port = Number(process.env['PORT'] ?? 3000);
   await app.listen({ port, host: '0.0.0.0' });
   console.log(`[api] слушает :${port}, шаблонов загружено: ${templates.size}`);
 
   for (const signal of ['SIGINT', 'SIGTERM'] as const) {
     process.on(signal, () => {
+      worker?.abort();
       void app.close().then(() => db.close()).then(() => process.exit(0));
     });
   }

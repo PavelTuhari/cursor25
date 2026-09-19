@@ -210,16 +210,26 @@ export function buildApp(deps: AppDeps): FastifyInstance {
     if (!playbook) throw ApiError.notFound('Плейбук');
 
     const fm = playbook.front_matter as { run_mode?: string };
+    const isExternal = input.execution === 'external';
     const run = await db.query<{ id: string }>(
       `INSERT INTO task_runs (playbook_id, site_id, status, run_mode, trigger, started_at)
-       VALUES ($1,$2,'running',$3,$4,now()) RETURNING id`,
-      [playbook.id, playbook.site_id, fm.run_mode ?? 'dry-run', input.trigger],
+       VALUES ($1,$2,$3,$4,$5,$6) RETURNING id`,
+      [
+        playbook.id,
+        playbook.site_id,
+        isExternal ? 'running' : 'queued',
+        fm.run_mode ?? 'dry-run',
+        input.trigger,
+        isExternal ? new Date().toISOString() : null,
+      ],
     );
     await audit({
       actor: 'system', actor_kind: 'system', action: 'run.start',
-      target: playbook.id, run_id: run.rows[0]!.id,
+      target: playbook.id, run_id: run.rows[0]!.id, payload: { execution: input.execution },
     });
-    return reply.status(201).send({ id: run.rows[0]!.id, status: 'running' });
+    return reply
+      .status(201)
+      .send({ id: run.rows[0]!.id, status: isExternal ? 'running' : 'queued' });
   });
 
   app.post('/runs/:id/report', async (request) => {

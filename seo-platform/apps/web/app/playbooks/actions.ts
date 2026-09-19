@@ -44,9 +44,15 @@ export async function generatePlaybookAction(input: {
 
 export async function startRunAction(playbookId: string): Promise<{ ok: boolean; message: string }> {
   try {
-    const run = await api.post<{ id: string }>('/runs', { playbook_id: playbookId });
+    const run = await api.post<{ id: string; status: string }>('/runs', { playbook_id: playbookId });
     revalidatePath('/runs');
-    return { ok: true, message: `Сессия ${run.id} запущена` };
+    return {
+      ok: true,
+      message:
+        run.status === 'queued'
+          ? `Запуск ${run.id} поставлен в очередь. Исполнит раннер платформы, если он включён.`
+          : `Сессия ${run.id} запущена`,
+    };
   } catch (error) {
     return { ok: false, message: error instanceof ApiCallError ? error.message : String(error) };
   }

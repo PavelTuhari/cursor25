@@ -25,6 +25,7 @@
     "vitest": "^2.1.8"
   },
   "optionalDependencies": {
+    "@anthropic-ai/sdk": "^0.127.0",
     "oracledb": "^7.0.1"
   }
 }
