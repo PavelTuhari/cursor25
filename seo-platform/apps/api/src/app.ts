@@ -1,11 +1,15 @@
 import Fastify, { type FastifyInstance } from 'fastify';
-import { generatePlaybook, validatePlaybook, type PlaybookTemplate, type SiteProfile } from '@seo/playbook-engine';
+import { validatePlaybook, type PlaybookTemplate } from '@seo/playbook-engine';
 import { ZodError } from 'zod';
 import type { Db } from './db.js';
 import { ApiError } from './errors.js';
 import type { UnaGateway } from './una/gateway.js';
+import { createPlaybook, type SiteRow } from './playbooks.js';
+import { isValidCron, nextRunAt } from './cron.js';
+import { Scheduler } from './scheduler.js';
 import {
-  approvalInput, budgetCheckInput, generateInput, reportInput, runInput, siteInput, unaDocInput,
+  approvalInput, budgetCheckInput, generateInput, reportInput, runInput, scheduleInput,
+  siteInput, unaDocInput,
 } from './schemas.js';
 
 export interface AppDeps {
@@ -14,37 +18,6 @@ export interface AppDeps {
   templates: Map<string, PlaybookTemplate>;
   /** Источник времени; вынесен ради воспроизводимых тестов. */
   now?: () => Date;
-}
-
-interface SiteRow {
-  id: string;
-  domain: string;
-  name: string;
-  locales: string[];
-  geo: string[];
-  niche: string;
-  description: string;
-  audience: string;
-  tone_of_voice: string;
-  banned_claims: string[];
-  competitors: string[];
-  una_div: string | null;
-}
-
-function toProfile(row: SiteRow): SiteProfile {
-  return {
-    domain: row.domain,
-    name: row.name,
-    locales: row.locales,
-    geo: row.geo,
-    niche: row.niche,
-    description: row.description,
-    audience: row.audience,
-    tone_of_voice: row.tone_of_voice,
-    banned_claims: row.banned_claims,
-    competitors: row.competitors,
-    una_div: row.una_div ?? undefined,
-  };
 }
 
 export function buildApp(deps: AppDeps): FastifyInstance {
@@ -128,62 +101,12 @@ export function buildApp(deps: AppDeps): FastifyInstance {
   // ----------------------------------------------------------- плейбуки
   app.post('/playbooks/generate', async (request, reply) => {
     const input = generateInput.parse(request.body);
-    const template = templates.get(input.template_code);
-    if (!template) throw ApiError.notFound(`Шаблон ${input.template_code}`);
-
-    const site = await db.query<SiteRow>(`SELECT * FROM sites WHERE id = $1`, [input.site_id]);
-    const row = site.rows[0];
-    if (!row) throw ApiError.notFound('Сайт');
-
-    // Плейбук фазы 6 работает с деньгами и без привязки к UNA бессмыслен.
-    if (template.phase === 6 && !input.una) {
-      throw ApiError.badRequest(
-        `Шаблон ${template.code} относится к учётному контуру: нужен блок una (tech_user, secret_ref)`,
-      );
-    }
-
-    const generatedAt = now().toISOString();
-    let rendered;
-    try {
-      rendered = generatePlaybook(template, {
-        site: toProfile(row),
-        params: input.params,
-        generated_at: generatedAt,
-        run_mode: input.run_mode,
-        model_hint: input.model_hint,
-        una: input.una,
-        budget: input.budget,
-      });
-    } catch (error) {
-      throw ApiError.badRequest((error as Error).message);
-    }
-
-    // Невалидный плейбук не сохраняем: иначе он рано или поздно уедет в сессию.
-    const verdict = validatePlaybook(rendered.content);
-    if (!verdict.ok) {
-      throw ApiError.badRequest('Сгенерированный плейбук не прошёл валидацию', verdict.issues);
-    }
-
-    const { rows } = await db.query<{ id: string }>(
-      `INSERT INTO playbooks (site_id, template_code, template_version, params, front_matter,
-                              body, content, file_path, generated_at, created_by)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING id`,
-      [input.site_id, template.code, template.version, JSON.stringify(input.params),
-       JSON.stringify(rendered.front_matter), rendered.body, rendered.content,
-       rendered.suggested_path, generatedAt, input.created_by],
-    );
+    const created = await createPlaybook(db, templates, input, now().toISOString());
     await audit({
       actor: input.created_by, actor_kind: 'system', action: 'playbook.generate',
-      target: `${template.code}@${row.domain}`, payload: { params: input.params },
+      target: `${input.template_code}@${input.site_id}`, payload: { params: input.params },
     });
-
-    return reply.status(201).send({
-      id: rows[0]!.id,
-      file_path: rendered.suggested_path,
-      front_matter: rendered.front_matter,
-      content: rendered.content,
-      warnings: verdict.issues,
-    });
+    return reply.status(201).send(created);
   });
 
   app.post('/playbooks/validate', async (request) => {
@@ -341,6 +264,75 @@ export function buildApp(deps: AppDeps): FastifyInstance {
       target: id, payload: { reason: input.reason },
     });
     return { id, decision: input.decision };
+  });
+
+  // ----------------------------------------------------------- расписания
+  app.get('/schedules', async () => {
+    const { rows } = await db.query(
+      `SELECT s.*, si.domain
+         FROM schedules s
+         JOIN sites si ON si.id = s.site_id
+        ORDER BY s.next_run_at NULLS FIRST`,
+    );
+    return { items: rows };
+  });
+
+  app.post('/schedules', async (request, reply) => {
+    const input = scheduleInput.parse(request.body);
+    if (!isValidCron(input.cron)) {
+      throw ApiError.badRequest(`Некорректное расписание "${input.cron}": ожидается cron из 5 полей (UTC)`);
+    }
+    if (!templates.has(input.template_code)) {
+      throw ApiError.notFound(`Шаблон ${input.template_code}`);
+    }
+    const site = await db.query(`SELECT id FROM sites WHERE id = $1`, [input.site_id]);
+    if (site.rows.length === 0) throw ApiError.notFound('Сайт');
+
+    // Первое срабатывание считаем сразу: иначе расписание сработает в
+    // ближайшем тике, а не тогда, когда указано.
+    const next = nextRunAt(input.cron, now());
+    const { rows } = await db.query<{ id: string }>(
+      `INSERT INTO schedules (site_id, template_code, name, cron, params, una, run_mode, enabled, next_run_at)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+       ON CONFLICT (site_id, template_code, cron) DO NOTHING
+       RETURNING id`,
+      [input.site_id, input.template_code, input.name, input.cron,
+       JSON.stringify(input.params), input.una ? JSON.stringify(input.una) : null,
+       input.run_mode ?? null, input.enabled, next ? next.toISOString() : null],
+    );
+    if (rows.length === 0) {
+      throw ApiError.conflict('Такое расписание для этого сайта и шаблона уже заведено');
+    }
+    await audit({
+      actor: 'system', actor_kind: 'system', action: 'schedule.create',
+      target: `${input.template_code}@${input.site_id}`, payload: { cron: input.cron },
+    });
+    return reply.status(201).send({ id: rows[0]!.id, next_run_at: next });
+  });
+
+  app.post('/schedules/:id/toggle', async (request) => {
+    const { id } = request.params as { id: string };
+    const body = request.body as { enabled?: boolean };
+    if (typeof body?.enabled !== 'boolean') throw ApiError.badRequest('Ожидалось поле enabled');
+    const { rows } = await db.query<{ id: string; enabled: boolean }>(
+      `UPDATE schedules SET enabled = $2 WHERE id = $1 RETURNING id, enabled`,
+      [id, body.enabled],
+    );
+    if (rows.length === 0) throw ApiError.notFound('Расписание');
+    return rows[0];
+  });
+
+  app.delete('/schedules/:id', async (request) => {
+    const { id } = request.params as { id: string };
+    const { rows } = await db.query(`DELETE FROM schedules WHERE id = $1 RETURNING id`, [id]);
+    if (rows.length === 0) throw ApiError.notFound('Расписание');
+    return { id, deleted: true };
+  });
+
+  /** Ручной прогон планировщика: нужен для тестов и для разбора застрявших задач. */
+  app.post('/scheduler/tick', async () => {
+    const scheduler = new Scheduler(db, templates, now);
+    return scheduler.tick();
   });
 
   // ------------------------------------------------------------------ UNA

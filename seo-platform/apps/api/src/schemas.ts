@@ -80,6 +80,24 @@ export const budgetCheckInput = z.object({
   channel: z.string().optional(),
 });
 
+export const scheduleInput = z.object({
+  site_id: z.string().uuid(),
+  template_code: z.string(),
+  name: z.string().default(''),
+  cron: z.string().min(9, 'cron из 5 полей, например "0 6 * * 1"'),
+  params: z.record(z.unknown()).default({}),
+  run_mode: z.enum(['dry-run', 'execute']).optional(),
+  una: z
+    .object({
+      campaign_doc: z.string().optional(),
+      budget_article: z.string().optional(),
+      tech_user: z.string(),
+      secret_ref: z.string().startsWith('vault://', 'секрет передаётся только ссылкой vault://'),
+    })
+    .optional(),
+  enabled: z.boolean().default(true),
+});
+
 export const unaDocInput = z.object({
   ext_system: z.string().min(1),
   ext_id: z.string().min(1),

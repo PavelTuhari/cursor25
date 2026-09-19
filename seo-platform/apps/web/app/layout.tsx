@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 const NAV = [
   { href: '/', label: 'Портфель сайтов' },
   { href: '/playbooks', label: 'Плейбуки' },
+  { href: '/schedules', label: 'Расписания' },
   { href: '/runs', label: 'Сессии' },
   { href: '/approvals', label: 'Очередь утверждения' },
   { href: '/budget', label: 'Бюджет и документы' },

@@ -8,6 +8,8 @@ import { OracleUnaGateway } from './una/oracle-gateway.js';
 import type { UnaGateway } from './una/gateway.js';
 import { ClaudeRunner } from './runner/claude-runner.js';
 import { RunWorker } from './runner/worker.js';
+import { buildRegistry, registryConfigFromEnv } from './runner/registry.js';
+import { Scheduler } from './scheduler.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -63,7 +65,12 @@ async function startWorker(db: Db): Promise<AbortController | null> {
     return null;
   }
   const { default: Anthropic } = await import('@anthropic-ai/sdk');
-  const runner = new ClaudeRunner({ client: new Anthropic() });
+  const registry = buildRegistry(registryConfigFromEnv());
+  const connectors = ['mcp-serp', 'mcp-gsc'].filter((id) => registry.has(id));
+  console.log(
+    `[runner] коннекторы: ${connectors.length > 0 ? connectors.join(', ') : 'только локальные (mcp-site, mcp-lang)'}`,
+  );
+  const runner = new ClaudeRunner({ client: new Anthropic(), registry });
   const worker = new RunWorker({
     db,
     runner,
@@ -85,6 +92,15 @@ async function main(): Promise<void> {
 
   const worker = await startWorker(db);
 
+  let scheduler: AbortController | null = null;
+  if (process.env['SCHEDULER'] === 'on') {
+    scheduler = new AbortController();
+    void new Scheduler(db, templates).loop(scheduler.signal);
+    console.log('[scheduler] включён, проверка расписаний раз в минуту');
+  } else {
+    console.warn('[scheduler] выключен (SCHEDULER=off): расписания не срабатывают');
+  }
+
   const port = Number(process.env['PORT'] ?? 3000);
   await app.listen({ port, host: '0.0.0.0' });
   console.log(`[api] слушает :${port}, шаблонов загружено: ${templates.size}`);
@@ -92,6 +108,7 @@ async function main(): Promise<void> {
   for (const signal of ['SIGINT', 'SIGTERM'] as const) {
     process.on(signal, () => {
       worker?.abort();
+      scheduler?.abort();
       void app.close().then(() => db.close()).then(() => process.exit(0));
     });
   }

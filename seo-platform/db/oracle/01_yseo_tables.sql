@@ -316,4 +316,8 @@ INSERT INTO YSEO_TMS_SETUP (PARAM_KEY, PARAM_VALUE, NOTE) VALUES
     ('BUDGET_WARN_PCT', '80', 'Процент освоения бюджета, при котором отправляется предупреждение');
 INSERT INTO YSEO_TMS_SETUP (PARAM_KEY, PARAM_VALUE, NOTE) VALUES
     ('AI_TECH_USERS', 'SEO_AI_BOT', 'Список технических пользователей AI через запятую');
+INSERT INTO YSEO_TMS_SETUP (PARAM_KEY, PARAM_VALUE, NOTE) VALUES
+    ('ARTICLE_ADS_DEFAULT', '1', 'Статья бюджета по умолчанию для расходов на рекламу, COD1 раздела TMS_SYSS (W,6)');
+INSERT INTO YSEO_TMS_SETUP (PARAM_KEY, PARAM_VALUE, NOTE) VALUES
+    ('GL_INTEGRATION_READY', 'N', 'Y только после сверки сигнатуры UN$GFC и проверки проводок на тестовом периоде');
 COMMIT;
