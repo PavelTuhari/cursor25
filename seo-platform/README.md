@@ -30,27 +30,33 @@ Site Profile + данные + шаблон  →  Playbook (.md)  →  AI-сес�
 | Компонент | Путь | Состояние |
 |---|---|---|
 | Движок плейбуков | `packages/playbook-engine` | Рендер, генерация, валидация, 4 шаблона. 39 тестов |
-| API платформы | `apps/api` | Сайты, шаблоны, генерация, запуски, Approval Inbox, шлюз UNA. 31 тест |
+| API платформы | `apps/api` | Сайты, шаблоны, генерация, запуски, Approval Inbox, шлюз UNA. 34 теста |
+| Web-панель | `apps/web` | Портфель, профиль сайта, плейбуки с генерацией, сессии, очередь утверждения, бюджет и документы UNA |
 | Схема Postgres | `db/postgres/migrations` | 3 миграции, проверены прогоном на живом движке |
 | Контур UNA (Oracle) | `db/oracle` | Таблицы `YSEO_*`, вьюшки `VSEO_*`, пакеты `PK_SEO_*`, роли |
 | ТЗ | `TZ-*.md` | Части I и II |
 
-Не реализовано: web-панель, планировщик и раннеры AI-сессий, коннекторы к
-рекламным кабинетам и соцсетям, генерация проводок через `UN$GFC`
-(ждёт сверки интерфейса с командой UNA — см. `db/oracle/README.md`).
+Не реализовано: планировщик и раннеры AI-сессий, коннекторы к рекламным
+кабинетам и соцсетям, генерация проводок через `UN$GFC` (ждёт сверки
+интерфейса с командой UNA — см. `db/oracle/README.md`).
 
 ## Запуск
 
 ```bash
 npm install
 npm run build          # движок собирается до старта API
-npm test               # 70 тестов: движок + API на настоящем Postgres в WASM
+npm test               # 73 теста: движок + API на настоящем Postgres в WASM
 
-# API
-cp apps/api/.env.example apps/api/.env   # DATABASE_URL, UNA_MODE
-psql "$DATABASE_URL" -f db/postgres/migrations/001_core.sql   # и далее по порядку
-npm run api:dev
+# Полный стек локально, без внешней базы:
+DATABASE_URL=pglite UNA_MODE=mock npm run api:dev     # API на :3000
+node scripts/seed-demo.mjs                            # три пилотных сайта
+API_URL=http://localhost:3000 npm run web:dev         # панель на :3001
 ```
+
+`DATABASE_URL=pglite` поднимает встроенный Postgres (WASM) и сам накатывает
+миграции — инфраструктура для разработки не нужна. Данные живут, пока живёт
+процесс. Для продакшна — настоящая строка подключения и миграции из
+`db/postgres/migrations` по порядку.
 
 `UNA_MODE=mock` поднимает шлюз-заглушку, повторяющий инварианты пакетов
 `PK_SEO_*`: AI не согласует, автор не согласует сам себя, повтор по `ext_id`

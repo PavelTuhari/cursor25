@@ -255,6 +255,31 @@ export function buildApp(deps: AppDeps): FastifyInstance {
     return { id, status: input.status, artifacts: input.artifacts.length };
   });
 
+  app.get('/runs', async (request) => {
+    const query = request.query as { site_id?: string; status?: string; limit?: string };
+    const conditions: string[] = [];
+    const params: unknown[] = [];
+    if (query.site_id) {
+      params.push(query.site_id);
+      conditions.push(`site_id = $${params.length}`);
+    }
+    if (query.status) {
+      params.push(query.status);
+      conditions.push(`status = $${params.length}`);
+    }
+    // Потолок на выдачу: панель показывает последние запуски, а не всю историю.
+    const limit = Math.min(Number(query.limit ?? 100) || 100, 500);
+    params.push(limit);
+    const { rows } = await db.query(
+      `SELECT * FROM task_runs
+        ${conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : ''}
+        ORDER BY created_at DESC
+        LIMIT $${params.length}`,
+      params,
+    );
+    return { items: rows };
+  });
+
   app.get('/runs/:id', async (request) => {
     const { id } = request.params as { id: string };
     const { rows } = await db.query(`SELECT * FROM task_runs WHERE id = $1`, [id]);

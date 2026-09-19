@@ -134,8 +134,14 @@ describe('генерация плейбуков', () => {
 });
 
 describe('запуски и артефакты', () => {
+  /** Сайт создаётся один раз: домен уникален, повторное создание вернуло бы 409. */
+  async function siteOnce(): Promise<{ id: string }> {
+    const existing = (await app.inject({ method: 'GET', url: '/sites' })).json();
+    return existing.items.length > 0 ? existing.items[0] : await createSite();
+  }
+
   async function startRun() {
-    const site = await createSite();
+    const site = await siteOnce();
     const playbook = (await generateArticle(site.id)).json();
     const run = await app.inject({ method: 'POST', url: '/runs', payload: { playbook_id: playbook.id } });
     return run.json() as { id: string };
@@ -159,6 +165,34 @@ describe('запуски и артефакты', () => {
     expect(detail.status).toBe('awaiting_approval');
     expect(detail.artifacts).toHaveLength(1);
     expect(Number(detail.cost_amount)).toBeCloseTo(1.42);
+  });
+
+  it('отдаёт список запусков, новые первыми', async () => {
+    const first = await startRun();
+    const second = await startRun();
+    const list = (await app.inject({ method: 'GET', url: '/runs' })).json();
+    expect(list.items).toHaveLength(2);
+    expect(list.items[0].id).toBe(second.id);
+    expect(list.items[1].id).toBe(first.id);
+  });
+
+  it('фильтрует список по статусу', async () => {
+    const run = await startRun();
+    await startRun();
+    await app.inject({
+      method: 'POST', url: `/runs/${run.id}/report`,
+      payload: { status: 'success', report: {}, artifacts: [] },
+    });
+    const done = (await app.inject({ method: 'GET', url: '/runs?status=success' })).json();
+    expect(done.items).toHaveLength(1);
+    expect(done.items[0].id).toBe(run.id);
+  });
+
+  it('ограничивает выдачу параметром limit', async () => {
+    await startRun();
+    await startRun();
+    const list = (await app.inject({ method: 'GET', url: '/runs?limit=1' })).json();
+    expect(list.items).toHaveLength(1);
   });
 
   it('не принимает второй отчёт по тому же запуску', async () => {
