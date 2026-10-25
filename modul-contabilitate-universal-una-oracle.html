@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNA.md/CUN — Contabilitatea Organizației Universale</title>
+<meta name="description" content="Modul standard de evidență contabilă pentru organizații universale (CUN) din Republica Moldova, pe platforma UNA.md ERP cu Oracle Database 26ai. Livrare PaaS sau SaaS. Fișă de produs detaliată, ediția 2026.">
+<style>
+  :root {
+    --ink: #1c2733;
+    --ink-soft: #4a5a6a;
+    --accent: #b3261e;
+    --accent-dark: #8c1d17;
+    --paper: #ffffff;
+    --paper-soft: #f5f7f9;
+    --line: #d8dee5;
+    --ok: #1a7a4a;
+    --ok-soft: #e8f4ee;
+    --note-bg: #fff8e6;
+    --note-line: #e6c95c;
+    --chip-bg: #eef1f4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--ink);
+    background: var(--paper-soft);
+    line-height: 1.6;
+    font-size: 17px;
+  }
+  .sheet {
+    max-width: 1020px;
+    margin: 0 auto;
+    background: var(--paper);
+    box-shadow: 0 0 30px rgba(28,39,51,.08);
+  }
+
+  /* ---------- Masthead ---------- */
+  header.masthead {
+    background: linear-gradient(135deg, #1c2733 0%, #2c3e50 60%, #8c1d17 100%);
+    color: #fff;
+    padding: 48px 56px 40px;
+  }
+  header.masthead .kicker {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    opacity: .75;
+    margin-bottom: 14px;
+  }
+  header.masthead h1 {
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: normal;
+    margin-bottom: 12px;
+  }
+  header.masthead .subtitle {
+    font-size: 18px;
+    opacity: .92;
+    max-width: 760px;
+  }
+  header.masthead .badges { margin-top: 22px; }
+  .badge {
+    display: inline-block;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    padding: 5px 12px;
+    border: 1px solid rgba(255,255,255,.45);
+    border-radius: 3px;
+    margin: 0 8px 8px 0;
+    background: rgba(255,255,255,.08);
+  }
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .stat {
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 4px;
+    padding: 14px 16px;
+  }
+  .stat .v {
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    line-height: 1.2;
+  }
+  .stat .l {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    opacity: .8;
+  }
+
+  /* ---------- Layout ---------- */
+  main { padding: 40px 56px 56px; }
+  section { margin-bottom: 48px; }
+  h2 {
+    font-size: 25px;
+    font-weight: normal;
+    color: var(--accent-dark);
+    border-bottom: 2px solid var(--accent-dark);
+    padding-bottom: 8px;
+    margin-bottom: 18px;
+  }
+  h3 {
+    font-size: 19.5px;
+    color: var(--ink);
+    margin: 26px 0 10px;
+  }
+  h3 .idx { color: var(--accent-dark); }
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 0 0 14px 26px; }
+  li { margin-bottom: 6px; }
+  strong { color: var(--ink); }
+  .lead { font-size: 18px; color: var(--ink-soft); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+  @media (max-width: 860px) {
+    main, header.masthead, footer { padding-left: 24px; padding-right: 24px; }
+    .two-col, .three-col, .stat-row { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Cards ---------- */
+  .card {
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 20px;
+  }
+  .card h4 {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--accent-dark);
+    margin-bottom: 10px;
+  }
+  .card ul { margin-left: 20px; margin-bottom: 0; }
+  .card li { font-size: 15.5px; }
+  .doclist {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+  }
+  .doclist b { color: var(--ink); }
+
+  /* ---------- Tables ---------- */
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15.5px;
+    margin: 10px 0 16px;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--chip-bg);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--ink-soft);
+  }
+  td.num { text-align: right; white-space: nowrap; font-weight: bold; }
+  td.ctr { text-align: center; }
+  tr.total td { background: #f9f3ec; font-weight: bold; }
+  td.yes { color: var(--ok); font-weight: bold; text-align: center; }
+  td.no  { color: var(--ink-soft); text-align: center; }
+
+  /* ---------- Notes & chips ---------- */
+  .note {
+    background: var(--note-bg);
+    border: 1px solid var(--note-line);
+    border-left: 5px solid var(--note-line);
+    border-radius: 3px;
+    padding: 14px 18px;
+    font-size: 15.5px;
+    margin: 14px 0;
+  }
+  .note.ok {
+    background: var(--ok-soft);
+    border-color: #9ecdb4;
+    border-left-color: var(--ok);
+  }
+  .chip {
+    display: inline-block;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 11.5px;
+    background: var(--chip-bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 2px 10px;
+    margin: 2px 4px 2px 0;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  /* ---------- Pricing plans ---------- */
+  .plan {
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--accent-dark);
+    border-radius: 4px;
+    padding: 22px 24px;
+    background: var(--paper);
+  }
+  .plan.saas { border-top-color: var(--ok); }
+  .plan h4 {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 6px;
+  }
+  .price-sub {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+  .check li { list-style: none; position: relative; padding-left: 22px; }
+  .check li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: var(--ok);
+    font-size: 14px;
+  }
+
+  /* ---------- Architecture layers ---------- */
+  .arch { margin: 18px 0; }
+  .arch .layer {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 12px 18px;
+    margin-bottom: 8px;
+    background: var(--paper-soft);
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 14px;
+    align-items: center;
+  }
+  .arch .layer .t {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-weight: bold;
+    color: var(--accent-dark);
+  }
+  .arch .layer .d { font-size: 15px; color: var(--ink-soft); }
+  .arch .layer.deep { background: #f2e9e8; }
+  @media (max-width: 640px) { .arch .layer { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* ---------- Timeline ---------- */
+  .timeline { list-style: none; margin: 18px 0 10px 0; position: relative; padding-left: 34px; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 11px; top: 6px; bottom: 6px;
+    width: 2px;
+    background: var(--line);
+  }
+  .timeline li { position: relative; margin-bottom: 18px; padding-left: 6px; }
+  .timeline li::before {
+    content: "";
+    position: absolute;
+    left: -29px; top: 6px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent-dark);
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px var(--accent-dark);
+  }
+  .timeline .when {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--accent-dark);
+    font-weight: bold;
+    display: block;
+  }
+  .timeline .what { font-size: 16px; }
+  .timeline .det { font-size: 14.5px; color: var(--ink-soft); }
+
+  /* ---------- Mermaid diagrams ---------- */
+  pre.mermaid {
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 16px;
+    margin: 12px 0 20px;
+    overflow-x: auto;
+    text-align: center;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+  pre.mermaid svg { max-width: 100%; height: auto; }
+
+  /* ---------- FAQ ---------- */
+  details {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background: var(--paper-soft);
+  }
+  details summary {
+    cursor: pointer;
+    padding: 12px 18px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  details[open] summary { border-bottom: 1px solid var(--line); }
+  details .a { padding: 12px 18px; font-size: 15.5px; }
+  details .a p:last-child { margin-bottom: 0; }
+
+  /* ---------- TOC & footer ---------- */
+  .toc {
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 24px;
+    margin-bottom: 40px;
+    font-size: 15.5px;
+    column-count: 2;
+    column-gap: 40px;
+  }
+  @media (max-width: 640px) { .toc { column-count: 1; } }
+  .toc h4 {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+    column-span: all;
+  }
+  .toc ol { margin-bottom: 0; }
+  .toc a { color: var(--accent-dark); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  footer {
+    background: var(--ink);
+    color: #cfd8e0;
+    padding: 28px 56px;
+    font-size: 14.5px;
+  }
+  footer .vat { color: #fff; font-weight: bold; }
+
+  header.masthead strong { color: #fff; }
+
+  /* ---------- Panou de personalizare ---------- */
+  .customize {
+    max-width: 1020px; margin: 0 auto; padding: 10px 16px;
+    display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center;
+    font-family: Arial, Helvetica, sans-serif; font-size: 14px;
+    background: var(--chip-bg); border-bottom: 1px solid var(--line); color: var(--ink-soft);
+  }
+  .customize label { display: flex; gap: 6px; align-items: center; }
+  .customize input {
+    font: inherit; color: var(--ink); padding: 4px 8px; width: 150px;
+    border: 1px solid var(--line); border-radius: 4px; background: #fff;
+  }
+  .customize button {
+    font: inherit; padding: 4px 12px; cursor: pointer; color: #fff;
+    background: var(--accent); border: 0; border-radius: 4px;
+  }
+  .customize button:hover { background: var(--accent-dark); }
+
+  @media print {
+    .customize { display: none; }
+    body { background: #fff; }
+    .sheet { box-shadow: none; max-width: none; }
+    details { break-inside: avoid; }
+    section { break-inside: avoid-page; }
+  }
+</style>
+</head>
+<body>
+
+<form class="customize" id="customize" onsubmit="return false">
+  <strong>Personalizare ofertă:</strong>
+  <label>Tip organizație <input id="in-tip" value="Universale" placeholder="ex. Universale"></label>
+  <label>Abreviere <input id="in-cod" value="CUN" placeholder="ex. CUN" style="width:90px"></label>
+  <button type="button" id="copy-link">Copiază linkul</button>
+  <span id="copy-msg"></span>
+</form>
+<div class="sheet">
+
+<header class="masthead">
+  <div class="kicker">Fișă de produs · Configurație aplicativă standard · Ediția 2026</div>
+  <h1>UNA.md/<span class="v-cod">CUN</span> — Contabilitatea Organizației <span class="v-tip-cap">Universale</span></h1>
+  <p class="subtitle">Modul standard de evidență contabilă, fiscală și de gestiune pentru organizațiile <span class="v-tip">universale</span> din Republica Moldova, dezvoltat pe platforma <strong>UNA.md ERP</strong> cu baza de date <strong>Oracle Database 26ai</strong>, găzduit în <strong>Oracle Cloud Infrastructure (OCI)</strong>. Livrat ca aplicație separată, în model PaaS sau SaaS.</p>
+  <div class="badges">
+    <span class="badge">Platformă: UNA.md ERP</span>
+    <span class="badge">SGBD: Oracle Database 26ai</span>
+    <span class="badge">Cloud: Oracle OCI (regiuni UE)</span>
+    <span class="badge">Client: Windows nativ (Embarcadero Delphi / C++)</span>
+    <span class="badge">Livrare: PaaS / SaaS</span>
+    <span class="badge">Limbi: RO / RU / EN</span>
+  </div>
+  <div class="stat-row">
+    <div class="stat"><span class="v">500–1 500 €</span><span class="l">pachet de bază PaaS, unic</span></div>
+    <div class="stat"><span class="v">50 €/lună</span><span class="l">abonament SaaS complet</span></div>
+    <div class="stat"><span class="v">10 subsisteme</span><span class="l">funcționale în pachetul standard</span></div>
+    <div class="stat"><span class="v">100 %</span><span class="l">rapoarte reglementate RM incluse</span></div>
+  </div>
+</header>
+
+<main>
+
+<nav class="toc">
+  <h4>Cuprins</h4>
+  <ol>
+    <li><a href="#rezumat">Rezumat pentru conducere</a></li>
+    <li><a href="#destinatie">Destinația configurației</a></li>
+    <li><a href="#arhitectura">Arhitectura soluției</a></li>
+    <li><a href="#functional">Funcționalitatea detaliată (10 subsisteme)</a></li>
+    <li><a href="#rapoarte">Rapoarte reglementate pentru RM</a></li>
+    <li><a href="#oracle">Avantajele Oracle Database 26ai</a></li>
+    <li><a href="#securitate">Securitate cibernetică în Oracle OCI</a></li>
+    <li><a href="#grok">Grok Builder (opțional, recomandat)</a></li>
+    <li><a href="#implementare">Etapele implementării și migrarea datelor</a></li>
+    <li><a href="#livrare">Variante de livrare și lista de prețuri</a></li>
+    <li><a href="#scenarii">Exemple de calcul al costului</a></li>
+    <li><a href="#suport">Suport, mentenanță legislativă și SLA</a></li>
+    <li><a href="#comparatie">Comparație PaaS / SaaS</a></li>
+    <li><a href="#concurenta">Comparație cu alte soluții (Sirius, 1C, softuri românești)</a></li>
+    <li><a href="#procese">Catalogul proceselor de business (diagrame)</a></li>
+    <li><a href="#faq">Întrebări frecvente</a></li>
+  </ol>
+</nav>
+
+<!-- ============================================================ -->
+<section id="rezumat">
+  <h2>1. Rezumat pentru conducere</h2>
+  <p class="lead"><strong>UNA.md/<span class="v-cod">CUN</span></strong> este o configurație aplicativă standard („cutie”) pentru contabilitatea organizațiilor <span class="v-tip">universale</span> din Republica Moldova — construită după modelul soluțiilor tipizate consacrate pe piață (plan de conturi predefinit, documente tipizate, rapoarte reglementate actualizate centralizat), dar pe o fundație tehnologică de clasă enterprise: platforma UNA.md ERP și Oracle Database 26ai în cloud-ul Oracle OCI.</p>
+  <div class="three-col">
+    <div class="card">
+      <h4>Ce primește organizația</h4>
+      <ul>
+        <li>Evidență completă: granturi, proiecte, bancă/casă, imobilizări, ajutor umanitar, salarii;</li>
+        <li>Toate dările de seamă către SFS, CNAS, CNAM, BNS și situațiile financiare pentru ONC;</li>
+        <li>Raportare către donatori în formatele acestora.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Ce NU mai trebuie să facă</h4>
+      <ul>
+        <li>Să cumpere și să administreze servere proprii;</li>
+        <li>Să urmărească manual Monitorul Oficial — actualizările vin prin serviciul de „asigurare legislativă”;</li>
+        <li>Să angajeze administrator de bază de date sau specialist de securitate IT.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Cât costă (fără TVA)</h4>
+      <ul>
+        <li><strong>PaaS:</strong> pachet de bază 500–1 500 €, instalare + migrare date 200–400 € (unic);</li>
+        <li><strong>SaaS:</strong> 200 € conectare + 50 €/lună;</li>
+        <li>Doar pentru PaaS: asigurare legislativă 400 €/an sau 300 €/6 luni; suport chat 30 €/2 săptămâni. În SaaS ambele sunt <strong>incluse în abonament</strong>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="destinatie">
+  <h2>2. Destinația configurației</h2>
+  <p>Configurația <strong>„UNA.md/<span class="v-cod">CUN</span> — Contabilitatea Organizației <span class="v-tip-cap">Universale</span>”</strong> automatizează integral evidența contabilă, fiscală și de gestiune în organizațiile <span class="v-tip">universale</span> înregistrate în Republica Moldova — de la documentul primar până la situațiile financiare anuale și rapoartele către donatori, într-o singură bază informațională.</p>
+
+  <h3><span class="idx">2.1.</span> Segmente-țintă</h3>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Segment</th><th>Exemple / particularități</th><th>Model recomandat</th></tr>
+    <tr>
+      <td><strong>Filiale ale <span class="v-cod">CUN</span>-urilor internaționale</strong></td>
+      <td>Organizații umanitare cu programe mari în Moldova — de exemplu, organizații de tipul <em>People in Need</em>: zeci de proiecte simultane, donatori multipli (UE, agențiile ONU, fundații), raportare în EUR/USD/CZK, audit anual al donatorilor.</td>
+      <td class="ctr">PaaS + Grok Builder</td>
+    </tr>
+    <tr>
+      <td><strong>Asociații obștești naționale</strong></td>
+      <td>2–10 proiecte active, 1–2 contabili, granturi și cotizații, desemnarea procentuală 2%.</td>
+      <td class="ctr">PaaS sau SaaS</td>
+    </tr>
+    <tr>
+      <td><strong>Fundații și instituții private</strong></td>
+      <td>Conform Legii nr. 86/2020; evidența patrimoniului și a activității economice auxiliare.</td>
+      <td class="ctr">PaaS</td>
+    </tr>
+    <tr>
+      <td><strong>Organizații mici / start-up <span class="v-cod">CUN</span></strong></td>
+      <td>Un singur contabil (deseori part-time), buget limitat, necesar de pornire rapidă.</td>
+      <td class="ctr">SaaS</td>
+    </tr>
+    <tr>
+      <td><strong>Alte structuri <span class="v-tip">universale</span></strong></td>
+      <td>Organizații religioase, sindicate, patronate, asociații de economii și împrumut, asociații de proprietari (condominii), partide.</td>
+      <td class="ctr">SaaS / PaaS</td>
+    </tr>
+    <tr>
+      <td><strong>Companii de outsourcing contabil</strong></td>
+      <td>Deservesc portofolii de <span class="v-cod">CUN</span>-uri; regim multi-firmă într-o singură instanță, cu separarea strictă a datelor pe clienți.</td>
+      <td class="ctr">PaaS multi-firmă</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3><span class="idx">2.2.</span> Cadrul normativ acoperit</h3>
+  <ul>
+    <li><strong>Legea contabilității și raportării financiare nr. 287/2017</strong> — ținerea contabilității, formatele situațiilor financiare;</li>
+    <li><strong>Standardele Naționale de Contabilitate (SNC)</strong>, cu posibilitate de raportare paralelă IFRS pentru donatori și sediile centrale;</li>
+    <li><strong>Indicațiile metodice privind particularitățile contabilității în organizațiile <span class="v-tip">universale</span></strong> (Ordinul Ministerului Finanțelor) — finanțări cu destinație specială, fonduri, autofinanțare;</li>
+    <li><strong>Legea nr. 86/2020 cu privire la organizațiile <span class="v-tip">universale</span></strong> — forme juridice, statutul de utilitate publică;</li>
+    <li><strong>Codul fiscal al RM</strong> — regimul fiscal al organizațiilor <span class="v-tip">universale</span>, scutirea de impozit pe venit (art. 52), mecanismul desemnării procentuale („Legea 2%”), TVA la ajutorul umanitar și proiectele de asistență tehnică;</li>
+    <li><strong>Legislația muncii și asigurărilor sociale</strong> — Codul muncii, contribuții CNAS, prime CNAM, raportarea salarială lunară;</li>
+    <li><strong>Legea nr. 133/2011</strong> privind protecția datelor cu caracter personal (relevantă pentru evidența beneficiarilor).</li>
+  </ul>
+</section>
+
+<!-- ============================================================ -->
+<section id="arhitectura">
+  <h2>3. Arhitectura soluției</h2>
+  <p>Soluția are arhitectură client–server clasică, de înaltă performanță: utilizatorii lucrează în <strong>aplicația nativă UNA.md pentru Windows</strong> — un client desktop scris în <strong>Embarcadero RAD Studio (Delphi / C++)</strong>, platformă universală de dezvoltare nativă — care se conectează securizat la baza de date Oracle din cloud-ul OCI. Clientul nativ oferă viteza de lucru și ergonomia cu tastatura pe care contabilii le așteaptă de la un program profesional de evidență (introducere rapidă a documentelor, grile mari fără întârzieri de browser). Arhitectura pe niveluri:</p>
+  <div class="arch">
+    <div class="layer">
+      <span class="t">Nivel utilizator</span>
+      <span class="d"><strong>Aplicația nativă UNA.md pentru Windows</strong> (Embarcadero Delphi / C++): interfață rapidă, orientată pe tastatură, în română, rusă și engleză, comutabilă per utilizator. Instalare simplă pe stațiile de lucru, cu actualizare automată a clientului. Lucrul de la distanță (de acasă sau din teren) — prin conexiune criptată directă la OCI sau prin server terminal (RDP), la alegerea organizației.</span>
+    </div>
+    <div class="layer">
+      <span class="t">Nivel aplicație</span>
+      <span class="d">Configurația UNA.md/<span class="v-cod">CUN</span> pe platforma <strong>UNA.md ERP</strong>: documente, registre, procese de aprobare, rapoarte. Personalizările se realizează în <strong>Grok Builder</strong> și se păstrează separat de nucleul standard.</span>
+    </div>
+    <div class="layer">
+      <span class="t">Nivel integrare</span>
+      <span class="d">API REST/JSON, conectoare e-Factura, Declarația electronică SFS, MSign, MConnect, import extras bancar, curs BNM, export către sistemele donatorilor.</span>
+    </div>
+    <div class="layer deep">
+      <span class="t">Nivel date</span>
+      <span class="d"><strong>Oracle Database 26ai</strong> — bază convergentă cu AI încorporat: date relaționale, JSON, vectoriale și blockchain tables într-un singur motor.</span>
+    </div>
+    <div class="layer deep">
+      <span class="t">Nivel infrastructură</span>
+      <span class="d"><strong>Oracle Cloud Infrastructure</strong>, regiuni din Uniunea Europeană (Frankfurt / Amsterdam): rețea izolată per client, criptare implicită, backup automat, monitorizare 24/7. Pentru instanțele PaaS cu <strong>până la 5 utilizatori</strong> se folosește nivelul <strong>Oracle Always Free</strong> (Autonomous Database) — infrastructura de bază de date fără niciun cost lunar.</span>
+    </div>
+  </div>
+  <div class="note ok"><strong>Principiul „nucleu standard + extensii”:</strong> actualizările legislative se aplică nucleului standard fără a atinge personalizările clientului — același model care a făcut fiabile configurațiile tipizate clasice, dar implementat nativ în platformă.</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="functional">
+  <h2>4. Funcționalitatea detaliată</h2>
+  <p>Pachetul standard include <strong>10 subsisteme funcționale</strong>. Pentru fiecare sunt indicate și documentele tipizate principale, după modelul descrierilor de configurații standard.</p>
+
+  <h3><span class="idx">4.1.</span> Finanțări cu destinație specială</h3>
+  <div class="card">
+    <ul>
+      <li>Evidența <strong>granturilor, donațiilor (bănești și în natură), cotizațiilor de membru, contribuțiilor fondatorilor</strong> și mijloacelor din <strong>desemnarea procentuală (2%)</strong>;</li>
+      <li>Analitică pe patru dimensiuni simultan: <strong>sursă de finanțare → contract de grant → proiect → linie de buget</strong>;</li>
+      <li>Controlul utilizării conform destinației: interzicerea sau avertizarea la depășirea liniei de buget, configurabilă per donator;</li>
+      <li>Repartizarea automată a cheltuielilor indirecte (chirie, comunicații, salarii administrative) între proiecte după cote procentuale, chei de repartizare sau time-sheets;</li>
+      <li>Evidența cofinanțării, a contribuției proprii și a contribuțiilor în natură (in-kind) cu evaluare documentată;</li>
+      <li>Recunoașterea veniturilor din finanțări pe măsura efectuării cheltuielilor, conform Indicațiilor metodice pentru ONC;</li>
+      <li>Solduri de finanțare nevalorificată pe fiecare proiect, cu scadențar de raportare către donatori.</li>
+    </ul>
+    <div class="doclist"><b>Documente:</b> Contract de finanțare (grant) · Tranșă de finanțare primită · Buget de proiect (cu versiuni) · Redistribuire între linii de buget · Act de recunoaștere a veniturilor din finanțări · Raport financiar către donator</div>
+  </div>
+
+  <h3><span class="idx">4.2.</span> Contabilitate generală</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Plan de conturi predefinit pentru organizații <span class="v-tip">universale</span></strong> (fonduri, finanțări cu destinație specială, autofinanțare), extensibil de client;</li>
+      <li>Contare automată din documente tipizate + operațiuni manuale cu șabloane;</li>
+      <li>Evidență <strong>multivalutară</strong>: cursul oficial BNM preluat automat, diferențe de curs valutar și de sumă calculate la reevaluare și la achitare;</li>
+      <li>Evidență paralelă opțională în valuta donatorului (EUR/USD) pentru raportare, fără registre duble ținute manual;</li>
+      <li>Asistent de <strong>închidere a perioadei</strong>: verificări de completitudine, repartizarea cheltuielilor indirecte, închiderea conturilor de venituri/cheltuieli pe surse de finanțare;</li>
+      <li>Registre: Cartea mare, balanța de verificare (inclusiv pe proiect), analiza contului, fișa contului, șah-ul contărilor.</li>
+    </ul>
+    <div class="doclist"><b>Documente:</b> Notă contabilă · Operațiune manuală · Reevaluare valutară · Închiderea perioadei · Solduri inițiale</div>
+  </div>
+
+  <h3><span class="idx">4.3.</span> Bancă și casă</h3>
+  <div class="card">
+    <ul>
+      <li>Ordine de plată în lei și valută, cu fluxuri de aprobare pe niveluri (contabil → director → semnatar);</li>
+      <li>Import/export extras bancar în formatele băncilor din Moldova (MAIB, MICB, Victoriabank, OTP, ProCredit ș.a.) și recunoașterea automată a partenerilor;</li>
+      <li>Registru de casă, dispoziții de încasare și de plată, monetar, limita soldului de casă;</li>
+      <li>Decontări cu <strong>titularii de avans</strong>: eliberare avans, decont de avans în lei și valută, restituiri, rețineri din salariu;</li>
+      <li>Evidența transferurilor de la donatori externi cu atașarea documentelor justificative (contract, notificare de tranșă, SWIFT);</li>
+      <li>Calendar de plăți și prognoza lichidității pe surse de finanțare.</li>
+    </ul>
+    <div class="doclist"><b>Documente:</b> Ordin de plată · Extras bancar · Dispoziție de încasare/plată · Decont de avans · Transfer între conturi · Cumpărare/vânzare valută</div>
+  </div>
+
+  <h3><span class="idx">4.4.</span> Imobilizări (mijloace fixe și necorporale)</h3>
+  <div class="card">
+    <ul>
+      <li>Ciclul complet: procurare/primire cu titlu gratuit → punere în funcțiune → amortizare lunară → transfer → reparație/modernizare → casare/transmitere;</li>
+      <li><strong>Particularitatea ONC:</strong> amortizarea imobilizărilor procurate din finanțări cu destinație specială, cu decontarea concomitentă a fondului aferent, exact conform Indicațiilor metodice;</li>
+      <li>Evidența pe gestionari, subdiviziuni și proiecte; inventarierea cu liste de inventariere și acte de rezultate;</li>
+      <li>Registrul mijloacelor fixe primite ca ajutor umanitar sau asistență tehnică (regim fiscal separat);</li>
+      <li>Amortizarea fiscală calculată în paralel cu cea contabilă.</li>
+    </ul>
+    <div class="doclist"><b>Documente:</b> Intrare imobilizare · Punere în funcțiune · Calculul amortizării · Transfer · Modernizare · Casare · Inventariere</div>
+  </div>
+
+  <h3><span class="idx">4.5.</span> Stocuri și ajutor umanitar</h3>
+  <div class="card">
+    <ul>
+      <li>Evidență cantitativ-valorică pe depozite, gestionari și <strong>proiecte/surse de finanțare</strong>;</li>
+      <li>Evidența <strong>ajutorului umanitar</strong>: recepția loturilor (inclusiv import cu scutiri), păstrarea, distribuirea către beneficiari;</li>
+      <li><strong>Registrul beneficiarilor</strong> cu liste nominale de distribuire, acte de predare-primire și protecția datelor cu caracter personal (acces pe roluri, mascarea datelor);</li>
+      <li>OMVSD (obiecte de mică valoare și scurtă durată): dare în exploatare, evidență extrabilanțieră, casare;</li>
+      <li>Formulare tipizate: bon de intrare, bon de consum, aviz de însoțire, fișa de magazie;</li>
+      <li>Inventarierea stocurilor cu regularizarea automată a divergențelor.</li>
+    </ul>
+    <div class="doclist"><b>Documente:</b> Recepție stocuri / lot umanitar · Bon de consum · Distribuire către beneficiari · Transfer între depozite · Dare în exploatare OMVSD · Inventariere</div>
+  </div>
+
+  <h3><span class="idx">4.6.</span> Salarizare și personal</h3>
+  <div class="card">
+    <ul>
+      <li>Contracte de muncă, <strong>contracte de prestări servicii</strong> (civile) și <strong>contracte de voluntariat</strong> conform Legii voluntariatului;</li>
+      <li>Calculul salariilor cu <strong>finanțarea unui post din mai multe proiecte simultan</strong>: time-sheets pe proiecte, repartizarea automată a costului salarial și a contribuțiilor pe linii de buget;</li>
+      <li>Impozit pe venit cu scutiri personale, contribuții CNAS, prime CNAM — după cotele în vigoare, actualizate prin serviciul legislativ;</li>
+      <li>Concedii (de odihnă, medicale, de îngrijire), indemnizații, delegații în țară și peste hotare cu diurne pe norme;</li>
+      <li>Fluturași de salariu trimiși pe e-mail, plata salariilor pe carduri (fișiere pentru proiectele salariale ale băncilor);</li>
+      <li>State de personal, ordine de angajare/transfer/eliberare, adeverințe pentru angajați.</li>
+    </ul>
+    <div class="doclist"><b>Documente:</b> Angajare · Ordin de salarizare · Time-sheet pe proiecte · Calcul salariu · Concediu · Delegație · Plată salariu · Eliberare</div>
+  </div>
+
+  <h3><span class="idx">4.7.</span> Decontări cu partenerii și contracte</h3>
+  <div class="card">
+    <ul>
+      <li>Facturi fiscale primite și emise (activitatea economică statutară), acte de servicii;</li>
+      <li>Evidența contractelor cu furnizorii pe proiecte, cu control de acoperire bugetară la înregistrarea facturii;</li>
+      <li>Solduri și scadențare pe parteneri, contracte și documente de decontare; acte de verificare;</li>
+      <li>Registrul procurărilor pe proiecte pentru dosarul de achiziții cerut de donatori (praguri, oferte, contract câștigător).</li>
+    </ul>
+    <div class="doclist"><b>Documente:</b> Factură primită · Factură fiscală emisă · Act de servicii · Contract · Act de verificare</div>
+  </div>
+
+  <h3><span class="idx">4.8.</span> TVA și fiscalitate</h3>
+  <div class="card">
+    <ul>
+      <li>Regim mixt: activitate statutară neimpozabilă + activitate economică impozabilă, cu separarea TVA deductibile prin proratare;</li>
+      <li>Scutiri de TVA pentru ajutor umanitar și proiecte de asistență tehnică (cu evidența pe listele aprobate de Guvern);</li>
+      <li>Registrele de procurări și livrări, generarea TVA12 și a anexelor;</li>
+      <li>Evidența statutului de utilitate publică și a condițiilor de scutire de impozit pe venit (art. 52 Cod fiscal), cu date pregătite pentru ONG17.</li>
+    </ul>
+  </div>
+
+  <h3><span class="idx">4.9.</span> Bugetare și raportare către donatori</h3>
+  <div class="card">
+    <ul>
+      <li>Bugete de proiect <strong>în valuta donatorului</strong>, cu versiuni (aprobat inițial, amendamente) și scenarii;</li>
+      <li>Analiza plan-fapt pe linii de buget în timp real, cu prognoza execuției și alerte de sub/supra-execuție;</li>
+      <li>Machete de rapoarte financiare pe formatele donatorilor (Comisia Europeană, USAID, agențiile ONU, fundații private) — configurabile per donator, cu maparea liniilor de buget la conturile contabile;</li>
+      <li>Conversia cheltuielilor în valuta raportului la cursul cerut de donator (curs BNM, curs InforEuro, curs fix al contractului);</li>
+      <li>Dosar electronic al proiectului: buget, contracte, rapoarte, corespondență — pregătit pentru auditul donatorului;</li>
+      <li>Export Excel/PDF cu păstrarea formatelor donatorului.</li>
+    </ul>
+  </div>
+
+  <h3><span class="idx">4.10.</span> Administrare, roluri și audit intern</h3>
+  <div class="card">
+    <ul>
+      <li>Roluri predefinite: contabil-șef, contabil, casier, manager de proiect (acces doar la proiectele proprii, fără salarii), director (dashboard-uri și aprobări), auditor extern (acces read-only pe perioadă limitată);</li>
+      <li>Jurnalul complet al acțiunilor: cine, când, ce document a creat/modificat/șters, cu valorile înainte/după;</li>
+      <li>Interzicerea editării perioadelor închise, cu redeschidere controlată doar de contabilul-șef;</li>
+      <li>Regim <strong>multi-firmă</strong>: mai multe organizații în aceeași instanță, cu separarea strictă a datelor și rapoarte consolidate opționale;</li>
+      <li>Atașarea fișierelor scanate la orice document; arhiva electronică a documentelor primare.</li>
+    </ul>
+  </div>
+
+  <h3><span class="idx">4.11.</span> Servicii electronice de stat integrate</h3>
+  <p>
+    <span class="chip">e-Factura — facturi fiscale electronice</span>
+    <span class="chip">Declarația electronică SFS</span>
+    <span class="chip">MSign — semnătură electronică</span>
+    <span class="chip">MConnect — registre de stat</span>
+    <span class="chip">Curs valutar BNM automat</span>
+    <span class="chip">Clasificatoare de stat actualizate</span>
+    <span class="chip">Proiecte salariale bancare</span>
+  </p>
+</section>
+
+<!-- ============================================================ -->
+<section id="rapoarte">
+  <h2>5. Rapoarte reglementate pentru Republica Moldova</h2>
+  <p>Setul complet de rapoarte reglementate este inclus în pachetul standard și menținut în actualitate prin serviciul de asigurare legislativă:</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Domeniu</th><th>Rapoarte incluse</th><th>Periodicitate</th></tr>
+    <tr>
+      <td><strong>Situații financiare</strong></td>
+      <td>Situațiile financiare pentru organizațiile <span class="v-tip">universale</span>: bilanțul, situația de venituri și cheltuieli, situația modificărilor surselor de finanțare, situația fluxurilor de numerar, nota explicativă; variante prescurtate/complete conform SNC.</td>
+      <td>Anual</td>
+    </tr>
+    <tr>
+      <td><strong>Impozit pe venit</strong></td>
+      <td>Declarația <strong>ONG17</strong> — impozitul pe venit al organizației necomerciale, cu anexele privind respectarea condițiilor de scutire.</td>
+      <td>Anual</td>
+    </tr>
+    <tr>
+      <td><strong>TVA</strong></td>
+      <td>Declarația <strong>TVA12</strong> cu registrele de procurări/livrări (pentru organizațiile înregistrate ca plătitori), anexele TVA FACT.</td>
+      <td>Lunar</td>
+    </tr>
+    <tr>
+      <td><strong>Salarii și contribuții</strong></td>
+      <td><strong>IPC21</strong> — darea de seamă unificată (impozit pe venit reținut, prime CNAM, contribuții CNAS, evidența nominală a asiguraților); nota informativă anuală <strong>IALS</strong>; certificate de salariu pentru angajați.</td>
+      <td>Lunar / anual</td>
+    </tr>
+    <tr>
+      <td><strong>Taxe locale și alte impozite</strong></td>
+      <td>Dările de seamă privind taxele locale, impozitul pe bunurile imobiliare, taxa pentru folosirea drumurilor — după aplicabilitate.</td>
+      <td>Trimestrial / anual</td>
+    </tr>
+    <tr>
+      <td><strong>Desemnarea procentuală</strong></td>
+      <td>Raportul privind utilizarea mijloacelor din desemnarea procentuală (2%), în formatul cerut beneficiarilor mecanismului.</td>
+      <td>Anual</td>
+    </tr>
+    <tr>
+      <td><strong>Statistică</strong></td>
+      <td>Rapoartele statistice periodice solicitate organizațiilor <span class="v-tip">universale</span> de Biroul Național de Statistică.</td>
+      <td>Conform calendarului BNS</td>
+    </tr>
+    <tr>
+      <td><strong>Donatori</strong></td>
+      <td>Rapoarte financiare pe proiect în formatele donatorilor, registrul granturilor, execuția bugetară pe surse de finanțare, rapoarte pentru sediul central al organizației internaționale.</td>
+      <td>Conform contractelor</td>
+    </tr>
+  </table>
+  </div>
+  <div class="note"><strong>Depunere electronică:</strong> rapoartele către SFS se semnează și se depun direct din program prin serviciul „Declarația electronică”, fără export manual. Formele se actualizează la fiecare modificare publicată în <strong>Monitorul Oficial</strong> (vezi secțiunea 12).</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="oracle">
+  <h2>6. Avantajele tehnologice Oracle Database 26ai</h2>
+  <p>Spre deosebire de soluțiile de contabilitate construite pe baze de date de fișiere sau SGBD-uri de nivel mediu, UNA.md/<span class="v-cod">CUN</span> rulează pe <strong>Oracle Database 26ai</strong> — generația curentă a bazei de date convergente Oracle, cu inteligența artificială integrată în nucleul SGBD. Pentru organizație aceasta înseamnă concret:</p>
+
+  <div class="two-col">
+    <div class="card">
+      <h4>AI încorporat în baza de date</h4>
+      <ul>
+        <li><strong>AI Vector Search</strong> — căutare semantică în contracte de grant, rapoarte și corespondența cu donatorii, direct în SQL: „găsește contractele cu clauze de cofinanțare” funcționează chiar dacă termenul exact diferă;</li>
+        <li><strong>Select AI</strong> — interogări în limbaj natural: contabilul întreabă „cheltuielile de transport ale proiectului X în trimestrul 2” și primește raportul, fără constructor de rapoarte;</li>
+        <li>Algoritmi ML in-database pentru <strong>detectarea anomaliilor</strong>: dublări de plăți, contări atipice, abateri de la tiparul cheltuielilor proiectului — semnalate înainte de raportare;</li>
+        <li>Suport <strong>RAG</strong>: asistenți AI care răspund pe datele organizației, fără ca datele să părăsească baza — esențial pentru confidențialitatea beneficiarilor.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Performanță și disponibilitate</h4>
+      <ul>
+        <li>Bază <strong>convergentă</strong>: date relaționale, JSON, spațiale și vectoriale într-un singur motor — fără sisteme suplimentare de întreținut;</li>
+        <li><strong>JSON-Relational Duality</strong> — aceleași date accesibile și ca tabele contabile, și ca documente JSON pentru integrări API cu sistemele donatorilor;</li>
+        <li><strong>True Cache</strong> și indexare automată — balanța pe 10 ani de istorie sau raportul consolidat pe 50 de proiecte se construiesc în secunde;</li>
+        <li>Patch-uri fără oprire (rolling patching), funcționare 24/7 inclusiv în perioada dărilor de seamă;</li>
+        <li>Scalare de la 1 la sute de utilizatori fără schimbarea arhitecturii.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Integritate și audit</h4>
+      <ul>
+        <li><strong>Blockchain Tables</strong> — registrele contabile pot fi ținute în tabele imuabile criptografic: nicio înregistrare istorică nu poate fi modificată sau ștearsă neobservat. Argument direct la auditurile donatorilor și la controalele de stat;</li>
+        <li><strong>Flashback</strong> — „mașina timpului”: vizualizarea și restabilirea stării bazei la orice moment din trecut, fără a căuta backup-uri;</li>
+        <li>Jurnalizare completă la nivel de SGBD, independentă de aplicație — al doilea contur de audit.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Autonomie operațională</h4>
+      <ul>
+        <li>Varianta <strong>Autonomous Database</strong> în OCI: administrare, optimizare, backup și patch-uri complet automate — „se conduce singură”;</li>
+        <li>Organizația <strong>nu are nevoie de administrator de bază de date</strong> propriu;</li>
+        <li>Copii de rezervă automate zilnice cu păstrare configurabilă (implicit 60 de zile) și restaurare punct-în-timp;</li>
+        <li>Mediu de test separat, reîmprospătat din producție la cerere — pentru verificarea actualizărilor înainte de aplicare.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Ce înseamnă aceasta în practică</h3>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Situație tipică într-un <span class="v-cod">CUN</span></th><th>Cum ajută Oracle 26ai</th></tr>
+    <tr>
+      <td>Auditorul donatorului cere dovada că registrele din perioada raportată nu au fost modificate ulterior.</td>
+      <td>Blockchain Tables: verificare criptografică a imuabilității înregistrărilor, raport de integritate generat automat.</td>
+    </tr>
+    <tr>
+      <td>Un contabil a șters din greșeală un set de documente vineri seara.</td>
+      <td>Flashback: starea de joi se restabilește în minute, fără a pierde lucrul celorlalți utilizatori.</td>
+    </tr>
+    <tr>
+      <td>Managerul de proiect vrea o cifră rapidă, contabilul e în concediu.</td>
+      <td>Select AI: întrebarea se pune în limbaj natural, răspunsul vine din datele reale, cu respectarea drepturilor de acces.</td>
+    </tr>
+    <tr>
+      <td>Aceeași factură a fost introdusă de două ori de persoane diferite.</td>
+      <td>Detecția ML a anomaliilor semnalează dublarea înainte de plată.</td>
+    </tr>
+  </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="securitate">
+  <h2>7. Securitate cibernetică în Oracle OCI</h2>
+  <p>Pentru organizațiile care gestionează date ale beneficiarilor vulnerabili și fonduri ale donatorilor internaționali, securitatea este o <strong>cerință contractuală</strong>, nu o opțiune. Găzduirea în Oracle Cloud Infrastructure oferă un nivel de protecție practic inaccesibil serverelor locale din oficiu:</p>
+
+  <h3><span class="idx">7.1.</span> Mecanisme de protecție incluse</h3>
+  <ul class="check">
+    <li><strong>Criptare totală implicită</strong> — toate datele criptate în repaus (TDE — Transparent Data Encryption) și în tranzit (TLS 1.2+); criptarea nu poate fi dezactivată nici măcar de administrator;</li>
+    <li><strong>Oracle Data Safe</strong> — evaluarea continuă a securității bazei, descoperirea și mascarea datelor cu caracter personal ale beneficiarilor, auditul activității utilizatorilor privilegiați;</li>
+    <li><strong>Oracle Cloud Guard</strong> — monitorizarea permanentă a întregii infrastructuri, cu detectarea și remedierea automată a configurărilor riscante;</li>
+    <li><strong>Security Zones</strong> — politici de securitate obligatorii aplicate la nivel de infrastructură: publicarea accidentală a unei baze de date în internet devine tehnic imposibilă;</li>
+    <li><strong>OCI Vault</strong> — gestiunea centralizată a cheilor de criptare și a secretelor (parole, certificate, chei API);</li>
+    <li><strong>IAM + MFA</strong> — autentificare multi-factor obligatorie pentru administratori și opțională pentru toți utilizatorii; roluri și drepturi granulare;</li>
+    <li><strong>Izolare de rețea</strong> — fiecare client PaaS rulează în propriul Virtual Cloud Network; acces exclusiv prin canale criptate, cu restricții opționale pe IP;</li>
+    <li><strong>Protecție anti-DDoS și WAF</strong> (Web Application Firewall) la perimetrul OCI, incluse implicit;</li>
+    <li><strong>Patch-uri de securitate</strong> aplicate automat, fără ferestre lungi de indisponibilitate.</li>
+  </ul>
+
+  <h3><span class="idx">7.2.</span> Conformitate și certificări</h3>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Cerință</th><th>Acoperire</th></tr>
+    <tr><td>Standarde internaționale de securitate</td><td>Centrele de date OCI dețin certificări <strong>ISO 27001 / 27017 / 27018</strong>, <strong>SOC 1 / SOC 2 / SOC 3</strong>, PCI DSS.</td></tr>
+    <tr><td>Protecția datelor cu caracter personal</td><td>Conformitate <strong>GDPR</strong> (relevantă pentru donatorii din UE) și cu <strong>Legea RM nr. 133/2011</strong>; instrumente de mascare și pseudonimizare pentru registrul beneficiarilor.</td></tr>
+    <tr><td>Localizarea datelor</td><td>Găzduire în <strong>regiuni OCI din Uniunea Europeană</strong> (Frankfurt, Amsterdam) — cerință frecventă a donatorilor europeni; regiunea se fixează în contract.</td></tr>
+    <tr><td>Cerințele de audit ale donatorilor</td><td>Jurnal complet de acces și modificări, cont de auditor read-only, rapoarte de integritate din Blockchain Tables, istoricul versiunilor documentelor.</td></tr>
+    <tr><td>Continuitatea activității</td><td>Backup automat zilnic, restaurare punct-în-timp, RPO ≤ 24 h / RTO ≤ 8 h în pachetul standard (parametri extindibili contractual).</td></tr>
+  </table>
+  </div>
+  <div class="note ok"><strong>Comparație practică:</strong> un server propriu în oficiul unui <span class="v-cod">CUN</span> înseamnă de regulă: fără criptare, backup pe un HDD extern în același birou, fără monitorizare, fără patch-uri regulate. Mutarea în OCI elimină dintr-o singură mișcare toată această clasă de riscuri — inclusiv riscul fizic (furt, incendiu, pene de curent).</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="grok">
+  <h2>8. Grok Builder — configurare și dezvoltare (opțional, recomandat)</h2>
+  <p><strong>Grok Builder</strong> este mediul de configurare al platformei UNA.md, asistat de inteligență artificială — echivalentul funcțional al „configuratorului” din sistemele clasice, dar în regim no-code/low-code și cu generare asistată de AI. Se recomandă opțional, ca instrument de personalizare și dezvoltare ulterioară a configurației.</p>
+  <div class="two-col">
+    <div class="card">
+      <h4>Ce permite</h4>
+      <ul>
+        <li>Crearea de câmpuri, registre, documente și rapoarte noi <strong>fără programare</strong>;</li>
+        <li>Generarea machetelor de rapoarte pentru donatori noi prin <strong>descriere în limbaj natural</strong> („raport pe liniile de buget ale contractului UE, în EUR la curs InforEuro, cu comparativ plan-fapt”);</li>
+        <li>Construirea fluxurilor de aprobare (workflow) pentru plăți, deconturi și contracte;</li>
+        <li>Dashboard-uri pentru conducere și manageri de proiect;</li>
+        <li>Conectoare API noi către sistemele donatorilor sau ale sediului central.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Cum protejează investiția</h4>
+      <ul>
+        <li>Toate modificările sunt <strong>versionate</strong> și păstrate <strong>separat de configurația standard</strong> — actualizările legislative nu suprascriu personalizările;</li>
+        <li>Orice extensie poate fi dezactivată sau derulată înapoi la o versiune anterioară;</li>
+        <li>Poate fi utilizat atât de partenerul de implementare, cât și de utilizatorii avansați ai organizației — fără dependență de un singur furnizor;</li>
+        <li>Extensiile se testează pe mediul de test înainte de publicarea în producție.</li>
+      </ul>
+    </div>
+  </div>
+  <h3>Instalare complet automată cu AI — Grok Builder 1.0</h3>
+  <p>Pe lângă rolul de configurator, <strong>Grok Builder 1.0</strong> conduce și <strong>instalarea complet automată</strong> a soluției: AI-ul provizionează baza de date în OCI (inclusiv pe nivelul Oracle Always Free pentru instanțele de până la 5 utilizatori), desfășoară configurația standard, aplică setările organizației din chestionarul de evaluare și pregătește utilizatorii și rolurile — fără intervenție manuală a inginerilor. Scenariul de instalare automată a fost <strong>verificat într-un proiect-pilot pentru compania Siemens</strong>.</p>
+  <div class="note"><strong>Recomandare:</strong> Grok Builder nu este necesar pentru exploatarea pachetului standard. Este recomandat organizațiilor cu mai mulți donatori și formate de raportare specifice — tipic filialelor organizațiilor internaționale. Licențierea — conform ofertei individuale.</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="implementare">
+  <h2>9. Etapele implementării și migrarea datelor</h2>
+  <p>Implementarea urmează o metodologie standard, cu termene tipice de <strong>2–6 săptămâni</strong> pentru PaaS și <strong>2–5 zile lucrătoare</strong> pentru SaaS:</p>
+  <ol class="timeline">
+    <li>
+      <span class="when">Etapa 1 · Analiză (1–3 zile)</span>
+      <span class="what">Chestionar de evaluare a complexității și demo pe date de test.</span>
+      <span class="det">Se stabilesc: numărul de proiecte și donatori, sursele de date existente, personalizările necesare. Rezultat: oferta fermă în intervalul 500–1 500 € pentru pachetul de bază (PaaS) și planul calendaristic.</span>
+    </li>
+    <li>
+      <span class="when">Etapa 2 · Instalare (1–2 zile)</span>
+      <span class="what">Provizionarea instanței în OCI, instalarea clientului nativ, crearea utilizatorilor.</span>
+      <span class="det">Întregul proces poate rula <strong>complet automat, condus de AI pe baza Grok Builder 1.0</strong>: provizionarea bazei în OCI (pentru până la 5 utilizatori — pe nivelul Oracle Always Free, fără cost de infrastructură), desfășurarea configurației, instalarea aplicației native UNA.md pe stațiile de lucru Windows, conexiunea criptată, politici de parole și MFA, roluri de acces, conectarea serviciilor de stat (e-Factura, Declarația electronică, MSign), planul de conturi și politicile contabile. Scenariul de instalare automată a fost verificat într-un <strong>proiect-pilot pentru compania Siemens</strong>.</span>
+    </li>
+    <li>
+      <span class="when">Etapa 3 · Migrarea datelor (2–10 zile)</span>
+      <span class="what">Migrare din orice sistem-sursă — inclusă în tariful de instalare (200–400 €).</span>
+      <span class="det">Surse acceptate: 1C 7.7/8.x, Excel, WizCount, Universal Accounting, alte programe — prin conectoare standard și șabloane de import. Se migrează: planul de conturi și soldurile inițiale, partenerii și contractele, mijloacele fixe cu amortizarea acumulată, salariații și datele de personal, proiectele și bugetele active, soldurile finanțărilor pe surse. Verificarea se face prin <strong>balanța comparativă sursă/destinație</strong>, semnată de ambele părți.</span>
+    </li>
+    <li>
+      <span class="when">Etapa 4 · Instruire (2–3 sesiuni)</span>
+      <span class="what">Instruirea utilizatorilor pe roluri, pe datele proprii ale organizației.</span>
+      <span class="det">Sesiuni online sau la sediu; înregistrările și instrucțiunile pas-cu-pas rămân în baza de cunoștințe a clientului.</span>
+    </li>
+    <li>
+      <span class="when">Etapa 5 · Exploatare asistată (2 săptămâni)</span>
+      <span class="what">Prima închidere de lună cu asistența consultantului.</span>
+      <span class="det">Se verifică primul set de dări de seamă generat din sistem. La final — proces-verbal de punere în exploatare și trecerea la regimul de suport ales (secțiunea 12).</span>
+    </li>
+  </ol>
+  <div class="note"><strong>Funcționare în paralel:</strong> la dorință, în prima lună evidența se poate ține în paralel cu sistemul vechi; balanțele se compară automat, iar trecerea definitivă se face doar după coincidența rezultatelor.</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="livrare">
+  <h2>10. Variante de livrare și lista de prețuri</h2>
+  <p>Soluția se livrează ca <strong>aplicație separată</strong>, în două modele comerciale, după practica listelor de prețuri ale partenerilor-franciză 1C din Republica Moldova, cu intervale reale de prețuri medii de piață. <strong>Toate prețurile sunt indicate în EUR, fără TVA.</strong></p>
+
+  <div class="two-col">
+    <div class="plan">
+      <h4>Varianta PaaS — instanță dedicată</h4>
+      <p class="price-sub">Baza de date Oracle dedicată organizației, în propriul Virtual Cloud Network din OCI. Configurația se adaptează la specificul organizației. Recomandată pentru <span class="v-cod">CUN</span>-uri medii și mari, filiale ale organizațiilor internaționale, outsourcing contabil.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Serviciu</th><th>Preț, EUR fără TVA</th></tr>
+        <tr>
+          <td><strong>Pachet de bază</strong> — licențierea și configurarea aplicației după complexitate: număr de proiecte, donatori, utilizatori, subsisteme activate. Prețul exact se fixează prin chestionarul de evaluare (Etapa 1) înainte de semnarea contractului.</td>
+          <td class="num">500 – 1 500<br><span class="price-sub">plată unică</span></td>
+        </tr>
+        <tr>
+          <td><strong>Instalare unică + migrarea datelor din orice sistem-sursă</strong> (1C, Excel, alte programe): solduri inițiale, parteneri, mijloace fixe, salariați, proiecte și bugete — cu balanță comparativă de verificare.</td>
+          <td class="num">200 – 400<br><span class="price-sub">plată unică</span></td>
+        </tr>
+        <tr>
+          <td><strong>Grok Builder</strong> — mediu de configurare și dezvoltare <em>(opțional, recomandat pentru organizațiile cu raportare multi-donator)</em>.</td>
+          <td class="num">conform ofertei</td>
+        </tr>
+      </table>
+      </div>
+      <ul class="check">
+        <li>Instanță dedicată = performanță garantată și politici de securitate proprii;</li>
+        <li><strong>Până la 5 utilizatori:</strong> baza rulează pe <strong>Oracle Autonomous Database Always Free</strong> — costul infrastructurii OCI este <strong>zero</strong>, se achită doar serviciile din lista de prețuri;</li>
+        <li>Instalare <strong>complet automată, asistată de AI</strong>, pe baza Grok Builder 1.0 (vezi secțiunea 9);</li>
+        <li>Regim multi-firmă disponibil fără plăți per firmă suplimentare în pachetul de bază;</li>
+        <li>Mediu de test inclus.</li>
+      </ul>
+    </div>
+    <div class="plan saas">
+      <h4>Varianta SaaS — abonament în cloud</h4>
+      <p class="price-sub">Aplicație standard în infrastructura partajată OCI, cu separarea completă a datelor per client. Fără investiție inițială mare; pornire în 2–5 zile lucrătoare. Recomandată pentru <span class="v-cod">CUN</span>-uri mici și organizații la început de activitate.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Serviciu</th><th>Preț, EUR fără TVA</th></tr>
+        <tr>
+          <td><strong>Conectare</strong> — crearea bazei, utilizatorii, setările inițiale, conectarea serviciilor de stat.</td>
+          <td class="num">200<br><span class="price-sub">plată unică</span></td>
+        </tr>
+        <tr>
+          <td><strong>Abonament lunar</strong> — găzduire OCI, actualizările configurației standard (asigurare legislativă inclusă), suport prin chat inclus, copii de rezervă zilnice, monitorizare.</td>
+          <td class="num">50 / lună</td>
+        </tr>
+      </table>
+      </div>
+      <ul class="check">
+        <li>Asigurarea legislativă (actualizările conform Monitorul Oficial) — <strong>inclusă</strong> în abonament, fără plată separată;</li>
+        <li>Suportul prin chat (max. 15 min/întrebare) — <strong>inclus</strong> în abonament, fără plată separată;</li>
+        <li>Fără contract pe termen lung: facturare lunară, datele se exportă integral la reziliere;</li>
+        <li>Migrarea datelor și personalizările se tarifează separat, conform listei de prețuri (secțiunea 12.3);</li>
+        <li>Trecerea SaaS → PaaS este posibilă oricând, cu transferul integral al datelor.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">Intervalele de preț corespund practicii pieței serviciilor de implementare a programelor de contabilitate din Republica Moldova (nivelul mediu al partenerilor-franciză): pachetul de bază se stabilește prin chestionar de evaluare a complexității, iar oferta finală se fixează în contract <strong>înainte de începerea lucrărilor</strong> — fără costuri-surpriză pe parcurs.</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="scenarii">
+  <h2>11. Exemple de calcul al costului (primul an, fără TVA)</h2>
+  <p>Trei scenarii tipice, calculate strict pe lista de prețuri din secțiunile 10 și 12:</p>
+  <div class="table-wrap">
+  <table>
+    <tr>
+      <th>Poziție</th>
+      <th><span class="v-cod">CUN</span> mic<br><span style="text-transform:none;font-weight:normal">1 contabil, 1–2 proiecte · SaaS</span></th>
+      <th><span class="v-cod">CUN</span> mediu<br><span style="text-transform:none;font-weight:normal">2–3 contabili, 5–8 proiecte · PaaS</span></th>
+      <th>Filială internațională<br><span style="text-transform:none;font-weight:normal">tip People in Need · PaaS + Grok Builder</span></th>
+    </tr>
+    <tr>
+      <td>Pachet de bază / conectare</td>
+      <td class="num">200</td>
+      <td class="num">800</td>
+      <td class="num">1 500</td>
+    </tr>
+    <tr>
+      <td>Instalare + migrare date</td>
+      <td class="num">— <span class="price-sub">(pornire de la zero)</span></td>
+      <td class="num">300</td>
+      <td class="num">400</td>
+    </tr>
+    <tr>
+      <td>Abonament SaaS (50 €/lună × 12)</td>
+      <td class="num">600</td>
+      <td class="num">—</td>
+      <td class="num">—</td>
+    </tr>
+    <tr>
+      <td>Asigurare legislativă (doar PaaS)</td>
+      <td class="num">inclusă în abonament</td>
+      <td class="num">400 / an</td>
+      <td class="num">400 / an</td>
+    </tr>
+    <tr>
+      <td>Suport chat (doar PaaS: 30 € / 2 săpt., utilizare estimată)</td>
+      <td class="num">inclus în abonament</td>
+      <td class="num">180 <span class="price-sub">(6 perioade)</span></td>
+      <td class="num">360 <span class="price-sub">(12 perioade)</span></td>
+    </tr>
+    <tr>
+      <td>Lucrări la tarif orar (min. 40 €/oră, pachet min. 4 ore)</td>
+      <td class="num">—</td>
+      <td class="num">160 <span class="price-sub">(1 pachet)</span></td>
+      <td class="num">640 <span class="price-sub">(4 pachete)</span></td>
+    </tr>
+    <tr>
+      <td>Grok Builder</td>
+      <td class="num">—</td>
+      <td class="num">—</td>
+      <td class="num">conform ofertei</td>
+    </tr>
+    <tr class="total">
+      <td>Total orientativ primul an</td>
+      <td class="num">≈ 800</td>
+      <td class="num">≈ 1 840</td>
+      <td class="num">≈ 3 300 + Grok Builder</td>
+    </tr>
+    <tr>
+      <td>Cost recurent din anul 2</td>
+      <td class="num">≈ 600 / an</td>
+      <td class="num">≈ 740 / an</td>
+      <td class="num">≈ 1 400 / an</td>
+    </tr>
+  </table>
+  </div>
+  <p class="price-sub">Calcule orientative, pe utilizarea estimată a serviciilor de suport; consumul real poate diferi. Toate sumele fără TVA.</p>
+</section>
+
+<!-- ============================================================ -->
+<section id="suport">
+  <h2>12. Suport, mentenanță legislativă și SLA</h2>
+
+  <h3><span class="idx">12.1.</span> „Asigurare legislativă” — actualizări conform Monitorul Oficial</h3>
+  <p>Serviciu de mentenanță care garantează adaptarea configurației la <strong>orice modificare a legislației</strong> Republicii Moldova (contabilă, fiscală, salarială), pe măsura publicării în <strong>Monitorul Oficial</strong>. Funcționează astfel:</p>
+  <ol>
+    <li>Echipa de mentenanță monitorizează Monitorul Oficial și actele SFS/MF/CNAS/CNAM;</li>
+    <li>La fiecare modificare relevantă se pregătește actualizarea configurației standard (forme noi de rapoarte, cote, algoritmi de calcul);</li>
+    <li>Clientul primește notificare și <strong>solicită actualizarea prin sistemul de tichete OTRS</strong>;</li>
+    <li>Actualizarea se aplică întâi pe mediul de test (PaaS), apoi în producție, cu confirmarea instalării în tichet.</li>
+  </ol>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Abonament</th><th>Perioada</th><th>Preț, EUR fără TVA</th></tr>
+    <tr><td>Asigurare legislativă — anuală</td><td>12 luni</td><td class="num">400 / an</td></tr>
+    <tr><td>Asigurare legislativă — semestrială</td><td>6 luni</td><td class="num">300 / 6 luni</td></tr>
+  </table>
+  </div>
+  <div class="note ok"><strong>Doar pentru PaaS:</strong> asigurarea legislativă se contractează ca serviciu separat exclusiv pentru instanțele PaaS. Pentru clienții SaaS actualizările legislative sunt <strong>incluse în abonamentul lunar de 50 €</strong>, fără nicio plată suplimentară.</div>
+
+  <h3><span class="idx">12.2.</span> Suport prin chat — abonament</h3>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Serviciu</th><th>Condiții</th><th>Preț, EUR fără TVA</th></tr>
+    <tr>
+      <td>Abonament consultații în chat <span class="price-sub">(doar PaaS)</span></td>
+      <td>Perioadă de <strong>2 săptămâni</strong>; număr nelimitat de întrebări; durata lucrului per întrebare — <strong>maximum 15 minute</strong>; program 9:00–18:00 în zilele lucrătoare.</td>
+      <td class="num">30 / 2 săptămâni</td>
+    </tr>
+  </table>
+  </div>
+  <div class="note ok"><strong>Doar pentru PaaS:</strong> abonamentul de chat se achită separat doar de clienții PaaS. Pentru clienții SaaS suportul prin chat este <strong>inclus în abonamentul lunar</strong>, în aceleași condiții (max. 15 minute per întrebare).</div>
+
+  <h3><span class="idx">12.3.</span> Lucrări la tarif orar</h3>
+  <p>Solicitările care depășesc 15 minute per întrebare, precum și lucrările de setare și dezvoltare, se execută la tarif orar conform listei de prețuri:</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Serviciu</th><th>Condiții</th><th>Preț, EUR fără TVA</th></tr>
+    <tr>
+      <td>Oră de lucru specialist (consultanță, setări, rapoarte noi, dezvoltare)</td>
+      <td>Tarif minim în anul <strong>2026</strong>; comandă minimă — <strong>pachet de 4 ore</strong>; devizul se aprobă în tichet înainte de începerea lucrului.</td>
+      <td class="num">de la 40 / oră</td>
+    </tr>
+    <tr class="total">
+      <td>Pachet minim de lucrări</td>
+      <td>4 ore × 40 EUR</td>
+      <td class="num">de la 160</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3><span class="idx">12.4.</span> Canale de suport și termene de reacție</h3>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Canal</th><th>Destinație</th><th>Termen de reacție țintă</th></tr>
+    <tr>
+      <td><strong>OTRS</strong> (sistem de tichete)</td>
+      <td>Actualizări legislative, incidente, cereri de dezvoltare — cu istoric complet, priorități și devize aprobate în tichet.</td>
+      <td>Incident critic (sistemul inaccesibil): 2 ore lucrătoare · Incident obișnuit: 8 ore lucrătoare · Cereri: 2 zile lucrătoare</td>
+    </tr>
+    <tr>
+      <td><strong>Chat</strong></td>
+      <td>Consultații operative „cum se face” în cadrul abonamentului (12.2).</td>
+      <td>Prima reacție: 30 minute în programul de lucru</td>
+    </tr>
+    <tr>
+      <td><strong>Baza de cunoștințe</strong></td>
+      <td>Instrucțiuni pas-cu-pas și video în română și rusă; actualizată la fiecare versiune.</td>
+      <td>Acces permanent, inclus gratuit</td>
+    </tr>
+  </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="comparatie">
+  <h2>13. Comparație PaaS / SaaS</h2>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Criteriu</th><th>PaaS (instanță dedicată)</th><th>SaaS (abonament)</th></tr>
+    <tr><td>Cost inițial</td><td class="ctr">700 – 1 900 € <span class="price-sub">(pachet + instalare/migrare)</span></td><td class="ctr">200 €</td></tr>
+    <tr><td>Cost recurent</td><td class="ctr">servicii de suport contractate separat (vezi rândurile de mai jos)</td><td class="ctr">50 €/lună — totul inclus</td></tr>
+    <tr><td>Asigurare legislativă (actualizări Monitorul Oficial, prin tichete OTRS)</td><td class="ctr">400 €/an sau 300 €/6 luni <span class="price-sub">(serviciu separat)</span></td><td class="yes">✔ inclusă în abonament</td></tr>
+    <tr><td>Suport prin chat (max. 15 min/întrebare)</td><td class="ctr">30 €/2 săptămâni <span class="price-sub">(abonament separat)</span></td><td class="yes">✔ inclus în abonament</td></tr>
+    <tr><td>Lucrări peste 15 min/întrebare (setări, dezvoltare)</td><td class="ctr">de la 40 €/oră, pachet min. 4 ore</td><td class="ctr">de la 40 €/oră, pachet min. 4 ore</td></tr>
+    <tr><td>Bază de date</td><td class="ctr">Oracle 26ai dedicată, VCN propriu · până la 5 utilizatori — Always Free, cost infrastructură zero</td><td class="ctr">Oracle 26ai partajată, date izolate per client</td></tr>
+    <tr><td>Instalare automată cu AI (Grok Builder 1.0)</td><td class="yes">✔ verificată în proiect-pilot (Siemens)</td><td class="yes">✔ provizionare automată standard</td></tr>
+    <tr><td>Personalizări (Grok Builder)</td><td class="yes">✔ complet</td><td class="no">limitat (machete de rapoarte)</td></tr>
+    <tr><td>Regim multi-firmă</td><td class="yes">✔</td><td class="no">1 organizație per abonament</td></tr>
+    <tr><td>Mediu de test</td><td class="yes">✔ inclus</td><td class="no">—</td></tr>
+    <tr><td>Politici de securitate proprii (IP, MFA, parole)</td><td class="yes">✔</td><td class="ctr">politici standard</td></tr>
+    <tr><td>Migrarea datelor din sistemul vechi</td><td class="ctr">inclusă în instalare (200–400 €)</td><td class="ctr">contra cost, la tarif orar</td></tr>
+    <tr><td>Termen de pornire</td><td class="ctr">2–6 săptămâni</td><td class="ctr">2–5 zile lucrătoare</td></tr>
+    <tr><td>Recomandat pentru</td><td class="ctr"><span class="v-cod">CUN</span> medii/mari, filiale internaționale, outsourcing</td><td class="ctr"><span class="v-cod">CUN</span> mici, start-up, buget limitat</td></tr>
+  </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="concurenta">
+  <h2>14. Comparație cu alte soluții de pe piață</h2>
+  <p>Pentru o decizie informată, mai jos este poziționarea UNA.md/<span class="v-cod">CUN</span> față de soluțiile de contabilitate utilizate cel mai des de organizațiile din Republica Moldova — atât cele de pe piața locală (1C, Sirius, Universal Accounting), cât și produsele românești întâlnite la organizațiile cu activitate în ambele țări (SAGA, WinMENTOR, Ciel, Smartbill).</p>
+
+  <h3><span class="idx">14.1.</span> Matricea de comparație</h3>
+  <div class="table-wrap">
+  <table>
+    <tr>
+      <th>Criteriu</th>
+      <th>UNA.md/<span class="v-cod">CUN</span><br><span style="text-transform:none;font-weight:normal">(Oracle 26ai / OCI)</span></th>
+      <th>1C:Contabilitate 8<br><span style="text-transform:none;font-weight:normal">(Moldova, prin franciză)</span></th>
+      <th>Sirius<br><span style="text-transform:none;font-weight:normal">(Moldova)</span></th>
+      <th>SAGA C<br><span style="text-transform:none;font-weight:normal">(România)</span></th>
+      <th>WinMENTOR / Ciel<br><span style="text-transform:none;font-weight:normal">(România)</span></th>
+      <th>Smartbill<br><span style="text-transform:none;font-weight:normal">(România, cloud)</span></th>
+    </tr>
+    <tr>
+      <td>Legislația și rapoartele reglementate ale <strong>Republicii Moldova</strong> (ONG17, IPC21, TVA12, situații financiare ONC)</td>
+      <td class="yes">✔ complet, în pachetul standard</td>
+      <td class="yes">✔ prin configurațiile localizate</td>
+      <td class="yes">✔ produs local</td>
+      <td class="no">— doar legislația României</td>
+      <td class="no">— doar legislația României</td>
+      <td class="no">— doar legislația României</td>
+    </tr>
+    <tr>
+      <td>Specializare <strong><span class="v-cod">CUN</span></strong>: finanțări cu destinație specială, analitică pe proiecte/donatori/linii de buget, rapoarte către donatori</td>
+      <td class="yes">✔ nativ, subsistem dedicat</td>
+      <td class="ctr">parțial — prin adaptarea configurației, contra cost</td>
+      <td class="ctr">parțial — evidență generală, fără raportare donatori</td>
+      <td class="ctr">parțial — modul ONG pentru legislația RO</td>
+      <td class="no">— orientate pe firme comerciale</td>
+      <td class="no">— facturare/contabilitate comercială</td>
+    </tr>
+    <tr>
+      <td>Baza de date</td>
+      <td class="yes">Oracle 26ai (convergentă, AI încorporat)</td>
+      <td class="ctr">proprie (fișiere) sau MS SQL/PostgreSQL</td>
+      <td class="ctr">SGBD de nivel mediu</td>
+      <td class="ctr">bază locală proprie</td>
+      <td class="ctr">bază proprie / SGBD mediu</td>
+      <td class="ctr">cloud propriu al producătorului</td>
+    </tr>
+    <tr>
+      <td>AI încorporat: interogări în limbaj natural, căutare semantică, detecția anomaliilor</td>
+      <td class="yes">✔ Select AI, Vector Search, ML in-database</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+      <td class="ctr">asistență AI limitată la facturare</td>
+    </tr>
+    <tr>
+      <td>Registre imuabile pentru audit (Blockchain Tables), Flashback</td>
+      <td class="yes">✔</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+      <td class="no">—</td>
+    </tr>
+    <tr>
+      <td>Găzduire cloud cu certificări ISO 27001 / SOC, regiuni UE, criptare implicită</td>
+      <td class="yes">✔ Oracle OCI (Frankfurt/Amsterdam)</td>
+      <td class="ctr">hosting la parteneri, nivel variabil</td>
+      <td class="ctr">de regulă server local la client</td>
+      <td class="ctr">local sau hosting terț</td>
+      <td class="ctr">local sau hosting terț</td>
+      <td class="ctr">cloud RO, certificare proprie</td>
+    </tr>
+    <tr>
+      <td>Client nativ Windows de înaltă performanță</td>
+      <td class="yes">✔ Embarcadero Delphi / C++</td>
+      <td class="yes">✔</td>
+      <td class="yes">✔</td>
+      <td class="yes">✔</td>
+      <td class="yes">✔</td>
+      <td class="no">— doar web</td>
+    </tr>
+    <tr>
+      <td>Integrare servicii de stat <strong>MD</strong>: e-Factura SFS, Declarația electronică, MSign, curs BNM</td>
+      <td class="yes">✔</td>
+      <td class="yes">✔</td>
+      <td class="yes">✔ / parțial</td>
+      <td class="no">— integrate cu ANAF/SPV (RO)</td>
+      <td class="no">— integrate cu ANAF/SPV (RO)</td>
+      <td class="no">— e-Factura RO, SAF-T RO</td>
+    </tr>
+    <tr>
+      <td>Multivalută + evidență paralelă în valuta donatorului</td>
+      <td class="yes">✔ inclusiv curs InforEuro / curs fix contract</td>
+      <td class="ctr">multivalută da, evidența donatorilor — prin adaptare</td>
+      <td class="ctr">multivalută de bază</td>
+      <td class="ctr">multivalută de bază</td>
+      <td class="ctr">multivalută de bază</td>
+      <td class="ctr">facturare multivalută</td>
+    </tr>
+    <tr>
+      <td>Actualizări legislative pentru Moldova (Monitorul Oficial), canal garantat</td>
+      <td class="yes">✔ asigurare legislativă prin OTRS (PaaS) / incluse (SaaS)</td>
+      <td class="ctr">prin abonament ITS la partenerul franciză</td>
+      <td class="ctr">prin producătorul local</td>
+      <td class="no">— urmărește doar Monitorul Oficial al României</td>
+      <td class="no">— idem</td>
+      <td class="no">— idem</td>
+    </tr>
+    <tr>
+      <td>Instalare complet automată condusă de AI</td>
+      <td class="yes">✔ Grok Builder 1.0, verificată în pilot (Siemens)</td>
+      <td class="no">— instalare manuală de specialist</td>
+      <td class="no">—</td>
+      <td class="ctr">instalare simplă manuală</td>
+      <td class="no">—</td>
+      <td class="yes">✔ înregistrare online (SaaS)</td>
+    </tr>
+    <tr>
+      <td>Personalizare fără programare (no-code) protejată la actualizări</td>
+      <td class="yes">✔ Grok Builder, extensii versionate</td>
+      <td class="ctr">configurator propriu — necesită programator 1C</td>
+      <td class="no">— la producător</td>
+      <td class="no">—</td>
+      <td class="ctr">parametrizare limitată</td>
+      <td class="no">—</td>
+    </tr>
+    <tr>
+      <td>Interfață RO / RU / EN comutabilă per utilizator</td>
+      <td class="yes">✔</td>
+      <td class="ctr">RU/RO, după configurație</td>
+      <td class="ctr">RO/RU</td>
+      <td class="no">doar RO</td>
+      <td class="no">doar RO</td>
+      <td class="ctr">RO/EN</td>
+    </tr>
+    <tr>
+      <td>Model de preț transparent, publicat (fără TVA)</td>
+      <td class="yes">✔ PaaS 500–1 500 € + 200–400 € / SaaS 200 € + 50 €/lună</td>
+      <td class="ctr">licențe + implementare + ITS, ofertă per partener</td>
+      <td class="ctr">ofertă a producătorului</td>
+      <td class="ctr">licență accesibilă, dar inutilizabilă pentru evidența MD</td>
+      <td class="ctr">licențe per modul + mentenanță</td>
+      <td class="ctr">abonamente SaaS publicate (RO)</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3><span class="idx">14.2.</span> Față de soluțiile de pe piața Moldovei (1C, Sirius, Universal Accounting)</h3>
+  <ul>
+    <li><strong>Acoperirea legislativă este comparabilă</strong> — toate produsele locale mature acoperă rapoartele reglementate ale RM. Diferența decisivă este <strong>specializarea <span class="v-cod">CUN</span> din pachetul standard</strong>: în UNA.md/<span class="v-cod">CUN</span> finanțările cu destinație specială, analitica pe patru dimensiuni și machetele de rapoarte pentru donatori există „din cutie”, pe când în soluțiile universale se obțin prin adaptări individuale plătite, care apoi complică fiecare actualizare;</li>
+    <li><strong>Fundația tehnologică</strong>: bazele de date de fișiere sau SGBD-urile de nivel mediu nu oferă registre imuabile, Flashback, criptare totală implicită sau AI încorporat. Pe Oracle 26ai acestea sunt proprietăți ale platformei, nu promisiuni ale aplicației;</li>
+    <li><strong>Modelul de operare</strong>: serverul local din oficiu (tipic pentru instalările Sirius/1C din sectorul asociativ) concentrează toate riscurile — furt, incendiu, lipsă backup, lipsă patch-uri. OCI le elimină ca clasă, cu certificări pe care le puteți anexa direct la dosarul de audit al donatorului;</li>
+    <li><strong>Costul total</strong>: la 1C se cumulează licențele platformei, orele partenerului de implementare și abonamentul de actualizări; UNA.md/<span class="v-cod">CUN</span> publică lista de prețuri integral (secțiunile 10–12), iar până la 5 utilizatori infrastructura PaaS este pe nivelul Always Free — cost zero.</li>
+  </ul>
+
+  <h3><span class="idx">14.3.</span> Față de soluțiile românești (SAGA, WinMENTOR, Ciel, Smartbill)</h3>
+  <ul>
+    <li>Produsele românești sunt construite pentru <strong>legislația României</strong>: planul de conturi RO, declarațiile ANAF, SAF-T (D406), e-Factura RO. Ele <strong>nu acoperă</strong> planul de conturi al RM, declarațiile SFS (ONG17, IPC21, TVA12), CNAS/CNAM sau situațiile financiare pentru ONC din Moldova — folosirea lor pentru o entitate moldovenească ar însemna ținerea manuală, în paralel, a întregii evidențe reglementate;</li>
+    <li>Pentru organizațiile care activează <strong>în ambele țări</strong> (entitate RO + entitate MD), combinația practică este: softul românesc rămâne la entitatea din România, UNA.md/<span class="v-cod">CUN</span> ține evidența entității din Moldova, iar rapoartele consolidate către donator se generează din UNA.md/<span class="v-cod">CUN</span> prin machetele multi-valută (secțiunea 4.9);</li>
+    <li>Avantajul de preț al unor produse românești (ex. SAGA, cu licențiere foarte accesibilă) nu se transferă pe piața Moldovei: economia la licență este anulată de costul ținerii manuale a raportării RM;</li>
+    <li>Soluțiile cloud românești (Smartbill, Oblio, FGO) sunt orientate pe facturare și contabilitate comercială pentru IMM-uri din România — fără evidența finanțărilor cu destinație specială și fără raportare către donatori.</li>
+  </ul>
+
+  <div class="note"><strong>Notă:</strong> comparația are caracter informativ și este întocmită pe baza informațiilor publice disponibile la data ediției (2026); capabilitățile și prețurile produselor terților se pot modifica. Denumirile 1C, Sirius, Universal Accounting, SAGA, WinMENTOR, Ciel, Smartbill și celelalte mărci menționate aparțin deținătorilor respectivi. Înainte de decizie recomandăm verificarea cerințelor proprii printr-o sesiune demo.</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="procese">
+  <h2>15. Catalogul proceselor de business</h2>
+  <p>Configurația standard acoperă procesele de business de mai jos, modelate „din cutie”. Diagramele sunt în notația <strong>Mermaid</strong> — aceleași scheme sunt disponibile și în fișierul <code>catalog-procese-business.md</code> din repozitoriu (redat nativ de GitHub) și pot fi adaptate pentru manualul de proceduri interne al organizației.</p>
+
+  <h3><span class="idx">15.1.</span> Registrul proceselor</h3>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Cod</th><th>Proces</th><th>Responsabil principal</th><th>Frecvență</th><th>Subsistem (secț. 4)</th><th>Diagramă</th></tr>
+    <tr><td>BP-00</td><td>Harta generală a proceselor (de la donator la raportare)</td><td>Director executiv</td><td>continuu</td><td>toate</td><td class="ctr">15.2</td></tr>
+    <tr><td>BP-01</td><td>Ciclul de viață al grantului</td><td>Manager de proiect + contabil-șef</td><td>per contract</td><td>4.1, 4.9</td><td class="ctr">15.3</td></tr>
+    <tr><td>BP-02</td><td>Bugetare și realocări între linii de buget</td><td>Manager de proiect</td><td>per proiect / la amendamente</td><td>4.9</td><td class="ctr">inclus în 15.3</td></tr>
+    <tr><td>BP-03</td><td>De la achiziție la plată (Procure-to-Pay)</td><td>Contabil + director</td><td>zilnic</td><td>4.3, 4.7</td><td class="ctr">15.4</td></tr>
+    <tr><td>BP-04</td><td><strong>Salarizare pe proiecte</strong> (time-sheets, calcul, plată, IPC21)</td><td>Contabil salarii</td><td>lunar</td><td>4.6</td><td class="ctr">15.5</td></tr>
+    <tr><td>BP-05</td><td>Recepția și distribuirea ajutorului umanitar</td><td>Gestionar depozit + manager de proiect</td><td>per lot</td><td>4.5</td><td class="ctr">15.6</td></tr>
+    <tr><td>BP-06</td><td>Închiderea lunii și raportarea reglementată</td><td>Contabil-șef</td><td>lunar</td><td>4.2, secț. 5</td><td class="ctr">15.7</td></tr>
+    <tr><td>BP-07</td><td>Deconturi de avans și delegații</td><td>Titular de avans + contabil</td><td>la eveniment</td><td>4.3</td><td class="ctr">inclus în 15.4</td></tr>
+    <tr><td>BP-08</td><td>Actualizare legislativă (Monitorul Oficial → OTRS → producție)</td><td>Partener de suport</td><td>la modificări</td><td>secț. 12.1</td><td class="ctr">descris în 12.1</td></tr>
+  </table>
+  </div>
+
+  <h3><span class="idx">15.2.</span> BP-00 · Harta generală a proceselor</h3>
+  <pre class="mermaid">
+flowchart LR
+  subgraph SF["1 · Atragere finanțări"]
+    A1["Negociere cu donatorul"] --> A2["Contract de grant semnat"]
+  end
+  subgraph PL["2 · Planificare"]
+    B1["Buget de proiect pe linii, în valuta donatorului"] --> B2["Aprobare buget"]
+  end
+  subgraph EX["3 · Execuție"]
+    C1["Achiziții și contracte"]
+    C2["Plăți, casă și bancă"]
+    C3["Salarizare pe proiecte"]
+    C4["Distribuire ajutor umanitar"]
+    C1 --> C2
+  end
+  subgraph CT["4 · Contabilitate"]
+    D1["Contare documente pe surse de finanțare"] --> D2["Închiderea lunii"]
+  end
+  subgraph RP["5 · Raportare"]
+    E1["Rapoarte către donatori"]
+    E2["Rapoarte reglementate: SFS, CNAS, CNAM, BNS"]
+    E3["Audit donator / audit statutar"]
+  end
+  A2 --> B1
+  B2 --> C1
+  B2 --> C3
+  B2 --> C4
+  C2 --> D1
+  C3 --> D1
+  C4 --> D1
+  D2 --> E1
+  D2 --> E2
+  E1 --> E3
+  E2 --> E3
+  </pre>
+
+  <h3><span class="idx">15.3.</span> BP-01 · Ciclul de viață al grantului</h3>
+  <pre class="mermaid">
+flowchart TD
+  G1["Semnare contract de grant"] --> G2["Înregistrare sursă de finanțare și proiect"]
+  G2 --> G3["Introducere buget pe linii, în valuta donatorului"]
+  G3 --> G3a{"Buget aprobat de donator?"}
+  G3a -- "Nu — amendament" --> G3
+  G3a -- "Da" --> G4["Primire tranșă de finanțare (extras bancar)"]
+  G4 --> G5["Execuție cheltuieli cu control automat de buget"]
+  G5 --> G6{"Depășire pe linia de buget?"}
+  G6 -- "Da" --> G7["Blocare document → realocare internă sau cerere de amendament la donator"]
+  G7 --> G5
+  G6 -- "Nu" --> G8["Recunoașterea veniturilor pe măsura efectuării cheltuielilor"]
+  G8 --> G9["Raport financiar intermediar către donator"]
+  G9 --> G10{"Ultima perioadă de raportare?"}
+  G10 -- "Nu" --> G4
+  G10 -- "Da" --> G11["Raport final + audit al donatorului"]
+  G11 --> G12["Închiderea proiectului: sold nevalorificat restituit sau realocat"]
+  </pre>
+
+  <h3><span class="idx">15.4.</span> BP-03 · De la achiziție la plată (Procure-to-Pay)</h3>
+  <pre class="mermaid">
+flowchart TD
+  A["Cerere de achiziție — manager de proiect"] --> B{"Disponibil pe linia de buget?"}
+  B -- "Insuficient" --> B1["Respingere sau realocare (BP-02)"]
+  B1 --> A
+  B -- "Da" --> C{"Peste pragul de achiziții al donatorului?"}
+  C -- "Sub prag" --> D["Comandă directă"]
+  C -- "Peste prag" --> E["Colectare oferte + proces-verbal de selecție"]
+  E --> F["Contract cu furnizorul, legat de proiect"]
+  D --> F
+  F --> G["Recepție factură (e-Factura) sau decont de avans (BP-07)"]
+  G --> H{"Aprobare pe niveluri: contabil → director"}
+  H -- "Respins" --> A
+  H -- "Aprobat" --> I["Ordin de plată → export către bancă"]
+  I --> J["Import extras bancar, reconciliere automată"]
+  J --> K["Contare pe proiect și linia de buget"]
+  K --> L["Dosarul achiziției arhivat pentru auditul donatorului"]
+  </pre>
+
+  <h3><span class="idx">15.5.</span> BP-04 · Salarizare pe proiecte — procesul detaliat</h3>
+  <p>Procesul-cheie pentru <span class="v-cod">CUN</span>-urile cu posturi finanțate din mai multe granturi: costul salarial se repartizează pe proiecte strict după time-sheets, iar dările de seamă pleacă electronic la SFS.</p>
+  <pre class="mermaid">
+flowchart TD
+  subgraph HR["Resurse umane"]
+    H1["Contract: muncă / prestări servicii / voluntariat"] --> H2["Ordin de angajare, salariu de funcție, stat de personal"]
+    H2 --> H3["Evidența lunară: prezență, concedii, medicale, delegații"]
+  end
+  subgraph PM["Manageri de proiect"]
+    P1["Completare time-sheet lunar pe proiecte"] --> P2{"Time-sheet aprobat?"}
+    P2 -- "Nu — corecții" --> P1
+  end
+  subgraph CALC["Contabilitate — calculul salariilor"]
+    C1["Calcul avans (dacă este prevăzut)"]
+    C2["Calcul brut: salariu de funcție, premii, concedii, medicale"]
+    C3["Aplicarea scutirilor personale și deducerilor"]
+    C4["Rețineri din salariu: impozit pe venit + prime CNAM, conform cotelor în vigoare"]
+    C5["Contribuții ale angajatorului: CNAS, conform cotelor în vigoare"]
+    C6{"Post finanțat din mai multe proiecte?"}
+    C7["Repartizarea costului salarial și a contribuțiilor pe proiecte și linii de buget, proporțional time-sheet-ului"]
+    C8["Contare automată pe surse de finanțare"]
+  end
+  subgraph PAY["Plata"]
+    Y1["Fluturași de salariu pe e-mail"]
+    Y2["Fișier pentru proiectul salarial al băncii (plata pe card)"]
+    Y3["Ordine de plată: salarii nete + impozit + CNAS + CNAM"]
+    Y4["Import extras bancar — confirmarea plăților"]
+  end
+  subgraph REP["Raportare"]
+    R1["IPC21 — darea de seamă lunară unificată, până pe 25 a lunii următoare"]
+    R2["Depunere prin Declarația electronică SFS"]
+    R3["IALS — nota informativă anuală"]
+    R4["Raport de cost salarial pe donatori și proiecte"]
+  end
+  H3 --> C2
+  C1 --> C2
+  P2 -- "Da" --> C7
+  C2 --> C3 --> C4
+  C2 --> C5
+  C4 --> C6
+  C5 --> C6
+  C6 -- "Da" --> C7
+  C6 -- "Nu — un singur proiect" --> C8
+  C7 --> C8
+  C8 --> Y1
+  C8 --> Y2 --> Y3 --> Y4
+  C8 --> R1 --> R2
+  C8 --> R3
+  C8 --> R4
+  </pre>
+  <div class="note ok"><strong>Controale încorporate în BP-04:</strong> suma repartizărilor pe proiecte = 100 % din costul salarial; blocarea calculului dacă lipsește time-sheet-ul aprobat; verificarea încadrării în linia de buget „Personal” a fiecărui proiect înainte de contare; jurnalul modificărilor pentru auditul donatorului.</div>
+
+  <h3><span class="idx">15.6.</span> BP-05 · Recepția și distribuirea ajutorului umanitar</h3>
+  <pre class="mermaid">
+flowchart TD
+  U1["Notificare lot de ajutor umanitar de la donator"] --> U2["Import / recepție cu facilitățile vamale și TVA aplicabile"]
+  U2 --> U3["Recepție la depozit: evidență cantitativ-valorică pe lot și proiect"]
+  U3 --> U4["Plan de distribuire aprobat pe proiect"]
+  U4 --> U5["Liste nominale de beneficiari — date personale protejate, acces pe roluri"]
+  U5 --> U6["Distribuire către beneficiari + act de predare-primire semnat"]
+  U6 --> U7{"Stoc rămas în lot?"}
+  U7 -- "Da" --> U4
+  U7 -- "Nu" --> U8["Raport de distribuire către donator"]
+  U8 --> U9["Contare: decontarea finanțării cu destinație specială, descărcarea stocului"]
+  U9 --> U10["Arhivare dosar lot pentru audit"]
+  </pre>
+
+  <h3><span class="idx">15.7.</span> BP-06 · Închiderea lunii și raportarea reglementată</h3>
+  <pre class="mermaid">
+flowchart TD
+  Z1["Verificarea completitudinii documentelor primare"] --> Z2["Import extrase bancare, curs BNM, reevaluare valutară"]
+  Z2 --> Z3["Calculul amortizării mijloacelor fixe"]
+  Z3 --> Z4["Repartizarea cheltuielilor indirecte pe proiecte, după cotele aprobate"]
+  Z4 --> Z5["Calculul și contarea salariilor (BP-04)"]
+  Z5 --> Z6["Verificări de control: balanța, soldurile finanțărilor pe surse, decontări"]
+  Z6 --> Z7{"Erori sau abateri?"}
+  Z7 -- "Da — corecții" --> Z1
+  Z7 -- "Nu" --> Z8["Închiderea perioadei — blocarea editării documentelor"]
+  Z8 --> Z9["IPC21, TVA12 și celelalte dări de seamă → Declarația electronică SFS"]
+  Z8 --> Z10["Rapoarte către donatori și management (plan-fapt pe bugete)"]
+  Z9 --> Z11["Confirmări de recepție SFS arhivate"]
+  </pre>
+
+  <div class="note"><strong>Notă:</strong> diagramele necesită conexiune la internet la prima deschidere a fișierului (biblioteca Mermaid se încarcă din CDN). Pe GitHub, aceleași diagrame din <code>catalog-procese-business.md</code> se afișează fără nicio dependență.</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="faq">
+  <h2>16. Întrebări frecvente</h2>
+
+  <details>
+    <summary>Putem migra din 1C? Ce se pierde la migrare?</summary>
+    <div class="a">
+      <p>Da — migrarea din 1C 7.7/8.x este scenariul cel mai frecvent și este <strong>inclusă în tariful de instalare PaaS (200–400 €)</strong>. Se migrează planul de conturi, soldurile, partenerii, mijloacele fixe cu amortizarea acumulată, salariații, proiectele și bugetele. Istoricul complet al documentelor din anii precedenți se migrează opțional (la tarif orar) sau se păstrează arhiva 1C pentru consultare. Verificarea se face prin balanța comparativă semnată de ambele părți.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Datele noastre sunt în siguranță? Unde se află fizic?</summary>
+    <div class="a">
+      <p>Datele se găzduiesc în regiuni Oracle OCI din Uniunea Europeană (Frankfurt sau Amsterdam — se fixează în contract), criptate în repaus și în tranzit, cu backup zilnic automat. Centrele de date dețin certificări ISO 27001, SOC 1/2/3. Accesul este protejat prin MFA, iar fiecare acțiune a fiecărui utilizator este jurnalizată. Detalii în secțiunea 7.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Ce se întâmplă când se schimbă legislația?</summary>
+    <div class="a">
+      <p>Pe SaaS actualizările legislative și suportul prin chat sunt incluse în abonamentul de 50 €/lună, fără plăți suplimentare. Doar pe PaaS acestea se contractează separat: „asigurarea legislativă” costă 400 €/an sau 300 €/6 luni — la fiecare modificare publicată în Monitorul Oficial primiți notificare și solicitați actualizarea printr-un tichet OTRS; ea se aplică întâi pe mediul de test, apoi în producție.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Donatorul cere raport într-un format propriu. Cât durează?</summary>
+    <div class="a">
+      <p>Machetele pentru donatorii uzuali (Comisia Europeană, agențiile ONU, USAID) sunt incluse în pachetul standard. Un format nou se configurează de regulă într-un pachet minim de lucrări (4 ore × 40 € = de la 160 €) sau, dacă dețineți Grok Builder, îl puteți genera singuri prin descriere în limbaj natural.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Câți utilizatori pot lucra simultan? Se plătește per utilizator?</summary>
+    <div class="a">
+      <p>Numărul de utilizatori se stabilește la evaluarea complexității și influențează poziționarea în intervalul 500–1 500 € al pachetului de bază PaaS; nu există plăți lunare per utilizator în pachetul standard. Pe SaaS abonamentul de 50 €/lună acoperă necesarul tipic al unui <span class="v-cod">CUN</span> mic; extinderile se convin prin ofertă.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Putem începe cu SaaS și trece ulterior pe PaaS?</summary>
+    <div class="a">
+      <p>Da. Trecerea SaaS → PaaS se face cu transferul integral al datelor (aceeași platformă, aceeași structură de bază), de regulă într-o fereastră de weekend. Se achită doar diferența de configurare a pachetului de bază PaaS.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Ce se întâmplă cu datele dacă reziliem contractul?</summary>
+    <div class="a">
+      <p>Datele aparțin organizației. La reziliere primiți exportul complet: balanțe, registre, documente, atașamente — în formate deschise (CSV/Excel/PDF), plus, la cerere, dump-ul bazei de date. Termenul de păstrare a copiilor de rezervă după reziliere se fixează în contract.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>De ce Oracle, și nu o bază de date „obișnuită”?</summary>
+    <div class="a">
+      <p>Trei motive practice: (1) <strong>integritatea probantă</strong> — Blockchain Tables și Flashback fac registrele verificabile la auditurile donatorilor; (2) <strong>fiabilitatea</strong> — funcționare 24/7 cu patch-uri fără oprire, critică în perioada dărilor de seamă; (3) <strong>AI-ul încorporat</strong> — căutare semantică, interogări în limbaj natural și detecția anomaliilor fără sisteme suplimentare. Detalii în secțiunea 6.</p>
+    </div>
+  </details>
+</section>
+
+</main>
+
+<footer>
+  <p><span class="vat">Toate prețurile din prezenta fișă de produs sunt indicate în EUR, fără TVA.</span></p>
+  <p>UNA.md/<span class="v-cod">CUN</span> — Contabilitatea Organizației <span class="v-tip-cap">Universale</span> · Platforma UNA.md ERP · Oracle Database 26ai · Oracle Cloud Infrastructure.<br>
+  Fișă de produs cu caracter informativ, ediția 2026. Oferta finală de preț se stabilește prin contract, în baza chestionarului de evaluare a complexității. Denumirile Oracle, OCI, OTRS, 1C și alte mărci menționate aparțin deținătorilor respectivi; referirile la organizații (ex. People in Need) au caracter ilustrativ privind tipul de client.</p>
+</footer>
+
+</div>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true, theme: "neutral", flowchart: { useMaxWidth: true } });
+</script>
+<script>
+  (function () {
+    var DEF_TIP = "Universale", DEF_COD = "CUN";
+    var q = new URLSearchParams(location.search);
+    var inTip = document.getElementById("in-tip"), inCod = document.getElementById("in-cod");
+    inTip.value = q.get("tip") || DEF_TIP;
+    inCod.value = q.get("cod") || DEF_COD;
+
+    function titleCase(s) {
+      return s.replace(/(^|\s|-)(\S)/g, function (m, a, c) { return a + c.toLocaleUpperCase("ro"); });
+    }
+    function fill(cls, text) {
+      document.querySelectorAll("." + cls).forEach(function (el) { el.textContent = text; });
+    }
+    function apply() {
+      var tip = inTip.value.trim() || DEF_TIP, cod = inCod.value.trim() || DEF_COD;
+      fill("v-tip", tip.toLocaleLowerCase("ro"));
+      fill("v-tip-cap", titleCase(tip));
+      fill("v-cod", cod);
+      document.title = "UNA.md/" + cod + " — Contabilitatea Organizației " + titleCase(tip);
+      var p = new URLSearchParams(location.search);
+      tip === DEF_TIP ? p.delete("tip") : p.set("tip", tip);
+      cod === DEF_COD ? p.delete("cod") : p.set("cod", cod);
+      var qs = p.toString();
+      history.replaceState(null, "", location.pathname + (qs ? "?" + qs : "") + location.hash);
+    }
+    inTip.addEventListener("input", apply);
+    inCod.addEventListener("input", apply);
+    document.getElementById("copy-link").addEventListener("click", function () {
+      var msg = document.getElementById("copy-msg");
+      navigator.clipboard.writeText(location.href).then(
+        function () { msg.textContent = "Link copiat."; },
+        function () { msg.textContent = location.href; });
+    });
+    apply();
+  })();
+</script>
+</body>
+</html>
