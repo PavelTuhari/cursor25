@@ -12,12 +12,16 @@ import { ExpoSecureStorage } from './src/auth/expoSecureStorage';
 import { KvStorage } from './src/auth/secureStorage';
 import { bootstrap, type Runtime } from './src/bootstrap';
 import { ExpoSqlDriver } from './src/db/expoDriver';
+import { createDemoFetch, DEMO_BASE_URL } from './src/demo/demoBackend';
 import { ExpoPushAdapter } from './src/push/expoAdapter';
 import { AppProvider } from './src/state/AppContext';
 import { useAutoSync } from './src/state/useAutoSync';
 import { CartProvider } from './src/state/CartContext';
 import { ShoppingListProvider } from './src/state/ShoppingListContext';
 import { RootNavigator } from './src/ui/navigation/RootNavigator';
+
+/** Set at bundle time for the demo build: `EXPO_PUBLIC_DEMO=1`. */
+const IS_DEMO = process.env.EXPO_PUBLIC_DEMO === '1';
 
 /** Lives inside the providers so it can use the app context. */
 function AutoSync(): null {
@@ -50,8 +54,11 @@ export default function App(): React.ReactElement {
           storage: new ExpoSecureStorage(new KvStorage(driver)),
           pushAdapter: new ExpoPushAdapter(Constants.expoConfig?.extra?.eas?.projectId as string | undefined),
           deviceLocales: Localization.getLocales().map((locale) => locale.languageTag),
-          // Dev and staging builds point the app at their own backend.
-          apiBaseUrl: __DEV__ ? devApiBaseUrl : undefined,
+          // The demo build answers from the mock backend inside the app; dev
+          // and staging builds point the app at their own backend.
+          ...(IS_DEMO
+            ? { fetchImpl: createDemoFetch(), apiBaseUrl: DEMO_BASE_URL }
+            : { apiBaseUrl: __DEV__ ? devApiBaseUrl : undefined }),
         });
         setRuntime(instance);
 
