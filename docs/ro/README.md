@@ -9,6 +9,9 @@ Documentația în limba română, împărțită după cititor. Alegeți document
 | **Utilizator** (cumpărător sau contabil) | [GHID-UTILIZATOR.md](GHID-UTILIZATOR.md) | cum se instalează aplicația și cum se folosește fiecare ecran, cu imagini |
 | **Dezvoltator / administrator** | [GHID-DEZVOLTATOR.md](GHID-DEZVOLTATOR.md) | cum e construit sistemul, cum se pornește local, cum se compilează APK-ul, cum se instalează microserviciul e-Factura |
 
+Pentru o întâlnire: [PREZENTARE.pdf](PREZENTARE.pdf), 28 de diapozitive, cu o parte
+pentru fiecare cititor.
+
 ## Proiectul pe scurt
 
 Repozitoriul conține două sisteme independente:

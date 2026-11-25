@@ -120,7 +120,7 @@ la 15 minute.
 |---|---|
 | Regulile, baza de date, sincronizarea, autentificarea | 208 teste automate (mobil) |
 | SOAP, semnarea, coada, primirea facturilor | 89 de teste automate (microserviciu) |
-| Parcursul complet în română: 36 de ecrane, cu autentificare, comandă, cerere de factură | rulare reală în browser, cu capturi |
+| Un parcurs în română, 36 de capturi: autentificare, comandă, cerere de factură | rulare reală în browser, cu capturi |
 | Conținutul APK-urilor: permisiuni, semnătură, arhitecturi | analiză statică |
 
 | **Neverificat** | De ce | Ce e necesar |
