@@ -22,6 +22,7 @@ export type RootStackParamList = {
   list: undefined;
   promos: undefined;
   corporate: undefined;
+  companyEdit: undefined;
   wallet: undefined;
   connections: undefined;
   connectCompany: { connectionId?: string } | undefined;

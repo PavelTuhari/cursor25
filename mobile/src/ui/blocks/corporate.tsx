@@ -10,12 +10,13 @@ import React from 'react';
 import { Alert, Linking, Text, View } from 'react-native';
 
 import { useApp, useT, useTheme } from '../../state/AppContext';
-import { useEntityQuery } from '../../state/useEntityQuery';
+import { useEntityQuery, useEntityRecord } from '../../state/useEntityQuery';
 import {
   canRequestInvoice,
   invoiceBadge,
   invoiceLabel,
   isVatRegistered,
+  withinRequestWindow,
   type CompanyRecord,
   type FiscalInvoiceRecord,
 } from '../../domain/company';
@@ -24,6 +25,7 @@ import { formatDate } from '../../domain/dates';
 import { asAction, runAction } from '../actions';
 import { Button, Card, EmptyState, LoadingBlock, Section } from '../components/base';
 import { Icon } from '../components/Icon';
+import type { ReceiptRecord } from '../components/ReceiptRow';
 import { blockBoolean, blockQuery, type BlockProps } from './types';
 
 /** One label/value line, skipped entirely when there is no value. */
@@ -184,7 +186,7 @@ export function CompanyCardBlock({ block, navigate }: BlockProps): React.ReactEl
   );
 }
 
-export function FiscalInvoiceListBlock({ block, navigate }: BlockProps): React.ReactElement {
+export function FiscalInvoiceListBlock({ block }: BlockProps): React.ReactElement {
   const theme = useTheme();
   const t = useT();
   const { config, isAuthenticated, locale } = useApp();
@@ -258,7 +260,7 @@ export function FiscalInvoiceListBlock({ block, navigate }: BlockProps): React.R
                       label={t('corporate.show_qr')}
                       icon="qr"
                       variant="secondary"
-                      onPress={() => navigate('invoiceQr', { invoiceId: invoice.id })}
+                      onPress={() => void Linking.openURL(String(invoice.qr_text))}
                     />
                   ) : null}
                 </View>
@@ -275,7 +277,7 @@ export function FiscalInvoiceListBlock({ block, navigate }: BlockProps): React.R
  * Sits on a receipt. Enabled only for a corporate customer whose company is on
  * file, once per receipt and inside the window the configuration allows.
  */
-export function InvoiceRequestBlock({ block, navigate }: BlockProps): React.ReactElement | null {
+export function InvoiceRequestBlock({ block }: BlockProps): React.ReactElement | null {
   const theme = useTheme();
   const t = useT();
   const { config, db, isAuthenticated, invalidate } = useApp();
@@ -290,12 +292,16 @@ export function InvoiceRequestBlock({ block, navigate }: BlockProps): React.Reac
       : null,
   );
 
+  const { data: receipts } = useEntityRecord<ReceiptRecord>('receipts', isAuthenticated ? receiptId : null);
+
   const corporate = config.app.corporate;
   const company = companies[0];
+  const receipt = receipts[0];
 
   if (!isAuthenticated || !receiptId || !corporate?.enabled) return null;
-  if (!company) return null;
+  if (!company || !receipt) return null;
 
+  const expired = !withinRequestWindow(receipt.purchased_at ?? null, corporate.requestWindowDays, new Date());
   const already = !canRequestInvoice(receiptId, invoices);
 
   const request = async (): Promise<void> => {
@@ -308,6 +314,10 @@ export function InvoiceRequestBlock({ block, navigate }: BlockProps): React.Reac
         receipt_id: receiptId,
         company_id: company.id,
         state: 'requested',
+        direction: 'out',
+        source: 'platform',
+        buyer_idno: company.idno,
+        total: receipt.total ?? 0,
         updated_at: new Date().toISOString(),
       });
       invalidate();
@@ -318,18 +328,18 @@ export function InvoiceRequestBlock({ block, navigate }: BlockProps): React.Reac
   };
 
   return (
-    <View style={{ padding: theme.spacing.lg, gap: theme.spacing.sm }}>
+    <View style={{ gap: theme.spacing.sm }}>
       <Button
         label={t('corporate.request_invoice')}
         icon="receipt"
-        disabled={already}
+        disabled={already || expired}
         onPress={() => void request()}
       />
-      {already ? (
+      {already || expired ? (
         <View style={{ flexDirection: 'row', gap: theme.spacing.sm, alignItems: 'center' }}>
           <Icon name="info" size={16} color={theme.colors.textMuted} />
           <Text style={{ color: theme.colors.textMuted, fontSize: theme.typography.sizes.sm }}>
-            {t('corporate.request_exists')}
+            {t(already ? 'corporate.request_exists' : 'corporate.request_expired')}
           </Text>
         </View>
       ) : null}

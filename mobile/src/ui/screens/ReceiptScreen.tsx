@@ -9,6 +9,8 @@ import { useApp, useT, useTheme } from '../../state/AppContext';
 import { useEntityRecord } from '../../state/useEntityQuery';
 import { useShoppingList } from '../../state/ShoppingListContext';
 import { Barcode } from '../components/Barcode';
+import { InvoiceRequestBlock } from '../blocks/corporate';
+import type { BlockProps } from '../blocks/types';
 import { Button, Card, EmptyState, LoadingBlock } from '../components/base';
 import type { ReceiptRecord } from '../components/ReceiptRow';
 
@@ -22,7 +24,13 @@ interface ReceiptLine {
   discount?: number | null;
 }
 
-export function ReceiptScreen({ receiptId }: { receiptId: string }): React.ReactElement {
+export function ReceiptScreen({
+  receiptId,
+  navigate,
+}: {
+  receiptId: string;
+  navigate: BlockProps['navigate'];
+}): React.ReactElement {
   const theme = useTheme();
   const t = useT();
   const { config, locale } = useApp();
@@ -157,6 +165,14 @@ export function ReceiptScreen({ receiptId }: { receiptId: string }): React.React
 
       {lines.some((line) => line.product_id) ? (
         <Button label={t('receipt.repeat')} icon="plus" variant="secondary" onPress={() => void addAllToList()} />
+      ) : null}
+
+      {/* Shows itself only to a corporate customer with a company on file. */}
+      {config.app.features.corporate && config.app.corporate?.requestFromReceipt ? (
+        <InvoiceRequestBlock
+          block={{ id: 'invoice-request', type: 'invoice_request', props: { receiptId } }}
+          navigate={navigate}
+        />
       ) : null}
     </ScrollView>
   );

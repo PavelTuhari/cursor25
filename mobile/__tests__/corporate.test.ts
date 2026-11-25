@@ -2,11 +2,12 @@
  * Corporate option: company validation, invoice status mapping and the shape of
  * the configuration that switches the whole thing on.
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 import {
   canRequestInvoice,
+  withinRequestWindow,
   EFACTURA_STATUS,
   invoiceBadge,
   invoiceLabel,
@@ -234,5 +235,42 @@ describe('configuration', () => {
       expect(translations['menu.corporate']).toBeTruthy();
       expect(translations['corporate.request_invoice']).toBeTruthy();
     }
+  });
+});
+
+describe('requesting an invoice from a receipt', () => {
+  it('closes after the configured number of days', () => {
+    const now = new Date('2026-08-25T10:00:00Z');
+    expect(withinRequestWindow('2026-08-22T18:42:00Z', 30, now)).toBe(true);
+    expect(withinRequestWindow('2026-07-21T12:09:00Z', 30, now)).toBe(false);
+    expect(withinRequestWindow('2026-07-21T12:09:00Z', 0, now)).toBe(true);
+    expect(withinRequestWindow(null, 30, now)).toBe(false);
+  });
+});
+
+describe('navigation', () => {
+  it('has a route for every screen the configuration navigates to', () => {
+    const root = join(__dirname, '..');
+    const navigator = readFileSync(join(root, 'src', 'ui', 'navigation', 'RootNavigator.tsx'), 'utf8');
+    const routes = new Set([...navigator.matchAll(/<Stack\.Screen\s+name="(\w+)"/g)].map((match) => match[1]));
+    const tabs = JSON.parse(readFileSync(join(root, 'config', 'navigation.config.json'), 'utf8')) as {
+      tabs: Array<{ id: string }>;
+    };
+    tabs.tabs.forEach((tab) => routes.add(tab.id));
+
+    const missing: string[] = [];
+    const walk = (value: unknown, file: string): void => {
+      if (Array.isArray(value)) value.forEach((item) => walk(item, file));
+      else if (value && typeof value === 'object') {
+        const action = value as { type?: unknown; screen?: unknown };
+        if (action.type === 'navigate' && typeof action.screen === 'string' && !routes.has(action.screen)) {
+          missing.push(`${file}: ${action.screen}`);
+        }
+        Object.values(value).forEach((item) => walk(item, file));
+      }
+    };
+    const dir = join(root, 'config', 'screens');
+    for (const file of readdirSync(dir)) walk(JSON.parse(readFileSync(join(dir, file), 'utf8')), file);
+    expect(missing).toEqual([]);
   });
 });

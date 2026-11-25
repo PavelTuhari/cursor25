@@ -183,3 +183,11 @@ export function canRequestInvoice(
     (invoice) => invoice.receipt_id === receiptId && invoice.state !== 'failed',
   );
 }
+
+/** An invoice may be asked for only so many days after the purchase. */
+export function withinRequestWindow(purchasedAt: string | null, windowDays: number, now: Date): boolean {
+  if (windowDays <= 0) return true;
+  const bought = purchasedAt ? Date.parse(purchasedAt) : NaN;
+  if (Number.isNaN(bought)) return false;
+  return now.getTime() - bought <= windowDays * 24 * 60 * 60 * 1000;
+}

@@ -20,6 +20,7 @@ import { useShoppingList } from '../../state/ShoppingListContext';
 import { Icon } from '../components/Icon';
 import { AccountScreen } from '../screens/AccountScreen';
 import { BlocksScreen } from '../screens/BlocksScreen';
+import { CompanyEditScreen } from '../screens/CompanyEditScreen';
 import { ConnectCompanyScreen } from '../screens/ConnectCompanyScreen';
 import { InvoiceScreen } from '../screens/InvoiceScreen';
 import { CategoryScreen } from '../screens/CategoryScreen';
@@ -84,6 +85,8 @@ function TabsNavigator(): React.ReactElement {
         tabBarStyle: { backgroundColor: theme.colors.surface, borderTopColor: theme.colors.border },
         tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: theme.colors.textMuted,
+        // Leaves the label its full line: the default icon box squeezes it to 10 px.
+        tabBarIconStyle: { height: 24 },
       }}
     >
       {tabs.map((tab) => (
@@ -143,7 +146,8 @@ function ReceiptsRoute(): React.ReactElement {
 }
 
 function ReceiptRoute({ route }: { route: { params: RootStackParamList['receipt'] } }): React.ReactElement {
-  return <ReceiptScreen receiptId={route.params.receiptId} />;
+  const navigate = useNavigate();
+  return <ReceiptScreen receiptId={route.params.receiptId} navigate={navigate} />;
 }
 
 function OrdersRoute(): React.ReactElement {
@@ -185,6 +189,11 @@ function PromosRoute(): React.ReactElement {
 function CorporateRoute(): React.ReactElement {
   const navigate = useNavigate();
   return <BlocksScreen screenId="corporate" navigate={navigate} />;
+}
+
+function CompanyEditRoute(): React.ReactElement {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  return <CompanyEditScreen goBack={() => navigation.goBack()} />;
 }
 
 function WalletRoute(): React.ReactElement {
@@ -290,6 +299,11 @@ export function RootNavigator(): React.ReactElement {
         <Stack.Screen name="list" component={ListRoute} options={{ title: t('screen.list') }} />
         <Stack.Screen name="promos" component={PromosRoute} options={{ title: t('screen.promos') }} />
         <Stack.Screen name="corporate" component={CorporateRoute} options={{ title: t('screen.corporate') }} />
+        <Stack.Screen
+          name="companyEdit"
+          component={CompanyEditRoute}
+          options={{ title: t('corporate.edit_company') }}
+        />
         <Stack.Screen name="wallet" component={WalletRoute} options={{ title: t('screen.wallet') }} />
         <Stack.Screen name="connections" component={ConnectionsRoute} options={{ title: t('screen.connections') }} />
         <Stack.Screen
