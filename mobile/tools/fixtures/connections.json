@@ -1,0 +1,15 @@
+[
+  {
+    "id": "con-4001",
+    "idno": "1000000000015",
+    "title": "ALFA DEMO SRL",
+    "actor_role": 2,
+    "state": "active",
+    "sfs_username": "buyer",
+    "consent_at": "2026-08-24T08:30:00Z",
+    "consent_version": "2026-08-25",
+    "last_poll_at": "2026-08-25T09:45:00Z",
+    "last_error": null,
+    "updated_at": "2026-08-25T09:45:00Z"
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "promo-w34",
+    "title": {
+      "ro": "Catalog 18–26 august",
+      "ru": "Каталог 18–26 августа",
+      "en": "Flyer 18–26 August"
+    },
+    "subtitle": {
+      "ro": "Ofertele săptămânii",
+      "ru": "Предложения недели",
+      "en": "Offers of the week"
+    },
+    "cover_url": "https://cdn.una.md/retail/flyers/w34/cover.jpg",
+    "pdf_url": "https://cdn.una.md/retail/flyers/w34.pdf",
+    "pages": [
+      "https://cdn.una.md/retail/flyers/w34/p1.jpg",
+      "https://cdn.una.md/retail/flyers/w34/p2.jpg",
+      "https://cdn.una.md/retail/flyers/w34/p3.jpg",
+      "https://cdn.una.md/retail/flyers/w34/p4.jpg",
+      "https://cdn.una.md/retail/flyers/w34/p5.jpg",
+      "https://cdn.una.md/retail/flyers/w34/p6.jpg",
+      "https://cdn.una.md/retail/flyers/w34/p7.jpg",
+      "https://cdn.una.md/retail/flyers/w34/p8.jpg"
+    ],
+    "store_ids": [
+      "st-01",
+      "st-02",
+      "st-03",
+      "st-04"
+    ],
+    "starts_at": "2026-08-18T00:00:00Z",
+    "ends_at": "2026-08-26T20:59:59Z",
+    "sort_order": 10,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "promo-back-to-school",
+    "title": {
+      "ro": "Înapoi la școală",
+      "ru": "Снова в школу",
+      "en": "Back to school"
+    },
+    "subtitle": {
+      "ro": "Rechizite și gustări",
+      "ru": "Канцтовары и перекусы",
+      "en": "Supplies and snacks"
+    },
+    "cover_url": "https://cdn.una.md/retail/flyers/school/cover.jpg",
+    "pdf_url": "https://cdn.una.md/retail/flyers/school.pdf",
+    "pages": [
+      "https://cdn.una.md/retail/flyers/school/p1.jpg",
+      "https://cdn.una.md/retail/flyers/school/p2.jpg",
+      "https://cdn.una.md/retail/flyers/school/p3.jpg",
+      "https://cdn.una.md/retail/flyers/school/p4.jpg"
+    ],
+    "store_ids": [
+      "st-01",
+      "st-02"
+    ],
+    "starts_at": "2026-08-15T00:00:00Z",
+    "ends_at": "2026-09-10T20:59:59Z",
+    "sort_order": 20,
+    "updated_at": "2026-08-20T08:00:00Z"
+  }
+]

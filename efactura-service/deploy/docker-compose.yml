@@ -1,0 +1,19 @@
+# Single-client deployment. Secrets come from .env, never from the image.
+services:
+  efactura:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: una-efactura:1.0.0
+    restart: unless-stopped
+    env_file: ../.env
+    ports:
+      - "8090:8090"
+    volumes:
+      # The signing certificate stays on the host, read-only.
+      - ./certs:/etc/una-efactura/certs:ro
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8090/efactura/v1/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

@@ -1,0 +1,89 @@
+[
+  {
+    "id": "cpn-1001",
+    "code": "LACTATE10",
+    "title": {
+      "ro": "-10% la lactate",
+      "ru": "-10% на молочное",
+      "en": "-10% on dairy"
+    },
+    "description": {
+      "ro": "Reducere la toate produsele lactate.",
+      "ru": "Скидка на все молочные продукты.",
+      "en": "Discount on all dairy products."
+    },
+    "image_url": "https://cdn.una.md/retail/coupons/dairy.png",
+    "barcode": "4841000100014",
+    "discount_type": "percent",
+    "discount_value": 10,
+    "min_order_total": 0,
+    "category_ids": [
+      "cat-dairy",
+      "cat-dairy-milk",
+      "cat-dairy-cheese"
+    ],
+    "product_ids": [],
+    "starts_at": "2026-08-01T00:00:00Z",
+    "ends_at": "2026-09-30T20:59:59Z",
+    "is_activated": false,
+    "activated_at": null,
+    "used_at": null,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "cpn-1002",
+    "code": "MINUS50",
+    "title": {
+      "ro": "-50 lei la comanda ta",
+      "ru": "-50 леев на заказ",
+      "en": "-50 lei off your order"
+    },
+    "description": {
+      "ro": "La comenzi de la 300 lei.",
+      "ru": "При заказе от 300 леев.",
+      "en": "On orders from 300 lei."
+    },
+    "image_url": "https://cdn.una.md/retail/coupons/minus50.png",
+    "barcode": "4841000100021",
+    "discount_type": "amount",
+    "discount_value": 50,
+    "min_order_total": 300,
+    "category_ids": [],
+    "product_ids": [],
+    "starts_at": "2026-08-10T00:00:00Z",
+    "ends_at": "2026-09-15T20:59:59Z",
+    "is_activated": false,
+    "activated_at": null,
+    "used_at": null,
+    "updated_at": "2026-08-20T08:00:00Z"
+  },
+  {
+    "id": "cpn-1003",
+    "code": "CAFEA15",
+    "title": {
+      "ro": "-15% la cafea",
+      "ru": "-15% на кофе",
+      "en": "-15% on coffee"
+    },
+    "description": {
+      "ro": "Pentru cafeaua de dimineață.",
+      "ru": "Для утреннего кофе.",
+      "en": "For your morning coffee."
+    },
+    "image_url": "https://cdn.una.md/retail/coupons/coffee.png",
+    "barcode": "4841000100038",
+    "discount_type": "percent",
+    "discount_value": 15,
+    "min_order_total": 0,
+    "category_ids": [],
+    "product_ids": [
+      "p-5004"
+    ],
+    "starts_at": "2026-08-15T00:00:00Z",
+    "ends_at": "2026-09-20T20:59:59Z",
+    "is_activated": true,
+    "activated_at": "2026-08-18T10:00:00Z",
+    "used_at": null,
+    "updated_at": "2026-08-20T08:00:00Z"
+  }
+]

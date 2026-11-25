@@ -1,0 +1,45 @@
+{
+  "externalId": "DOC-1001",
+  "deliveryDate": "2026-08-24T09:00:00.000Z",
+  "supplier": {
+    "idno": "1000000000033",
+    "taxpayerType": 1,
+    "title": "UNA RETAIL SRL",
+    "address": "mun. Chisinau, str. Alba Iulia 75",
+    "bankAccount": {
+      "account": "MD24AG000225100013104168",
+      "branchTitle": "BC Moldova Agroindbank SA",
+      "branchCode": "MOBBMD22"
+    }
+  },
+  "buyer": {
+    "idno": "1000000000015",
+    "taxpayerType": 1,
+    "title": "ALFA DEMO SRL",
+    "address": "mun. Chisinau, bd. Dacia 47"
+  },
+  "lines": [
+    {
+      "code": "4820",
+      "name": "Lapte 2.5% 1 L",
+      "unitOfMeasure": "buc",
+      "quantity": 10,
+      "unitPriceWithoutVat": 14.92,
+      "totalPriceWithoutVat": 149.20,
+      "vatRate": 8,
+      "totalVat": 11.94,
+      "totalPrice": 161.14
+    },
+    {
+      "code": "7710",
+      "name": "Detergent vase 1 L",
+      "unitOfMeasure": "buc",
+      "quantity": 2,
+      "unitPriceWithoutVat": 45.75,
+      "totalPriceWithoutVat": 91.50,
+      "vatRate": 20,
+      "totalVat": 18.30,
+      "totalPrice": 109.80
+    }
+  ]
+}

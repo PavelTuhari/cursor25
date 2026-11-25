@@ -1,0 +1,30 @@
+{
+  "id": "cart",
+  "titleKey": "screen.cart",
+  "refreshable": false,
+  "blocks": [
+    {
+      "id": "cart-main",
+      "type": "cart",
+      "visibleIf": { "feature": "cart" },
+      "props": { "showCoupon": true, "checkoutAction": { "type": "navigate", "screen": "checkout" } }
+    },
+    {
+      "id": "cart-suggestions",
+      "type": "product_carousel",
+      "titleKey": "home.deals",
+      "props": {
+        "cardWidth": 156,
+        "source": {
+          "entity": "products",
+          "where": [
+            { "field": "discount_percent", "op": ">", "value": 0 },
+            { "field": "is_active", "op": "=", "value": 1 }
+          ],
+          "orderBy": [{ "field": "discount_percent", "dir": "desc" }],
+          "limit": 12
+        }
+      }
+    }
+  ]
+}

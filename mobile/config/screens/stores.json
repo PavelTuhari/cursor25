@@ -1,0 +1,22 @@
+{
+  "id": "stores",
+  "titleKey": "screen.stores",
+  "refreshable": true,
+  "blocks": [
+    {
+      "id": "stores-list",
+      "type": "store_list",
+      "props": {
+        "source": {
+          "entity": "stores",
+          "where": [{ "field": "is_active", "op": "=", "value": 1 }],
+          "orderBy": [{ "field": "code", "dir": "asc" }],
+          "limit": 200
+        },
+        "showWorkingHours": true,
+        "showServices": true,
+        "sortByDistance": true
+      }
+    }
+  ]
+}

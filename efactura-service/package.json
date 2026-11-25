@@ -1,0 +1,41 @@
+{
+  "name": "una-efactura-service",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Autonomous e-Factura (SFS.md) integration microservice: Oracle-backed outbox, SOAP client for SIA e-Factura, XMLDSig signing. Runs standalone on Ubuntu, Windows or OCI.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/main.js",
+    "dev": "tsx watch src/main.ts",
+    "start:mock-sfs": "tsx mock/sfs-mock.ts",
+    "typecheck": "tsc --noEmit",
+    "validate-config": "tsx src/config/validateCli.ts",
+    "migrate": "tsx src/db/migrateCli.ts",
+    "test": "tsx --test __tests__/*.test.ts",
+    "check": "npm run typecheck && npm run validate-config && npm test"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.9.8",
+    "fast-xml-parser": "^5.2.5",
+    "node-forge": "^1.3.1",
+    "oracledb": "^6.9.0",
+    "xml-crypto": "^6.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@types/node-forge": "^1.3.11",
+    "@types/oracledb": "^6.9.1",
+    "tsx": "^4.20.6",
+    "typescript": "~5.9.3"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "oracledb@6.10.0": true
+  }
+}

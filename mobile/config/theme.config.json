@@ -1,0 +1,54 @@
+{
+  "light": {
+    "colors": {
+      "primary": "#E10915",
+      "onPrimary": "#FFFFFF",
+      "primaryMuted": "#FDE7E9",
+      "secondary": "#00723F",
+      "accent": "#FFCC00",
+      "background": "#F5F6F8",
+      "surface": "#FFFFFF",
+      "surfaceAlt": "#EFF1F4",
+      "text": "#16181D",
+      "textMuted": "#6B7280",
+      "border": "#E3E6EB",
+      "success": "#127C42",
+      "warning": "#B45309",
+      "danger": "#C21B17",
+      "price": "#16181D",
+      "priceOld": "#9AA0AA",
+      "badge": "#E10915",
+      "onBadge": "#FFFFFF"
+    }
+  },
+  "dark": {
+    "colors": {
+      "primary": "#FF4D57",
+      "onPrimary": "#1A0508",
+      "primaryMuted": "#3A1216",
+      "secondary": "#3FBF7F",
+      "accent": "#FFD84D",
+      "background": "#0F1115",
+      "surface": "#181B21",
+      "surfaceAlt": "#20242C",
+      "text": "#F2F4F7",
+      "textMuted": "#98A1AE",
+      "border": "#2A2F38",
+      "success": "#3FBF7F",
+      "warning": "#F0A72C",
+      "danger": "#FF6B63",
+      "price": "#F2F4F7",
+      "priceOld": "#6B7280",
+      "badge": "#FF4D57",
+      "onBadge": "#1A0508"
+    }
+  },
+  "typography": {
+    "fontFamily": null,
+    "sizes": { "xs": 11, "sm": 13, "md": 15, "lg": 18, "xl": 22, "xxl": 28 },
+    "weights": { "regular": "400", "medium": "600", "bold": "800" }
+  },
+  "radius": { "sm": 6, "md": 12, "lg": 18, "pill": 999 },
+  "spacing": { "xs": 4, "sm": 8, "md": 12, "lg": 16, "xl": 24, "xxl": 32 },
+  "images": { "placeholder": "https://cdn.una.md/retail/placeholder.png" }
+}

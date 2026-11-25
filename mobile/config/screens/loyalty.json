@@ -1,0 +1,27 @@
+{
+  "id": "loyalty",
+  "titleKey": "screen.loyalty",
+  "refreshable": true,
+  "blocks": [
+    { "id": "loyalty-card", "type": "loyalty_card", "props": { "compact": false } },
+    {
+      "id": "loyalty-offers",
+      "type": "product_carousel",
+      "titleKey": "loyalty.personal_offers",
+      "props": {
+        "cardWidth": 156,
+        "source": {
+          "entity": "products",
+          "where": [{ "field": "promo_id", "op": "is not null" }],
+          "orderBy": [{ "field": "discount_percent", "dir": "desc" }],
+          "limit": 20
+        }
+      }
+    },
+    {
+      "id": "loyalty-info",
+      "type": "info_banner",
+      "props": { "titleKey": "loyalty.how_title", "textKey": "loyalty.how_text", "icon": "card" }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "receipts",
+  "titleKey": "screen.receipts",
+  "refreshable": true,
+  "blocks": [
+    {
+      "id": "receipts-list",
+      "type": "receipt_list",
+      "visibleIf": { "feature": "purchaseHistory" },
+      "props": {
+        "showStore": true,
+        "showPoints": true,
+        "source": {
+          "entity": "receipts",
+          "orderBy": [{ "field": "purchased_at", "dir": "desc" }],
+          "limit": 100
+        }
+      }
+    },
+    {
+      "id": "receipts-login",
+      "type": "login_prompt",
+      "visibleIf": { "auth": "anonymous" },
+      "props": { "titleKey": "auth.prompt_title", "textKey": "account.receipts_login_text" }
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "configVersion": 1,
+  "app": {
+    "id": "md.una.retail",
+    "name": "UNA Market",
+    "tenantId": "demo",
+    "defaultLocale": "ro",
+    "locales": [
+      "ro",
+      "ru",
+      "en"
+    ],
+    "currency": {
+      "code": "MDL",
+      "symbol": "lei",
+      "decimals": 2,
+      "position": "suffix"
+    },
+    "supportPhone": "+373 22 000 000",
+    "supportEmail": "suport@una.md"
+  },
+  "api": {
+    "baseUrl": "https://api.una.md/retail/v1",
+    "timeoutMs": 15000,
+    "pageSize": 200,
+    "retry": {
+      "attempts": 3,
+      "backoffMs": 500,
+      "factor": 2,
+      "maxBackoffMs": 8000
+    },
+    "auth": {
+      "mode": "bearer",
+      "flow": "otp",
+      "requestCodeEndpoint": "/auth/request-code",
+      "loginEndpoint": "/auth/login",
+      "refreshEndpoint": "/auth/refresh",
+      "logoutEndpoint": "/auth/logout",
+      "otpLength": 4,
+      "otpResendSeconds": 60,
+      "anonymousAllowed": true,
+      "termsUrl": "https://una.md/terms"
+    },
+    "headers": {
+      "X-App-Platform": "mobile",
+      "X-Tenant": "demo"
+    }
+  },
+  "sync": {
+    "syncOnStart": true,
+    "intervalMinutes": 30,
+    "minIntervalMinutes": 5,
+    "staleAfterMinutes": 720,
+    "outbox": {
+      "maxAttempts": 5,
+      "backoffMs": 2000,
+      "factor": 3,
+      "maxBackoffMs": 3600000
+    },
+    "maxPagesPerEntity": 200
+  },
+  "remoteConfig": {
+    "enabled": true,
+    "endpoint": "/app-config",
+    "cacheTtlMinutes": 60,
+    "failOpen": true
+  },
+  "features": {
+    "loyalty": true,
+    "shoppingList": true,
+    "favorites": true,
+    "stores": true,
+    "promoFlyers": true,
+    "search": true,
+    "productReviews": false,
+    "cart": true,
+    "onlineOrders": true,
+    "account": true,
+    "purchaseHistory": true,
+    "eReceipts": true,
+    "coupons": true,
+    "push": true,
+    "scanner": true,
+    "corporate": true,
+    "eFactura": true,
+    "wallet": true,
+    "incomingInvoices": true,
+    "payments": false
+  },
+  "loyalty": {
+    "barcodeFormat": "ean13",
+    "cardTitleKey": "loyalty.card_title",
+    "showPoints": true,
+    "showTierProgress": true
+  },
+  "catalog": {
+    "productCard": {
+      "showUnitPrice": true,
+      "showDiscountBadge": true,
+      "showStockStatus": true,
+      "showFavoriteButton": true
+    },
+    "gridColumns": 2,
+    "pageSize": 30
+  },
+  "search": {
+    "minChars": 2,
+    "historySize": 10,
+    "debounceMs": 250
+  },
+  "account": {
+    "editableFields": [
+      "first_name",
+      "last_name",
+      "email",
+      "birthday",
+      "city"
+    ],
+    "showMarketingOptIn": true,
+    "receiptsPageSize": 50,
+    "receiptBarcodeFormat": "code128"
+  },
+  "cart": {
+    "fulfillment": [
+      "pickup",
+      "delivery"
+    ],
+    "minOrderTotal": 150,
+    "deliveryFee": 39,
+    "freeDeliveryFrom": 500,
+    "slotDays": 3,
+    "slotHours": [
+      "10:00-12:00",
+      "12:00-14:00",
+      "14:00-16:00",
+      "16:00-18:00",
+      "18:00-20:00"
+    ],
+    "maxQuantityPerItem": 30
+  },
+  "push": {
+    "enabled": true,
+    "registerEndpoint": "/account/push-token",
+    "askOnFirstLaunch": false,
+    "topics": [
+      "promotions",
+      "orders",
+      "personal"
+    ]
+  },
+  "scanner": {
+    "formats": [
+      "ean13",
+      "ean8",
+      "upc_a",
+      "code128",
+      "qr"
+    ],
+    "addToListOnScan": false
+  },
+  "corporate": {
+    "enabled": true,
+    "requireVerification": true,
+    "companyEndpoint": "/account/company",
+    "invoicesEndpoint": "/account/invoices",
+    "taxpayerLookupEndpoint": "/account/company/lookup",
+    "editableFields": [
+      "name",
+      "vat_code",
+      "legal_address",
+      "delivery_address",
+      "bank_account",
+      "bank_name",
+      "bank_swift",
+      "contact_name",
+      "contact_email",
+      "contact_phone"
+    ],
+    "invoicesPageSize": 50,
+    "requestFromReceipt": true,
+    "requestWindowDays": 30,
+    "efactura": {
+      "portalUrl": "https://efactura.sfs.md/",
+      "showStatus": true,
+      "showQr": true,
+      "allowPdfDownload": true
+    }
+  },
+  "wallet": {
+    "enabled": true,
+    "connectionsEndpoint": "/account/connections",
+    "inboxEndpoint": "/account/inbox",
+    "consentUrl": "https://una.md/wallet-consent",
+    "consentVersion": "2026-08-25",
+    "refreshIntervalMinutes": 15,
+    "backfillMonths": 12,
+    "pdfCacheDays": 30,
+    "documentsPageSize": 100,
+    "decisions": {
+      "allowAccept": true,
+      "allowReject": true,
+      "requireRejectComment": true
+    },
+    "payments": {
+      "enabled": false,
+      "provider": "",
+      "allowPartial": true
+    }
+  }
+}
