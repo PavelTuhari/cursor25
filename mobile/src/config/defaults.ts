@@ -17,6 +17,9 @@ import cartScreen from '@config/screens/cart.json';
 import ordersScreen from '@config/screens/orders.json';
 import couponsScreen from '@config/screens/coupons.json';
 import receiptsScreen from '@config/screens/receipts.json';
+import corporateScreen from '@config/screens/corporate.json';
+import walletScreen from '@config/screens/wallet.json';
+import connectionsScreen from '@config/screens/connections.json';
 import ro from '@config/l10n/ro.json';
 import ru from '@config/l10n/ru.json';
 import en from '@config/l10n/en.json';
@@ -31,6 +34,10 @@ import type {
   Translations,
 } from './types';
 
+// Every file in `config/screens/` belongs here. A screen that exists on disk
+// but is missing from this list renders as "not configured" until the backend
+// happens to send it - which is exactly what a first launch does not have. The
+// test suite compares this list against the directory.
 const screens: Record<string, ScreenConfig> = {};
 for (const screen of [
   homeScreen,
@@ -44,6 +51,9 @@ for (const screen of [
   ordersScreen,
   couponsScreen,
   receiptsScreen,
+  corporateScreen,
+  walletScreen,
+  connectionsScreen,
 ] as unknown as ScreenConfig[]) {
   screens[screen.id] = screen;
 }

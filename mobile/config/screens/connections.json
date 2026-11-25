@@ -1,0 +1,23 @@
+{
+  "id": "connections",
+  "titleKey": "screen.connections",
+  "refreshable": true,
+  "blocks": [
+    {
+      "id": "connections-login",
+      "type": "login_prompt",
+      "visibleIf": { "auth": "anonymous" },
+      "props": { "titleKey": "auth.prompt_title", "textKey": "corporate.login_text" }
+    },
+    {
+      "id": "connections-list",
+      "type": "connection_list",
+      "titleKey": "wallet.connections",
+      "visibleIf": { "feature": "wallet", "auth": "required" },
+      "props": {
+        "source": { "entity": "connections", "limit": 50 },
+        "addAction": { "type": "navigate", "screen": "connectCompany" }
+      }
+    }
+  ]
+}

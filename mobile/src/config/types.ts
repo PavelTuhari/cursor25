@@ -136,6 +136,60 @@ export interface ScannerConfig {
   addToListOnScan: boolean;
 }
 
+/**
+ * Corporate customers: company details on file and fiscal invoices issued
+ * through the e-Factura service. A consumer-only tenant omits the whole
+ * section, which is why it is optional on `AppConfig`.
+ */
+export interface CorporateConfig {
+  enabled: boolean;
+  /** Treat a company as usable only once the backend has checked it against SFS. */
+  requireVerification: boolean;
+  companyEndpoint: string;
+  invoicesEndpoint: string;
+  taxpayerLookupEndpoint: string;
+  editableFields: string[];
+  invoicesPageSize: number;
+  /** Offer "request a fiscal invoice" on a receipt. */
+  requestFromReceipt: boolean;
+  /** How long after the purchase an invoice may still be requested. */
+  requestWindowDays: number;
+  efactura: {
+    portalUrl: string;
+    showStatus: boolean;
+    showQr: boolean;
+    allowPdfDownload: boolean;
+  };
+}
+
+/**
+ * The wallet: incoming fiscal invoices from every supplier, the companies whose
+ * e-Factura accounts are connected, and payments against those invoices.
+ */
+export interface WalletConfig {
+  enabled: boolean;
+  connectionsEndpoint: string;
+  inboxEndpoint: string;
+  /** Full consent text, linked from the connect screen. */
+  consentUrl: string;
+  /** Recorded with each connection, so a change of terms is auditable. */
+  consentVersion: string;
+  refreshIntervalMinutes: number;
+  backfillMonths: number;
+  pdfCacheDays: number;
+  documentsPageSize: number;
+  decisions: {
+    allowAccept: boolean;
+    allowReject: boolean;
+    requireRejectComment: boolean;
+  };
+  payments: {
+    enabled: boolean;
+    provider: string;
+    allowPartial: boolean;
+  };
+}
+
 export interface SearchConfig {
   minChars: number;
   historySize: number;
@@ -156,6 +210,8 @@ export interface AppConfig {
   cart: CartConfig;
   push: PushConfig;
   scanner: ScannerConfig;
+  corporate?: CorporateConfig;
+  wallet?: WalletConfig;
 }
 
 /* ------------------------------------------------------------------ theme */

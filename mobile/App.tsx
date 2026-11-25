@@ -19,6 +19,7 @@ import { useAutoSync } from './src/state/useAutoSync';
 import { CartProvider } from './src/state/CartContext';
 import { ShoppingListProvider } from './src/state/ShoppingListContext';
 import { RootNavigator } from './src/ui/navigation/RootNavigator';
+import { WalletPreview } from './src/dev/WalletPreview';
 
 /** Set at bundle time for the demo build: `EXPO_PUBLIC_DEMO=1`. */
 const IS_DEMO = process.env.EXPO_PUBLIC_DEMO === '1';
@@ -29,6 +30,24 @@ function AutoSync(): null {
   return null;
 }
 
+/**
+ * Internal preview windows: one screen, in a chosen state, without walking
+ * there through the app. Development builds only, and only when asked for -
+ * `?preview=wallet` on web, or `expo.extra.preview` in a dev build. A release
+ * build never reaches this code because `__DEV__` is false.
+ */
+function requestedPreview(): string | null {
+  if (!__DEV__) return null;
+
+  if (typeof window !== 'undefined' && window.location?.search) {
+    const fromUrl = new URLSearchParams(window.location.search).get('preview');
+    if (fromUrl) return fromUrl;
+  }
+
+  const extra = Constants.expoConfig?.extra as { preview?: string } | undefined;
+  return extra?.preview ?? null;
+}
+
 export default function App(): React.ReactElement {
   const scheme = useColorScheme() === 'dark' ? 'dark' : 'light';
   const [runtime, setRuntime] = useState<Runtime | null>(null);
@@ -36,8 +55,12 @@ export default function App(): React.ReactElement {
   const [configRevision, setConfigRevision] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const started = useRef(false);
+  // Read once: the preview owns the whole tree, and switching into it mid-run
+  // would leave the app's runtime half-started behind it.
+  const preview = useRef(requestedPreview()).current;
 
   useEffect(() => {
+    if (preview) return;
     if (started.current) return;
     started.current = true;
 
@@ -80,6 +103,15 @@ export default function App(): React.ReactElement {
       }
     })();
   }, []);
+
+  if (preview === 'wallet' || preview === 'connect') {
+    return (
+      <SafeAreaProvider>
+        <StatusBar style="light" />
+        <WalletPreview screen={preview} />
+      </SafeAreaProvider>
+    );
+  }
 
   if (error) {
     return (

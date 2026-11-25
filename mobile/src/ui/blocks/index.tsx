@@ -28,6 +28,8 @@ import {
   StoreLocatorCardBlock,
   SyncStatusBlock,
 } from './misc';
+import { CompanyCardBlock, FiscalInvoiceListBlock, InvoiceRequestBlock } from './corporate';
+import { ConnectionListBlock, InvoiceActionsBlock, WalletListBlock } from './wallet';
 import { BLOCK_TYPE_NAMES } from './blockTypes';
 import type { BlockComponent, BlockProps } from './types';
 
@@ -54,6 +56,12 @@ export const BLOCK_REGISTRY: Record<string, BlockComponent> = {
   coupon_strip: CouponStripBlock,
   menu_list: MenuListBlock,
   sync_status: SyncStatusBlock,
+  company_card: CompanyCardBlock,
+  fiscal_invoice_list: FiscalInvoiceListBlock,
+  invoice_request: InvoiceRequestBlock,
+  wallet_list: WalletListBlock,
+  connection_list: ConnectionListBlock,
+  invoice_actions: InvoiceActionsBlock,
 };
 
 export const BLOCK_TYPES: string[] = [...BLOCK_TYPE_NAMES];

@@ -12,9 +12,13 @@ import type { FetchLike } from '../api/client';
 import appConfigJson from '../../config/app.config.json';
 import banners from '../../tools/fixtures/banners.json';
 import categories from '../../tools/fixtures/categories.json';
+import company from '../../tools/fixtures/company.json';
+import connections from '../../tools/fixtures/connections.json';
 import coupons from '../../tools/fixtures/coupons.json';
+import fiscalInvoices from '../../tools/fixtures/fiscal_invoices.json';
 import loyaltyAccount from '../../tools/fixtures/loyalty_account.json';
 import orders from '../../tools/fixtures/orders.json';
+import payments from '../../tools/fixtures/payments.json';
 import products from '../../tools/fixtures/products.json';
 import profile from '../../tools/fixtures/profile.json';
 import promotions from '../../tools/fixtures/promotions.json';
@@ -63,9 +67,13 @@ export function createDemoFetch(): FetchLike {
     fixtures: {
       banners,
       categories,
+      company,
+      connections,
       coupons,
+      fiscal_invoices: fiscalInvoices,
       loyalty_account: loyaltyAccount,
       orders,
+      payments,
       products,
       profile,
       promotions,

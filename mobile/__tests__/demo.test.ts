@@ -69,6 +69,11 @@ describe('demo build', () => {
       );
       expect(orders[0]).toMatchObject({ status: 'confirmed' });
 
+      // The corporate area and the wallet are part of the demo too.
+      for (const entity of ['company', 'fiscal_invoices', 'connections']) {
+        expect((await runtime.db.repository(entity).query({ entity }, ctx)).length).toBeGreaterThan(0);
+      }
+
       await driver.close();
     } finally {
       global.fetch = realFetch;
@@ -76,4 +81,32 @@ describe('demo build', () => {
 
     expect(networkCalls).toEqual([]);
   }, 30_000);
+
+  it('connects a company without keeping or returning the tax-service password', async () => {
+    const send = createDemoFetch();
+    const post = (url: string, body: unknown, token?: string) =>
+      send(`${DEMO_BASE_URL}${url}`, {
+        method: 'POST',
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        body: JSON.stringify(body),
+      });
+
+    const login = (await (await post('/auth/login', { phone: '+37360123456', code: '1234' })).json()) as {
+      access_token: string;
+    };
+    const draft = { idno: '1000000000099', sfsUsername: 'api-user', consentAccepted: true, actorRole: 2 };
+
+    expect((await post('/account/connections', { ...draft, sfsPassword: 'x' })).status).toBe(401);
+    const rejected = await post('/account/connections', { ...draft, sfsPassword: 'wrong' }, login.access_token);
+    expect(rejected.status).toBe(422);
+
+    const created = await post('/account/connections', { ...draft, sfsPassword: 'kept-nowhere' }, login.access_token);
+    expect(created.status).toBe(201);
+    const listed = await send(`${DEMO_BASE_URL}/account/connections`, {
+      headers: { Authorization: `Bearer ${login.access_token}` },
+    });
+    const text = (await created.text()) + (await listed.text());
+    expect(text).toContain('1000000000099');
+    expect(text).not.toContain('kept-nowhere');
+  });
 });

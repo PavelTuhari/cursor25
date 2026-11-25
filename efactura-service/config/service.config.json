@@ -1,0 +1,66 @@
+{
+  "service": {
+    "name": "una-efactura",
+    "tenantId": "demo",
+    "http": { "host": "0.0.0.0", "port": 8090, "basePath": "/efactura/v1" },
+    "apiToken": "",
+    "logLevel": "info"
+  },
+  "sfs": {
+    "endpoint": "https://efactura-api.sfs.md/Service.svc",
+    "soapNamespace": "http://tempuri.org/",
+    "modelNamespace": "http://schemas.datacontract.org/2004/07/AX.EFactura.Model.ApiModel",
+    "username": "",
+    "password": "",
+    "timeoutMs": 60000,
+    "retries": 3,
+    "retryBackoffMs": 2000,
+    "actorRole": 1,
+    "invoiceType": 0
+  },
+  "oracle": {
+    "connectString": "localhost:1521/XEPDB1",
+    "user": "EFACTURA",
+    "password": "",
+    "schema": "EFACTURA",
+    "poolMin": 1,
+    "poolMax": 8,
+    "poolIncrement": 1,
+    "queueTimeoutMs": 30000
+  },
+  "erp": {
+    "source": "views",
+    "views": {
+      "documents": "V_EFACT_DOCUMENTS",
+      "lines": "V_EFACT_DOCUMENT_LINES",
+      "partners": "V_EFACT_PARTNERS"
+    }
+  },
+  "signing": {
+    "mode": "none",
+    "pkcs12": { "file": "", "passphrase": "", "digest": "sha256" },
+    "pkiServer": { "url": "", "apiKey": "", "keyAlias": "", "timeoutMs": 30000 }
+  },
+  "crypto": {
+    "key": "",
+    "consentVersion": "2026-08-25"
+  },
+  "inbox": {
+    "enabled": false,
+    "pollIntervalMs": 900000,
+    "connectionsPerTick": 20,
+    "batchSize": 50,
+    "maxAttempts": 5,
+    "backfillMonths": 12,
+    "trackedStatuses": [7, 3, 8, 10, 2]
+  },
+  "worker": {
+    "enabled": true,
+    "pollIntervalMs": 15000,
+    "batchSize": 25,
+    "maxAttempts": 8,
+    "statusPollIntervalMs": 300000,
+    "seriesLowWaterMark": 50,
+    "seriesReserveCount": 200
+  }
+}

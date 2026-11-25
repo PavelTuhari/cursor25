@@ -127,6 +127,32 @@
             }
           },
           {
+            "id": "wallet",
+            "titleKey": "menu.wallet",
+            "icon": "card",
+            "visibleIf": {
+              "feature": "wallet",
+              "auth": "required"
+            },
+            "action": {
+              "type": "navigate",
+              "screen": "wallet"
+            }
+          },
+          {
+            "id": "corporate",
+            "titleKey": "menu.corporate",
+            "icon": "receipt",
+            "visibleIf": {
+              "feature": "corporate",
+              "auth": "required"
+            },
+            "action": {
+              "type": "navigate",
+              "screen": "corporate"
+            }
+          },
+          {
             "id": "favorites",
             "titleKey": "menu.favorites",
             "icon": "heart",

@@ -21,6 +21,11 @@ export type RootStackParamList = {
   scan: undefined;
   list: undefined;
   promos: undefined;
+  corporate: undefined;
+  wallet: undefined;
+  connections: undefined;
+  connectCompany: { connectionId?: string } | undefined;
+  invoice: { invoiceId: string };
 };
 
 export type ScreenName = keyof RootStackParamList;

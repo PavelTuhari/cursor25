@@ -26,6 +26,12 @@ export const BLOCK_TYPE_NAMES = [
   'coupon_strip',
   'menu_list',
   'sync_status',
+  'company_card',
+  'fiscal_invoice_list',
+  'invoice_request',
+  'wallet_list',
+  'connection_list',
+  'invoice_actions',
 ] as const;
 
 export type BlockTypeName = (typeof BLOCK_TYPE_NAMES)[number];

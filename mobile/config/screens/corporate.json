@@ -1,0 +1,52 @@
+{
+  "id": "corporate",
+  "titleKey": "screen.corporate",
+  "refreshable": true,
+  "blocks": [
+    {
+      "id": "corporate-login",
+      "type": "login_prompt",
+      "visibleIf": { "auth": "anonymous" },
+      "props": { "titleKey": "auth.prompt_title", "textKey": "corporate.login_text" }
+    },
+    {
+      "id": "corporate-company",
+      "type": "company_card",
+      "titleKey": "corporate.company",
+      "visibleIf": { "feature": "corporate", "auth": "required" },
+      "props": {
+        "showBank": true,
+        "showContact": true,
+        "showVerification": true,
+        "source": { "entity": "company", "limit": 1 },
+        "editAction": { "type": "navigate", "screen": "companyEdit" }
+      }
+    },
+    {
+      "id": "corporate-invoices",
+      "type": "fiscal_invoice_list",
+      "titleKey": "corporate.invoices",
+      "visibleIf": { "feature": "eFactura", "auth": "required" },
+      "props": {
+        "showQr": true,
+        "showPdf": true,
+        "source": {
+          "entity": "fiscal_invoices",
+          "orderBy": [{ "field": "issued_at", "dir": "desc" }],
+          "limit": 50
+        }
+      }
+    },
+    {
+      "id": "corporate-efactura-note",
+      "type": "info_banner",
+      "visibleIf": { "feature": "eFactura", "auth": "required" },
+      "props": {
+        "icon": "info",
+        "titleKey": "corporate.efactura_note_title",
+        "textKey": "corporate.efactura_note_text",
+        "action": { "type": "url", "url": "https://efactura.sfs.md/" }
+      }
+    }
+  ]
+}

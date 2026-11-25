@@ -1,0 +1,101 @@
+{
+  "id": "wallet",
+  "titleKey": "screen.wallet",
+  "refreshable": true,
+  "blocks": [
+    {
+      "id": "wallet-login",
+      "type": "login_prompt",
+      "visibleIf": {
+        "auth": "anonymous"
+      },
+      "props": {
+        "titleKey": "auth.prompt_title",
+        "textKey": "corporate.login_text"
+      }
+    },
+    {
+      "id": "wallet-connections",
+      "type": "connection_list",
+      "titleKey": "wallet.connections",
+      "visibleIf": {
+        "feature": "wallet",
+        "auth": "required"
+      },
+      "props": {
+        "source": {
+          "entity": "connections",
+          "limit": 20
+        },
+        "addAction": {
+          "type": "navigate",
+          "screen": "connectCompany"
+        }
+      }
+    },
+    {
+      "id": "wallet-incoming",
+      "type": "wallet_list",
+      "titleKey": "wallet.incoming",
+      "visibleIf": {
+        "feature": "incomingInvoices",
+        "auth": "required"
+      },
+      "props": {
+        "filter": "in",
+        "showSummary": true,
+        "source": {
+          "entity": "fiscal_invoices",
+          "orderBy": [
+            {
+              "field": "issued_at",
+              "dir": "desc"
+            }
+          ],
+          "limit": 100
+        }
+      }
+    },
+    {
+      "id": "wallet-outgoing",
+      "type": "wallet_list",
+      "titleKey": "wallet.outgoing",
+      "visibleIf": {
+        "feature": "eFactura",
+        "auth": "required"
+      },
+      "props": {
+        "filter": "out",
+        "showSummary": false,
+        "source": {
+          "entity": "fiscal_invoices",
+          "orderBy": [
+            {
+              "field": "issued_at",
+              "dir": "desc"
+            }
+          ],
+          "limit": 50
+        },
+        "hideWhenEmpty": true
+      }
+    },
+    {
+      "id": "wallet-note",
+      "type": "info_banner",
+      "visibleIf": {
+        "feature": "incomingInvoices",
+        "auth": "required"
+      },
+      "props": {
+        "icon": "info",
+        "titleKey": "corporate.efactura_note_title",
+        "textKey": "corporate.efactura_note_text",
+        "action": {
+          "type": "url",
+          "url": "https://efactura.sfs.md/"
+        }
+      }
+    }
+  ]
+}

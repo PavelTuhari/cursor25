@@ -39,6 +39,13 @@ const ROUTES = [
   { path: '/account/receipts', collection: 'receipts', auth: true },
   { path: '/account/coupons', collection: 'coupons', writable: true, batch: true, auth: true },
   { path: '/account/orders', collection: 'orders', writable: true, auth: true, orders: true },
+  // Corporate: the company is edited on the device, invoice requests are
+  // pushed and the issued documents come back from the e-Factura service.
+  { path: '/account/company', collection: 'company', writable: true, auth: true },
+  { path: '/account/invoices', collection: 'fiscal_invoices', writable: true, auth: true },
+  // Wallet: connected e-Factura accounts and payments against invoices.
+  { path: '/account/connections', collection: 'connections', writable: true, auth: true, connect: true },
+  { path: '/account/payments', collection: 'payments', writable: true, auth: true },
   { path: '/list/items', collection: 'shopping_list_items', writable: true },
   { path: '/account/favorites', collection: 'favorites', writable: true, batch: true, auth: true },
 ];
@@ -140,6 +147,7 @@ function createMockBackend(options) {
   const pushTokens = new Map();
   let sessionCounter = 0;
   let orderCounter = 0;
+  let connectionCounter = 0;
 
   function localizeImages(value) {
     if (typeof value === 'string') {
@@ -356,6 +364,33 @@ function createMockBackend(options) {
         };
       });
       return json(200, { results });
+    }
+
+    // Connecting a company: the tax-service password is checked and dropped, it
+    // is never stored or returned. "wrong" plays the part of a rejected one.
+    if (route.connect && method === 'POST' && rest === '') {
+      const draft = body || {};
+      if (!draft.idno || !draft.sfsUsername || !draft.sfsPassword || draft.consentAccepted !== true) {
+        return json(422, { error: 'incomplete connection' });
+      }
+      if (draft.sfsPassword === 'wrong') return json(422, { error: 'rejected by the tax service' });
+      const known = collections.connections.find((item) => item.idno === draft.idno);
+      connectionCounter += 1;
+      const at = now();
+      return json(
+        201,
+        upsert('connections', known ? known.id : `con-demo-${connectionCounter}`, {
+          idno: draft.idno,
+          title: known ? known.title : `IDNO ${draft.idno}`,
+          actor_role: draft.actorRole != null ? draft.actorRole : 2,
+          state: 'active',
+          sfs_username: draft.sfsUsername,
+          consent_at: at,
+          consent_version: draft.consentVersion != null ? draft.consentVersion : null,
+          last_poll_at: at,
+          last_error: null,
+        }),
+      );
     }
 
     if (method === 'PUT' && rest) {

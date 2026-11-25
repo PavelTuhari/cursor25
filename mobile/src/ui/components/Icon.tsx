@@ -38,6 +38,10 @@ const GLYPHS: Record<string, string> = {
   truck: '⇢',
   store: '⌂',
   warning: '⚠',
+  edit: '✎',
+  download: '⤓',
+  qr: '▩',
+  building: '☷',
 };
 
 export interface IconProps {

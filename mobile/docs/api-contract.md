@@ -263,6 +263,97 @@ DELETE /account/push-token/{token}   → 204   (при выходе из акк�
 | `cart_items` | — | local (не синхронизируется) | — |
 | `shopping_list_items` | `/list/items` | bidirectional | delta, REST |
 | `favorites` | `/account/favorites` | bidirectional | delta, batch |
+| `company` | `/account/company` | bidirectional (auth) | full, REST |
+| `fiscal_invoices` | `/account/invoices` | bidirectional (auth) | delta, REST |
 
 Набор задаётся конфигурацией: добавление сущности на стороне UNA.md — это новая запись
 в `entities.config.json`, а не изменение кода приложения.
+
+## Корпоративные клиенты и e-Factura
+
+Включается флагами `features.corporate` и `features.eFactura`; настройки —
+в секции `corporate` файла `app.config.json`.
+
+### `/account/company`
+
+Реквизиты юрлица покупателя. Двусторонняя сущность: клиент заполняет их в
+приложении, изменения уходят через очередь, поэтому форма работает офлайн.
+
+```json
+{
+  "id": "cmp-2001",
+  "idno": "1000000000015",
+  "name": "ALFA DEMO SRL",
+  "vat_code": "0305678",
+  "legal_address": "mun. Chisinau, bd. Dacia 47/2",
+  "delivery_address": "mun. Chisinau, str. Uzinelor 12",
+  "bank_account": "MD24AG000225100013104168",
+  "bank_name": "BC Moldova Agroindbank SA",
+  "bank_swift": "MOBBMD22",
+  "contact_name": "Ion Popescu",
+  "contact_email": "contabilitate@example.md",
+  "contact_phone": "+37322334455",
+  "efactura_verified": true,
+  "efactura_actor": true,
+  "status": "active",
+  "updated_at": "2026-08-20T09:00:00Z"
+}
+```
+
+`efactura_verified` и `efactura_actor` **выставляет сервер**, а не приложение:
+это результат вызова `GetTaxpayersInfo` в реестре SFS через микросервис
+e-Factura. Приложение показывает их значками и никогда не меняет.
+
+### `/account/company/lookup`
+
+`GET ?idno=1000000000015` — подстановка названия и адреса из реестра SFS, чтобы
+покупателю не пришлось вводить их вручную. Проксируется на
+`GET /efactura/v1/taxpayers/{idno}` микросервиса.
+
+### `/account/invoices`
+
+Фискальные фактуры. Запрос создаётся приложением (push), сами документы приходят
+с сервера (pull) по мере прохождения через e-Factura.
+
+```json
+{
+  "id": "inv-3001",
+  "receipt_id": "rcp-1006",
+  "company_id": "cmp-2001",
+  "seria": "EAA",
+  "number": "000005948",
+  "issued_at": "2026-07-21T12:40:00Z",
+  "total": 811.00,
+  "total_vat": 135.17,
+  "state": "confirmed",
+  "efactura_status": 3,
+  "qr_text": "https://efactura.sfs.md/EFactura.aspx?id=...",
+  "pdf_url": "https://api.una.md/retail/v1/account/invoices/inv-3001/pdf",
+  "updated_at": "2026-07-22T08:15:00Z"
+}
+```
+
+**Запрос фактуры по чеку.** Приложение пишет запись с
+`id = "req-<receipt_id>"`, `receipt_id`, `company_id` и `state: "requested"`;
+очередь отправляет её обычным upsert. Идентификатор выводится из чека, поэтому
+повторное нажатие не создаёт вторую заявку. Сервер отвечает записью с
+собственным `id`, которая заменяет черновик при следующей синхронизации.
+
+**Поля состояния.** `state` — очередь микросервиса (`pending`, `posted`,
+`confirmed`, `failed`, …), `efactura_status` — код SIA e-Factura:
+
+| Код | Значение |
+|---|---|
+| 0 | черновик |
+| 1 | подписана поставщиком |
+| 2 | отклонена покупателем |
+| 3 | принята покупателем |
+| 5 | отозвана поставщиком |
+| 7 | отправлена покупателю |
+| 8 | подписана покупателем |
+| 10 | доставлена |
+
+Приложение сводит эти два поля в одно понятное покупателю состояние
+(`invoiceView` в `src/domain/company.ts`), поэтому новый код на стороне SFS не
+ломает экран — документ просто останется в состоянии «Запрошена», пока маппинг
+не обновят.
