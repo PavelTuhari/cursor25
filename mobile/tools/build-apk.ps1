@@ -51,10 +51,25 @@ Set-Location "$mobile\android"
 & .\gradlew.bat assembleRelease --max-workers=4 --console=plain
 if ($LASTEXITCODE -ne 0) { throw "gradle failed" }
 
+# The variant is inlined into the JS bundle: check the bundle, not the intention.
+$apk = "$mobile\android\app\build\outputs\apk\release\app-release.apk"
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+$zip = [IO.Compression.ZipFile]::OpenRead($apk)
+$memory = New-Object IO.MemoryStream
+$stream = $zip.GetEntry("assets/index.android.bundle").Open()
+$stream.CopyTo($memory)
+$stream.Dispose()
+$zip.Dispose()
+$bundle = [Text.Encoding]::GetEncoding(28591).GetString($memory.ToArray())
+$other = if ($Variant -eq "demo") { "prod" } else { "demo" }
+if (-not $bundle.Contains("una-build:$Variant") -or $bundle.Contains("una-build:$other")) {
+  throw "the bundle is not a $Variant build: clear %TEMP%\metro-cache and build again"
+}
+
 New-Item -ItemType Directory -Force $OutDir | Out-Null
 $version = ([Text.Encoding]::UTF8.GetString($package) | ConvertFrom-Json).version
 $sha = (git -C $mobile rev-parse --short HEAD)
 $label = if ($Variant -eq "demo") { "UNA-Market-Demo" } else { "UNA-Market" }
 $target = Join-Path $OutDir "$label-$version-$sha.apk"
-Copy-Item "$mobile\android\app\build\outputs\apk\release\app-release.apk" $target -Force
+Copy-Item $apk $target -Force
 "BUILT $target"

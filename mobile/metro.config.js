@@ -13,4 +13,14 @@ config.server.enhanceMiddleware = (middleware) => (req, res, next) => {
   return middleware(req, res, next);
 };
 
+// EXPO_PUBLIC_* values are inlined into the code while it is transformed, but
+// Metro does not put them in the cache key: a demo build after a normal one
+// would silently reuse the normal code, and the other way round.
+const inlined = Object.keys(process.env)
+  .filter((key) => key.startsWith('EXPO_PUBLIC_'))
+  .sort()
+  .map((key) => `${key}=${process.env[key]}`)
+  .join('&');
+config.cacheVersion = `${config.cacheVersion ?? ''}|${inlined}`;
+
 module.exports = config;

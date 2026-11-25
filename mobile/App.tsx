@@ -24,6 +24,12 @@ import { WalletPreview } from './src/dev/WalletPreview';
 /** Set at bundle time for the demo build: `EXPO_PUBLIC_DEMO=1`. */
 const IS_DEMO = process.env.EXPO_PUBLIC_DEMO === '1';
 
+/**
+ * A literal that survives in the bundle, so that `tools/build-apk.ps1` can tell
+ * which variant it has actually packed.
+ */
+(globalThis as { __unaBuild?: string }).__unaBuild = IS_DEMO ? 'una-build:demo' : 'una-build:prod';
+
 /** Lives inside the providers so it can use the app context. */
 function AutoSync(): null {
   useAutoSync();
