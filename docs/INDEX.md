@@ -22,6 +22,12 @@
 
 ---
 
+## Documentația în română
+
+[docs/ro](ro/README.md): ghidul beneficiarului, al utilizatorului și al dezvoltatorului, cu capturi de ecran.
+
+---
+
 ## Обзорные документы
 
 | Документ | О чём |

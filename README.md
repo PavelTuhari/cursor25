@@ -7,7 +7,7 @@
 | [`mobile/`](mobile/) | **UNA Market** — кросс-платформенное приложение сети (iOS + Android): каталог, акции, лояльность, список покупок, личный кабинет и корпоративный кабинет | [README](mobile/README.md) |
 | [`efactura-service/`](efactura-service/) | **una-efactura** — автономный микросервис интеграции с SIA «e-Factura» Государственной налоговой службы Молдовы | [README](efactura-service/README.md) |
 
-**→ [Полная карта документации](docs/INDEX.md)**
+**→ [Полная карта документации](docs/INDEX.md)** · **→ [Documentația în română](docs/ro/README.md)**
 
 ---
 
@@ -29,7 +29,7 @@ cd mobile && npm install && npm run start:mock && npm start
 ## Проверки
 
 ```bash
-cd mobile           && npm run check   # typecheck + валидация конфигурации + 160 тестов
+cd mobile           && npm run check   # typecheck + валидация конфигурации + 208 тестов
 cd efactura-service && npm run check   # typecheck + валидация конфигурации +  89 тестов
 ```
 

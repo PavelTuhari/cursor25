@@ -124,7 +124,7 @@ http://localhost:8081/?preview=wallet&scenario=default
 ## Проверки перед коммитом
 
 ```bash
-cd mobile           && npm run check   # typecheck + валидация конфигурации + 160 тестов
+cd mobile           && npm run check   # typecheck + валидация конфигурации + 208 тестов
 cd efactura-service && npm run check   # typecheck + валидация конфигурации +  89 тестов
 ```
 
